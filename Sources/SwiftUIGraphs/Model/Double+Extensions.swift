@@ -17,6 +17,8 @@ public extension Double {
         return formatter.string(from: number)!
     }
     
+    
+    
     func roundedUp()->Int { 
         let intValue = Int(self)
         let digitCount = String(intValue).count
@@ -29,9 +31,9 @@ public extension Double {
 
     }
     
-    func rounded(digits: Int, roundingRule: FloatingPointRoundingRule)->Int {
+    func rounded(digits: Int, base: Decimal = 10, roundingRule: FloatingPointRoundingRule)->Int {
 
-        let roundFactor = pow(10, digits)
+        let roundFactor = pow(base, digits)
         let roundFactorAsDouble = Double(truncating: NSDecimalNumber(decimal:roundFactor))
 
         return Int(roundFactorAsDouble)  * Int((self / roundFactorAsDouble).rounded(roundingRule))
@@ -46,5 +48,22 @@ public extension Double {
             digitsForRoundingFactor = 1
         }
         return digitsForRoundingFactor
+    }
+}
+
+
+public extension TimeInterval {
+    func toString()->String? {
+
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        
+        formatter.allowedUnits = self >= 3600 ? [ .hour, .minute, .second] : [.minute, .second]
+        formatter.zeroFormattingBehavior = [.pad]
+        var resultString = formatter.string(from: self)
+        if let result = resultString, result.hasPrefix("0") {
+            resultString?.removeFirst()
+        }
+        return resultString
     }
 }

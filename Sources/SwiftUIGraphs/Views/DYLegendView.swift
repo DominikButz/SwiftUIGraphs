@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct DYLegendView: View {
-    
+    @ObservedObject var orientationObserver = OrientationObserver()
     let title: String
     var dataPoints: [DYDataPoint]
     var xValueConverter: (Double)->String
@@ -28,24 +28,25 @@ public struct DYLegendView: View {
     public var body: some View {
         
         VStack(alignment: .leading, spacing: 5) {
-            Text(title).font(.title)
+           
+                Text(title).font(.title)
+
+         
             if self.dataPoints.count >= 2 {
-                if let maxDataPoint = self.maxDataPoint {
-                    
-                    Group {
-                        Text("Maximum").bold()
-                        HStack {
-                            Text(yValueConverter(maxDataPoint.yValue)).bold()
-                            Text(xValueConverter(maxDataPoint.xValue)).foregroundColor(.secondary)
-                            Spacer()
-                        }
-                    }.font(.footnote)
+                if self.orientationObserver.orientation == .portrait {
+                    self.maximumValueView
                     Divider()
                 }
                 
                 HStack {
                     Text(yValueConverter(dataPoints[selectedIndex].yValue)).font(.body).bold()
                     Text(xValueConverter(dataPoints[selectedIndex].xValue)).foregroundColor(.secondary)
+                    
+                    if self.orientationObserver.orientation == .landscape  {
+                        Text(" | ")
+                        self.maximumValueView
+                    }
+                    
                     Spacer()
                 }
             }
@@ -53,6 +54,21 @@ public struct DYLegendView: View {
         }
         
         
+    }
+    
+    var maximumValueView: some View {
+        Group {
+            if let maxDataPoint = self.maxDataPoint {
+                    HStack {
+                        Text("Maximum").bold()
+                        Text(yValueConverter(maxDataPoint.yValue)).bold()
+                        Text(xValueConverter(maxDataPoint.xValue)).foregroundColor(.secondary)
+                        Spacer()
+                    }
+                    .font(.footnote)
+                
+            }
+        }
     }
     
     var maxDataPoint: DYDataPoint? {

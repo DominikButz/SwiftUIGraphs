@@ -9,11 +9,18 @@ final class SwiftUIGraphsTests: XCTestCase {
 //        XCTAssertEqual(SwiftUIGraphs().text, "Hello, World!")
 //    }
     
+    func testDigitsForRounding() throws {
+        
+        let timerInterval:TimeInterval = 11940
+        let digits = timerInterval.roundingFactorDigits()
+        XCTAssertEqual(digits, 3)
+    }
     
     func testRoundUp() throws {
-        let doubleNumber: Double = 14030
-        let rounded = doubleNumber.rounded(digits: 3, roundingRule: .up) // meaning nearest 100
-        XCTAssertEqual(rounded, 15000)
+        let doubleNumber: Double = 11240
+        let digits = doubleNumber.roundingFactorDigits()
+        let rounded = doubleNumber.rounded(digits: digits, base: 60, roundingRule: .up) // meaning nearest 100
+        XCTAssertEqual(rounded, 12000)
     }
     
     func testRoundDown() throws {
