@@ -17,7 +17,7 @@ public struct DYDataPoint {
         
         var endDate = Date().add(units: -3, component: .hour)
         
-        for _ in 0..<12 {
+        for _ in 0..<20 {
           let yValue = Int.random(in: 6000 ..< 12000)
            // let yValue:Double = 2000
             let xValue =  endDate.timeIntervalSinceReferenceDate

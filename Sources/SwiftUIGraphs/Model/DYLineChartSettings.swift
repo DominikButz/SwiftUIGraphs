@@ -30,6 +30,7 @@ public struct  DYLineChartSettings {
     var markerLinePointColor: Color
     // yAxis
     var showYAxis: Bool
+    var yAxisPosition: Edge.Set
     var yAxisViewWidth: CGFloat
     var showYAxisLines: Bool
     var yAxisLineStrokeStyle: StrokeStyle
@@ -43,7 +44,7 @@ public struct  DYLineChartSettings {
     var xAxisInterval: Double
     
     
-    public init(lineStrokeStyle:StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: Color = Color.orange, showPointMarkers: Bool = true, showGradient: Bool = true, gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, .white]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), pointDiameter: CGFloat = 10, pointStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), pointColor: Color = Color.orange, pointBackgroundColor: Color = Color(.systemBackground), markerLineWidth: CGFloat = 2, markerLinePointDiameter: CGFloat = 12, markerLineColor: Color = .orange, markerLinePointColor: Color = .orange, showYAxis: Bool = true , yAxisViewWidth: CGFloat = 30, showYAxisLines: Bool = true, yAxisLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), yAxisMinMax: (min:Double, max:Double)? = nil, yAxisInterval: Double  = 100, showXAxis: Bool = true, showXAxisLines: Bool = true, xAxisLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisInterval:Double = 100) {
+    public init(lineStrokeStyle:StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: Color = Color.orange, showPointMarkers: Bool = true, showGradient: Bool = true, gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, .white]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), pointDiameter: CGFloat = 10, pointStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), pointColor: Color = Color.orange, pointBackgroundColor: Color = Color(.systemBackground), markerLineWidth: CGFloat = 2, markerLinePointDiameter: CGFloat = 12, markerLineColor: Color = .orange, markerLinePointColor: Color = .orange, showYAxis: Bool = true, yAxisPosition: Edge.Set = .leading, yAxisViewWidth: CGFloat = 35, showYAxisLines: Bool = true, yAxisLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), yAxisMinMax: (min:Double, max:Double)? = nil, yAxisInterval: Double  = 100, showXAxis: Bool = true, showXAxisLines: Bool = true, xAxisLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisInterval:Double = 100) {
         
         self.lineColor = lineColor
         self.lineStrokeStyle = lineStrokeStyle
@@ -60,6 +61,7 @@ public struct  DYLineChartSettings {
         self.markerLineColor = markerLineColor
         self.markerLinePointColor = markerLinePointColor
         self.showYAxis = showYAxis
+        self.yAxisPosition = yAxisPosition
         self.yAxisViewWidth = yAxisViewWidth
         self.showYAxisLines = showYAxisLines
         self.yAxisLineStrokeStyle = yAxisLineStrokeStyle

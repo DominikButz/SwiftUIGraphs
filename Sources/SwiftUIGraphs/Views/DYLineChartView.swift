@@ -22,7 +22,7 @@ public struct DYLineChartView: View {
     
     @State var showWithAnimation: Bool = false
     // constants
-
+    var chartFrameHeight: CGFloat?
     var settings: DYLineChartSettings
     
     var xValueConverter:  (Double)->String
@@ -32,47 +32,54 @@ public struct DYLineChartView: View {
         return settings.lateralPadding.leading + settings.lateralPadding.trailing
     }
     
-    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String,   settings: DYLineChartSettings = DYLineChartSettings()) {
+    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, chartFrameHeight:CGFloat? = nil, settings: DYLineChartSettings = DYLineChartSettings()) {
         self._selectedIndex = selectedIndex
         // sort the data points according to x values
         let sortedData = dataPoints.sorted(by: {$0.xValue < $1.xValue})
         self.dataPoints = sortedData
         self.xValueConverter = xValueConverter
         self.yValueConverter = yValueConverter
+        self.chartFrameHeight = chartFrameHeight
         self.settings = settings
        // self.setYAxisMinMax(overrideMinMax: overrideYAxisMinMax)
     }
 
     public var body: some View {
         GeometryReader { geo in
+            
             if self.dataPoints.count >= 2 {
                 VStack(spacing: 0) {
-                    HStack {
-                    if self.settings.showYAxis {
-                        self.yAxisView(geo: geo).frame(width:settings.yAxisViewWidth)
-                    }
-                    ZStack {
-
-                        Group {
-                            if self.settings.showYAxisLines {
-                                self.yAxisLines().opacity(0.5)
-                            }
-                            if self.settings.showXAxisLines {
-                                self.xAxisLines().opacity(0.5)
-                            }
-                            self.line()
-                            if self.settings.showGradient {
-                                self.gradient()
-                            }
-                            if self.settings.showPointMarkers {
-                                self.points()
-                            }
-                            self.addUserInteraction()
-                            
+                    HStack(spacing:0) {
+                        if self.settings.showYAxis && settings.yAxisPosition == .leading {
+                            self.yAxisView(geo: geo).padding(.trailing, 5).frame(width:settings.yAxisViewWidth)
                         }
-   
-                    }
-                }
+                        ZStack {
+
+                            Group {
+                                if self.settings.showYAxisLines {
+                                    self.yAxisGridLines().opacity(0.5)
+                                }
+                                if self.settings.showXAxisLines {
+                                    self.xAxisGridLines().opacity(0.5)
+                                }
+                                self.line()
+                                if self.settings.showGradient {
+                                    self.gradient()
+                                }
+                                if self.settings.showPointMarkers {
+                                    self.points()
+                                }
+                                self.addUserInteraction()
+                                
+                            }
+       
+                        }
+                        
+                        if self.settings.showYAxis && settings.yAxisPosition == .trailing {
+                            self.yAxisView(geo: geo).padding(.leading, 5).frame(width:settings.yAxisViewWidth)
+                        }
+                    }.frame(height: chartFrameHeight)
+                    
                     if settings.showXAxis {
                         self.xAxisView()
                     }
@@ -132,7 +139,7 @@ public struct DYLineChartView: View {
 
     
     
-    private func yAxisLines() -> some View {
+    private func yAxisGridLines() -> some View {
         GeometryReader { geo in
             VStack(spacing: 0) {
                 let width = geo.size.width
@@ -164,29 +171,28 @@ public struct DYLineChartView: View {
     
     private func xAxisView()-> some View {
         
-        ZStack {
+        ZStack(alignment: .center) {
             GeometryReader { geo in
-                if let minValue = self.xAxisValues().first {
-                    Text(self.xValueConverter(minValue)).font(.system(size: 7)).position(x: 10, y: 10)
-                }
-            
+
                 ForEach(self.xAxisValues(), id:\.self) { value in
-                    
-                    if value != self.xAxisValues().first {
-                        Text(self.xValueConverter(value)).font(.system(size: 7)).position(x: self.convertToXCoordinate(value: value, width: geo.size.width - marginSum) + 10, y: 10)
-                    }
+                    self.xAxisIntervalTextViewFor(value: value, geo: geo)
                 }
             }
         
-         }
-        .padding(.leading, settings.yAxisViewWidth)
+        }
+        .padding(.leading, settings.showYAxis && settings.yAxisPosition == .leading ?  settings.yAxisViewWidth : 0)
         .padding(.leading, settings.lateralPadding.leading )
+        .padding(.trailing, settings.showYAxis && settings.yAxisPosition == .trailing ? settings.yAxisViewWidth : 0)
         .padding(.trailing, settings.lateralPadding.trailing)
-        
 
     }
     
-    private func xAxisLines()-> some View {
+    private func xAxisIntervalTextViewFor(value:Double, geo: GeometryProxy)-> some View {
+        Text(self.xValueConverter(value)).font(.system(size: 7)).position(x: self.convertToXCoordinate(value: value, width: geo.size.width - marginSum), y: 10)
+    }
+
+
+    private func xAxisGridLines()-> some View {
         GeometryReader { geo in
             VStack(spacing: 0) {
                 Path { p in
