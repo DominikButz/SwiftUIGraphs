@@ -9,10 +9,16 @@ import Foundation
 
 public struct DYDataPoint {
     
-    var xValue: Double
-    var yValue: Double
+    public init(xValue: Double, yValue: Double) {
+        self.xValue = xValue
+        self.yValue = yValue
+    }
     
-    public static var exampleData: [DYDataPoint] {
+    public var xValue: Double
+    public var yValue: Double
+    
+    // the y-values are seconds
+    public static var lineExampleData0: [DYDataPoint] {
         var dataPoints:[DYDataPoint] = []
         
         var endDate = Date().add(units: -3, component: .hour)
@@ -22,6 +28,26 @@ public struct DYDataPoint {
            // let yValue:Double = 2000
             let xValue =  endDate.timeIntervalSinceReferenceDate
            let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
+            dataPoints.append(dataPoint)
+            let randomDayDifference = Int.random(in: 1 ..< 8)
+            endDate = endDate.add(units: -randomDayDifference, component: .day)
+        }
+
+        print(dataPoints.map({$0.yValue}))
+        return dataPoints
+    }
+    
+    // y values are kg (e.g. weight volume per exercise
+    public static var lineExampleData1: [DYDataPoint] {
+        var dataPoints:[DYDataPoint] = []
+        
+        var endDate = Date().add(units: -3, component: .hour)
+        
+        for _ in 0..<20 {
+          let yValue = Double.random(in: 1500 ..< 1940)
+           // let yValue:Double = 2000
+            let xValue =  endDate.timeIntervalSinceReferenceDate
+           let dataPoint = DYDataPoint(xValue: xValue, yValue: yValue)
             dataPoints.append(dataPoint)
             let randomDayDifference = Int.random(in: 1 ..< 8)
             endDate = endDate.add(units: -randomDayDifference, component: .day)

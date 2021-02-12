@@ -16,8 +16,16 @@ final class SwiftUIGraphsTests: XCTestCase {
         XCTAssertEqual(digits, 3)
     }
     
+    func testNearestInt() throws {
+        
+        let value: Int = 1900
+        let fullUnit = 1800
+       let rounded =  value.nearest(multipleOf: fullUnit, up: false)
+        XCTAssertEqual(rounded, 1800)
+    }
+    
     func testRoundUp() throws {
-        let doubleNumber: Double = 11240
+        let doubleNumber: Double = 1900
         let digits = doubleNumber.roundingFactorDigits()
         let rounded = doubleNumber.rounded(digits: digits, base: 60, roundingRule: .up) // meaning nearest 100
         XCTAssertEqual(rounded, 12000)

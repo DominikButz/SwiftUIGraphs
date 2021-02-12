@@ -16,20 +16,8 @@ public extension Double {
         let number = NSNumber(value: self)
         return formatter.string(from: number)!
     }
-    
-    
-    
-    func roundedUp()->Int { 
-        let intValue = Int(self)
-        let digitCount = String(intValue).count
-        
-        var roundFactorExp = digitCount - 1
-        if roundFactorExp == 0 {
-            roundFactorExp = 1
-        }
-        return self.rounded(digits: roundFactorExp, roundingRule: .up)
 
-    }
+    
     
     func rounded(digits: Int, base: Decimal = 10, roundingRule: FloatingPointRoundingRule)->Int {
 
@@ -49,6 +37,37 @@ public extension Double {
         }
         return digitsForRoundingFactor
     }
+    
+ 
+    func decimalsCount() -> Int {
+        if self == Double(Int(self)) {
+            return 0
+        }
+
+        let integerString = String(Int(self))
+        let doubleString = String(Double(self))
+        let decimalCount = doubleString.count - integerString.count - 1
+
+        return decimalCount
+    }
+    
+}
+
+public extension Int {
+    
+    func nearest(multipleOf: Int, up: Bool)->Int {
+        // e.g. 1900 % 1800 = 100
+        let remainder = self % multipleOf
+        
+        //1900 + 1800 - 100 = 3600
+        var rounded = self - remainder
+        if up {
+            rounded += multipleOf
+        }
+        
+        return rounded
+    }
+    
 }
 
 
