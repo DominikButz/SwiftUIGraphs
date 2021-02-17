@@ -15,7 +15,7 @@ protocol GridChart: View {
     var selectedIndex: Int {get set}
     var settings: DYGridSettings {get set}
     var marginSum: CGFloat {get}
-    var xValueConverter:  (Double)->String {get set}
+    var chartFrameHeight: CGFloat? {get set}
     var yValueConverter: (Double)->String {get set}
       
     func yAxisValueCount()->Int

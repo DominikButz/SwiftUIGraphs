@@ -18,7 +18,7 @@ public struct DYDataPoint {
     public var yValue: Double
     
     // the y-values are seconds
-    public static var lineExampleData0: [DYDataPoint] {
+    public static var exampleData0: [DYDataPoint] {
         var dataPoints:[DYDataPoint] = []
         
         var endDate = Date().add(units: -3, component: .hour)
@@ -37,13 +37,13 @@ public struct DYDataPoint {
         return dataPoints
     }
     
-    // y values are kg (e.g. weight volume per exercise
-    public static var lineExampleData1: [DYDataPoint] {
+    // e.g. weight volume per exercise
+    public static var exampleData1: [DYDataPoint] {
         var dataPoints:[DYDataPoint] = []
         
         var endDate = Date().add(units: -3, component: .hour)
         
-        for _ in 0..<20 {
+        for _ in 0..<15 {
           let yValue = Double.random(in: 1500 ..< 1940)
            // let yValue:Double = 2000
             let xValue =  endDate.timeIntervalSinceReferenceDate
@@ -53,8 +53,6 @@ public struct DYDataPoint {
             endDate = endDate.add(units: -randomDayDifference, component: .day)
         }
         
-//        dataPoints.append(DYDataPoint(xValue: endDate.add(units: -3, component: .day).timeIntervalSinceReferenceDate, yValue: 2000))
-//        dataPoints.append(DYDataPoint(xValue: endDate.add(units: -5, component: .day).timeIntervalSinceReferenceDate, yValue: 1000))
         print(dataPoints.map({$0.yValue}))
         return dataPoints
     }

@@ -29,19 +29,6 @@ public extension Date {
         return dateFormatter.string(from: self)
     }
     
-//    static func weekCountForDateRange(firstDate: Date, lastDate: Date)->UInt {
-//        
-//        print("first date \(firstDate.description), last date: \(lastDate.description)")
-//        let timerInterval = firstDate - lastDate
-//        
-//        var weeks = UInt(timerInterval) / 604800
-//        if UInt(timerInterval) % 604800 != 0 {
-//            weeks += 1
-//        }
-//       
-//        return weeks
-//    }
-    
     static func - (lhs: Date, rhs: Date) -> TimeInterval {
        // print(lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate)
            return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
