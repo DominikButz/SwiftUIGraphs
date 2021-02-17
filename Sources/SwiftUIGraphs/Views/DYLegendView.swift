@@ -8,19 +8,21 @@
 import SwiftUI
 
 public struct DYLegendView: View {
-    @ObservedObject var orientationObserver = OrientationObserver()
+
     let title: String
     var dataPoints: [DYDataPoint]
     var xValueConverter: (Double)->String
     var yValueConverter:  (Double)->String
     
     @Binding var selectedIndex: Int
+    var isLandscape: Bool
     
-    public init(title: String, dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String) {
+    public init(title: String, dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, isLandscape: Bool,  xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String) {
         self.title = title
         let sortedData = dataPoints.sorted(by: {$0.xValue < $1.xValue})
         self.dataPoints = sortedData
         self._selectedIndex = selectedIndex
+        self.isLandscape = isLandscape
         self.xValueConverter = xValueConverter
         self.yValueConverter = yValueConverter
     }
@@ -29,11 +31,9 @@ public struct DYLegendView: View {
         
         VStack(alignment: .leading, spacing: 5) {
            
-                Text(title).font(.title)
-
-         
+                Text(title).font(.headline)
             if self.dataPoints.count >= 2 {
-                if self.orientationObserver.orientation == .portrait {
+                if self.isLandscape == false  {
                     self.maximumValueView
                     Divider()
                 }
@@ -42,7 +42,7 @@ public struct DYLegendView: View {
                     Text(yValueConverter(dataPoints[selectedIndex].yValue)).font(.body).bold()
                     Text(xValueConverter(dataPoints[selectedIndex].xValue)).foregroundColor(.secondary)
                     
-                    if self.orientationObserver.orientation == .landscape  {
+                    if self.isLandscape {
                         Text(" | ")
                         self.maximumValueView
                     }
@@ -52,8 +52,7 @@ public struct DYLegendView: View {
             }
             
         }
-        
-        
+  
     }
     
     var maximumValueView: some View {
@@ -87,7 +86,7 @@ public struct DYLegendView: View {
 
 struct DYLegendView_Previews: PreviewProvider {
     static var previews: some View {
-        DYLegendView(title: "Example Line Chart", dataPoints: DYDataPoint.lineExampleData0, selectedIndex: .constant(0), xValueConverter: { (xValue) -> String in
+        DYLegendView(title: "Example Line Chart", dataPoints: DYDataPoint.lineExampleData0, selectedIndex: .constant(0), isLandscape: false, xValueConverter: { (xValue) -> String in
             let date = Date(timeIntervalSinceReferenceDate: xValue)
             let dateFormat = "dd-MM-yyyy HH:mm"
             let dateFormatter = DateFormatter()

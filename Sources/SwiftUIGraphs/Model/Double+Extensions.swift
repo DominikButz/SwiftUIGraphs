@@ -16,27 +16,27 @@ public extension Double {
         let number = NSNumber(value: self)
         return formatter.string(from: number)!
     }
-
-    
-    
-    func rounded(digits: Int, base: Decimal = 10, roundingRule: FloatingPointRoundingRule)->Int {
-
-        let roundFactor = pow(base, digits)
-        let roundFactorAsDouble = Double(truncating: NSDecimalNumber(decimal:roundFactor))
-
-        return Int(roundFactorAsDouble)  * Int((self / roundFactorAsDouble).rounded(roundingRule))
-    }
-    
-    func roundingFactorDigits()->Int {
-        let integer = Int(self)
-        let stringNumber = "\(integer)"
-        let digits = stringNumber.count
-        var digitsForRoundingFactor  = digits - 2
-        if digitsForRoundingFactor == 0 {
-            digitsForRoundingFactor = 1
-        }
-        return digitsForRoundingFactor
-    }
+//
+//    
+//    
+//    func rounded(digits: Int, base: Decimal = 10, roundingRule: FloatingPointRoundingRule)->Int {
+//
+//        let roundFactor = pow(base, digits)
+//        let roundFactorAsDouble = Double(truncating: NSDecimalNumber(decimal:roundFactor))
+//
+//        return Int(roundFactorAsDouble)  * Int((self / roundFactorAsDouble).rounded(roundingRule))
+//    }
+//    
+//    func roundingFactorDigits()->Int {
+//        let integer = Int(self)
+//        let stringNumber = "\(integer)"
+//        let digits = stringNumber.count
+//        var digitsForRoundingFactor  = digits - 2
+//        if digitsForRoundingFactor == 0 {
+//            digitsForRoundingFactor = 1
+//        }
+//        return digitsForRoundingFactor
+//    }
     
  
     func decimalsCount() -> Int {
@@ -55,14 +55,15 @@ public extension Double {
 
 public extension Int {
     
-    func nearest(multipleOf: Int, up: Bool)->Int {
-        // e.g. 1900 % 1800 = 100
-        let remainder = self % multipleOf
-        
-        //1900 + 1800 - 100 = 3600
+    func nearest(multipleOf: UInt, up: Bool)->Int {
+        // e.g. -12 % 10 = -2
+        let remainder = self % Int(multipleOf)
+
+        let addFullUnit = self >= 0 && up == true || self < 0 && up == false
+        //  -12 -- 2 = -10
         var rounded = self - remainder
-        if up {
-            rounded += multipleOf
+        if addFullUnit {
+            rounded += Int(multipleOf)
         }
         
         return rounded

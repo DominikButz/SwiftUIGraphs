@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-public struct DYLineChartView: View {
-   
+public struct DYLineChartView: View, GridChart {
+
     var dataPoints: [DYDataPoint]
 
    @State private var convertedXValues: [CGFloat]  = []
@@ -19,11 +19,11 @@ public struct DYLineChartView: View {
    // @State var selectedXPos: CGFloat = 8 // User X touch location
     @State var selectedYPos: CGFloat = 0 // User Y touch location
     @State var isSelected: Bool = false // Is the user touching the graph
-    
+    @State private var lineEnd = CGFloat.zero
     @State var showWithAnimation: Bool = false
     // constants
     var chartFrameHeight: CGFloat?
-    var settings: DYLineChartSettings
+    var settings: DYGridSettings
     
     var yAxisScaler: YAxisScaler
     var xValueConverter:  (Double)->String
@@ -32,6 +32,8 @@ public struct DYLineChartView: View {
     var marginSum: CGFloat {
         return settings.lateralPadding.leading + settings.lateralPadding.trailing
     }
+    
+
     
     public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, chartFrameHeight:CGFloat? = nil, settings: DYLineChartSettings = DYLineChartSettings()) {
         self._selectedIndex = selectedIndex
@@ -47,14 +49,14 @@ public struct DYLineChartView: View {
         if let overrideMin = settings.yAxisSettings.yAxisMinMaxOverride?.min, overrideMin < min {
             min = overrideMin
         }
-
-    //     let min =  self.dataPoints.map({$0.yValue}).min() ?? 0
          var max = self.dataPoints.map({$0.yValue}).max() ?? 0
         if let overrideMax = settings.yAxisSettings.yAxisMinMaxOverride?.max, overrideMax > max {
             max = overrideMax
         }
          self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10)
     }
+    
+    
 
     public var body: some View {
         GeometryReader { geo in
@@ -67,34 +69,49 @@ public struct DYLineChartView: View {
                         }
                         ZStack {
 
-                            Group {
                                 if self.settings.yAxisSettings.showYAxisLines {
                                     self.yAxisGridLines().opacity(0.5)
                                 }
-                                if self.settings.xAxisSettings.showXAxisLines {
+                                if (self.settings as! DYLineChartSettings).xAxisSettings.showXAxisLines {
                                     self.xAxisGridLines().opacity(0.5)
                                 }
-                                self.line()
-                                if self.settings.showGradient {
-                                    self.gradient()
-                                }
-                                if self.settings.showPointMarkers {
-                                    self.points()
-                                }
-                               self.addUserInteraction()
-                                
+                            
+                            self.line()
+                            
+                            if self.showWithAnimation {
+                                Group {
+                                    if (self.settings as! DYLineChartSettings).showGradient {
+                                            self.gradient()
+                                        }
+                                        if (self.settings as! DYLineChartSettings).showPointMarkers {
+                                            self.points()
+                                        }
+                                        self.addUserInteraction()
+                                }.transition(AnyTransition.opacity.animation(Animation.easeIn(duration: 0.8)))
+                                    
                             }
-       
+
                         }.background(settings.chartViewBackgroundColor)
+                    
                         
                         if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing {
                             self.yAxisView(geo: geo).padding(.leading, 5).frame(width:settings.yAxisSettings.yAxisViewWidth)
                         }
                     }.frame(height: chartFrameHeight)
-                    
-                    if settings.xAxisSettings.showXAxis {
+
+                    if (self.settings as! DYLineChartSettings).xAxisSettings.showXAxis {
                         self.xAxisView()
                     }
+                }.onAppear {
+                    
+                    withAnimation(.easeIn(duration: 1.6)) {
+                        self.lineEnd = 1
+                    }
+     
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                        self.showWithAnimation = true
+                    }
+                   
                 }
             } else {
                 HStack {
@@ -111,63 +128,63 @@ public struct DYLineChartView: View {
     
 
     
-    private func yAxisView(geo: GeometryProxy)-> some View {
-
-        VStack(alignment: .trailing, spacing: 0) {
-            let interval = self.yAxisScaler.tickSpacing ?? self.settings.yAxisSettings.yAxisIntervalOverride ?? 0
-            if let maxValue = self.yAxisValues().first, maxValue >=  interval {
-                Text(self.yValueConverter(maxValue)).font(.system(size: 7))
-            }
-            ForEach(self.yAxisValues(), id: \.self) {value in
-                if value != self.yAxisMinMax().max {
-                    Spacer(minLength: 0)
-                    Text(self.yValueConverter(value)).font(.system(size: 7))
-                }
-                
-            }
-        
-        }
-        //.frame(height: geo.size.height)
-    }
+//    private func yAxisView(geo: GeometryProxy)-> some View {
+//
+//        VStack(alignment: .trailing, spacing: 0) {
+//            let interval = self.yAxisScaler.tickSpacing ?? self.settings.yAxisSettings.yAxisIntervalOverride ?? 0
+//            if let maxValue = self.yAxisValues().first, maxValue >=  interval {
+//                Text(self.yValueConverter(maxValue)).font(.system(size: 7))
+//            }
+//            ForEach(self.yAxisValues(), id: \.self) {value in
+//                if value != self.yAxisMinMax().max {
+//                    Spacer(minLength: 0)
+//                    Text(self.yValueConverter(value)).font(.system(size: 7))
+//                }
+//
+//            }
+//
+//        }
+//        //.frame(height: geo.size.height)
+//    }
     
     
 
     
     
-    private func yAxisGridLines() -> some View {
-        GeometryReader { geo in
-            VStack(spacing: 0) {
-                let width = geo.size.width
-                Path { p in
-                
-                    var yPosition:CGFloat = 0
-
-                    let count = self.yAxisValueCount()
-                    let yAxisInterval = self.settings.yAxisSettings.yAxisIntervalOverride ?? self.yAxisScaler.tickSpacing ?? 1
-
-                    let min = self.yAxisMinMax().min
-                    let max = self.yAxisMinMax().max
-                    let convertedYAxisInterval  = geo.size.height * CGFloat(yAxisInterval / (max - min))
-                    
-                    for _ in 0..<count    {
-                         
-                        p.move(to: CGPoint(x: 0, y: yPosition))
-                        p.addLine(to: CGPoint(x: width, y: yPosition))
-                        p.closeSubpath()
-                        yPosition += convertedYAxisInterval
-                    }
-
-                    
-                }.stroke(style: settings.yAxisSettings.yAxisLineStrokeStyle)
-                .foregroundColor(.secondary)
-                
-            }
-
-        }
-    }
-    
+//    private func yAxisGridLines() -> some View {
+//        GeometryReader { geo in
+//            VStack(spacing: 0) {
+//                let width = geo.size.width
+//                Path { p in
+//
+//                    var yPosition:CGFloat = 0
+//
+//                    let count = self.yAxisValueCount()
+//                    let yAxisInterval = self.settings.yAxisSettings.yAxisIntervalOverride ?? self.yAxisScaler.tickSpacing ?? 1
+//
+//                    let min = self.yAxisMinMax().min
+//                    let max = self.yAxisMinMax().max
+//                    let convertedYAxisInterval  = geo.size.height * CGFloat(yAxisInterval / (max - min))
+//
+//                    for _ in 0..<count    {
+//
+//                        p.move(to: CGPoint(x: 0, y: yPosition))
+//                        p.addLine(to: CGPoint(x: width, y: yPosition))
+//                        p.closeSubpath()
+//                        yPosition += convertedYAxisInterval
+//                    }
+//
+//
+//                }.stroke(style: settings.yAxisSettings.yAxisLineStrokeStyle)
+//                .foregroundColor(.secondary)
+//
+//            }
+//
+//        }
+//    }
+//
     private func xAxisView()-> some View {
-        
+
         ZStack(alignment: .center) {
             GeometryReader { geo in
 
@@ -175,7 +192,7 @@ public struct DYLineChartView: View {
                     self.xAxisIntervalTextViewFor(value: value, geo: geo)
                 }
             }
-        
+
         }
         .padding(.leading, settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .leading ?  settings.yAxisSettings.yAxisViewWidth : 0)
         .padding(.leading, settings.lateralPadding.leading )
@@ -183,12 +200,12 @@ public struct DYLineChartView: View {
         .padding(.trailing, settings.lateralPadding.trailing)
 
     }
-    
+//
     private func xAxisIntervalTextViewFor(value:Double, geo: GeometryProxy)-> some View {
-        Text(self.xValueConverter(value)).font(.system(size: 7)).position(x: self.convertToXCoordinate(value: value, width: geo.size.width - marginSum), y: 10)
+        Text(self.xValueConverter(value)).font((settings as! DYLineChartSettings).xAxisSettings.xAxisFont).position(x: self.convertToXCoordinate(value: value, width: geo.size.width - marginSum), y: 10)
     }
-
-
+//
+//
     private func xAxisGridLines()-> some View {
         GeometryReader { geo in
             VStack(spacing: 0) {
@@ -197,7 +214,7 @@ public struct DYLineChartView: View {
                     let totalHeight = geo.size.height
                     var xPosition: CGFloat = self.settings.lateralPadding.leading
                     let count = self.xAxisLineCount()
-                    let interval:Double = settings.xAxisSettings.xAxisInterval
+                    let interval:Double = (self.settings as! DYLineChartSettings).xAxisSettings.xAxisInterval
                     let xAxisMinMax = self.xAxisMinMax()
                     let convertedXAxisInterval = totalWidth * CGFloat(interval / (xAxisMinMax.max - xAxisMinMax.min))
                     for _ in 0..<count + 1 {
@@ -205,20 +222,20 @@ public struct DYLineChartView: View {
                         p.addLine(to: CGPoint(x:xPosition, y: totalHeight))
                         xPosition += convertedXAxisInterval
                     }
-                }.stroke(style: settings.xAxisSettings.xAxisLineStrokeStyle)
+                }.stroke(style: (self.settings as! DYLineChartSettings).xAxisSettings.xAxisLineStrokeStyle)
                 .foregroundColor(.secondary)
             }
-            
-            
+
+
         }
     }
     
     private func line()->some View {
       GeometryReader { geo in
         self.pathFor(width: geo.size.width - marginSum, height: geo.size.height, closeShape: false)
-
-            .stroke(style: settings.lineStrokeStyle)
-            .foregroundColor(settings.lineColor)
+            .trim(from: 0, to: self.lineEnd)
+            .stroke(style: (self.settings as! DYLineChartSettings).lineStrokeStyle)
+            .foregroundColor((self.settings as! DYLineChartSettings).lineColor)
             .onAppear {
                   self.convertedXValues = self.dataPoints.map({convertToXCoordinate(value: $0.xValue, width: geo.size.width - marginSum)})
               }
@@ -235,7 +252,7 @@ public struct DYLineChartView: View {
                     self.pathFor(width: geo.size.width - marginSum, height: geo.size.height, closeShape: true)
 
                   }
-             )
+            )
     }
     
     func pathFor(width: CGFloat, height: CGFloat, closeShape: Bool)->Path {
@@ -285,10 +302,10 @@ public struct DYLineChartView: View {
             let width = geo.size.width - marginSum
           ForEach(dataPoints.indices) { i in
                 Circle()
-                    .stroke(style: settings.pointStrokeStyle)
-                    .frame(width: settings.pointDiameter, height: settings.pointDiameter, alignment: .center)
-                    .foregroundColor(settings.pointColor)
-                    .background(settings.pointBackgroundColor)
+                    .stroke(style: (self.settings as! DYLineChartSettings).pointStrokeStyle)
+                    .frame(width: (self.settings as! DYLineChartSettings).pointDiameter, height: (self.settings as! DYLineChartSettings).pointDiameter, alignment: .center)
+                    .foregroundColor((self.settings as! DYLineChartSettings).pointColor)
+                    .background((self.settings as! DYLineChartSettings).pointBackgroundColor)
                     .cornerRadius(5)
                     //((geo.size.width - marginSum) / CGFloat(self.dataPoints.count - 1)) * CGFloat(i) - 5
                     .offset(x: settings.lateralPadding.leading + self.convertToXCoordinate(value: dataPoints[i].xValue, width: width) - 5, y: (height - self.convertToYCoordinate(value: dataPoints[i].yValue, height: height)) - 5)
@@ -306,23 +323,23 @@ public struct DYLineChartView: View {
 
             ZStack(alignment: .leading) {
                 
-                settings.markerLineColor
+                (self.settings as! DYLineChartSettings).markerLineColor
                                 .frame(width: 2)
                                 .opacity(self.isSelected ? 1 : 0) // hide the vertical indicator line if user not touching the chart
                                 .overlay(
                                     Circle()
                                         .frame(width: 24, height: 24, alignment: .center)
-                                        .foregroundColor(settings.markerLinePointColor)
+                                        .foregroundColor((self.settings as! DYLineChartSettings).markerLinePointColor)
                                         .opacity(0.2)
                                         .overlay(
                                             Circle()
                                                 .fill()
-                                                .frame(width: settings.markerLinePointDiameter, height: settings.markerLinePointDiameter, alignment: .center)
-                                                .foregroundColor(settings.markerLinePointColor)
+                                                .frame(width: (self.settings as! DYLineChartSettings).markerLinePointDiameter, height: (self.settings as! DYLineChartSettings).markerLinePointDiameter, alignment: .center)
+                                                .foregroundColor((self.settings as! DYLineChartSettings).markerLinePointColor)
                                         )
                                         //CGFloat(self.dataPoints.count) - self.convertToYCoordinate(value: Double(selectedYPos), height: height)
                      //+ CGFloat(self.dataPoints.count)
-                                        .offset(x: 0, y: isSelected ? selectedYPos - height + settings.markerLinePointDiameter :  settings.markerLinePointDiameter - self.convertToYCoordinate(value: dataPoints[selectedIndex].yValue, height: height))
+                                        .offset(x: 0, y: isSelected ? selectedYPos - height + (self.settings as! DYLineChartSettings).markerLinePointDiameter :  (self.settings as! DYLineChartSettings).markerLinePointDiameter - self.convertToYCoordinate(value: dataPoints[selectedIndex].yValue, height: height))
                                     , alignment: .bottom)
                     .offset(x: isSelected ? lineOffset : settings.lateralPadding.leading + self.convertToXCoordinate(value: dataPoints[selectedIndex].xValue, width: width), y: 0)
                                 .animation(Animation.spring().speed(4))
@@ -407,95 +424,84 @@ public struct DYLineChartView: View {
         return 0
     }
     
-    private func xAxisMinMax()->(min: Double, max: Double){
+    internal func xAxisMinMax()->(min: Double, max: Double){
         let xValues = dataPoints.map({$0.xValue})
         return (min: xValues.min() ?? 0, max: xValues.max() ?? 0)
     }
     
-    private func yAxisMinMax()->(min: Double, max: Double){
-        let scaledMin = self.settings.yAxisSettings.yAxisMinMaxOverride?.min ?? self.yAxisScaler.scaledMin ?? 0
-        let scaledMax = self.settings.yAxisSettings.yAxisMinMaxOverride?.max ?? self.yAxisScaler.scaledMax ?? 1
-        
-        return (min: scaledMin, max: scaledMax)
-        /////////
-//        if let yAxisMinMax = settings.yAxisMinMax {
-//            return yAxisMinMax
+//    private func yAxisMinMax()->(min: Double, max: Double){
+//        let scaledMin = self.settings.yAxisSettings.yAxisMinMaxOverride?.min ?? self.yAxisScaler.scaledMin ?? 0
+//        let scaledMax = self.settings.yAxisSettings.yAxisMinMaxOverride?.max ?? self.yAxisScaler.scaledMax ?? 1
+//
+//        return (min: scaledMin, max: scaledMax)
+//        /////////
+////        if let yAxisMinMax = settings.yAxisMinMax {
+////            return yAxisMinMax
+////        }
+////
+////        let yValues = dataPoints.map({$0.yValue})
+////
+////        let maxY = yValues.max() ?? 0
+////        let minY = yValues.min() ?? 0
+////
+////        return (min: minY, max: maxY)
+//
+//    }
+    
+    
+//    internal func yAxisValueCount()->Int {
+//     //   print("y axis lines \(self.yAxisScaler.scaledValues().count)")
+//        guard let interval = settings.yAxisSettings.yAxisIntervalOverride else {
+//            return self.yAxisScaler.scaledValues().count
 //        }
-//
-//        let yValues = dataPoints.map({$0.yValue})
-//
-//        let maxY = yValues.max() ?? 0
-//        let minY = yValues.min() ?? 0
-//
-//        return (min: minY, max: maxY)
-
-    }
+//        let yAxisMinMax = self.yAxisMinMax()
+//        let yAxisInterval = interval
+//        let count = (yAxisMinMax.max - yAxisMinMax.min) / yAxisInterval
+//     //   print("line count \(count + 1)")
+//        return Int(count) + 1
+//    }
     
-    
-    private func yAxisValueCount()->Int {
-     //   print("y axis lines \(self.yAxisScaler.scaledValues().count)")
-        guard let interval = settings.yAxisSettings.yAxisIntervalOverride else {
-            return self.yAxisScaler.scaledValues().count
-        }
-        let yAxisMinMax = self.yAxisMinMax()
-        let yAxisInterval = interval
-        let count = (yAxisMinMax.max - yAxisMinMax.min) / yAxisInterval
-     //   print("line count \(count + 1)")
-        return Int(count) + 1
-    }
-    
-    private func xAxisLineCount()->Int {
+    internal func xAxisLineCount()->Int {
 
         let xAxisMinMax = self.xAxisMinMax()
    
-        let count = (xAxisMinMax.max - xAxisMinMax.min) / settings.xAxisSettings.xAxisInterval
+        let count = (xAxisMinMax.max - xAxisMinMax.min) / (self.settings as! DYLineChartSettings).xAxisSettings.xAxisInterval
         
         return Int(count)
     
         
     }
     
-//    private var yAxisInterval: Double {
-//        
-//        let yAxisMinMax = self.yAxisMinMax()
-//        let digits = yAxisMinMax.max.roundingFactorDigits()
-//        
-//        let roundFactor = pow(settings.yAxisIntervalNumberBase, digits)
-//        
-//        let interval = Double(truncating: NSDecimalNumber(decimal:roundFactor)) * Double(settings.yAxisValueFrequency)
-//    
-//        return interval
-//    }
-    
-    private func xAxisValues()->[Double] {
+
+    internal func xAxisValues()->[Double] {
         var values:[Double] = []
         let count = self.xAxisLineCount()
         var currentValue = self.xAxisMinMax().min
         for _ in 0..<(count + 1) {
             values.append(currentValue)
-            currentValue += settings.xAxisSettings.xAxisInterval
+            currentValue += (self.settings as! DYLineChartSettings).xAxisSettings.xAxisInterval
             
         }
         return values
     }
     
-    private func yAxisValues()->[Double] {
-        
-        guard let interval = settings.yAxisSettings.yAxisIntervalOverride else {
-            return self.yAxisScaler.scaledValues().reversed()
-        }
-        var values:[Double] = []
-        let count = self.yAxisValueCount()
-        let yAxisInterval = interval
-        var currentValue  = self.yAxisMinMax().max
-      //  print("value count :\(count)")
-        for _ in 0..<(count) {
-            values.append(currentValue)
-            currentValue -= yAxisInterval
-        }
-        return values
-
-    }
+//    internal func yAxisValues()->[Double] {
+//
+//        guard let interval = settings.yAxisSettings.yAxisIntervalOverride else {
+//            return self.yAxisScaler.scaledValues().reversed()
+//        }
+//        var values:[Double] = []
+//        let count = self.yAxisValueCount()
+//        let yAxisInterval = interval
+//        var currentValue  = self.yAxisMinMax().max
+//      //  print("value count :\(count)")
+//        for _ in 0..<(count) {
+//            values.append(currentValue)
+//            currentValue -= yAxisInterval
+//        }
+//        return values
+//
+//    }
     
 
     
@@ -507,20 +513,7 @@ public struct DYLineChartView: View {
         return width * CGFloat(normalizationFactor(value: value, maxValue: maxX, minValue: minX))
 
     }
-    
-    private func convertToYCoordinate(value:Double, height: CGFloat)->CGFloat {
-        
-        let yAxisMinMax = self.yAxisMinMax()
 
-        return height * CGFloat(normalizationFactor(value: value, maxValue: yAxisMinMax.max, minValue: yAxisMinMax.min))
-
-    
-    }
-    
-    private func normalizationFactor(value: Double, maxValue: Double, minValue: Double)->Double {
-        
-        return (value - minValue) / (maxValue - minValue)
-    }
     
 //    private func  yScaleFor(height: CGFloat)->CGFloat {
 //
