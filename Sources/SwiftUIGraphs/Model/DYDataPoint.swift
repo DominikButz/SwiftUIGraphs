@@ -17,7 +17,7 @@ public struct DYDataPoint {
     public var xValue: Double
     public var yValue: Double
     
-    // the y-values are seconds
+    // e.g. y-values are seconds
     public static var exampleData0: [DYDataPoint] {
         var dataPoints:[DYDataPoint] = []
         
@@ -25,7 +25,7 @@ public struct DYDataPoint {
         
         for _ in 0..<20 {
           let yValue = Int.random(in: 6000 ..< 12000)
-           // let yValue:Double = 2000
+
             let xValue =  endDate.timeIntervalSinceReferenceDate
            let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
             dataPoints.append(dataPoint)
@@ -33,7 +33,7 @@ public struct DYDataPoint {
             endDate = endDate.add(units: -randomDayDifference, component: .day)
         }
 
-        print(dataPoints.map({$0.yValue}))
+       // print(dataPoints.map({$0.yValue}))
         return dataPoints
     }
     
@@ -53,7 +53,7 @@ public struct DYDataPoint {
             endDate = endDate.add(units: -randomDayDifference, component: .day)
         }
         
-        print(dataPoints.map({$0.yValue}))
+      //  print(dataPoints.map({$0.yValue}))
         return dataPoints
     }
     

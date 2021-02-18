@@ -103,12 +103,13 @@ public struct DYLineChartView: View, GridChart {
                         self.xAxisView()
                     }
                 }.onAppear {
-                    
-                    withAnimation(.easeIn(duration: 1.6)) {
+
+                    withAnimation(Animation.easeIn(duration: 1.6)) {
                         self.lineEnd = 1
                     }
+             
      
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
                         self.showWithAnimation = true
                     }
                    

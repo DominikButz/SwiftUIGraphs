@@ -110,3 +110,38 @@ public struct LineChartXAxisSettings {
     }
 }
 
+public struct DYBarChartSettings: DYGridSettings {
+    
+    public var chartViewBackgroundColor: Color
+    public var gradient: LinearGradient
+    public var lateralPadding: (leading: CGFloat, trailing: CGFloat)
+    public var yAxisSettings: YAxisSettings
+    public var xAxisSettings: BarChartXAxisSettings
+    
+    public init(chartViewBackgroundColor: Color = Color(.systemBackground), gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, Color.orange.opacity(0.8)]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0),  yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: BarChartXAxisSettings = BarChartXAxisSettings()) {
+        
+        self.chartViewBackgroundColor = chartViewBackgroundColor
+        self.gradient = gradient
+        self.lateralPadding = lateralPadding
+
+        self.yAxisSettings = yAxisSettings
+        self.xAxisSettings = xAxisSettings
+ 
+        
+    }
+    
+}
+
+
+public struct BarChartXAxisSettings {
+    var showXAxis: Bool
+    var xAxisInterval: Double
+    var xAxisFont: Font
+    public init(showXAxis: Bool = true, xAxisInterval:Double = 100, xAxisFont: Font = Font.system(size:8)) {
+        
+        self.showXAxis = showXAxis
+        self.xAxisInterval = xAxisInterval
+        self.xAxisFont = xAxisFont
+    }
+}
+
