@@ -7,7 +7,9 @@
 
 import Foundation
 
-public struct DYDataPoint {
+public struct DYDataPoint: Identifiable {
+    
+    public let id:UUID = UUID()
     
     public init(xValue: Double, yValue: Double) {
         self.xValue = xValue
@@ -43,9 +45,8 @@ public struct DYDataPoint {
         
         var endDate = Date().add(units: -3, component: .hour)
         
-        for _ in 0..<15 {
+        for _ in 0..<14 {
           let yValue = Double.random(in: 1500 ..< 1940)
-           // let yValue:Double = 2000
             let xValue =  endDate.timeIntervalSinceReferenceDate
            let dataPoint = DYDataPoint(xValue: xValue, yValue: yValue)
             dataPoints.append(dataPoint)

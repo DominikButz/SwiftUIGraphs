@@ -39,9 +39,10 @@ public struct DYLegendView: View {
                 }
                 
                 HStack {
-                    Text(yValueConverter(dataPoints[selectedIndex].yValue)).font(.body).bold()
-                    Text(xValueConverter(dataPoints[selectedIndex].xValue)).foregroundColor(.secondary)
-                    
+                    if selectedIndex >= 0 && selectedIndex <= self.dataPoints.count {
+                        Text(yValueConverter(dataPoints[selectedIndex].yValue)).font(.body).bold()
+                        Text(xValueConverter(dataPoints[selectedIndex].xValue)).foregroundColor(.secondary)
+                    }
                     if self.isLandscape {
                         Text(" | ")
                         self.maximumValueView

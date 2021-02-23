@@ -19,7 +19,7 @@ public struct DYLineChartView: View, GridChart {
    // @State var selectedXPos: CGFloat = 8 // User X touch location
     @State var selectedYPos: CGFloat = 0 // User Y touch location
     @State var isSelected: Bool = false // Is the user touching the graph
-    @State private var lineEnd = CGFloat.zero
+    @State private var lineEnd: CGFloat = 0 // for line animation
     @State var showWithAnimation: Bool = false
     // constants
     var chartFrameHeight: CGFloat?
@@ -60,67 +60,68 @@ public struct DYLineChartView: View, GridChart {
 
     public var body: some View {
         GeometryReader { geo in
-            
-            if self.dataPoints.count >= 2 {
-                VStack(spacing: 0) {
-                    HStack(spacing:0) {
-                        if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .leading {
-                            self.yAxisView(geo: geo).padding(.trailing, 5).frame(width:settings.yAxisSettings.yAxisViewWidth)
-                        }
-                        ZStack {
-
+            Group {
+                if self.dataPoints.count >= 2 {
+                    VStack(spacing: 0) {
+                        HStack(spacing:0) {
+                            if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .leading {
+                                self.yAxisView(geo: geo).padding(.trailing, 5).frame(width:settings.yAxisSettings.yAxisViewWidth)
+                            }
+                            ZStack {
+                                
                                 if self.settings.yAxisSettings.showYAxisLines {
                                     self.yAxisGridLines().opacity(0.5)
                                 }
                                 if (self.settings as! DYLineChartSettings).xAxisSettings.showXAxisLines {
                                     self.xAxisGridLines().opacity(0.5)
                                 }
-                            
-                            self.line()
-                            
-                            if self.showWithAnimation {
-                                Group {
-                                    if (self.settings as! DYLineChartSettings).showGradient {
+                                
+                                self.line()
+                                
+                                if self.showWithAnimation {
+                                    Group {
+                                        if (self.settings as! DYLineChartSettings).showGradient {
                                             self.gradient()
                                         }
                                         if (self.settings as! DYLineChartSettings).showPointMarkers {
                                             self.points()
                                         }
                                         self.addUserInteraction()
-                                }.transition(AnyTransition.opacity.animation(Animation.easeIn(duration: 0.8)))
+                                    }.transition(AnyTransition.opacity.animation(Animation.easeIn(duration: 0.8)))
                                     
+                                }
+                                
+                            }.background(settings.chartViewBackgroundColor)
+                            
+                            
+                            if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing {
+                                self.yAxisView(geo: geo).padding(.leading, 5).frame(width:settings.yAxisSettings.yAxisViewWidth)
                             }
-
-                        }.background(settings.chartViewBackgroundColor)
-                    
+                        }.frame(height: chartFrameHeight)
                         
-                        if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing {
-                            self.yAxisView(geo: geo).padding(.leading, 5).frame(width:settings.yAxisSettings.yAxisViewWidth)
+                        if (self.settings as! DYLineChartSettings).xAxisSettings.showXAxis {
+                            self.xAxisView()
                         }
-                    }.frame(height: chartFrameHeight)
-
-                    if (self.settings as! DYLineChartSettings).xAxisSettings.showXAxis {
-                        self.xAxisView()
                     }
-                }.onAppear {
-
-                    withAnimation(Animation.easeIn(duration: 1.6)) {
-                        self.lineEnd = 1
+                            
+                } else {
+                    HStack {
+                        Spacer()
+                        Text("Not enough data!").padding()
+                        Spacer()
                     }
-             
-     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
-                        self.showWithAnimation = true
-                    }
-                   
                 }
-            } else {
-                HStack {
-                    Spacer()
-                    Text("Not enough data!").padding()
-                    Spacer()
+            }.onAppear {
+                
+                withAnimation(.easeInOut(duration: 1.6)) {
+                    self.lineEnd = 1
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+                    self.showWithAnimation = true
                 }
             }
+      
         }
         
     }
@@ -203,7 +204,7 @@ public struct DYLineChartView: View, GridChart {
     }
 //
     private func xAxisIntervalTextViewFor(value:Double, geo: GeometryProxy)-> some View {
-        Text(self.xValueConverter(value)).font((settings as! DYLineChartSettings).xAxisSettings.xAxisFont).position(x: self.convertToXCoordinate(value: value, width: geo.size.width - marginSum), y: 10)
+        Text(self.xValueConverter(value)).font(.system(size:(settings as! DYLineChartSettings).xAxisSettings.xAxisFontSize)).position(x: self.convertToXCoordinate(value: value, width: geo.size.width - marginSum), y: 10)
     }
 //
 //
@@ -237,9 +238,6 @@ public struct DYLineChartView: View, GridChart {
             .trim(from: 0, to: self.lineEnd)
             .stroke(style: (self.settings as! DYLineChartSettings).lineStrokeStyle)
             .foregroundColor((self.settings as! DYLineChartSettings).lineColor)
-            .onAppear {
-                  self.convertedXValues = self.dataPoints.map({convertToXCoordinate(value: $0.xValue, width: geo.size.width - marginSum)})
-              }
       }
  
     }
@@ -301,7 +299,7 @@ public struct DYLineChartView: View, GridChart {
          //   let yScale = self.yScaleFor(height: geo.size.height)
             let height = geo.size.height
             let width = geo.size.width - marginSum
-          ForEach(dataPoints.indices) { i in
+           ForEach(dataPoints) { dataPoint in
                 Circle()
                     .stroke(style: (self.settings as! DYLineChartSettings).pointStrokeStyle)
                     .frame(width: (self.settings as! DYLineChartSettings).pointDiameter, height: (self.settings as! DYLineChartSettings).pointDiameter, alignment: .center)
@@ -309,7 +307,7 @@ public struct DYLineChartView: View, GridChart {
                     .background((self.settings as! DYLineChartSettings).pointBackgroundColor)
                     .cornerRadius(5)
                     //((geo.size.width - marginSum) / CGFloat(self.dataPoints.count - 1)) * CGFloat(i) - 5
-                    .offset(x: settings.lateralPadding.leading + self.convertToXCoordinate(value: dataPoints[i].xValue, width: width) - 5, y: (height - self.convertToYCoordinate(value: dataPoints[i].yValue, height: height)) - 5)
+                    .offset(x: settings.lateralPadding.leading + self.convertToXCoordinate(value: dataPoint.xValue, width: width) - 5, y: (height - self.convertToYCoordinate(value: dataPoint.yValue, height: height)) - 5)
             }
        }
         

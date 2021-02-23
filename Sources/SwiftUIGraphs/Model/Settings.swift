@@ -20,14 +20,13 @@ public struct  DYLineChartSettings:  DYGridSettings {
     
     //chart
     public var chartViewBackgroundColor: Color
+    public var gradient: LinearGradient
+    public var lateralPadding: (leading: CGFloat, trailing: CGFloat)
     var lineColor: Color
     var lineStrokeStyle:  StrokeStyle
     var showPointMarkers: Bool
     var showGradient: Bool
-    public var gradient: LinearGradient
-    public var lateralPadding: (leading: CGFloat, trailing: CGFloat)
 
-    
     var pointDiameter: CGFloat
     var pointStrokeStyle: StrokeStyle
     var pointColor: Color
@@ -77,18 +76,18 @@ public struct YAxisSettings {
     var yAxisViewWidth: CGFloat
     var showYAxisLines: Bool
     var yAxisLineStrokeStyle: StrokeStyle
-    var yAxisFont: Font
+    var yAxisFontSize: CGFloat
     var yAxisMinMaxOverride: (min:Double?, max:Double?)?
     var yAxisIntervalOverride: Double?
     
-    public init(showYAxis: Bool = true, yAxisPosition: Edge.Set = .leading, yAxisViewWidth: CGFloat = 35, showYAxisLines: Bool = true, yAxisLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), yAxisFont: Font = Font.system(size: 8), yAxisMinMaxOverride: (min:Double?, max:Double?)? = nil, yAxisIntervalOverride: Double? = nil) {
+    public init(showYAxis: Bool = true, yAxisPosition: Edge.Set = .leading, yAxisViewWidth: CGFloat = 35, showYAxisLines: Bool = true, yAxisLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), yAxisFontSize: CGFloat = 8, yAxisMinMaxOverride: (min:Double?, max:Double?)? = nil, yAxisIntervalOverride: Double? = nil) {
         
         self.showYAxis = showYAxis
         self.yAxisPosition = yAxisPosition
         self.yAxisViewWidth = yAxisViewWidth
         self.showYAxisLines = showYAxisLines
         self.yAxisLineStrokeStyle = yAxisLineStrokeStyle
-        self.yAxisFont = yAxisFont
+        self.yAxisFontSize = yAxisFontSize
         self.yAxisMinMaxOverride = yAxisMinMaxOverride
         self.yAxisIntervalOverride = yAxisIntervalOverride
     }
@@ -99,14 +98,15 @@ public struct LineChartXAxisSettings {
     var showXAxisLines: Bool
     var xAxisLineStrokeStyle: StrokeStyle
     var xAxisInterval: Double
-    var xAxisFont: Font
-    public init(showXAxis: Bool = true, showXAxisLines: Bool = true, xAxisLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisInterval:Double = 100, xAxisFont: Font = Font.system(size:8)) {
+    var xAxisFontSize: CGFloat
+    
+    public init(showXAxis: Bool = true, showXAxisLines: Bool = true, xAxisLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisInterval:Double = 100, xAxisFontSize: CGFloat = 8) {
         
         self.showXAxis = showXAxis
         self.showXAxisLines = showXAxisLines
         self.xAxisLineStrokeStyle = xAxisLineStrokeStyle
         self.xAxisInterval = xAxisInterval
-        self.xAxisFont = xAxisFont
+        self.xAxisFontSize = xAxisFontSize
     }
 }
 
@@ -118,12 +118,16 @@ public struct DYBarChartSettings: DYGridSettings {
     public var yAxisSettings: YAxisSettings
     public var xAxisSettings: BarChartXAxisSettings
     
-    public init(chartViewBackgroundColor: Color = Color(.systemBackground), gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, Color.orange.opacity(0.8)]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0),  yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: BarChartXAxisSettings = BarChartXAxisSettings()) {
+    var showSelectionIndicator: Bool
+    var selectionIndicatorColor: Color
+    
+    public init(chartViewBackgroundColor: Color = Color(.systemBackground), gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, Color.orange.opacity(0.8)]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), showSelectionIndicator: Bool = true, selectionIndicatorColor: Color = .orange, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: BarChartXAxisSettings = BarChartXAxisSettings()) {
         
         self.chartViewBackgroundColor = chartViewBackgroundColor
         self.gradient = gradient
         self.lateralPadding = lateralPadding
-
+        self.showSelectionIndicator = showSelectionIndicator
+        self.selectionIndicatorColor = selectionIndicatorColor
         self.yAxisSettings = yAxisSettings
         self.xAxisSettings = xAxisSettings
  
@@ -134,14 +138,14 @@ public struct DYBarChartSettings: DYGridSettings {
 
 
 public struct BarChartXAxisSettings {
+    
     var showXAxis: Bool
-    var xAxisInterval: Double
-    var xAxisFont: Font
-    public init(showXAxis: Bool = true, xAxisInterval:Double = 100, xAxisFont: Font = Font.system(size:8)) {
+    var xAxisFontSize: CGFloat
+    
+    public init(showXAxis: Bool = true, xAxisFontSize: CGFloat = 8) {
         
         self.showXAxis = showXAxis
-        self.xAxisInterval = xAxisInterval
-        self.xAxisFont = xAxisFont
+        self.xAxisFontSize = xAxisFontSize
     }
 }
 

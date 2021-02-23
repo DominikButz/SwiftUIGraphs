@@ -30,12 +30,12 @@ extension GridChart {
         VStack(alignment: .trailing, spacing: 0) {
             let interval = self.yAxisScaler.tickSpacing ?? self.settings.yAxisSettings.yAxisIntervalOverride ?? 0
             if let maxValue = self.yAxisValues().first, maxValue >=  interval {
-                Text(self.yValueConverter(maxValue)).font(settings.yAxisSettings.yAxisFont)
+                Text(self.yValueConverter(maxValue)).font(.system(size: settings.yAxisSettings.yAxisFontSize))
             }
             ForEach(self.yAxisValues(), id: \.self) {value in
                 if value != self.yAxisMinMax().max {
                     Spacer(minLength: 0)
-                    Text(self.yValueConverter(value)).font(settings.yAxisSettings.yAxisFont)
+                    Text(self.yValueConverter(value)).font(.system(size: settings.yAxisSettings.yAxisFontSize))
                 }
                 
             }
@@ -134,5 +134,9 @@ extension GridChart {
      func normalizationFactor(value: Double, maxValue: Double, minValue: Double)->Double {
         
         return (value - minValue) / (maxValue - minValue)
+    }
+    
+    func indexFor(dataPoint: DYDataPoint)->Int? {
+        return self.dataPoints.firstIndex(where: {$0.id == dataPoint.id})
     }
 }

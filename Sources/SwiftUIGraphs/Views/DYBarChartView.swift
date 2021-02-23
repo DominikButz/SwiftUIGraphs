@@ -11,7 +11,7 @@ public struct DYBarChartView: View, GridChart {
     
     var dataPoints: [DYDataPoint]
     var yAxisScaler: YAxisScaler
-    var settings: DYGridSettings
+    var settings: DYGridSettings 
     var marginSum: CGFloat {
         return settings.lateralPadding.leading + settings.lateralPadding.trailing
     }
@@ -19,17 +19,23 @@ public struct DYBarChartView: View, GridChart {
     var yValueConverter: (Double)->String
     var xValueConverter: (Double)->String
     
-    @Binding var selectedIndex: Int
+    let generator = UISelectionFeedbackGenerator()
     
+    @Binding var selectedIndex: Int
     @State private var barEnd = CGFloat.zero
+    
+    @StateObject var orientationObserver: OrientationObserver = OrientationObserver()
+    @Namespace var namespace
     
     public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, chartFrameHeight:CGFloat? = nil, settings: DYBarChartSettings = DYBarChartSettings()) {
         self._selectedIndex = selectedIndex
-        // sort the data points according to x values
-        let sortedData = dataPoints.sorted(by: {$0.xValue < $1.xValue})
-        self.dataPoints = sortedData
         self.xValueConverter = xValueConverter
         self.yValueConverter = yValueConverter
+        // sort the data points according to x values
+    
+        let sortedData = dataPoints.sorted(by: {$0.xValue < $1.xValue})
+        self.dataPoints = sortedData
+  
         self.chartFrameHeight = chartFrameHeight
         self.settings = settings
         
@@ -62,7 +68,6 @@ public struct DYBarChartView: View, GridChart {
                             self.bars()
 
                         }.background(settings.chartViewBackgroundColor)
-                      
 
                         if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing {
                             self.yAxisView(geo: geo).padding(.leading, 5).frame(width:settings.yAxisSettings.yAxisViewWidth)
@@ -71,7 +76,7 @@ public struct DYBarChartView: View, GridChart {
                     }.frame(height: chartFrameHeight)
 
                     if (self.settings as! DYBarChartSettings).xAxisSettings.showXAxis {
-                        self.xAxisView()
+                        self.xAxisView(totalWidth: geo.size.width - settings.yAxisSettings.yAxisViewWidth - marginSum)
                     }
                 }
             } else {
@@ -87,44 +92,54 @@ public struct DYBarChartView: View, GridChart {
     
    private func bars()->some View {
         GeometryReader {geo in
-            let height = geo.size.height - 1
+            let height = geo.size.height
             let width = geo.size.width - marginSum
-            let barWidth:CGFloat = (width / 2) / CGFloat(self.dataPoints.count)
+            let barWidth:CGFloat = self.barWidth(totalWidth: width)
             
             HStack(spacing: 0) {
                 
                 Spacer(minLength: 0)
                 
-                ForEach(dataPoints.indices) { i in
+                ForEach(dataPoints) { dataPoint in
                     VStack(spacing: 0) {
+                        let i = self.indexFor(dataPoint: dataPoint) ?? 0
+                        if i == self.selectedIndex && (settings as! DYBarChartSettings).showSelectionIndicator {
+                            Rectangle().fill((settings as! DYBarChartSettings).selectionIndicatorColor)
+                                .frame(width:barWidth, height: 2)
+                                .offset(y: -2)
+                                .matchedGeometryEffect(id: "selectionIndicator", in: namespace)
+                        }
                         Spacer(minLength: 0)
-                        BarView(gradient: settings.gradient, width: barWidth, height: self.convertToYCoordinate(value: dataPoints[i].yValue, height: height), index: i, selectedIndex: self.$selectedIndex)
-//                            .shadow(color: self.selectedIndex == i ? Color.gray : Color.clear, radius: 3, x: 3, y: 3).shadow(color: self.selectedIndex == i ? Color.gray : Color.clear, radius: 3, x: -3, y:-3)
-//                            .animation(.easeInOut)
+                        BarView(gradient: settings.gradient, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, selectionFeedbackGenerator: self.generator)
                     }
                     Spacer(minLength: 0)
                     
                 }
   
-            }.padding(.bottom, 1)
-          //  .frame(height: chartFrameHeight)
+            }
+            .onAppear {
+                self.generator.prepare()
+            }
             
         }
         
         
     }
     
-    private func xAxisView()-> some View {
+    private func xAxisView(totalWidth: CGFloat)-> some View {
 
-        HStack(alignment: .center) {
+        ZStack(alignment: .center) {
            // GeometryReader { geo in
-                Spacer()
-                ForEach(self.dataPoints.map({$0.xValue}), id:\.self) { value in
-                    Text(self.xValueConverter(value)).font((settings as! DYBarChartSettings).xAxisSettings.xAxisFont)
-                    Spacer()
+ 
+            let labels = self.xAxisLabelStrings()
+            let labelSteps = self.labelSteps(totalWidth: totalWidth)
+            ForEach(labels, id:\.self) { label in
+                let i = self.indexFor(labelString: label)
+                if  i % labelSteps == 0 {
+                    self.xAxisIntervalTextViewFor(label: label, index: i, totalWidth: totalWidth)
                 }
-          //  }
-
+            
+            }
         }
         .padding(.leading, settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .leading ?  settings.yAxisSettings.yAxisViewWidth : 0)
         .padding(.leading, settings.lateralPadding.leading )
@@ -132,6 +147,70 @@ public struct DYBarChartView: View, GridChart {
         .padding(.trailing, settings.lateralPadding.trailing)
 
     }
+    
+    private func xAxisIntervalTextViewFor(label: String, index: Int, totalWidth: CGFloat)-> some View {
+        Text(label).font(.system(size: (settings as! DYBarChartSettings).xAxisSettings.xAxisFontSize)).position(x: self.convertToXCoordinate(index: index, totalWidth: totalWidth), y: 10)
+    }
+    
+    
+    // MARK: Helper Funcs
+    
+    private func barWidth(totalWidth:CGFloat)->CGFloat {
+       return (totalWidth / 2) / CGFloat(self.dataPoints.count)
+    }
+    
+    private func xAxisLabelStrings()->[String] {
+        return self.dataPoints.map({self.xValueConverter($0.xValue)})
+    }
+    
+    private func indexFor(labelString:String)->Int {
+        return self.xAxisLabelStrings().firstIndex(where: {$0 == labelString}) ?? 0
+    }
+    
+    //CTFontCreateWithName(("SFProText-Regular" as CFString), 12, nil)
+    
+    private func labelSteps(totalWidth: CGFloat)->Int {
+        let allLabels = xAxisLabelStrings()
+
+        let fontSize =  (settings as! DYBarChartSettings).xAxisSettings.xAxisFontSize
+
+        let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
+        // let 5 be the padding
+        var totalWidthAllLabels: CGFloat = allLabels.map({$0.width(ctFont: ctFont) + 5}).reduce(0, +)
+        if totalWidthAllLabels < totalWidth {
+            return 1
+        }
+        
+        var labels: [String] = allLabels
+        var count = 1
+        while totalWidthAllLabels > totalWidth {
+            count += 1
+            labels = labels.indices.compactMap({
+                if $0 % 2 != 0 { return labels[$0] }
+                   else { return nil }
+            })
+            totalWidthAllLabels = labels.map({$0.width(ctFont: ctFont)}).reduce(0, +)
+            
+
+        }
+        
+        return count
+        
+    }
+    
+    private func convertToXCoordinate(index:Int, totalWidth: CGFloat)->CGFloat {
+
+        let barWidth = self.barWidth(totalWidth: totalWidth)
+        let barCount = CGFloat(self.dataPoints.count)
+        
+        let spacerWidth = (totalWidth - barWidth * CGFloat(barCount)) / CGFloat(barCount + 1)
+        
+        let startPosition:CGFloat = spacerWidth + barWidth / 2.0
+
+        return startPosition + CGFloat(index) * (spacerWidth + barWidth)
+
+    }
+
 
 }
 //struct DYBarChartView_Previews: PreviewProvider {
@@ -145,24 +224,50 @@ internal struct BarView: View {
     var gradient: LinearGradient
     var width: CGFloat
     var height: CGFloat
+    var index: Int
+    @ObservedObject var orientationObserver: OrientationObserver
     
     @State var currentHeight: CGFloat = 0
-    var index: Int
+    @State var scale:CGFloat = 1
     @Binding var selectedIndex: Int
+    var selectionFeedbackGenerator: UISelectionFeedbackGenerator
     
     var body: some View {
         
         RoundedCornerRectangle(tl: 5, tr: 5, bl: 0, br: 0)
             .fill(gradient)
-            .frame(width: width, height: height, alignment: .center)
-            
+            .frame(width: width, height: self.currentHeight, alignment: .center)
+            .scaleEffect(self.scale, anchor: .bottom)
             .onTapGesture {
-                self.selectedIndex = index
+                self.updateSelectionIfNeeded()
             }
             .onAppear {
-                withAnimation(Animation.easeIn(duration: 0.3).delay( 0.1 * Double(index))) {
+          
+                withAnimation(Animation.easeIn(duration: 0.4).delay( 0.1 * Double(index))) {
                     self.currentHeight = height
                 }
+            }.onReceive(self.orientationObserver.objectWillChange) { (_) in
+                self.currentHeight = height
             }
+    }
+    
+    func updateSelectionIfNeeded() {
+        
+        if self.selectedIndex != self.index {
+            
+            self.selectionFeedbackGenerator.selectionChanged() // haptic feedback
+            
+            withAnimation(Animation.spring()) {
+                self.scale = 1.08
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                withAnimation(Animation.spring()) {
+                    self.scale = 1
+                    self.selectedIndex = index
+                }
+            }
+            
+        }
     }
 }
