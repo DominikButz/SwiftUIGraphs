@@ -111,16 +111,19 @@ public struct DYLineChartView: View, GridChart {
                         Spacer()
                     }
                 }
-            }.onAppear {
-                
-                withAnimation(.easeInOut(duration: 1.6)) {
-                    self.lineEnd = 1
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
-                    self.showWithAnimation = true
-                }
             }
+            .onAppear {
+                   // DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        withAnimation(.easeInOut(duration: 1.6)) {
+                            self.lineEnd = 1
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+                            self.showWithAnimation = true
+                        }
+                 //   })
+            }
+            
       
         }
         
@@ -238,6 +241,7 @@ public struct DYLineChartView: View, GridChart {
             .trim(from: 0, to: self.lineEnd)
             .stroke(style: (self.settings as! DYLineChartSettings).lineStrokeStyle)
             .foregroundColor((self.settings as! DYLineChartSettings).lineColor)
+
       }
  
     }

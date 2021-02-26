@@ -101,7 +101,7 @@ public struct DYBarChartView: View, GridChart {
                 Spacer(minLength: 0)
                 
                 ForEach(dataPoints) { dataPoint in
-                    VStack(spacing: 0) {
+                    VStack( spacing: 0) {
                         let i = self.indexFor(dataPoint: dataPoint) ?? 0
                         if i == self.selectedIndex && (settings as! DYBarChartSettings).showSelectionIndicator {
                             Rectangle().fill((settings as! DYBarChartSettings).selectionIndicatorColor)
@@ -236,16 +236,17 @@ internal struct BarView: View {
         
         RoundedCornerRectangle(tl: 5, tr: 5, bl: 0, br: 0)
             .fill(gradient)
-            .frame(width: width, height: self.currentHeight, alignment: .center)
-            .scaleEffect(self.scale, anchor: .bottom)
+            .frame(width: width, height: self.currentHeight, alignment: .bottom)
+            .scaleEffect(self.scale, anchor: .bottom) // for selection scale effect
             .onTapGesture {
                 self.updateSelectionIfNeeded()
             }
             .onAppear {
-          
-                withAnimation(Animation.easeIn(duration: 0.4).delay( 0.1 * Double(index))) {
+
+                withAnimation(Animation.default.delay(0.1 * Double(index))) {
                     self.currentHeight = height
                 }
+
             }.onReceive(self.orientationObserver.objectWillChange) { (_) in
                 self.currentHeight = height
             }
