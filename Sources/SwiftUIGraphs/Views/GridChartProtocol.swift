@@ -17,7 +17,8 @@ protocol GridChart: View {
     var marginSum: CGFloat {get}
     var chartFrameHeight: CGFloat? {get set}
     var yValueConverter: (Double)->String {get set}
-      
+    var xValueConverter: (Double)->String {get set}
+    
     func yAxisValueCount()->Int
     func yAxisValues()->[Double]
 }
@@ -131,10 +132,47 @@ extension GridChart {
 
     }
     
+    func xAxisLabelStrings()->[String] {
+        return self.dataPoints.map({self.xValueConverter($0.xValue)})
+    }
+    
+    func xAxisLabelSteps(totalWidth: CGFloat)->Int {
+        let allLabels = xAxisLabelStrings()
+
+        let fontSize =  settings.xAxisSettings.xAxisFontSize
+
+        let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
+        // let 5 be the padding
+        var totalWidthAllLabels: CGFloat = allLabels.map({$0.width(ctFont: ctFont) + 5}).reduce(0, +)
+        if totalWidthAllLabels < totalWidth {
+            return 1
+        }
+        
+        var labels: [String] = allLabels
+        var count = 1
+        while totalWidthAllLabels > totalWidth {
+            count += 1
+            labels = labels.indices.compactMap({
+                if $0 % 2 != 0 { return labels[$0] }
+                   else { return nil }
+            })
+            totalWidthAllLabels = labels.map({$0.width(ctFont: ctFont)}).reduce(0, +)
+            
+
+        }
+        
+        return count
+        
+    }
+    
      func normalizationFactor(value: Double, maxValue: Double, minValue: Double)->Double {
         
         return (value - minValue) / (maxValue - minValue)
     }
+    
+    func indexFor(labelString:String)->Int {
+       return self.xAxisLabelStrings().firstIndex(where: {$0 == labelString}) ?? 0
+   }
     
     func indexFor(dataPoint: DYDataPoint)->Int? {
         return self.dataPoints.firstIndex(where: {$0.id == dataPoint.id})

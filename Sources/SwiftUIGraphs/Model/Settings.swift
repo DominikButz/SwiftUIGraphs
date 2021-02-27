@@ -13,7 +13,7 @@ public protocol DYGridSettings  {
     var gradient: LinearGradient {get set}
     var lateralPadding: (leading: CGFloat, trailing: CGFloat) {get set}
     var yAxisSettings: YAxisSettings {get set }
-    
+    var xAxisSettings: XAxisSettings {get set}
 }
 
 public struct  DYLineChartSettings:  DYGridSettings {
@@ -40,7 +40,7 @@ public struct  DYLineChartSettings:  DYGridSettings {
     public var yAxisSettings: YAxisSettings
     
     //xAxis
-    var xAxisSettings: LineChartXAxisSettings
+    public var xAxisSettings: XAxisSettings
 
     public init(chartViewBackgroundColor: Color = Color(.systemBackground), lineStrokeStyle:StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: Color = Color.orange, showPointMarkers: Bool = true, showGradient: Bool = true, gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, .white]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), pointDiameter: CGFloat = 10, pointStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), pointColor: Color = Color.orange, pointBackgroundColor: Color = Color(.systemBackground), markerLineWidth: CGFloat = 2, markerLinePointDiameter: CGFloat = 12, markerLineColor: Color = .orange, markerLinePointColor: Color = .orange, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: LineChartXAxisSettings = LineChartXAxisSettings()) {
         
@@ -93,22 +93,7 @@ public struct YAxisSettings {
     }
 }
 
-public struct LineChartXAxisSettings {
-    var showXAxis: Bool
-    var showXAxisLines: Bool
-    var xAxisLineStrokeStyle: StrokeStyle
-    var xAxisInterval: Double
-    var xAxisFontSize: CGFloat
-    
-    public init(showXAxis: Bool = true, showXAxisLines: Bool = true, xAxisLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisInterval:Double = 100, xAxisFontSize: CGFloat = 8) {
-        
-        self.showXAxis = showXAxis
-        self.showXAxisLines = showXAxisLines
-        self.xAxisLineStrokeStyle = xAxisLineStrokeStyle
-        self.xAxisInterval = xAxisInterval
-        self.xAxisFontSize = xAxisFontSize
-    }
-}
+
 
 public struct DYBarChartSettings: DYGridSettings {
     
@@ -116,7 +101,7 @@ public struct DYBarChartSettings: DYGridSettings {
     public var gradient: LinearGradient
     public var lateralPadding: (leading: CGFloat, trailing: CGFloat)
     public var yAxisSettings: YAxisSettings
-    public var xAxisSettings: BarChartXAxisSettings
+    public var xAxisSettings: XAxisSettings
     
     var showSelectionIndicator: Bool
     var selectionIndicatorColor: Color
@@ -137,10 +122,36 @@ public struct DYBarChartSettings: DYGridSettings {
 }
 
 
-public struct BarChartXAxisSettings {
+public protocol XAxisSettings {
+    var showXAxis: Bool {get set}
+    var xAxisFontSize: CGFloat {get set}
     
-    var showXAxis: Bool
-    var xAxisFontSize: CGFloat
+}
+
+public struct LineChartXAxisSettings: XAxisSettings {
+    
+   public var showXAxis: Bool
+   public var xAxisFontSize: CGFloat
+    
+    var showXAxisLines: Bool
+    var xAxisLineStrokeStyle: StrokeStyle
+    var xAxisInterval: Double
+ 
+    
+    public init(showXAxis: Bool = true, showXAxisLines: Bool = true, xAxisLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisInterval:Double = 100, xAxisFontSize: CGFloat = 8) {
+        
+        self.showXAxis = showXAxis
+        self.showXAxisLines = showXAxisLines
+        self.xAxisLineStrokeStyle = xAxisLineStrokeStyle
+        self.xAxisInterval = xAxisInterval
+        self.xAxisFontSize = xAxisFontSize
+    }
+}
+
+public struct BarChartXAxisSettings: XAxisSettings {
+    
+   public var showXAxis: Bool
+   public var xAxisFontSize: CGFloat
     
     public init(showXAxis: Bool = true, xAxisFontSize: CGFloat = 8) {
         

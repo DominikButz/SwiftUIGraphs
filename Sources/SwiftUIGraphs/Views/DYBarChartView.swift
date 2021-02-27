@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  DYBarChartView.swift
 //  
 //
 //  Created by Dominik Butz on 17/2/2021.
@@ -75,7 +75,7 @@ public struct DYBarChartView: View, GridChart {
                         }
                     }.frame(height: chartFrameHeight)
 
-                    if (self.settings as! DYBarChartSettings).xAxisSettings.showXAxis {
+                    if self.settings.xAxisSettings.showXAxis {
                         self.xAxisView(totalWidth: geo.size.width - settings.yAxisSettings.yAxisViewWidth - marginSum)
                     }
                 }
@@ -129,14 +129,13 @@ public struct DYBarChartView: View, GridChart {
     private func xAxisView(totalWidth: CGFloat)-> some View {
 
         ZStack(alignment: .center) {
-           // GeometryReader { geo in
- 
+
             let labels = self.xAxisLabelStrings()
-            let labelSteps = self.labelSteps(totalWidth: totalWidth)
+            let labelSteps = self.xAxisLabelSteps(totalWidth: totalWidth)
             ForEach(labels, id:\.self) { label in
                 let i = self.indexFor(labelString: label)
                 if  i % labelSteps == 0 {
-                    self.xAxisIntervalTextViewFor(label: label, index: i, totalWidth: totalWidth)
+                    self.xAxisIntervalLabelViewFor(label: label, index: i, totalWidth: totalWidth)
                 }
             
             }
@@ -148,56 +147,18 @@ public struct DYBarChartView: View, GridChart {
 
     }
     
-    private func xAxisIntervalTextViewFor(label: String, index: Int, totalWidth: CGFloat)-> some View {
-        Text(label).font(.system(size: (settings as! DYBarChartSettings).xAxisSettings.xAxisFontSize)).position(x: self.convertToXCoordinate(index: index, totalWidth: totalWidth), y: 10)
+    private func xAxisIntervalLabelViewFor(label: String, index: Int, totalWidth: CGFloat)-> some View {
+        Text(label).font(.system(size: settings.xAxisSettings.xAxisFontSize)).position(x: self.convertToXCoordinate(index: index, totalWidth: totalWidth), y: 10)
     }
     
+
     
     // MARK: Helper Funcs
     
     private func barWidth(totalWidth:CGFloat)->CGFloat {
        return (totalWidth / 2) / CGFloat(self.dataPoints.count)
     }
-    
-    private func xAxisLabelStrings()->[String] {
-        return self.dataPoints.map({self.xValueConverter($0.xValue)})
-    }
-    
-    private func indexFor(labelString:String)->Int {
-        return self.xAxisLabelStrings().firstIndex(where: {$0 == labelString}) ?? 0
-    }
-    
-    //CTFontCreateWithName(("SFProText-Regular" as CFString), 12, nil)
-    
-    private func labelSteps(totalWidth: CGFloat)->Int {
-        let allLabels = xAxisLabelStrings()
-
-        let fontSize =  (settings as! DYBarChartSettings).xAxisSettings.xAxisFontSize
-
-        let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
-        // let 5 be the padding
-        var totalWidthAllLabels: CGFloat = allLabels.map({$0.width(ctFont: ctFont) + 5}).reduce(0, +)
-        if totalWidthAllLabels < totalWidth {
-            return 1
-        }
-        
-        var labels: [String] = allLabels
-        var count = 1
-        while totalWidthAllLabels > totalWidth {
-            count += 1
-            labels = labels.indices.compactMap({
-                if $0 % 2 != 0 { return labels[$0] }
-                   else { return nil }
-            })
-            totalWidthAllLabels = labels.map({$0.width(ctFont: ctFont)}).reduce(0, +)
-            
-
-        }
-        
-        return count
-        
-    }
-    
+ 
     private func convertToXCoordinate(index:Int, totalWidth: CGFloat)->CGFloat {
 
         let barWidth = self.barWidth(totalWidth: totalWidth)
@@ -213,11 +174,6 @@ public struct DYBarChartView: View, GridChart {
 
 
 }
-//struct DYBarChartView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SwiftUIView()
-//    }
-//}
 
 internal struct BarView: View {
     
