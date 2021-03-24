@@ -19,7 +19,7 @@ final class OrientationObserver: ObservableObject {
     private var _observer: NSObjectProtocol?
     
     init() {
-        // fairly arbitrary starting value for 'flat' orientations
+
         if UIDevice.current.orientation.isLandscape{
 
             self.orientation = .landscape

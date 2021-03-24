@@ -1,14 +1,7 @@
-//
-//  File.swift
-//  
-//
-//  Created by Dominik Butz on 12/2/2021.
-//
-
 
 //
 //  YAxisScaler.swift
-//  BarChart
+
 //
 //  Copyright (c) 2020 Roman Baitaliuk
 //  Permission is hereby granted, free of charge, to any person

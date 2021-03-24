@@ -203,9 +203,11 @@ internal struct BarView: View {
                     self.currentHeight = height
                 }
 
-            }.onReceive(self.orientationObserver.objectWillChange) { (_) in
-                self.currentHeight = height
             }
+            .onChange(of: self.orientationObserver.orientation, perform: { _ in
+                self.currentHeight = height
+            })
+
     }
     
     func updateSelectionIfNeeded() {

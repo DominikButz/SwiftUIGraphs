@@ -1,5 +1,4 @@
 //  Extension+StringSize.swift
-//  BarChart
 //
 //  Copyright (c) 2020 Roman Baitaliuk
 //  Permission is hereby granted, free of charge, to any person

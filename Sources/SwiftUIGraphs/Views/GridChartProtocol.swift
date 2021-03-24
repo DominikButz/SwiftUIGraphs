@@ -40,6 +40,10 @@ extension GridChart {
                 }
                 
             }
+            
+            if self.yAxisValues().count == 1 {
+                Spacer()
+            }
         
         }
         //.frame(height: geo.size.height)

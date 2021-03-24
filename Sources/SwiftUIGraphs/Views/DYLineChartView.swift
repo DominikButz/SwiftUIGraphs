@@ -16,12 +16,11 @@ public struct DYLineChartView: View, GridChart {
     @Binding var selectedIndex: Int
     
     @State var lineOffset: CGFloat = 0 // Vertical line offset
-   // @State var selectedXPos: CGFloat = 8 // User X touch location
     @State var selectedYPos: CGFloat = 0 // User Y touch location
     @State var isSelected: Bool = false // Is the user touching the graph
     @State private var lineEnd: CGFloat = 0 // for line animation
     @State var showWithAnimation: Bool = false
-    // constants
+
     var chartFrameHeight: CGFloat?
     var settings: DYGridSettings
     
@@ -113,18 +112,17 @@ public struct DYLineChartView: View, GridChart {
                 }
             }
             .onAppear {
-                   // DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                        withAnimation(.easeInOut(duration: 1.6)) {
-                            self.lineEnd = 1
-                        }
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
-                            self.showWithAnimation = true
-                        }
-                 //   })
+ 
+                withAnimation(.easeInOut(duration: 1.4)) {
+                    self.lineEnd = 1
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                    self.showWithAnimation = true
+                }
+
             }
-            
-      
+
         }
         
     }
@@ -132,62 +130,7 @@ public struct DYLineChartView: View, GridChart {
     //MARK: Sub-Views
     
 
-    
-//    private func yAxisView(geo: GeometryProxy)-> some View {
-//
-//        VStack(alignment: .trailing, spacing: 0) {
-//            let interval = self.yAxisScaler.tickSpacing ?? self.settings.yAxisSettings.yAxisIntervalOverride ?? 0
-//            if let maxValue = self.yAxisValues().first, maxValue >=  interval {
-//                Text(self.yValueConverter(maxValue)).font(.system(size: 7))
-//            }
-//            ForEach(self.yAxisValues(), id: \.self) {value in
-//                if value != self.yAxisMinMax().max {
-//                    Spacer(minLength: 0)
-//                    Text(self.yValueConverter(value)).font(.system(size: 7))
-//                }
-//
-//            }
-//
-//        }
-//        //.frame(height: geo.size.height)
-//    }
-    
-    
 
-    
-    
-//    private func yAxisGridLines() -> some View {
-//        GeometryReader { geo in
-//            VStack(spacing: 0) {
-//                let width = geo.size.width
-//                Path { p in
-//
-//                    var yPosition:CGFloat = 0
-//
-//                    let count = self.yAxisValueCount()
-//                    let yAxisInterval = self.settings.yAxisSettings.yAxisIntervalOverride ?? self.yAxisScaler.tickSpacing ?? 1
-//
-//                    let min = self.yAxisMinMax().min
-//                    let max = self.yAxisMinMax().max
-//                    let convertedYAxisInterval  = geo.size.height * CGFloat(yAxisInterval / (max - min))
-//
-//                    for _ in 0..<count    {
-//
-//                        p.move(to: CGPoint(x: 0, y: yPosition))
-//                        p.addLine(to: CGPoint(x: width, y: yPosition))
-//                        p.closeSubpath()
-//                        yPosition += convertedYAxisInterval
-//                    }
-//
-//
-//                }.stroke(style: settings.yAxisSettings.yAxisLineStrokeStyle)
-//                .foregroundColor(.secondary)
-//
-//            }
-//
-//        }
-//    }
-//
     private func xAxisView()-> some View {
 
         ZStack(alignment: .center) {
@@ -374,8 +317,7 @@ public struct DYLineChartView: View, GridChart {
     
     private func dragOnChanged(value: DragGesture.Value, geo: GeometryProxy) {
         let xPos = value.location.x
-      // let width = geo.size.width
-        //- marginSum
+
         self.isSelected = true
         
         let path = self.pathFor(width: geo.size.width - marginSum, height: geo.size.height, closeShape: false)
@@ -391,7 +333,6 @@ public struct DYLineChartView: View, GridChart {
 //         //   CGFloat(m) * index.truncatingRemainder(dividingBy: 1)
 //
 //        }
-
 
         if index.truncatingRemainder(dividingBy: 1) >= 0.5 && index < CGFloat(self.dataPoints.count  - 1) {
             self.selectedIndex = Int(index) + 1

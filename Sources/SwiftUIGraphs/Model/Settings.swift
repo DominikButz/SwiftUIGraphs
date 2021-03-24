@@ -1,7 +1,6 @@
-//
-//  File.swift
-//  
-//
+
+//  Settings.swift
+
 //  Created by Dominik Butz on 5/2/2021.
 //
 
@@ -145,6 +144,8 @@ public struct LineChartXAxisSettings: XAxisSettings {
         self.xAxisLineStrokeStyle = xAxisLineStrokeStyle
         self.xAxisInterval = xAxisInterval
         self.xAxisFontSize = xAxisFontSize
+        
+        
     }
 }
 
