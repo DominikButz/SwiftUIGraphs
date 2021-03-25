@@ -7,23 +7,31 @@
 
 import SwiftUI
 
-public struct DYPieChartView: View {
+public struct DYPieChartView<L: View>: View {
     
-    
-    @State private var selectedId:UUID?
+    @Binding private var selectedId:String?
     
     var data: [DYChartFraction] = []
-    var valueConverter: (Double)->String
+
+    var sliceLabelView: (DYChartFraction)->L
     var totalValue: Double {
 
         return data.reduce(0) { $0 + $1.value}
     }
-    var innerCircleRadiusPercentage: CGFloat = 0
+    var settings: DYPieChartSettings
     
-    public init(data: [DYChartFraction], valueConverter: @escaping (Double)->String) {
+    
+    /// DYPieChartView initializer
+    /// - Parameters:
+    ///   - data: Array of DYChartFraction structs. The fraction values will not be reordered, so the slices will be arranged exactly in the order of the DYChartFraction structs in the array - starting at 12 o'clock, in clockwise direction.
+    ///   - selectedId: The id of the DYChartFraction that is currently selected. Can be nil.
+    ///   - sliceLabelView: The view that should be displayed on top of each pie chart slice. If the fraction of a given slice is smaller than the visibility threshold defined in the DYPieChartSettings, the label view will not be shown. Return an EmptyView if no label should be displayed.
+    ///   - settings: DYPieChartSettings
+    public init(data: [DYChartFraction], selectedId: Binding<String?>, sliceLabelView: @escaping (DYChartFraction)->L, settings: DYPieChartSettings = DYPieChartSettings()) {
         self.data  = data
-        self.valueConverter = valueConverter
-        self.selectedId = data.first!.id
+        self._selectedId = selectedId
+        self.sliceLabelView = sliceLabelView
+        self.settings = settings
     }
     
     public var body: some View {
@@ -31,42 +39,37 @@ public struct DYPieChartView: View {
         GeometryReader {proxy in
             ZStack(alignment: .center) {
                 ForEach(self.data) { fraction in
-                    ZStack {
                         PieChartSlice(startAngle: self.startAngleFor(fraction: fraction) , endAngle: self.endAngleFor(fraction: fraction))
                             .foregroundColor(fraction.color)
-                            .mask(Circle()
-                                    .stroke(Color.black, lineWidth: min(proxy.size.width, proxy.size.height) * (1 - innerCircleRadiusPercentage))
-                            )
-                            .scaleEffect(self.selectedId == fraction.id ? 1.05 : 1, anchor: .center)
-                        
-                        if fraction.value / totalValue >= 0.15 {
-                            VStack {
-                                Text(fraction.title).font(.body)
-                                Text(self.valueConverter(fraction.value)).font(.callout).bold()
-                                Text(self.percentageStringFor(value: fraction.value)).font(.callout)
-                            }.offset(self.labelOffsetFor(fraction: fraction, radius: min(proxy.size.width, proxy.size.height) / 2))
-                        }
-                    }.onTapGesture {
-                        withAnimation {
-                            if self.selectedId != fraction.id {
-                                self.selectedId = fraction.id
-                            } else {
-                                self.selectedId = nil
+                            .scaleEffect(self.selectedId == fraction.id ? settings.selectedSliceScaleEffect : 1, anchor: .center)
+                            .shadow(radius: self.selectedId == fraction.id ? 5 : 0)
+                            .onTapGesture {
+                                withAnimation {
+                                    if self.selectedId != fraction.id {
+                                        self.selectedId = fraction.id
+                                    } else {
+                                        self.selectedId = nil
+                                    }
+                                }
                             }
-                        }
-                    }
                     
+                }.mask(Circle().stroke(Color.black, lineWidth: min(proxy.size.width, proxy.size.height) * (1 - settings.innerCircleRadiusFraction)))
+                
+                ForEach(self.data) { fraction in
+                    if fraction.value / totalValue >= settings.sliceLabelVisibilityThreshold {
+                        self.sliceLabelView(fraction)
+                            .offset(self.labelOffsetFor(fraction: fraction, radius: min(proxy.size.width, proxy.size.height) / 2))
+                            .scaleEffect(self.selectedId == fraction.id ? settings.selectedSliceScaleEffect: 1, anchor: .center)
+                            .allowsHitTesting(false)
+
+                    }
                 }
-            }.background(Circle().shadow(radius: 5))
+            }
         }
         
         
     }
-    
-//    private func indexOf(fraction: DYChartFraction)->Int {
-//        let ids = self.data.map({$0.id})
-//        return ids.firstIndex(of: fraction.id)!
-//    }
+
     
     private func cumulativeFractionValueUpUntil(fraction: DYChartFraction)->Double {
         
@@ -121,37 +124,12 @@ public struct DYPieChartView: View {
     private func labelOffsetFor(fraction: DYChartFraction, radius: CGFloat)->CGSize {
         let midAngle = self.midAngleFor(fraction: fraction)
 
-        let x = Double(radius / 2 ) * cos(midAngle.degrees * Double.pi / 180) / (1 -  (Double(innerCircleRadiusPercentage) / 2))
-        let y = Double(radius / 2) * sin(midAngle.degrees * Double.pi / 180) / (1 -  (Double(innerCircleRadiusPercentage) / 2))
+        let x = Double(radius / 2 ) * cos(midAngle.degrees * Double.pi / 180) / (1 -  (Double(settings.innerCircleRadiusFraction) / 2))
+        let y = Double(radius / 2) * sin(midAngle.degrees * Double.pi / 180) / (1 -  (Double(settings.innerCircleRadiusFraction) / 2))
         
         return CGSize(width: x, height: y)
     }
-    
-    private func percentageStringFor(value: Double)->String {
-        let fractionValue = value / self.totalValue
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        formatter.maximumFractionDigits = 1
-        return formatter.string(for: fractionValue)!
-        
-    }
-  
-}
 
-public struct DYChartFraction: Identifiable {
-    
-    public var id: UUID
-    public var value: Double
-    public var color: Color
-    public var title: String
-    
-    public init(value: Double, color: Color, title: String) {
-        self.id = UUID()
-        self.value = value
-        self.color = color
-        self.title = title
-    }
-    
 }
 
 
@@ -177,20 +155,17 @@ struct PieChartSlice: Shape {
 
 struct DYPieChartView_Previews: PreviewProvider {
     static var previews: some View {
-        DYPieChartView(data: [
-                        DYChartFraction(value: 500, color: Color.blue, title: "Blue"),
-            DYChartFraction(value: 100, color: .green, title: "Green"),
-            DYChartFraction(value: 250, color: .orange, title: "Orange"), DYChartFraction(value: 150, color: .yellow, title: "Yellow")
-                      
-        ]) { (value) -> String in
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .currency
-            formatter.currencySymbol = "USD"
-            formatter.maximumFractionDigits = 2
-            return formatter.string(for: value)!
-            
-        }.padding()
+        let data = DYChartFraction.exampleData()
+        DYPieChartView(data: data, selectedId: .constant(data.first!.id), sliceLabelView: { fraction in
+            VStack {
+                Text(fraction.title).font(.body)
+                Text(DYChartFraction.exampleFormatter(value: fraction.value)).font(.callout).bold()
+                Text(fraction.value.percentageString(totalValue: data.reduce(0) { $0 + $1.value})).font(.callout)
+                
+            }
+        }, settings: DYPieChartSettings(innerCircleRadiusFraction: 0.3)).padding()
     }
+
 }
 
 

@@ -13,7 +13,7 @@ protocol GridChart: View {
     var dataPoints: [DYDataPoint] {get set}
     var yAxisScaler: YAxisScaler {get set}
     var selectedIndex: Int {get set}
-    var settings: DYGridSettings {get set}
+    var settings: DYGridChartSettings {get set}
     var marginSum: CGFloat {get}
     var chartFrameHeight: CGFloat? {get set}
     var yValueConverter: (Double)->String {get set}

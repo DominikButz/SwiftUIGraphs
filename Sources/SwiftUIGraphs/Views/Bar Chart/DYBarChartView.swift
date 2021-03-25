@@ -11,7 +11,7 @@ public struct DYBarChartView: View, GridChart {
     
     var dataPoints: [DYDataPoint]
     var yAxisScaler: YAxisScaler
-    var settings: DYGridSettings 
+    var settings: DYGridChartSettings 
     var marginSum: CGFloat {
         return settings.lateralPadding.leading + settings.lateralPadding.trailing
     }

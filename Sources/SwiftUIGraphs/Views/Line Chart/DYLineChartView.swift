@@ -22,7 +22,7 @@ public struct DYLineChartView: View, GridChart {
     @State var showWithAnimation: Bool = false
 
     var chartFrameHeight: CGFloat?
-    var settings: DYGridSettings
+    var settings: DYGridChartSettings
     
     var yAxisScaler: YAxisScaler
     var xValueConverter:  (Double)->String

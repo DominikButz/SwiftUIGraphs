@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct DYLegendView: View {
+public struct DYGridChartHeaderView: View {
 
     let title: String
     var dataPoints: [DYDataPoint]
@@ -85,9 +85,9 @@ public struct DYLegendView: View {
     
 }
 
-struct DYLegendView_Previews: PreviewProvider {
+struct DYChartHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        DYLegendView(title: "Example Line Chart", dataPoints: DYDataPoint.exampleData0, selectedIndex: .constant(0), isLandscape: false, xValueConverter: { (xValue) -> String in
+        DYGridChartHeaderView(title: "Example Line Chart", dataPoints: DYDataPoint.exampleData0, selectedIndex: .constant(0), isLandscape: false, xValueConverter: { (xValue) -> String in
             let date = Date(timeIntervalSinceReferenceDate: xValue)
             let dateFormat = "dd-MM-yyyy HH:mm"
             let dateFormatter = DateFormatter()

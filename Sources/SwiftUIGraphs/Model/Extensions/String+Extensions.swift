@@ -42,4 +42,6 @@ extension String {
         let frame = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, range, nil, size, nil)
         return frame
     }
+    
+
 }

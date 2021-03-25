@@ -16,28 +16,7 @@ public extension Double {
         let number = NSNumber(value: self)
         return formatter.string(from: number)!
     }
-//
-//    
-//    
-//    func rounded(digits: Int, base: Decimal = 10, roundingRule: FloatingPointRoundingRule)->Int {
-//
-//        let roundFactor = pow(base, digits)
-//        let roundFactorAsDouble = Double(truncating: NSDecimalNumber(decimal:roundFactor))
-//
-//        return Int(roundFactorAsDouble)  * Int((self / roundFactorAsDouble).rounded(roundingRule))
-//    }
-//    
-//    func roundingFactorDigits()->Int {
-//        let integer = Int(self)
-//        let stringNumber = "\(integer)"
-//        let digits = stringNumber.count
-//        var digitsForRoundingFactor  = digits - 2
-//        if digitsForRoundingFactor == 0 {
-//            digitsForRoundingFactor = 1
-//        }
-//        return digitsForRoundingFactor
-//    }
-    
+
  
     func decimalsCount() -> Int {
         if self == Double(Int(self)) {
@@ -49,6 +28,16 @@ public extension Double {
         let decimalCount = doubleString.count - integerString.count - 1
 
         return decimalCount
+    }
+    
+    func percentageString(totalValue: Double)->String {
+        let fractionValue = self / totalValue
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 1
+        return formatter.string(for: fractionValue)!
+        
     }
     
 }
