@@ -1,0 +1,1021 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "DYBarChartView"
+- "BarView"
+provides-nominal:
+- "13SwiftUIGraphs14DYBarChartViewV"
+- "13SwiftUIGraphs7BarViewV"
+provides-member:
+- ["13SwiftUIGraphs14DYBarChartViewV", ""]
+- ["13SwiftUIGraphs7BarViewV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "!="
+- "%"
+- "&&"
+- "*"
+- !private "+"
+- "-"
+- !private "/"
+- "<"
+- "=="
+- !private ">"
+- ">="
+- "??"
+- "Animation"
+- "AssignmentPrecedence"
+- "BarView"
+- "Binding"
+- "CGFloat"
+- !private "CastingPrecedence"
+- "DYBarChartSettings"
+- "DYBarChartView"
+- "DYDataPoint"
+- "DYGridChartSettings"
+- !private "DispatchQueue"
+- "Double"
+- "FloatLiteralType"
+- "ForEach"
+- !private "GeometryReader"
+- "GridChart"
+- "HStack"
+- "Int"
+- "IntegerLiteralType"
+- "LinearGradient"
+- "Namespace"
+- "ObservedObject"
+- "OrientationObserver"
+- "Rectangle"
+- !private "RoundedCornerRectangle"
+- "Spacer"
+- "State"
+- "StateObject"
+- "String"
+- !private "StringLiteralType"
+- "TernaryPrecedence"
+- "Text"
+- "UISelectionFeedbackGenerator"
+- "VStack"
+- "View"
+- "YAxisScaler"
+- "ZStack"
+- "chartFrameHeight"
+- "dataPoints"
+- !private "gradient"
+- "height"
+- "index"
+- "marginSum"
+- "namespace"
+- "settings"
+- !private "width"
+- "withAnimation"
+depends-member:
+- ["s18AdditiveArithmeticP", "+"]
+- ["s18AdditiveArithmeticP", "+="]
+- ["s18AdditiveArithmeticP", "-"]
+- ["s18AdditiveArithmeticP", "-="]
+- ["s18AdditiveArithmeticP", ""]
+- !private ["s18AdditiveArithmeticP", "init"]
+- ["s18AdditiveArithmeticP", "zero"]
+- !private ["7SwiftUI9AlignmentV", "bottom"]
+- !private ["7SwiftUI9AlignmentV", "center"]
+- ["7SwiftUI10AnimatableP", ""]
+- !private ["7SwiftUI10AnimatableP", "bottom"]
+- !private ["7SwiftUI10AnimatableP", "fill"]
+- !private ["7SwiftUI10AnimatableP", "height"]
+- !private ["7SwiftUI10AnimatableP", "init"]
+- !private ["7SwiftUI10AnimatableP", "width"]
+- !private ["7SwiftUI9AnimationV", "default"]
+- !private ["7SwiftUI9AnimationV", "delay"]
+- !private ["7SwiftUI9AnimationV", "spring"]
+- !private ["Sa", "count"]
+- !private ["Sa", "map"]
+- !private ["Sa", "max"]
+- !private ["Sa", "min"]
+- !private ["Sa", "sorted"]
+- ["13SwiftUIGraphs7BarViewV", "$currentHeight"]
+- ["13SwiftUIGraphs7BarViewV", "$orientationObserver"]
+- ["13SwiftUIGraphs7BarViewV", "$scale"]
+- ["13SwiftUIGraphs7BarViewV", "$selectedIndex"]
+- !private ["13SwiftUIGraphs7BarViewV", "Animation"]
+- ["13SwiftUIGraphs7BarViewV", "Binding"]
+- ["13SwiftUIGraphs7BarViewV", "Body"]
+- ["13SwiftUIGraphs7BarViewV", "CGFloat"]
+- ["13SwiftUIGraphs7BarViewV", "Default_Body"]
+- !private ["13SwiftUIGraphs7BarViewV", "DispatchQueue"]
+- !private ["13SwiftUIGraphs7BarViewV", "Double"]
+- ["13SwiftUIGraphs7BarViewV", "Int"]
+- ["13SwiftUIGraphs7BarViewV", "LinearGradient"]
+- ["13SwiftUIGraphs7BarViewV", "ObservedObject"]
+- ["13SwiftUIGraphs7BarViewV", "OrientationObserver"]
+- !private ["13SwiftUIGraphs7BarViewV", "RoundedCornerRectangle"]
+- ["13SwiftUIGraphs7BarViewV", "State"]
+- ["13SwiftUIGraphs7BarViewV", "UISelectionFeedbackGenerator"]
+- ["13SwiftUIGraphs7BarViewV", "View"]
+- ["13SwiftUIGraphs7BarViewV", ""]
+- ["13SwiftUIGraphs7BarViewV", "_Default_Body"]
+- !private ["13SwiftUIGraphs7BarViewV", "_currentHeight"]
+- ["13SwiftUIGraphs7BarViewV", "_makeView"]
+- ["13SwiftUIGraphs7BarViewV", "_makeViewList"]
+- !private ["13SwiftUIGraphs7BarViewV", "_orientationObserver"]
+- !private ["13SwiftUIGraphs7BarViewV", "_scale"]
+- !private ["13SwiftUIGraphs7BarViewV", "_selectedIndex"]
+- ["13SwiftUIGraphs7BarViewV", "_viewListCount"]
+- ["13SwiftUIGraphs7BarViewV", "body"]
+- ["13SwiftUIGraphs7BarViewV", "currentHeight"]
+- ["13SwiftUIGraphs7BarViewV", "gradient"]
+- ["13SwiftUIGraphs7BarViewV", "height"]
+- ["13SwiftUIGraphs7BarViewV", "index"]
+- ["13SwiftUIGraphs7BarViewV", "init"]
+- ["13SwiftUIGraphs7BarViewV", "orientationObserver"]
+- ["13SwiftUIGraphs7BarViewV", "scale"]
+- ["13SwiftUIGraphs7BarViewV", "selectedIndex"]
+- ["13SwiftUIGraphs7BarViewV", "selectionFeedbackGenerator"]
+- ["13SwiftUIGraphs7BarViewV", "updateSelectionIfNeeded"]
+- ["13SwiftUIGraphs7BarViewV", "width"]
+- !private ["13SwiftUIGraphs7BarViewV", "withAnimation"]
+- ["SK", ""]
+- !private ["SK", "count"]
+- !private ["SK", "map"]
+- !private ["SK", "max"]
+- !private ["SK", "min"]
+- !private ["SK", "sorted"]
+- !private ["SB", "binade"]
+- !private ["SB", "exponentBitCount"]
+- !private ["SB", "exponentBitPattern"]
+- !private ["SB", "init"]
+- !private ["SB", "isTotallyOrdered"]
+- !private ["SB", "radix"]
+- !private ["SB", "significandBitCount"]
+- !private ["SB", "significandBitPattern"]
+- !private ["SB", "significandWidth"]
+- ["SB", "zero"]
+- ["7SwiftUI7BindingV", "init"]
+- ["7SwiftUI7BindingV", "projectedValue"]
+- ["7SwiftUI7BindingV", "subscript"]
+- ["7SwiftUI7BindingV", "wrappedValue"]
+- !private ["12CoreGraphics7CGFloatV", "init"]
+- ["12CoreGraphics7CGFloatV", "zero"]
+- !private ["So6CGSizeV", "height"]
+- !private ["So6CGSizeV", "width"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "count"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "init"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "map"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "max"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "min"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "sorted"]
+- ["s7CVarArgP", ""]
+- !private ["s7CVarArgP", "asyncAfter"]
+- !private ["s7CVarArgP", "count"]
+- ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "main"]
+- !private ["s7CVarArgP", "map"]
+- !private ["s7CVarArgP", "max"]
+- !private ["s7CVarArgP", "min"]
+- !private ["s7CVarArgP", "prepare"]
+- !private ["s7CVarArgP", "selectionChanged"]
+- !private ["s7CVarArgP", "sorted"]
+- ["s7CVarArgP", "zero"]
+- ["Sl", ""]
+- !private ["Sl", "count"]
+- !private ["Sl", "map"]
+- !private ["Sl", "max"]
+- !private ["Sl", "min"]
+- !private ["Sl", "sorted"]
+- ["SL", ""]
+- !private ["SL", "init"]
+- !private ["SL", "now"]
+- ["SL", "zero"]
+- !private ["10Foundation15ContiguousBytesP", "count"]
+- !private ["10Foundation15ContiguousBytesP", "map"]
+- !private ["10Foundation15ContiguousBytesP", "max"]
+- !private ["10Foundation15ContiguousBytesP", "min"]
+- !private ["10Foundation15ContiguousBytesP", "sorted"]
+- !private ["s28CustomDebugStringConvertibleP", "asyncAfter"]
+- !private ["s28CustomDebugStringConvertibleP", "count"]
+- !private ["s28CustomDebugStringConvertibleP", "default"]
+- !private ["s28CustomDebugStringConvertibleP", "delay"]
+- !private ["s28CustomDebugStringConvertibleP", "height"]
+- ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "main"]
+- !private ["s28CustomDebugStringConvertibleP", "map"]
+- !private ["s28CustomDebugStringConvertibleP", "max"]
+- !private ["s28CustomDebugStringConvertibleP", "min"]
+- !private ["s28CustomDebugStringConvertibleP", "none"]
+- !private ["s28CustomDebugStringConvertibleP", "prepare"]
+- !private ["s28CustomDebugStringConvertibleP", "selectionChanged"]
+- !private ["s28CustomDebugStringConvertibleP", "some"]
+- !private ["s28CustomDebugStringConvertibleP", "sorted"]
+- !private ["s28CustomDebugStringConvertibleP", "spring"]
+- !private ["s28CustomDebugStringConvertibleP", "system"]
+- !private ["s28CustomDebugStringConvertibleP", "width"]
+- !private ["s17CustomReflectableP", "count"]
+- !private ["s17CustomReflectableP", "default"]
+- !private ["s17CustomReflectableP", "delay"]
+- !private ["s17CustomReflectableP", "height"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "map"]
+- !private ["s17CustomReflectableP", "max"]
+- !private ["s17CustomReflectableP", "min"]
+- !private ["s17CustomReflectableP", "none"]
+- !private ["s17CustomReflectableP", "some"]
+- !private ["s17CustomReflectableP", "sorted"]
+- !private ["s17CustomReflectableP", "spring"]
+- !private ["s17CustomReflectableP", "system"]
+- !private ["s17CustomReflectableP", "width"]
+- ["s17CustomReflectableP", "zero"]
+- ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "asyncAfter"]
+- !private ["s23CustomStringConvertibleP", "count"]
+- !private ["s23CustomStringConvertibleP", "default"]
+- !private ["s23CustomStringConvertibleP", "delay"]
+- ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "main"]
+- !private ["s23CustomStringConvertibleP", "map"]
+- !private ["s23CustomStringConvertibleP", "max"]
+- !private ["s23CustomStringConvertibleP", "min"]
+- !private ["s23CustomStringConvertibleP", "prepare"]
+- !private ["s23CustomStringConvertibleP", "selectionChanged"]
+- !private ["s23CustomStringConvertibleP", "sorted"]
+- !private ["s23CustomStringConvertibleP", "spring"]
+- ["s23CustomStringConvertibleP", "zero"]
+- !private ["13SwiftUIGraphs18DYBarChartSettingsV", ""]
+- !private ["13SwiftUIGraphs18DYBarChartSettingsV", "init"]
+- !private ["13SwiftUIGraphs18DYBarChartSettingsV", "selectionIndicatorColor"]
+- !private ["13SwiftUIGraphs18DYBarChartSettingsV", "showSelectionIndicator"]
+- !private ["13SwiftUIGraphs18DYBarChartSettingsV", "yAxisSettings"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "$barEnd"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "$orientationObserver"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "$selectedIndex"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "BarView"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "Binding"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "Body"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "CGFloat"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "DYBarChartSettings"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "DYDataPoint"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "DYGridChartSettings"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "Default_Body"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "Double"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "ForEach"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "GeometryReader"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "HStack"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "Int"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "Namespace"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "OrientationObserver"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "Rectangle"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "Spacer"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "State"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "StateObject"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "String"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "Text"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "UISelectionFeedbackGenerator"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "VStack"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "View"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "YAxisScaler"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "ZStack"]
+- ["13SwiftUIGraphs14DYBarChartViewV", ""]
+- ["13SwiftUIGraphs14DYBarChartViewV", "_Default_Body"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "_barEnd"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "_makeView"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "_makeViewList"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "_namespace"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "_orientationObserver"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "_selectedIndex"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "_viewListCount"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "barEnd"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "barWidth"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "bars"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "body"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "chartFrameHeight"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "convertToXCoordinate"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "convertToYCoordinate"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "dataPoints"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "generator"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "indexFor"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "init"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "marginSum"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "namespace"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "orientationObserver"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "selectedIndex"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "settings"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "xAxisIntervalLabelViewFor"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "xAxisLabelSteps"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "xAxisLabelStrings"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "xAxisView"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "xValueConverter"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "yAxisGridLines"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "yAxisScaler"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "yAxisValueCount"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "yAxisValues"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "yAxisView"]
+- ["13SwiftUIGraphs14DYBarChartViewV", "yValueConverter"]
+- !private ["13SwiftUIGraphs11DYDataPointV", ""]
+- !private ["13SwiftUIGraphs11DYDataPointV", "xValue"]
+- !private ["13SwiftUIGraphs11DYDataPointV", "yValue"]
+- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "chartViewBackgroundColor"]
+- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "gradient"]
+- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "init"]
+- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "lateralPadding"]
+- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "selectionIndicatorColor"]
+- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "showSelectionIndicator"]
+- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "xAxisSettings"]
+- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "yAxisSettings"]
+- !private ["10Foundation12DataProtocolP", ""]
+- !private ["10Foundation12DataProtocolP", "count"]
+- !private ["10Foundation12DataProtocolP", "map"]
+- !private ["10Foundation12DataProtocolP", "max"]
+- !private ["10Foundation12DataProtocolP", "min"]
+- !private ["10Foundation12DataProtocolP", "sorted"]
+- !private ["Se", "count"]
+- !private ["Se", "height"]
+- !private ["Se", "init"]
+- !private ["Se", "map"]
+- !private ["Se", "max"]
+- !private ["Se", "min"]
+- !private ["Se", "none"]
+- !private ["Se", "some"]
+- !private ["Se", "sorted"]
+- !private ["Se", "system"]
+- !private ["Se", "width"]
+- ["Se", "zero"]
+- ["So18OS_dispatch_objectC", ""]
+- !private ["So18OS_dispatch_objectC", "asyncAfter"]
+- !private ["So18OS_dispatch_objectC", "init"]
+- !private ["So18OS_dispatch_objectC", "main"]
+- !private ["So18OS_dispatch_objectC", "sync"]
+- !private ["So17OS_dispatch_queueC", "asyncAfter"]
+- !private ["So17OS_dispatch_queueC", "main"]
+- !private ["8Dispatch0A4TimeV", "now"]
+- !private ["Sd", "init"]
+- ["7SwiftUI15DynamicPropertyP", "init"]
+- ["7SwiftUI15DynamicPropertyP", "wrappedValue"]
+- !private ["7SwiftUI18DynamicViewContentP", "init"]
+- !private ["SE", "count"]
+- !private ["SE", "height"]
+- !private ["SE", "init"]
+- !private ["SE", "map"]
+- !private ["SE", "max"]
+- !private ["SE", "min"]
+- !private ["SE", "none"]
+- !private ["SE", "some"]
+- !private ["SE", "sorted"]
+- !private ["SE", "system"]
+- !private ["SE", "width"]
+- ["SE", "zero"]
+- !private ["SQ", "=="]
+- ["SQ", ""]
+- !private ["SQ", "asyncAfter"]
+- !private ["SQ", "bottom"]
+- !private ["SQ", "center"]
+- !private ["SQ", "count"]
+- !private ["SQ", "default"]
+- !private ["SQ", "delay"]
+- !private ["SQ", "font"]
+- !private ["SQ", "height"]
+- ["SQ", "init"]
+- !private ["SQ", "leading"]
+- !private ["SQ", "main"]
+- !private ["SQ", "map"]
+- !private ["SQ", "max"]
+- !private ["SQ", "min"]
+- !private ["SQ", "none"]
+- !private ["SQ", "now"]
+- !private ["SQ", "padding"]
+- !private ["SQ", "position"]
+- !private ["SQ", "prepare"]
+- !private ["SQ", "selectionChanged"]
+- !private ["SQ", "some"]
+- !private ["SQ", "sorted"]
+- !private ["SQ", "spring"]
+- !private ["SQ", "system"]
+- !private ["SQ", "trailing"]
+- !private ["SQ", "width"]
+- ["SQ", "zero"]
+- !private ["s25ExpressibleByArrayLiteralP", ""]
+- !private ["s25ExpressibleByArrayLiteralP", "count"]
+- !private ["s25ExpressibleByArrayLiteralP", "leading"]
+- !private ["s25ExpressibleByArrayLiteralP", "map"]
+- !private ["s25ExpressibleByArrayLiteralP", "max"]
+- !private ["s25ExpressibleByArrayLiteralP", "min"]
+- !private ["s25ExpressibleByArrayLiteralP", "sorted"]
+- !private ["s25ExpressibleByArrayLiteralP", "trailing"]
+- ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
+- !private ["s25ExpressibleByFloatLiteralP", "FloatLiteralType"]
+- ["s25ExpressibleByFloatLiteralP", ""]
+- !private ["s25ExpressibleByFloatLiteralP", "init"]
+- ["s25ExpressibleByFloatLiteralP", "zero"]
+- ["s27ExpressibleByIntegerLiteralP", "IntegerLiteralType"]
+- ["s27ExpressibleByIntegerLiteralP", ""]
+- ["s27ExpressibleByIntegerLiteralP", "init"]
+- ["s27ExpressibleByIntegerLiteralP", "zero"]
+- !private ["s23ExpressibleByNilLiteralP", "none"]
+- !private ["s23ExpressibleByNilLiteralP", "some"]
+- !private ["s23ExpressibleByNilLiteralP", "system"]
+- ["s32ExpressibleByStringInterpolationP", ""]
+- !private ["s26ExpressibleByStringLiteralP", "StringLiteralType"]
+- ["s26ExpressibleByStringLiteralP", ""]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- ["s33ExpressibleByUnicodeScalarLiteralP", ""]
+- !private ["SF", "*"]
+- !private ["SF", "*="]
+- !private ["SF", "+"]
+- !private ["SF", "+="]
+- !private ["SF", "-"]
+- !private ["SF", "-="]
+- !private ["SF", "/"]
+- !private ["SF", "/="]
+- ["SF", ""]
+- !private ["SF", "addProduct"]
+- !private ["SF", "addingProduct"]
+- !private ["SF", "exponent"]
+- !private ["SF", "floatingPointClass"]
+- !private ["SF", "formRemainder"]
+- !private ["SF", "formSquareRoot"]
+- !private ["SF", "formTruncatingRemainder"]
+- !private ["SF", "greatestFiniteMagnitude"]
+- !private ["SF", "infinity"]
+- !private ["SF", "init"]
+- !private ["SF", "isCanonical"]
+- !private ["SF", "isEqual"]
+- !private ["SF", "isFinite"]
+- !private ["SF", "isInfinite"]
+- !private ["SF", "isLess"]
+- !private ["SF", "isLessThanOrEqualTo"]
+- !private ["SF", "isNaN"]
+- !private ["SF", "isNormal"]
+- !private ["SF", "isSignalingNaN"]
+- !private ["SF", "isSubnormal"]
+- !private ["SF", "isTotallyOrdered"]
+- !private ["SF", "isZero"]
+- !private ["SF", "leastNonzeroMagnitude"]
+- !private ["SF", "leastNormalMagnitude"]
+- !private ["SF", "maximum"]
+- !private ["SF", "maximumMagnitude"]
+- !private ["SF", "minimum"]
+- !private ["SF", "minimumMagnitude"]
+- !private ["SF", "nan"]
+- !private ["SF", "negate"]
+- !private ["SF", "nextDown"]
+- !private ["SF", "nextUp"]
+- !private ["SF", "pi"]
+- !private ["SF", "radix"]
+- !private ["SF", "remainder"]
+- !private ["SF", "round"]
+- !private ["SF", "rounded"]
+- !private ["SF", "sign"]
+- !private ["SF", "signalingNaN"]
+- !private ["SF", "significand"]
+- !private ["SF", "squareRoot"]
+- !private ["SF", "truncatingRemainder"]
+- !private ["SF", "ulp"]
+- !private ["SF", "ulpOfOne"]
+- ["SF", "zero"]
+- !private ["7SwiftUI4FontV", "system"]
+- !private ["7SwiftUI7ForEachV", "init"]
+- !private ["7SwiftUI13GeometryProxyV", "size"]
+- !private ["7SwiftUI14GeometryReaderV", "init"]
+- !private ["7SwiftUI7GestureP", "none"]
+- !private ["7SwiftUI7GestureP", "some"]
+- !private ["7SwiftUI7GestureP", "system"]
+- !private ["13SwiftUIGraphs9GridChartP", "$selectedIndex"]
+- !private ["13SwiftUIGraphs9GridChartP", "BarView"]
+- ["13SwiftUIGraphs9GridChartP", "Binding"]
+- ["13SwiftUIGraphs9GridChartP", "Body"]
+- ["13SwiftUIGraphs9GridChartP", "CGFloat"]
+- !private ["13SwiftUIGraphs9GridChartP", "DYBarChartSettings"]
+- ["13SwiftUIGraphs9GridChartP", "Default_Body"]
+- !private ["13SwiftUIGraphs9GridChartP", "ForEach"]
+- !private ["13SwiftUIGraphs9GridChartP", "GeometryReader"]
+- !private ["13SwiftUIGraphs9GridChartP", "HStack"]
+- ["13SwiftUIGraphs9GridChartP", "Namespace"]
+- ["13SwiftUIGraphs9GridChartP", "OrientationObserver"]
+- !private ["13SwiftUIGraphs9GridChartP", "Rectangle"]
+- !private ["13SwiftUIGraphs9GridChartP", "Spacer"]
+- ["13SwiftUIGraphs9GridChartP", "State"]
+- ["13SwiftUIGraphs9GridChartP", "StateObject"]
+- !private ["13SwiftUIGraphs9GridChartP", "Text"]
+- ["13SwiftUIGraphs9GridChartP", "UISelectionFeedbackGenerator"]
+- !private ["13SwiftUIGraphs9GridChartP", "VStack"]
+- !private ["13SwiftUIGraphs9GridChartP", "YAxisScaler"]
+- !private ["13SwiftUIGraphs9GridChartP", "ZStack"]
+- ["13SwiftUIGraphs9GridChartP", ""]
+- ["13SwiftUIGraphs9GridChartP", "_Default_Body"]
+- ["13SwiftUIGraphs9GridChartP", "_makeView"]
+- ["13SwiftUIGraphs9GridChartP", "_makeViewList"]
+- !private ["13SwiftUIGraphs9GridChartP", "_selectedIndex"]
+- ["13SwiftUIGraphs9GridChartP", "_viewListCount"]
+- !private ["13SwiftUIGraphs9GridChartP", "barWidth"]
+- !private ["13SwiftUIGraphs9GridChartP", "bars"]
+- ["13SwiftUIGraphs9GridChartP", "body"]
+- ["13SwiftUIGraphs9GridChartP", "chartFrameHeight"]
+- !private ["13SwiftUIGraphs9GridChartP", "convertToXCoordinate"]
+- !private ["13SwiftUIGraphs9GridChartP", "convertToYCoordinate"]
+- ["13SwiftUIGraphs9GridChartP", "dataPoints"]
+- !private ["13SwiftUIGraphs9GridChartP", "generator"]
+- !private ["13SwiftUIGraphs9GridChartP", "indexFor"]
+- ["13SwiftUIGraphs9GridChartP", "marginSum"]
+- !private ["13SwiftUIGraphs9GridChartP", "namespace"]
+- !private ["13SwiftUIGraphs9GridChartP", "orientationObserver"]
+- ["13SwiftUIGraphs9GridChartP", "selectedIndex"]
+- ["13SwiftUIGraphs9GridChartP", "settings"]
+- !private ["13SwiftUIGraphs9GridChartP", "xAxisIntervalLabelViewFor"]
+- !private ["13SwiftUIGraphs9GridChartP", "xAxisLabelSteps"]
+- !private ["13SwiftUIGraphs9GridChartP", "xAxisLabelStrings"]
+- !private ["13SwiftUIGraphs9GridChartP", "xAxisView"]
+- ["13SwiftUIGraphs9GridChartP", "xValueConverter"]
+- !private ["13SwiftUIGraphs9GridChartP", "yAxisGridLines"]
+- ["13SwiftUIGraphs9GridChartP", "yAxisScaler"]
+- ["13SwiftUIGraphs9GridChartP", "yAxisValueCount"]
+- ["13SwiftUIGraphs9GridChartP", "yAxisValues"]
+- !private ["13SwiftUIGraphs9GridChartP", "yAxisView"]
+- ["13SwiftUIGraphs9GridChartP", "yValueConverter"]
+- !private ["7SwiftUI6HStackV", "frame"]
+- !private ["7SwiftUI6HStackV", "init"]
+- !private ["7SwiftUI6HStackV", "onAppear"]
+- ["SH", ""]
+- !private ["SH", "asyncAfter"]
+- !private ["SH", "bottom"]
+- !private ["SH", "count"]
+- ["SH", "init"]
+- !private ["SH", "main"]
+- !private ["SH", "map"]
+- !private ["SH", "max"]
+- !private ["SH", "min"]
+- !private ["SH", "none"]
+- !private ["SH", "prepare"]
+- !private ["SH", "selectionChanged"]
+- !private ["SH", "some"]
+- !private ["SH", "sorted"]
+- !private ["SH", "system"]
+- ["SH", "zero"]
+- !private ["s12IdentifiableP", "xValue"]
+- !private ["s12IdentifiableP", "yValue"]
+- !private ["7SwiftUI15InsettableShapeP", "fill"]
+- !private ["7SwiftUI15InsettableShapeP", "init"]
+- ["s7KeyPathC", ""]
+- ["s25LosslessStringConvertibleP", ""]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["SM", ""]
+- !private ["SM", "count"]
+- !private ["SM", "map"]
+- !private ["SM", "max"]
+- !private ["SM", "min"]
+- !private ["SM", "sorted"]
+- !private ["10Foundation19MutableDataProtocolP", "count"]
+- !private ["10Foundation19MutableDataProtocolP", "map"]
+- !private ["10Foundation19MutableDataProtocolP", "max"]
+- !private ["10Foundation19MutableDataProtocolP", "min"]
+- !private ["10Foundation19MutableDataProtocolP", "sorted"]
+- ["So8NSCodingP", ""]
+- ["So8NSObjectC", ""]
+- !private ["So8NSObjectC", "activate"]
+- !private ["So8NSObjectC", "asyncAfter"]
+- ["So8NSObjectC", "init"]
+- !private ["So8NSObjectC", "main"]
+- !private ["So8NSObjectC", "prepare"]
+- !private ["So8NSObjectC", "resume"]
+- !private ["So8NSObjectC", "selectionChanged"]
+- !private ["So8NSObjectC", "setTarget"]
+- !private ["So8NSObjectC", "suspend"]
+- !private ["So8NSObjectC", "sync"]
+- ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "activate"]
+- !private ["So8NSObjectP", "asyncAfter"]
+- ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "main"]
+- !private ["So8NSObjectP", "prepare"]
+- !private ["So8NSObjectP", "resume"]
+- !private ["So8NSObjectP", "selectionChanged"]
+- !private ["So8NSObjectP", "setTarget"]
+- !private ["So8NSObjectP", "suspend"]
+- !private ["So8NSObjectP", "sync"]
+- ["7SwiftUI9NamespaceV", "init"]
+- ["7SwiftUI9NamespaceV", "projectedValue"]
+- ["7SwiftUI9NamespaceV", "subscript"]
+- ["7SwiftUI9NamespaceV", "wrappedValue"]
+- ["7SwiftUI9NamespaceV", "wrapperValue"]
+- !private ["Sj", "*"]
+- !private ["Sj", "*="]
+- ["Sj", ""]
+- !private ["Sj", "init"]
+- !private ["Sj", "magnitude"]
+- ["Sj", "zero"]
+- ["So9OS_objectC", ""]
+- !private ["So9OS_objectC", "activate"]
+- !private ["So9OS_objectC", "asyncAfter"]
+- !private ["So9OS_objectC", "init"]
+- !private ["So9OS_objectC", "main"]
+- !private ["So9OS_objectC", "resume"]
+- !private ["So9OS_objectC", "setTarget"]
+- !private ["So9OS_objectC", "suspend"]
+- !private ["So9OS_objectC", "sync"]
+- ["7Combine16ObservableObjectP", "init"]
+- !private ["7Combine16ObservableObjectP", "orientation"]
+- ["7SwiftUI14ObservedObjectV", "init"]
+- ["7SwiftUI14ObservedObjectV", "projectedValue"]
+- ["7SwiftUI14ObservedObjectV", "subscript"]
+- ["7SwiftUI14ObservedObjectV", "wrappedValue"]
+- !private ["s9OptionSetP", "leading"]
+- !private ["s9OptionSetP", "trailing"]
+- !private ["Sq", "none"]
+- !private ["Sq", "some"]
+- !private ["Sq", "system"]
+- !private ["13SwiftUIGraphs19OrientationObserverC0C0O", ""]
+- ["13SwiftUIGraphs19OrientationObserverC", ""]
+- ["13SwiftUIGraphs19OrientationObserverC", "init"]
+- !private ["13SwiftUIGraphs19OrientationObserverC", "orientation"]
+- !private ["7Combine9PublishedV", "init"]
+- !private ["7Combine9PublishedV", "projectedValue"]
+- !private ["7Combine9PublishedV", "subscript"]
+- !private ["7Combine9PublishedV", "wrappedValue"]
+- !private ["Sk", ""]
+- !private ["Sk", "count"]
+- !private ["Sk", "map"]
+- !private ["Sk", "max"]
+- !private ["Sk", "min"]
+- !private ["Sk", "sorted"]
+- !private ["Sm", ""]
+- !private ["Sm", "count"]
+- !private ["Sm", "map"]
+- !private ["Sm", "max"]
+- !private ["Sm", "min"]
+- !private ["Sm", "sorted"]
+- !private ["SY", ""]
+- !private ["SY", "init"]
+- !private ["SY", "leading"]
+- !private ["SY", "rawValue"]
+- !private ["SY", "trailing"]
+- !private ["7SwiftUI9RectangleV", "fill"]
+- !private ["7SwiftUI9RectangleV", "init"]
+- !private ["13SwiftUIGraphs22RoundedCornerRectangleV", ""]
+- !private ["13SwiftUIGraphs22RoundedCornerRectangleV", "fill"]
+- !private ["13SwiftUIGraphs22RoundedCornerRectangleV", "init"]
+- !private ["s10SIMDScalarP", "init"]
+- !private ["7Combine9SchedulerP", "asyncAfter"]
+- !private ["7Combine9SchedulerP", "main"]
+- ["ST", ""]
+- !private ["ST", "count"]
+- !private ["ST", "map"]
+- !private ["ST", "max"]
+- !private ["ST", "min"]
+- !private ["ST", "sorted"]
+- !private ["7SwiftUI4EdgeO3SetV", "leading"]
+- !private ["7SwiftUI4EdgeO3SetV", "trailing"]
+- !private ["s10SetAlgebraP", ""]
+- !private ["s10SetAlgebraP", "leading"]
+- !private ["s10SetAlgebraP", "trailing"]
+- !private ["7SwiftUI5ShapeP", ""]
+- !private ["7SwiftUI5ShapeP", "fill"]
+- !private ["7SwiftUI5ShapeP", "init"]
+- !private ["s13SignedNumericP", "-"]
+- ["s13SignedNumericP", ""]
+- !private ["s13SignedNumericP", "init"]
+- ["s13SignedNumericP", "zero"]
+- !private ["7SwiftUI6SpacerV", "init"]
+- ["7SwiftUI5StateV", "init"]
+- ["7SwiftUI5StateV", "projectedValue"]
+- ["7SwiftUI5StateV", "subscript"]
+- ["7SwiftUI5StateV", "wrappedValue"]
+- ["7SwiftUI11StateObjectV", "init"]
+- ["7SwiftUI11StateObjectV", "projectedValue"]
+- ["7SwiftUI11StateObjectV", "subscript"]
+- ["7SwiftUI11StateObjectV", "wrappedValue"]
+- ["Sx", ""]
+- !private ["Sx", "init"]
+- ["Sx", "zero"]
+- !private ["7SwiftUI4TextV", "font"]
+- !private ["7SwiftUI4TextV", "init"]
+- !private ["7SwiftUI4TextV", "padding"]
+- !private ["7SwiftUI4TextV", "position"]
+- ["s16TextOutputStreamP", ""]
+- ["s20TextOutputStreamableP", ""]
+- !private ["s20TextOutputStreamableP", "init"]
+- ["So19UIFeedbackGeneratorC", ""]
+- ["So19UIFeedbackGeneratorC", "init"]
+- !private ["So19UIFeedbackGeneratorC", "prepare"]
+- !private ["So19UIFeedbackGeneratorC", "selectionChanged"]
+- ["So18UIFocusEnvironmentP", ""]
+- ["So28UISelectionFeedbackGeneratorC", "init"]
+- !private ["So28UISelectionFeedbackGeneratorC", "prepare"]
+- !private ["So28UISelectionFeedbackGeneratorC", "selectionChanged"]
+- !private ["7SwiftUI9UnitPointV", "bottom"]
+- !private ["7SwiftUI6VStackV", "init"]
+- !private ["7SwiftUI16VectorArithmeticP", "init"]
+- ["7SwiftUI16VectorArithmeticP", "zero"]
+- !private ["7SwiftUI4ViewP", "$selectedIndex"]
+- !private ["7SwiftUI4ViewP", "Animation"]
+- !private ["7SwiftUI4ViewP", "BarView"]
+- ["7SwiftUI4ViewP", "Binding"]
+- ["7SwiftUI4ViewP", "Body"]
+- ["7SwiftUI4ViewP", "CGFloat"]
+- !private ["7SwiftUI4ViewP", "DYBarChartSettings"]
+- ["7SwiftUI4ViewP", "Default_Body"]
+- !private ["7SwiftUI4ViewP", "DispatchQueue"]
+- !private ["7SwiftUI4ViewP", "Double"]
+- !private ["7SwiftUI4ViewP", "ForEach"]
+- !private ["7SwiftUI4ViewP", "GeometryReader"]
+- !private ["7SwiftUI4ViewP", "HStack"]
+- ["7SwiftUI4ViewP", "Namespace"]
+- ["7SwiftUI4ViewP", "ObservedObject"]
+- ["7SwiftUI4ViewP", "OrientationObserver"]
+- !private ["7SwiftUI4ViewP", "Rectangle"]
+- !private ["7SwiftUI4ViewP", "RoundedCornerRectangle"]
+- !private ["7SwiftUI4ViewP", "Spacer"]
+- ["7SwiftUI4ViewP", "State"]
+- ["7SwiftUI4ViewP", "StateObject"]
+- !private ["7SwiftUI4ViewP", "Text"]
+- ["7SwiftUI4ViewP", "UISelectionFeedbackGenerator"]
+- !private ["7SwiftUI4ViewP", "VStack"]
+- !private ["7SwiftUI4ViewP", "YAxisScaler"]
+- !private ["7SwiftUI4ViewP", "ZStack"]
+- ["7SwiftUI4ViewP", ""]
+- ["7SwiftUI4ViewP", "_Default_Body"]
+- ["7SwiftUI4ViewP", "_makeView"]
+- ["7SwiftUI4ViewP", "_makeViewList"]
+- !private ["7SwiftUI4ViewP", "_selectedIndex"]
+- ["7SwiftUI4ViewP", "_viewListCount"]
+- !private ["7SwiftUI4ViewP", "background"]
+- !private ["7SwiftUI4ViewP", "barWidth"]
+- !private ["7SwiftUI4ViewP", "bars"]
+- ["7SwiftUI4ViewP", "body"]
+- ["7SwiftUI4ViewP", "chartFrameHeight"]
+- !private ["7SwiftUI4ViewP", "convertToXCoordinate"]
+- !private ["7SwiftUI4ViewP", "convertToYCoordinate"]
+- !private ["7SwiftUI4ViewP", "currentHeight"]
+- ["7SwiftUI4ViewP", "dataPoints"]
+- !private ["7SwiftUI4ViewP", "fill"]
+- !private ["7SwiftUI4ViewP", "font"]
+- !private ["7SwiftUI4ViewP", "frame"]
+- !private ["7SwiftUI4ViewP", "generator"]
+- !private ["7SwiftUI4ViewP", "gradient"]
+- !private ["7SwiftUI4ViewP", "height"]
+- !private ["7SwiftUI4ViewP", "index"]
+- !private ["7SwiftUI4ViewP", "indexFor"]
+- !private ["7SwiftUI4ViewP", "init"]
+- ["7SwiftUI4ViewP", "marginSum"]
+- !private ["7SwiftUI4ViewP", "matchedGeometryEffect"]
+- !private ["7SwiftUI4ViewP", "namespace"]
+- !private ["7SwiftUI4ViewP", "none"]
+- !private ["7SwiftUI4ViewP", "offset"]
+- !private ["7SwiftUI4ViewP", "onAppear"]
+- !private ["7SwiftUI4ViewP", "onChange"]
+- !private ["7SwiftUI4ViewP", "onTapGesture"]
+- !private ["7SwiftUI4ViewP", "opacity"]
+- !private ["7SwiftUI4ViewP", "orientationObserver"]
+- !private ["7SwiftUI4ViewP", "padding"]
+- !private ["7SwiftUI4ViewP", "position"]
+- !private ["7SwiftUI4ViewP", "scale"]
+- !private ["7SwiftUI4ViewP", "scaleEffect"]
+- ["7SwiftUI4ViewP", "selectedIndex"]
+- !private ["7SwiftUI4ViewP", "selectionFeedbackGenerator"]
+- ["7SwiftUI4ViewP", "settings"]
+- !private ["7SwiftUI4ViewP", "some"]
+- !private ["7SwiftUI4ViewP", "system"]
+- !private ["7SwiftUI4ViewP", "updateSelectionIfNeeded"]
+- !private ["7SwiftUI4ViewP", "width"]
+- !private ["7SwiftUI4ViewP", "withAnimation"]
+- !private ["7SwiftUI4ViewP", "xAxisIntervalLabelViewFor"]
+- !private ["7SwiftUI4ViewP", "xAxisLabelSteps"]
+- !private ["7SwiftUI4ViewP", "xAxisLabelStrings"]
+- !private ["7SwiftUI4ViewP", "xAxisView"]
+- ["7SwiftUI4ViewP", "xValueConverter"]
+- !private ["7SwiftUI4ViewP", "yAxisGridLines"]
+- ["7SwiftUI4ViewP", "yAxisScaler"]
+- ["7SwiftUI4ViewP", "yAxisValueCount"]
+- ["7SwiftUI4ViewP", "yAxisValues"]
+- !private ["7SwiftUI4ViewP", "yAxisView"]
+- ["7SwiftUI4ViewP", "yValueConverter"]
+- !private ["7SwiftUI11ViewBuilderV", "buildBlock"]
+- !private ["7SwiftUI11ViewBuilderV", "buildEither"]
+- !private ["7SwiftUI11ViewBuilderV", "buildExpression"]
+- !private ["7SwiftUI11ViewBuilderV", "buildFinalResult"]
+- !private ["7SwiftUI11ViewBuilderV", "buildIf"]
+- !private ["7SwiftUI11ViewBuilderV", "buildOptional"]
+- !private ["13SwiftUIGraphs13XAxisSettingsP", "showXAxis"]
+- !private ["13SwiftUIGraphs13XAxisSettingsP", "xAxisFontSize"]
+- !private ["13SwiftUIGraphs11YAxisScalerV", "init"]
+- !private ["13SwiftUIGraphs13YAxisSettingsV", "showYAxis"]
+- !private ["13SwiftUIGraphs13YAxisSettingsV", "showYAxisLines"]
+- !private ["13SwiftUIGraphs13YAxisSettingsV", "yAxisMinMaxOverride"]
+- !private ["13SwiftUIGraphs13YAxisSettingsV", "yAxisPosition"]
+- !private ["13SwiftUIGraphs13YAxisSettingsV", "yAxisViewWidth"]
+- !private ["7SwiftUI6ZStackV", "background"]
+- !private ["7SwiftUI6ZStackV", "init"]
+- !private ["7SwiftUI6ZStackV", "padding"]
+- !private ["s14_ArrayProtocolP", "count"]
+- !private ["s14_ArrayProtocolP", "map"]
+- !private ["s14_ArrayProtocolP", "max"]
+- !private ["s14_ArrayProtocolP", "min"]
+- !private ["s14_ArrayProtocolP", "sorted"]
+- !private ["s15_CVarArgAlignedP", "init"]
+- ["s15_CVarArgAlignedP", "zero"]
+- !private ["s22_CVarArgPassedAsDoubleP", "init"]
+- ["s22_CVarArgPassedAsDoubleP", "zero"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "height"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "init"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "width"]
+- !private ["s24_DestructorSafeContainerP", "count"]
+- !private ["s24_DestructorSafeContainerP", "map"]
+- !private ["s24_DestructorSafeContainerP", "max"]
+- !private ["s24_DestructorSafeContainerP", "min"]
+- !private ["s24_DestructorSafeContainerP", "sorted"]
+- ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
+- !private ["s33_ExpressibleByBuiltinFloatLiteralP", "init"]
+- ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
+- !private ["7SwiftUI18_FormatSpecifiableP", "init"]
+- ["7SwiftUI18_FormatSpecifiableP", "zero"]
+- !private ["s19_HasContiguousBytesP", "count"]
+- !private ["s19_HasContiguousBytesP", "map"]
+- !private ["s19_HasContiguousBytesP", "max"]
+- !private ["s19_HasContiguousBytesP", "min"]
+- !private ["s19_HasContiguousBytesP", "sorted"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "count"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "map"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "max"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "min"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "sorted"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "asyncAfter"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "main"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "prepare"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "selectionChanged"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "asyncAfter"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "init"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "main"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "prepare"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "selectionChanged"]
+- !private ["s21_ObjectiveCBridgeableP", "count"]
+- !private ["s21_ObjectiveCBridgeableP", "height"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "map"]
+- !private ["s21_ObjectiveCBridgeableP", "max"]
+- !private ["s21_ObjectiveCBridgeableP", "min"]
+- !private ["s21_ObjectiveCBridgeableP", "none"]
+- !private ["s21_ObjectiveCBridgeableP", "some"]
+- !private ["s21_ObjectiveCBridgeableP", "sorted"]
+- !private ["s21_ObjectiveCBridgeableP", "system"]
+- !private ["s21_ObjectiveCBridgeableP", "width"]
+- ["s21_ObjectiveCBridgeableP", "zero"]
+depends-nominal:
+- "s18AdditiveArithmeticP"
+- !private "7SwiftUI9AlignmentV"
+- "7SwiftUI10AnimatableP"
+- !private "7SwiftUI9AnimationV"
+- !private "Sa"
+- "13SwiftUIGraphs7BarViewV"
+- "SK"
+- "SB"
+- "7SwiftUI7BindingV"
+- "12CoreGraphics7CGFloatV"
+- !private "So6CGSizeV"
+- !private "8CloudKit21CKRecordValueProtocolP"
+- "s7CVarArgP"
+- "Sl"
+- "SL"
+- !private "10Foundation15ContiguousBytesP"
+- "s28CustomDebugStringConvertibleP"
+- "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- !private "13SwiftUIGraphs18DYBarChartSettingsV"
+- "13SwiftUIGraphs14DYBarChartViewV"
+- !private "13SwiftUIGraphs11DYDataPointV"
+- !private "13SwiftUIGraphs19DYGridChartSettingsP"
+- !private "10Foundation12DataProtocolP"
+- "Se"
+- "So18OS_dispatch_objectC"
+- !private "So17OS_dispatch_queueC"
+- !private "8Dispatch0A4TimeV"
+- !private "Sd"
+- "7SwiftUI15DynamicPropertyP"
+- !private "7SwiftUI18DynamicViewContentP"
+- "SE"
+- "SQ"
+- !private "s25ExpressibleByArrayLiteralP"
+- "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- "s25ExpressibleByFloatLiteralP"
+- "s27ExpressibleByIntegerLiteralP"
+- !private "s23ExpressibleByNilLiteralP"
+- "s32ExpressibleByStringInterpolationP"
+- "s26ExpressibleByStringLiteralP"
+- "s33ExpressibleByUnicodeScalarLiteralP"
+- "SF"
+- !private "7SwiftUI4FontV"
+- !private "7SwiftUI7ForEachV"
+- !private "7SwiftUI13GeometryProxyV"
+- !private "7SwiftUI14GeometryReaderV"
+- !private "7SwiftUI7GestureP"
+- "13SwiftUIGraphs9GridChartP"
+- !private "7SwiftUI6HStackV"
+- "SH"
+- !private "s12IdentifiableP"
+- !private "7SwiftUI15InsettableShapeP"
+- "s7KeyPathC"
+- "s25LosslessStringConvertibleP"
+- !private "SM"
+- !private "10Foundation19MutableDataProtocolP"
+- "So8NSCodingP"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- "7SwiftUI9NamespaceV"
+- "Sj"
+- "So9OS_objectC"
+- "7Combine16ObservableObjectP"
+- "7SwiftUI14ObservedObjectV"
+- !private "s9OptionSetP"
+- !private "Sq"
+- !private "13SwiftUIGraphs19OrientationObserverC0C0O"
+- "13SwiftUIGraphs19OrientationObserverC"
+- !private "7Combine9PublishedV"
+- !private "Sk"
+- !private "Sm"
+- !private "SY"
+- !private "7SwiftUI9RectangleV"
+- !private "13SwiftUIGraphs22RoundedCornerRectangleV"
+- !private "s10SIMDScalarP"
+- !private "7Combine9SchedulerP"
+- "ST"
+- !private "7SwiftUI4EdgeO3SetV"
+- !private "s10SetAlgebraP"
+- !private "7SwiftUI5ShapeP"
+- "s13SignedNumericP"
+- !private "7SwiftUI6SpacerV"
+- "7SwiftUI5StateV"
+- "7SwiftUI11StateObjectV"
+- "Sx"
+- !private "7SwiftUI4TextV"
+- "s16TextOutputStreamP"
+- "s20TextOutputStreamableP"
+- "So19UIFeedbackGeneratorC"
+- "So18UIFocusEnvironmentP"
+- "So28UISelectionFeedbackGeneratorC"
+- !private "7SwiftUI9UnitPointV"
+- !private "7SwiftUI6VStackV"
+- "7SwiftUI16VectorArithmeticP"
+- "7SwiftUI4ViewP"
+- !private "7SwiftUI11ViewBuilderV"
+- !private "13SwiftUIGraphs13XAxisSettingsP"
+- !private "13SwiftUIGraphs11YAxisScalerV"
+- !private "13SwiftUIGraphs13YAxisSettingsV"
+- !private "7SwiftUI6ZStackV"
+- !private "s14_ArrayProtocolP"
+- "s15_CVarArgAlignedP"
+- "s22_CVarArgPassedAsDoubleP"
+- !private "s30_CustomPlaygroundQuickLookableP"
+- !private "s24_DestructorSafeContainerP"
+- "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- !private "s33_ExpressibleByBuiltinFloatLiteralP"
+- "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- "7SwiftUI18_FormatSpecifiableP"
+- !private "s19_HasContiguousBytesP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- "10Foundation27_KeyValueCodingAndObservingP"
+- "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- "s21_ObjectiveCBridgeableP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/ObjectiveC.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/SwiftUI.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreData.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreImage.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Combine.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/QuartzCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Dispatch.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Metal.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Darwin.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreLocation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Foundation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreFoundation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreGraphics.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/os.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/UniformTypeIdentifiers.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Swift.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/UIKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CloudKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/SwiftOnoneSupport.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/DeveloperToolsSupport.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/mach-o/dyld.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UserNotifications.framework/Headers/UserNotifications.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/os.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UniformTypeIdentifiers.framework/Headers/UniformTypeIdentifiers.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "ac6ffcdad7750647cf04a8f5b9915dcf"

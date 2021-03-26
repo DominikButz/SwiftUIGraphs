@@ -1,0 +1,317 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "SwiftUIGraphsExampleTests"
+provides-nominal:
+- "25SwiftUIGraphsExampleTestsAAC"
+provides-member:
+- ["25SwiftUIGraphsExampleTestsAAC", ""]
+provides-dynamic-lookup:
+- "setUpWithError"
+- "tearDownWithError"
+- "testExample"
+- "testPerformanceExample"
+- "testRoundDown"
+- "testRoundUp"
+depends-top-level:
+- "Double"
+- !private "FloatLiteralType"
+- !private "IntegerLiteralType"
+- "SwiftUIGraphsExampleTests"
+- !private "XCTAssertEqual"
+- "XCTestCase"
+depends-member:
+- !private ["s18AdditiveArithmeticP", ""]
+- !private ["s18AdditiveArithmeticP", "rounded"]
+- !private ["SB", "rounded"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "rounded"]
+- !private ["s7CVarArgP", "XCTAssertEqual"]
+- ["s7CVarArgP", ""]
+- !private ["s7CVarArgP", "measure"]
+- !private ["s7CVarArgP", "rounded"]
+- !private ["s7CVarArgP", "setUpWithError"]
+- !private ["s7CVarArgP", "tearDownWithError"]
+- !private ["s7CVarArgP", "testExample"]
+- !private ["s7CVarArgP", "testPerformanceExample"]
+- !private ["s7CVarArgP", "testRoundDown"]
+- !private ["s7CVarArgP", "testRoundUp"]
+- !private ["SL", ""]
+- !private ["SL", "rounded"]
+- !private ["s28CustomDebugStringConvertibleP", "XCTAssertEqual"]
+- ["s28CustomDebugStringConvertibleP", ""]
+- !private ["s28CustomDebugStringConvertibleP", "measure"]
+- !private ["s28CustomDebugStringConvertibleP", "rounded"]
+- !private ["s28CustomDebugStringConvertibleP", "setUpWithError"]
+- !private ["s28CustomDebugStringConvertibleP", "tearDownWithError"]
+- !private ["s28CustomDebugStringConvertibleP", "testExample"]
+- !private ["s28CustomDebugStringConvertibleP", "testPerformanceExample"]
+- !private ["s28CustomDebugStringConvertibleP", "testRoundDown"]
+- !private ["s28CustomDebugStringConvertibleP", "testRoundUp"]
+- !private ["s17CustomReflectableP", "rounded"]
+- !private ["s23CustomStringConvertibleP", "XCTAssertEqual"]
+- ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "measure"]
+- !private ["s23CustomStringConvertibleP", "rounded"]
+- !private ["s23CustomStringConvertibleP", "setUpWithError"]
+- !private ["s23CustomStringConvertibleP", "tearDownWithError"]
+- !private ["s23CustomStringConvertibleP", "testExample"]
+- !private ["s23CustomStringConvertibleP", "testPerformanceExample"]
+- !private ["s23CustomStringConvertibleP", "testRoundDown"]
+- !private ["s23CustomStringConvertibleP", "testRoundUp"]
+- !private ["Se", "rounded"]
+- !private ["Sd", "rounded"]
+- !private ["SE", "rounded"]
+- !private ["SQ", "XCTAssertEqual"]
+- ["SQ", ""]
+- !private ["SQ", "down"]
+- !private ["SQ", "measure"]
+- !private ["SQ", "rounded"]
+- !private ["SQ", "setUpWithError"]
+- !private ["SQ", "tearDownWithError"]
+- !private ["SQ", "testExample"]
+- !private ["SQ", "testPerformanceExample"]
+- !private ["SQ", "testRoundDown"]
+- !private ["SQ", "testRoundUp"]
+- !private ["SQ", "up"]
+- !private ["s25ExpressibleByFloatLiteralP", ""]
+- !private ["s25ExpressibleByFloatLiteralP", "rounded"]
+- !private ["s27ExpressibleByIntegerLiteralP", ""]
+- !private ["s27ExpressibleByIntegerLiteralP", "rounded"]
+- !private ["SF", ""]
+- !private ["SF", "rounded"]
+- !private ["s25FloatingPointRoundingRuleO", "down"]
+- !private ["s25FloatingPointRoundingRuleO", "up"]
+- !private ["SH", "XCTAssertEqual"]
+- ["SH", ""]
+- !private ["SH", "down"]
+- !private ["SH", "measure"]
+- !private ["SH", "rounded"]
+- !private ["SH", "setUpWithError"]
+- !private ["SH", "tearDownWithError"]
+- !private ["SH", "testExample"]
+- !private ["SH", "testPerformanceExample"]
+- !private ["SH", "testRoundDown"]
+- !private ["SH", "testRoundUp"]
+- !private ["SH", "up"]
+- !private ["s25LosslessStringConvertibleP", "rounded"]
+- ["So8NSCodingP", ""]
+- !private ["So9NSCopyingP", ""]
+- !private ["So8NSObjectC", "Double"]
+- !private ["So8NSObjectC", "XCTAssertEqual"]
+- ["So8NSObjectC", ""]
+- ["So8NSObjectC", "init"]
+- !private ["So8NSObjectC", "measure"]
+- !private ["So8NSObjectC", "measureBlock"]
+- !private ["So8NSObjectC", "measureWithMetrics"]
+- !private ["So8NSObjectC", "measureWithOptions"]
+- ["So8NSObjectC", "setUpWithError"]
+- ["So8NSObjectC", "tearDownWithError"]
+- ["So8NSObjectC", "testCaseWithInvocation"]
+- ["So8NSObjectC", "testCaseWithSelector"]
+- ["So8NSObjectC", "testExample"]
+- ["So8NSObjectC", "testPerformanceExample"]
+- ["So8NSObjectC", "testRoundDown"]
+- ["So8NSObjectC", "testRoundUp"]
+- !private ["So8NSObjectP", "Double"]
+- !private ["So8NSObjectP", "XCTAssertEqual"]
+- ["So8NSObjectP", ""]
+- ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "measure"]
+- !private ["So8NSObjectP", "measureBlock"]
+- !private ["So8NSObjectP", "measureWithMetrics"]
+- !private ["So8NSObjectP", "measureWithOptions"]
+- ["So8NSObjectP", "setUpWithError"]
+- ["So8NSObjectP", "tearDownWithError"]
+- ["So8NSObjectP", "testCaseWithInvocation"]
+- ["So8NSObjectP", "testCaseWithSelector"]
+- ["So8NSObjectP", "testExample"]
+- ["So8NSObjectP", "testPerformanceExample"]
+- ["So8NSObjectP", "testRoundDown"]
+- ["So8NSObjectP", "testRoundUp"]
+- !private ["Sj", ""]
+- !private ["Sj", "rounded"]
+- !private ["s10SIMDScalarP", "rounded"]
+- !private ["s13SignedNumericP", ""]
+- !private ["s13SignedNumericP", "rounded"]
+- !private ["Sx", ""]
+- !private ["Sx", "rounded"]
+- !private ["25SwiftUIGraphsExampleTestsAAC", "Double"]
+- !private ["25SwiftUIGraphsExampleTestsAAC", "XCTAssertEqual"]
+- ["25SwiftUIGraphsExampleTestsAAC", ""]
+- ["25SwiftUIGraphsExampleTestsAAC", "deinit"]
+- ["25SwiftUIGraphsExampleTestsAAC", "init"]
+- !private ["25SwiftUIGraphsExampleTestsAAC", "measure"]
+- ["25SwiftUIGraphsExampleTestsAAC", "setUpWithError"]
+- ["25SwiftUIGraphsExampleTestsAAC", "tearDownWithError"]
+- ["25SwiftUIGraphsExampleTestsAAC", "testExample"]
+- ["25SwiftUIGraphsExampleTestsAAC", "testPerformanceExample"]
+- ["25SwiftUIGraphsExampleTestsAAC", "testRoundDown"]
+- ["25SwiftUIGraphsExampleTestsAAC", "testRoundUp"]
+- !private ["s20TextOutputStreamableP", "rounded"]
+- !private ["7SwiftUI16VectorArithmeticP", "rounded"]
+- !private ["So11XCTActivityP", "Double"]
+- !private ["So11XCTActivityP", "XCTAssertEqual"]
+- ["So11XCTActivityP", ""]
+- ["So11XCTActivityP", "init"]
+- !private ["So11XCTActivityP", "measure"]
+- ["So11XCTActivityP", "setUpWithError"]
+- ["So11XCTActivityP", "tearDownWithError"]
+- ["So11XCTActivityP", "testExample"]
+- ["So11XCTActivityP", "testPerformanceExample"]
+- ["So11XCTActivityP", "testRoundDown"]
+- ["So11XCTActivityP", "testRoundUp"]
+- !private ["So17XCTWaiterDelegateP", "Double"]
+- !private ["So17XCTWaiterDelegateP", "XCTAssertEqual"]
+- ["So17XCTWaiterDelegateP", ""]
+- ["So17XCTWaiterDelegateP", "init"]
+- !private ["So17XCTWaiterDelegateP", "measure"]
+- ["So17XCTWaiterDelegateP", "setUpWithError"]
+- ["So17XCTWaiterDelegateP", "tearDownWithError"]
+- ["So17XCTWaiterDelegateP", "testExample"]
+- ["So17XCTWaiterDelegateP", "testPerformanceExample"]
+- ["So17XCTWaiterDelegateP", "testRoundDown"]
+- ["So17XCTWaiterDelegateP", "testRoundUp"]
+- !private ["So6XCTestC", "Double"]
+- !private ["So6XCTestC", "XCTAssertEqual"]
+- ["So6XCTestC", ""]
+- ["So6XCTestC", "init"]
+- !private ["So6XCTestC", "measure"]
+- !private ["So6XCTestC", "measureBlock"]
+- !private ["So6XCTestC", "measureWithMetrics"]
+- !private ["So6XCTestC", "measureWithOptions"]
+- ["So6XCTestC", "setUpWithError"]
+- ["So6XCTestC", "tearDownWithError"]
+- ["So6XCTestC", "testCaseWithInvocation"]
+- ["So6XCTestC", "testCaseWithSelector"]
+- ["So6XCTestC", "testExample"]
+- ["So6XCTestC", "testPerformanceExample"]
+- ["So6XCTestC", "testRoundDown"]
+- ["So6XCTestC", "testRoundUp"]
+- !private ["So10XCTestCaseC", "Double"]
+- !private ["So10XCTestCaseC", "XCTAssertEqual"]
+- ["So10XCTestCaseC", ""]
+- ["So10XCTestCaseC", "init"]
+- !private ["So10XCTestCaseC", "measure"]
+- ["So10XCTestCaseC", "setUpWithError"]
+- ["So10XCTestCaseC", "tearDownWithError"]
+- ["So10XCTestCaseC", "testExample"]
+- ["So10XCTestCaseC", "testPerformanceExample"]
+- ["So10XCTestCaseC", "testRoundDown"]
+- ["So10XCTestCaseC", "testRoundUp"]
+- !private ["s15_CVarArgAlignedP", "rounded"]
+- !private ["s22_CVarArgPassedAsDoubleP", "rounded"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "rounded"]
+- !private ["s33_ExpressibleByBuiltinFloatLiteralP", "rounded"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "rounded"]
+- !private ["7SwiftUI18_FormatSpecifiableP", "rounded"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "rounded"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "XCTAssertEqual"]
+- ["10Foundation27_KeyValueCodingAndObservingP", ""]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "measure"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "setUpWithError"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "tearDownWithError"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "testExample"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "testPerformanceExample"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "testRoundDown"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "testRoundUp"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "XCTAssertEqual"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", ""]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "measure"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "setUpWithError"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "tearDownWithError"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "testExample"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "testPerformanceExample"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "testRoundDown"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "testRoundUp"]
+- !private ["s21_ObjectiveCBridgeableP", "rounded"]
+depends-nominal:
+- !private "s18AdditiveArithmeticP"
+- !private "SB"
+- !private "8CloudKit21CKRecordValueProtocolP"
+- "s7CVarArgP"
+- !private "SL"
+- "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- !private "Se"
+- !private "Sd"
+- !private "SE"
+- "SQ"
+- !private "s25ExpressibleByFloatLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- !private "SF"
+- !private "s25FloatingPointRoundingRuleO"
+- "SH"
+- !private "s25LosslessStringConvertibleP"
+- "So8NSCodingP"
+- !private "So9NSCopyingP"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- !private "Sj"
+- !private "s10SIMDScalarP"
+- !private "s13SignedNumericP"
+- !private "Sx"
+- "25SwiftUIGraphsExampleTestsAAC"
+- !private "s20TextOutputStreamableP"
+- !private "7SwiftUI16VectorArithmeticP"
+- "So11XCTActivityP"
+- "So17XCTWaiterDelegateP"
+- "So6XCTestC"
+- "So10XCTestCaseC"
+- !private "s15_CVarArgAlignedP"
+- !private "s22_CVarArgPassedAsDoubleP"
+- !private "s30_CustomPlaygroundQuickLookableP"
+- !private "s33_ExpressibleByBuiltinFloatLiteralP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "7SwiftUI18_FormatSpecifiableP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- "10Foundation27_KeyValueCodingAndObservingP"
+- "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- !private "s21_ObjectiveCBridgeableP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/ObjectiveC.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/SwiftUI.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreData.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreImage.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/Build/Products/Debug-iphonesimulator/SwiftUIGraphsExample.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Combine.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/QuartzCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Dispatch.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Metal.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Darwin.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreLocation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Foundation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreFoundation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreGraphics.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/os.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/UniformTypeIdentifiers.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Swift.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/UIKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CloudKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/SwiftOnoneSupport.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/DeveloperToolsSupport.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/XCTest.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/mach-o/dyld.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UserNotifications.framework/Headers/UserNotifications.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/os.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UniformTypeIdentifiers.framework/Headers/UniformTypeIdentifiers.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework/Headers/XCTest.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "2aa53d37db30455703af976274fb77bc"

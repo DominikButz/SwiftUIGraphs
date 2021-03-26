@@ -1,0 +1,520 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "BasicPieChartExample"
+- "BasicPieChartExample_Previews"
+provides-nominal:
+- "20SwiftUIGraphsExample013BasicPieChartC0V"
+- "20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV"
+provides-member:
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", ""]
+- ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "$selectedId"
+- !private "/"
+- ">"
+- "Alignment"
+- "AssignmentPrecedence"
+- "BasicPieChartExample"
+- "BasicPieChartExample_Previews"
+- "Bool"
+- "Circle"
+- "Color"
+- "DYChartFraction"
+- "DYFractionChartInfoView"
+- "DYFractionChartLegendView"
+- "DYPieChartSettings"
+- "DYPieChartView"
+- "Double"
+- !private "FloatLiteralType"
+- "GeometryProxy"
+- !private "GeometryReader"
+- "Group"
+- "HStack"
+- !private "IntegerLiteralType"
+- !private "NumberFormatter"
+- "PreviewProvider"
+- "Spacer"
+- "State"
+- "String"
+- !private "StringLiteralType"
+- "Text"
+- "VStack"
+- "View"
+- "ZStack"
+- "settings"
+depends-member:
+- !private ["s18AdditiveArithmeticP", ""]
+- !private ["7SwiftUI9AlignmentV", "topLeading"]
+- ["7SwiftUI10AnimatableP", ""]
+- !private ["7SwiftUI10AnimatableP", "fill"]
+- !private ["7SwiftUI10AnimatableP", "height"]
+- !private ["7SwiftUI10AnimatableP", "init"]
+- !private ["7SwiftUI10AnimatableP", "width"]
+- !private ["7SwiftUI7AnyViewV", "init"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "$selectedId"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "Alignment"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "Body"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "Bool"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "Circle"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "Color"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "DYChartFraction"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "DYFractionChartInfoView"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "DYFractionChartLegendView"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "DYPieChartSettings"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "DYPieChartView"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "Default_Body"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "Double"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "GeometryProxy"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "GeometryReader"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "Group"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "HStack"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "NumberFormatter"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "Spacer"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "State"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "String"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "Text"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "VStack"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "View"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "ZStack"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", ""]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "_Default_Body"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "_makeView"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "_makeViewList"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "_selectedId"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "_viewListCount"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "body"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "content"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "init"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "isPortrait"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "percentageStringFor"]
+- ["20SwiftUIGraphsExample013BasicPieChartC0V", "selectedId"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "settings"]
+- !private ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", "BasicPieChartExample"]
+- ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", "Default_Previews"]
+- ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", "Previews"]
+- ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", "View"]
+- ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", ""]
+- ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", "_Default_Previews"]
+- ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", "_platform"]
+- ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", "_previews"]
+- ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", "init"]
+- ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", "platform"]
+- ["20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV", "previews"]
+- ["SK", ""]
+- !private ["SK", "systemBackground"]
+- !private ["So10CGColorRefa", "systemBackground"]
+- !private ["So6CGSizeV", "height"]
+- !private ["So6CGSizeV", "width"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "systemBackground"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "maximumFractionDigits"]
+- !private ["s7CVarArgP", "numberStyle"]
+- !private ["s7CVarArgP", "string"]
+- !private ["s7CVarArgP", "systemBackground"]
+- !private ["7SwiftUI6CircleV", "fill"]
+- !private ["7SwiftUI6CircleV", "init"]
+- ["Sl", ""]
+- !private ["Sl", "systemBackground"]
+- !private ["7SwiftUI5ColorV", "init"]
+- !private ["7SwiftUI8CommandsP", "init"]
+- !private ["7SwiftUI15CommandsBuilderV", "buildBlock"]
+- !private ["7SwiftUI15CommandsBuilderV", "buildExpression"]
+- !private ["7SwiftUI15CommandsBuilderV", "buildFinalResult"]
+- !private ["7SwiftUI15CommandsBuilderV", "buildIf"]
+- !private ["7SwiftUI15CommandsBuilderV", "buildOptional"]
+- !private ["SL", "<"]
+- !private ["SL", "<="]
+- !private ["SL", ">"]
+- !private ["SL", ">="]
+- ["SL", ""]
+- !private ["SL", "systemBackground"]
+- !private ["s28CustomDebugStringConvertibleP", "height"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "maximumFractionDigits"]
+- !private ["s28CustomDebugStringConvertibleP", "numberStyle"]
+- !private ["s28CustomDebugStringConvertibleP", "string"]
+- !private ["s28CustomDebugStringConvertibleP", "systemBackground"]
+- !private ["s28CustomDebugStringConvertibleP", "width"]
+- !private ["s17CustomReflectableP", "height"]
+- !private ["s17CustomReflectableP", "systemBackground"]
+- !private ["s17CustomReflectableP", "width"]
+- ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "maximumFractionDigits"]
+- !private ["s23CustomStringConvertibleP", "numberStyle"]
+- !private ["s23CustomStringConvertibleP", "string"]
+- !private ["s23CustomStringConvertibleP", "systemBackground"]
+- !private ["7SwiftUI26CustomizableToolbarContentP", "init"]
+- !private ["13SwiftUIGraphs15DYChartFractionV", "exampleData"]
+- !private ["13SwiftUIGraphs15DYChartFractionV", "exampleFormatter"]
+- !private ["13SwiftUIGraphs23DYFractionChartInfoViewV", "init"]
+- !private ["13SwiftUIGraphs23DYFractionChartInfoViewV", "padding"]
+- !private ["13SwiftUIGraphs25DYFractionChartLegendViewV", "frame"]
+- !private ["13SwiftUIGraphs25DYFractionChartLegendViewV", "init"]
+- !private ["13SwiftUIGraphs18DYPieChartSettingsV", "init"]
+- !private ["13SwiftUIGraphs14DYPieChartViewV", "background"]
+- !private ["13SwiftUIGraphs14DYPieChartViewV", "init"]
+- !private ["Se", "height"]
+- !private ["Se", "systemBackground"]
+- !private ["Se", "width"]
+- ["7SwiftUI15DynamicPropertyP", "init"]
+- ["7SwiftUI15DynamicPropertyP", "wrappedValue"]
+- !private ["SE", "height"]
+- !private ["SE", "systemBackground"]
+- !private ["SE", "width"]
+- ["SQ", ""]
+- !private ["SQ", "height"]
+- !private ["SQ", "init"]
+- !private ["SQ", "maximumFractionDigits"]
+- !private ["SQ", "numberStyle"]
+- !private ["SQ", "percent"]
+- !private ["SQ", "string"]
+- !private ["SQ", "systemBackground"]
+- !private ["SQ", "top"]
+- !private ["SQ", "topLeading"]
+- !private ["SQ", "width"]
+- ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "systemBackground"]
+- !private ["s27ExpressibleByIntegerLiteralP", ""]
+- ["s32ExpressibleByStringInterpolationP", ""]
+- !private ["s32ExpressibleByStringInterpolationP", "systemBackground"]
+- !private ["s26ExpressibleByStringLiteralP", "StringLiteralType"]
+- ["s26ExpressibleByStringLiteralP", ""]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- !private ["s26ExpressibleByStringLiteralP", "systemBackground"]
+- ["s33ExpressibleByUnicodeScalarLiteralP", ""]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "systemBackground"]
+- !private ["SF", "<"]
+- !private ["SF", "<="]
+- !private ["SF", ">"]
+- !private ["SF", ">="]
+- ["So11NSFormatterC", ""]
+- !private ["So11NSFormatterC", "init"]
+- !private ["So11NSFormatterC", "maximumFractionDigits"]
+- !private ["So11NSFormatterC", "numberStyle"]
+- !private ["So11NSFormatterC", "string"]
+- !private ["So11NSFormatterC", "stringFromNumber"]
+- !private ["7SwiftUI13GeometryProxyV", "size"]
+- !private ["7SwiftUI14GeometryReaderV", "init"]
+- !private ["7SwiftUI14GeometryReaderV", "navigationTitle"]
+- !private ["7SwiftUI5GroupV", "init"]
+- !private ["7SwiftUI6HStackV", "init"]
+- ["SH", ""]
+- !private ["SH", "init"]
+- !private ["SH", "maximumFractionDigits"]
+- !private ["SH", "numberStyle"]
+- !private ["SH", "percent"]
+- !private ["SH", "string"]
+- !private ["SH", "systemBackground"]
+- !private ["s12IdentifiableP", "exampleData"]
+- !private ["s12IdentifiableP", "exampleFormatter"]
+- !private ["7SwiftUI15InsettableShapeP", "fill"]
+- !private ["7SwiftUI15InsettableShapeP", "init"]
+- ["s25LosslessStringConvertibleP", ""]
+- !private ["s25LosslessStringConvertibleP", "systemBackground"]
+- !private ["s10MirrorPathP", "systemBackground"]
+- ["So8NSCodingP", ""]
+- !private ["So8NSCodingP", "init"]
+- !private ["So8NSCodingP", "maximumFractionDigits"]
+- !private ["So8NSCodingP", "numberStyle"]
+- !private ["So8NSCodingP", "string"]
+- !private ["So8NSCodingP", "stringFromNumber"]
+- !private ["So8NSCodingP", "systemBackground"]
+- !private ["So9NSCopyingP", ""]
+- !private ["So9NSCopyingP", "init"]
+- !private ["So9NSCopyingP", "maximumFractionDigits"]
+- !private ["So9NSCopyingP", "numberStyle"]
+- !private ["So9NSCopyingP", "string"]
+- !private ["So9NSCopyingP", "stringFromNumber"]
+- !private ["So9NSCopyingP", "systemBackground"]
+- !private ["So21NSItemProviderReadingP", "systemBackground"]
+- !private ["So21NSItemProviderWritingP", "systemBackground"]
+- ["So8NSObjectC", ""]
+- !private ["So8NSObjectC", "init"]
+- !private ["So8NSObjectC", "maximumFractionDigits"]
+- !private ["So8NSObjectC", "numberStyle"]
+- !private ["So8NSObjectC", "string"]
+- !private ["So8NSObjectC", "stringForObjectValue"]
+- !private ["So8NSObjectC", "stringFromNumber"]
+- !private ["So8NSObjectC", "systemBackground"]
+- !private ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "maximumFractionDigits"]
+- !private ["So8NSObjectP", "numberStyle"]
+- !private ["So8NSObjectP", "string"]
+- !private ["So8NSObjectP", "stringForObjectValue"]
+- !private ["So8NSObjectP", "stringFromNumber"]
+- !private ["So8NSObjectP", "systemBackground"]
+- !private ["So14NSSecureCodingP", "systemBackground"]
+- !private ["So17NSNumberFormatterC", "init"]
+- !private ["So17NSNumberFormatterC", "maximumFractionDigits"]
+- !private ["So17NSNumberFormatterC", "numberStyle"]
+- !private ["So17NSNumberFormatterC", "string"]
+- !private ["Sj", ""]
+- !private ["7SwiftUI15PreviewProviderP", "BasicPieChartExample"]
+- ["7SwiftUI15PreviewProviderP", "Default_Previews"]
+- ["7SwiftUI15PreviewProviderP", "Previews"]
+- ["7SwiftUI15PreviewProviderP", ""]
+- ["7SwiftUI15PreviewProviderP", "_Default_Previews"]
+- ["7SwiftUI15PreviewProviderP", "_platform"]
+- ["7SwiftUI15PreviewProviderP", "_previews"]
+- ["7SwiftUI15PreviewProviderP", "platform"]
+- ["7SwiftUI15PreviewProviderP", "previews"]
+- !private ["7SwiftUI5ColorV13RGBColorSpaceO", "systemBackground"]
+- !private ["Sm", "systemBackground"]
+- !private ["SY", "percent"]
+- !private ["7SwiftUI5SceneP", "init"]
+- !private ["7SwiftUI12SceneBuilderV", "buildBlock"]
+- !private ["7SwiftUI12SceneBuilderV", "buildExpression"]
+- !private ["7SwiftUI12SceneBuilderV", "buildFinalResult"]
+- !private ["7SwiftUI12SceneBuilderV", "buildIf"]
+- !private ["7SwiftUI12SceneBuilderV", "buildOptional"]
+- ["ST", ""]
+- !private ["ST", "systemBackground"]
+- !private ["7SwiftUI5ShapeP", ""]
+- !private ["7SwiftUI5ShapeP", "fill"]
+- !private ["7SwiftUI5ShapeP", "init"]
+- !private ["7SwiftUI10ShapeStyleP", "init"]
+- !private ["s13SignedNumericP", ""]
+- !private ["7SwiftUI6SpacerV", "init"]
+- ["7SwiftUI5StateV", "init"]
+- ["7SwiftUI5StateV", "projectedValue"]
+- ["7SwiftUI5StateV", "subscript"]
+- ["7SwiftUI5StateV", "wrappedValue"]
+- !private ["Sx", ""]
+- !private ["SS", "systemBackground"]
+- !private ["Sy", "systemBackground"]
+- !private ["So22NSNumberFormatterStyleV", "percent"]
+- ["s16TextOutputStreamP", ""]
+- !private ["s16TextOutputStreamP", "systemBackground"]
+- ["s20TextOutputStreamableP", ""]
+- !private ["s20TextOutputStreamableP", "systemBackground"]
+- !private ["7SwiftUI14ToolbarContentP", ""]
+- !private ["7SwiftUI14ToolbarContentP", "init"]
+- !private ["7SwiftUI21ToolbarContentBuilderV", "buildBlock"]
+- !private ["7SwiftUI21ToolbarContentBuilderV", "buildExpression"]
+- !private ["7SwiftUI21ToolbarContentBuilderV", "buildFinalResult"]
+- !private ["7SwiftUI21ToolbarContentBuilderV", "buildIf"]
+- !private ["7SwiftUI21ToolbarContentBuilderV", "buildOptional"]
+- !private ["So7UIColorC", "systemBackground"]
+- !private ["7SwiftUI6VStackV", "init"]
+- !private ["7SwiftUI17VerticalAlignmentV", "top"]
+- !private ["7SwiftUI4ViewP", "$selectedId"]
+- !private ["7SwiftUI4ViewP", "Alignment"]
+- ["7SwiftUI4ViewP", "Body"]
+- !private ["7SwiftUI4ViewP", "Circle"]
+- !private ["7SwiftUI4ViewP", "Color"]
+- !private ["7SwiftUI4ViewP", "DYChartFraction"]
+- !private ["7SwiftUI4ViewP", "DYFractionChartInfoView"]
+- !private ["7SwiftUI4ViewP", "DYFractionChartLegendView"]
+- !private ["7SwiftUI4ViewP", "DYPieChartSettings"]
+- !private ["7SwiftUI4ViewP", "DYPieChartView"]
+- ["7SwiftUI4ViewP", "Default_Body"]
+- !private ["7SwiftUI4ViewP", "GeometryReader"]
+- !private ["7SwiftUI4ViewP", "Group"]
+- !private ["7SwiftUI4ViewP", "HStack"]
+- !private ["7SwiftUI4ViewP", "NumberFormatter"]
+- !private ["7SwiftUI4ViewP", "Spacer"]
+- ["7SwiftUI4ViewP", "State"]
+- !private ["7SwiftUI4ViewP", "Text"]
+- !private ["7SwiftUI4ViewP", "VStack"]
+- !private ["7SwiftUI4ViewP", "ZStack"]
+- ["7SwiftUI4ViewP", ""]
+- ["7SwiftUI4ViewP", "_Default_Body"]
+- ["7SwiftUI4ViewP", "_makeView"]
+- ["7SwiftUI4ViewP", "_makeViewList"]
+- ["7SwiftUI4ViewP", "_viewListCount"]
+- !private ["7SwiftUI4ViewP", "background"]
+- ["7SwiftUI4ViewP", "body"]
+- !private ["7SwiftUI4ViewP", "content"]
+- !private ["7SwiftUI4ViewP", "fill"]
+- !private ["7SwiftUI4ViewP", "frame"]
+- !private ["7SwiftUI4ViewP", "init"]
+- !private ["7SwiftUI4ViewP", "navigationTitle"]
+- !private ["7SwiftUI4ViewP", "padding"]
+- !private ["7SwiftUI4ViewP", "selectedId"]
+- !private ["7SwiftUI4ViewP", "settings"]
+- !private ["7SwiftUI4ViewP", "shadow"]
+- !private ["7SwiftUI11ViewBuilderV", "buildBlock"]
+- !private ["7SwiftUI11ViewBuilderV", "buildEither"]
+- !private ["7SwiftUI11ViewBuilderV", "buildExpression"]
+- !private ["7SwiftUI11ViewBuilderV", "buildFinalResult"]
+- !private ["7SwiftUI11ViewBuilderV", "buildIf"]
+- !private ["7SwiftUI11ViewBuilderV", "buildOptional"]
+- !private ["7SwiftUI6ZStackV", "init"]
+- !private ["14CoreFoundation9_CFObjectP", "systemBackground"]
+- !private ["12CoreGraphics22_CGColorInitTrampolineP", "systemBackground"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "height"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "systemBackground"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "width"]
+- ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "systemBackground"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "systemBackground"]
+- ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "systemBackground"]
+- !private ["s26_ExpressibleByColorLiteralP", "systemBackground"]
+- !private ["s19_HasContiguousBytesP", "systemBackground"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "maximumFractionDigits"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "numberStyle"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "string"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "systemBackground"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "init"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "maximumFractionDigits"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "numberStyle"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "string"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "systemBackground"]
+- !private ["s21_ObjectiveCBridgeableP", "height"]
+- !private ["s21_ObjectiveCBridgeableP", "systemBackground"]
+- !private ["s21_ObjectiveCBridgeableP", "width"]
+- !private ["7SwiftUI16_PreviewProviderP", "BasicPieChartExample"]
+- ["7SwiftUI16_PreviewProviderP", "Default_Previews"]
+- ["7SwiftUI16_PreviewProviderP", "Previews"]
+- ["7SwiftUI16_PreviewProviderP", ""]
+- ["7SwiftUI16_PreviewProviderP", "_Default_Previews"]
+- ["7SwiftUI16_PreviewProviderP", "_platform"]
+- ["7SwiftUI16_PreviewProviderP", "_previews"]
+- ["7SwiftUI16_PreviewProviderP", "platform"]
+- ["7SwiftUI16_PreviewProviderP", "previews"]
+depends-nominal:
+- !private "s18AdditiveArithmeticP"
+- !private "7SwiftUI9AlignmentV"
+- "7SwiftUI10AnimatableP"
+- !private "7SwiftUI7AnyViewV"
+- "20SwiftUIGraphsExample013BasicPieChartC0V"
+- "20SwiftUIGraphsExample013BasicPieChartC9_PreviewsV"
+- "SK"
+- !private "So10CGColorRefa"
+- !private "So6CGSizeV"
+- !private "8CloudKit21CKRecordValueProtocolP"
+- !private "s7CVarArgP"
+- !private "7SwiftUI6CircleV"
+- "Sl"
+- !private "7SwiftUI5ColorV"
+- !private "7SwiftUI8CommandsP"
+- !private "7SwiftUI15CommandsBuilderV"
+- "SL"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- !private "7SwiftUI26CustomizableToolbarContentP"
+- !private "13SwiftUIGraphs15DYChartFractionV"
+- !private "13SwiftUIGraphs23DYFractionChartInfoViewV"
+- !private "13SwiftUIGraphs25DYFractionChartLegendViewV"
+- !private "13SwiftUIGraphs18DYPieChartSettingsV"
+- !private "13SwiftUIGraphs14DYPieChartViewV"
+- !private "Se"
+- "7SwiftUI15DynamicPropertyP"
+- !private "SE"
+- "SQ"
+- "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- "s32ExpressibleByStringInterpolationP"
+- "s26ExpressibleByStringLiteralP"
+- "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "SF"
+- "So11NSFormatterC"
+- !private "7SwiftUI13GeometryProxyV"
+- !private "7SwiftUI14GeometryReaderV"
+- !private "7SwiftUI5GroupV"
+- !private "7SwiftUI6HStackV"
+- "SH"
+- !private "s12IdentifiableP"
+- !private "7SwiftUI15InsettableShapeP"
+- "s25LosslessStringConvertibleP"
+- !private "s10MirrorPathP"
+- "So8NSCodingP"
+- !private "So9NSCopyingP"
+- !private "So21NSItemProviderReadingP"
+- !private "So21NSItemProviderWritingP"
+- "So8NSObjectC"
+- !private "So8NSObjectP"
+- !private "So14NSSecureCodingP"
+- !private "So17NSNumberFormatterC"
+- !private "Sj"
+- "7SwiftUI15PreviewProviderP"
+- !private "7SwiftUI5ColorV13RGBColorSpaceO"
+- !private "Sm"
+- !private "SY"
+- !private "7SwiftUI5SceneP"
+- !private "7SwiftUI12SceneBuilderV"
+- "ST"
+- !private "7SwiftUI5ShapeP"
+- !private "7SwiftUI10ShapeStyleP"
+- !private "s13SignedNumericP"
+- !private "7SwiftUI6SpacerV"
+- "7SwiftUI5StateV"
+- !private "Sx"
+- !private "SS"
+- !private "Sy"
+- !private "So22NSNumberFormatterStyleV"
+- "s16TextOutputStreamP"
+- "s20TextOutputStreamableP"
+- !private "7SwiftUI14ToolbarContentP"
+- !private "7SwiftUI21ToolbarContentBuilderV"
+- !private "So7UIColorC"
+- !private "7SwiftUI6VStackV"
+- !private "7SwiftUI17VerticalAlignmentV"
+- "7SwiftUI4ViewP"
+- !private "7SwiftUI11ViewBuilderV"
+- !private "7SwiftUI6ZStackV"
+- !private "14CoreFoundation9_CFObjectP"
+- !private "12CoreGraphics22_CGColorInitTrampolineP"
+- !private "s30_CustomPlaygroundQuickLookableP"
+- "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s26_ExpressibleByColorLiteralP"
+- !private "s19_HasContiguousBytesP"
+- !private "10Foundation27_KeyValueCodingAndObservingP"
+- !private "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- !private "s21_ObjectiveCBridgeableP"
+- "7SwiftUI16_PreviewProviderP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/ObjectiveC.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/SwiftUI.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreData.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreImage.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Combine.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/QuartzCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Dispatch.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Metal.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Darwin.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreLocation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Foundation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreFoundation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreGraphics.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/Build/Intermediates.noindex/Previews/SwiftUIGraphsExample/Products/Debug-iphonesimulator/SwiftUIGraphs.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/os.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/UniformTypeIdentifiers.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Swift.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/UIKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CloudKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/SwiftOnoneSupport.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/DeveloperToolsSupport.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/mach-o/dyld.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UserNotifications.framework/Headers/UserNotifications.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/os.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UniformTypeIdentifiers.framework/Headers/UniformTypeIdentifiers.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "2484427a5d75a310896c7b80e564ef44"

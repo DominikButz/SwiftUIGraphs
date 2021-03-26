@@ -1,0 +1,158 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "LineChartXAxisSettings"
+- "BarChartXAxisSettings"
+- "XAxisSettings"
+- "YAxisSettings"
+provides-nominal:
+- "13SwiftUIGraphs22LineChartXAxisSettingsV"
+- "13SwiftUIGraphs21BarChartXAxisSettingsV"
+- "13SwiftUIGraphs13XAxisSettingsP"
+- "13SwiftUIGraphs13YAxisSettingsV"
+provides-member:
+- ["13SwiftUIGraphs22LineChartXAxisSettingsV", ""]
+- ["13SwiftUIGraphs21BarChartXAxisSettingsV", ""]
+- ["13SwiftUIGraphs13XAxisSettingsP", ""]
+- ["13SwiftUIGraphs13YAxisSettingsV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "Array"
+- "AssignmentPrecedence"
+- "BarChartXAxisSettings"
+- "Bool"
+- "BooleanLiteralType"
+- "CGFloat"
+- "Double"
+- "Edge"
+- "FloatLiteralType"
+- "IntegerLiteralType"
+- "LineChartXAxisSettings"
+- "StrokeStyle"
+- "XAxisSettings"
+- "YAxisSettings"
+depends-member:
+- !private ["7SwiftUI10AnimatableP", "init"]
+- ["13SwiftUIGraphs21BarChartXAxisSettingsV", "Bool"]
+- ["13SwiftUIGraphs21BarChartXAxisSettingsV", "CGFloat"]
+- !private ["13SwiftUIGraphs21BarChartXAxisSettingsV", ""]
+- ["13SwiftUIGraphs21BarChartXAxisSettingsV", "init"]
+- ["13SwiftUIGraphs21BarChartXAxisSettingsV", "showXAxis"]
+- ["13SwiftUIGraphs21BarChartXAxisSettingsV", "xAxisFontSize"]
+- ["s12CaseIterableP", "Set"]
+- ["7SwiftUI4EdgeO", "Set"]
+- ["SQ", "Set"]
+- ["SQ", ""]
+- !private ["SQ", "init"]
+- !private ["SQ", "leading"]
+- !private ["s25ExpressibleByArrayLiteralP", ""]
+- ["s25ExpressibleByArrayLiteralP", "init"]
+- !private ["s25ExpressibleByArrayLiteralP", "leading"]
+- ["s27ExpressibleByIntegerLiteralP", "IntegerLiteralType"]
+- ["s27ExpressibleByIntegerLiteralP", "init"]
+- ["SH", "Set"]
+- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "Bool"]
+- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "CGFloat"]
+- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "Double"]
+- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "StrokeStyle"]
+- !private ["13SwiftUIGraphs22LineChartXAxisSettingsV", ""]
+- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "init"]
+- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "showXAxis"]
+- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "showXAxisLines"]
+- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "xAxisFontSize"]
+- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "xAxisInterval"]
+- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "xAxisLineStrokeStyle"]
+- !private ["s9OptionSetP", "leading"]
+- ["SY", "Set"]
+- !private ["SY", ""]
+- !private ["SY", "leading"]
+- !private ["7SwiftUI4EdgeO3SetV", "leading"]
+- !private ["s10SetAlgebraP", ""]
+- !private ["s10SetAlgebraP", "leading"]
+- !private ["7SwiftUI11StrokeStyleV", "init"]
+- ["13SwiftUIGraphs13XAxisSettingsP", "Bool"]
+- ["13SwiftUIGraphs13XAxisSettingsP", "CGFloat"]
+- !private ["13SwiftUIGraphs13XAxisSettingsP", "StrokeStyle"]
+- ["13SwiftUIGraphs13XAxisSettingsP", ""]
+- ["13SwiftUIGraphs13XAxisSettingsP", "showXAxis"]
+- !private ["13SwiftUIGraphs13XAxisSettingsP", "showXAxisLines"]
+- ["13SwiftUIGraphs13XAxisSettingsP", "xAxisFontSize"]
+- !private ["13SwiftUIGraphs13XAxisSettingsP", "xAxisInterval"]
+- !private ["13SwiftUIGraphs13XAxisSettingsP", "xAxisLineStrokeStyle"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "Bool"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "CGFloat"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "Double"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "Edge"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "StrokeStyle"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "init"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "showYAxis"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "showYAxisLines"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "yAxisFontSize"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "yAxisIntervalOverride"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "yAxisLineStrokeStyle"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "yAxisMinMaxOverride"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "yAxisPosition"]
+- ["13SwiftUIGraphs13YAxisSettingsV", "yAxisViewWidth"]
+- ["s35_ExpressibleByBuiltinBooleanLiteralP", "init"]
+- ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+depends-nominal:
+- !private "7SwiftUI10AnimatableP"
+- "13SwiftUIGraphs21BarChartXAxisSettingsV"
+- "s12CaseIterableP"
+- "7SwiftUI4EdgeO"
+- "SQ"
+- "s25ExpressibleByArrayLiteralP"
+- "s27ExpressibleByIntegerLiteralP"
+- "SH"
+- "13SwiftUIGraphs22LineChartXAxisSettingsV"
+- !private "s9OptionSetP"
+- "SY"
+- !private "7SwiftUI4EdgeO3SetV"
+- !private "s10SetAlgebraP"
+- !private "7SwiftUI11StrokeStyleV"
+- "13SwiftUIGraphs13XAxisSettingsP"
+- "13SwiftUIGraphs13YAxisSettingsV"
+- "s35_ExpressibleByBuiltinBooleanLiteralP"
+- "s35_ExpressibleByBuiltinIntegerLiteralP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/ObjectiveC.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/SwiftUI.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreData.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreImage.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Combine.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/QuartzCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Dispatch.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Metal.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Darwin.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreLocation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Foundation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreFoundation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreGraphics.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/os.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/UniformTypeIdentifiers.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Swift.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/UIKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CloudKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/SwiftOnoneSupport.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/DeveloperToolsSupport.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/mach-o/dyld.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UserNotifications.framework/Headers/UserNotifications.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/os.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UniformTypeIdentifiers.framework/Headers/UniformTypeIdentifiers.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "d2180f9cc59064dab56ec114f38704a9"

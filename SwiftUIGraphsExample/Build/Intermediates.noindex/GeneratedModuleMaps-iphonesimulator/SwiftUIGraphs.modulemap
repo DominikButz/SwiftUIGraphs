@@ -1,0 +1,4 @@
+module SwiftUIGraphs {
+header "SwiftUIGraphs-Swift.h"
+export *
+}

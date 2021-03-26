@@ -1,0 +1,9 @@
+version: "Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)"
+options: "9992ece54a52d2b945ca984ff0552c18"
+build_time: [1614072482, 198532000]
+inputs:
+  "/Users/Dominik/Library/Developer/Xcode/DerivedData/SwiftUIGraphsExample-djrcvfmdpvxsuhhkyizptpceijmd/SourcePackages/checkouts/SwiftUI-Introspect/Introspect/AppKitIntrospectionView.swift": [1614072478, 182805089]
+  "/Users/Dominik/Library/Developer/Xcode/DerivedData/SwiftUIGraphsExample-djrcvfmdpvxsuhhkyizptpceijmd/SourcePackages/checkouts/SwiftUI-Introspect/Introspect/Introspect.swift": [1614072478, 183309243]
+  "/Users/Dominik/Library/Developer/Xcode/DerivedData/SwiftUIGraphsExample-djrcvfmdpvxsuhhkyizptpceijmd/SourcePackages/checkouts/SwiftUI-Introspect/Introspect/UIKitIntrospectionView.swift": [1614072478, 183481239]
+  "/Users/Dominik/Library/Developer/Xcode/DerivedData/SwiftUIGraphsExample-djrcvfmdpvxsuhhkyizptpceijmd/SourcePackages/checkouts/SwiftUI-Introspect/Introspect/UIKitIntrospectionViewController.swift": [1614072478, 183637152]
+  "/Users/Dominik/Library/Developer/Xcode/DerivedData/SwiftUIGraphsExample-djrcvfmdpvxsuhhkyizptpceijmd/SourcePackages/checkouts/SwiftUI-Introspect/Introspect/ViewExtensions.swift": [1614072478, 183901770]

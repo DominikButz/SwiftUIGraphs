@@ -1,0 +1,498 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+provides-nominal:
+provides-member:
+- ["SS", ""]
+- ["SS", "width"]
+- ["SS", "height"]
+- ["SS", "size"]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "=="
+- !private "CFRange"
+- "CGFloat"
+- "CGSize"
+- "CTFont"
+- !private "CTFramesetterCreateWithAttributedString"
+- !private "CTFramesetterSuggestFrameSizeWithConstraints"
+- "CastingPrecedence"
+- !private "Dictionary"
+- !private "FloatLiteralType"
+- !private "IntegerLiteralType"
+- !private "NSAttributedString"
+- "String"
+- !private "StringLiteralType"
+- "TernaryPrecedence"
+- !private "UnicodeScalarType"
+- !private "kCTFontAttributeName"
+depends-member:
+- !private ["7SwiftUI10AnimatableP", "height"]
+- !private ["7SwiftUI10AnimatableP", "init"]
+- !private ["7SwiftUI10AnimatableP", "width"]
+- !private ["SK", "CFRange"]
+- !private ["SK", "CGSize"]
+- !private ["SK", "CTFramesetterCreateWithAttributedString"]
+- !private ["SK", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["SK", "NSAttributedString"]
+- !private ["SK", ""]
+- !private ["SK", "count"]
+- !private ["SK", "kCTFontAttributeName"]
+- !private ["SK", "size"]
+- !private ["So7CFRangea", "init"]
+- !private ["So6CGSizeV", "height"]
+- !private ["So6CGSizeV", "init"]
+- !private ["So6CGSizeV", "width"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "CFRange"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "CGSize"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "CTFramesetterCreateWithAttributedString"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "NSAttributedString"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "count"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "kCTFontAttributeName"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "size"]
+- !private ["s7CVarArgP", "CFRange"]
+- !private ["s7CVarArgP", "CGSize"]
+- !private ["s7CVarArgP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s7CVarArgP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s7CVarArgP", "Key"]
+- !private ["s7CVarArgP", "NSAttributedString"]
+- !private ["s7CVarArgP", "count"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "kCTFontAttributeName"]
+- !private ["s7CVarArgP", "size"]
+- !private ["Sl", "CFRange"]
+- !private ["Sl", "CGSize"]
+- !private ["Sl", "CTFramesetterCreateWithAttributedString"]
+- !private ["Sl", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["Sl", "NSAttributedString"]
+- !private ["Sl", ""]
+- !private ["Sl", "count"]
+- !private ["Sl", "kCTFontAttributeName"]
+- !private ["Sl", "size"]
+- !private ["SL", "CFRange"]
+- !private ["SL", "CGSize"]
+- !private ["SL", "CTFramesetterCreateWithAttributedString"]
+- !private ["SL", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["SL", "NSAttributedString"]
+- !private ["SL", ""]
+- !private ["SL", "count"]
+- !private ["SL", "kCTFontAttributeName"]
+- !private ["SL", "size"]
+- !private ["s28CustomDebugStringConvertibleP", "CFRange"]
+- !private ["s28CustomDebugStringConvertibleP", "CGSize"]
+- !private ["s28CustomDebugStringConvertibleP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s28CustomDebugStringConvertibleP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s28CustomDebugStringConvertibleP", "Key"]
+- !private ["s28CustomDebugStringConvertibleP", "NSAttributedString"]
+- !private ["s28CustomDebugStringConvertibleP", "count"]
+- !private ["s28CustomDebugStringConvertibleP", "height"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "kCTFontAttributeName"]
+- !private ["s28CustomDebugStringConvertibleP", "size"]
+- !private ["s28CustomDebugStringConvertibleP", "width"]
+- !private ["s17CustomReflectableP", "CFRange"]
+- !private ["s17CustomReflectableP", "CGSize"]
+- !private ["s17CustomReflectableP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s17CustomReflectableP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s17CustomReflectableP", "NSAttributedString"]
+- !private ["s17CustomReflectableP", "count"]
+- !private ["s17CustomReflectableP", "height"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "kCTFontAttributeName"]
+- !private ["s17CustomReflectableP", "size"]
+- !private ["s17CustomReflectableP", "width"]
+- !private ["s23CustomStringConvertibleP", "CFRange"]
+- !private ["s23CustomStringConvertibleP", "CGSize"]
+- !private ["s23CustomStringConvertibleP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s23CustomStringConvertibleP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s23CustomStringConvertibleP", "Key"]
+- !private ["s23CustomStringConvertibleP", "NSAttributedString"]
+- !private ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "count"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "kCTFontAttributeName"]
+- !private ["s23CustomStringConvertibleP", "size"]
+- !private ["Se", "CFRange"]
+- !private ["Se", "CGSize"]
+- !private ["Se", "CTFramesetterCreateWithAttributedString"]
+- !private ["Se", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["Se", "NSAttributedString"]
+- !private ["Se", "count"]
+- !private ["Se", "height"]
+- !private ["Se", "init"]
+- !private ["Se", "kCTFontAttributeName"]
+- !private ["Se", "size"]
+- !private ["Se", "width"]
+- !private ["SE", "CFRange"]
+- !private ["SE", "CGSize"]
+- !private ["SE", "CTFramesetterCreateWithAttributedString"]
+- !private ["SE", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["SE", "NSAttributedString"]
+- !private ["SE", "count"]
+- !private ["SE", "height"]
+- !private ["SE", "init"]
+- !private ["SE", "kCTFontAttributeName"]
+- !private ["SE", "size"]
+- !private ["SE", "width"]
+- !private ["SQ", "CFRange"]
+- !private ["SQ", "CGSize"]
+- !private ["SQ", "CTFramesetterCreateWithAttributedString"]
+- !private ["SQ", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["SQ", "Key"]
+- !private ["SQ", "NSAttributedString"]
+- !private ["SQ", "RawValue"]
+- !private ["SQ", ""]
+- !private ["SQ", "count"]
+- !private ["SQ", "height"]
+- !private ["SQ", "init"]
+- !private ["SQ", "kCTFontAttributeName"]
+- !private ["SQ", "size"]
+- !private ["SQ", "width"]
+- !private ["s30ExpressibleByDictionaryLiteralP", "Key"]
+- !private ["s30ExpressibleByDictionaryLiteralP", "Value"]
+- !private ["s30ExpressibleByDictionaryLiteralP", "init"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "CFRange"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "CGSize"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "NSAttributedString"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "count"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "kCTFontAttributeName"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "size"]
+- !private ["s32ExpressibleByStringInterpolationP", "CFRange"]
+- !private ["s32ExpressibleByStringInterpolationP", "CGSize"]
+- !private ["s32ExpressibleByStringInterpolationP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s32ExpressibleByStringInterpolationP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s32ExpressibleByStringInterpolationP", "NSAttributedString"]
+- !private ["s32ExpressibleByStringInterpolationP", ""]
+- !private ["s32ExpressibleByStringInterpolationP", "count"]
+- !private ["s32ExpressibleByStringInterpolationP", "kCTFontAttributeName"]
+- !private ["s32ExpressibleByStringInterpolationP", "size"]
+- !private ["s26ExpressibleByStringLiteralP", "CFRange"]
+- !private ["s26ExpressibleByStringLiteralP", "CGSize"]
+- !private ["s26ExpressibleByStringLiteralP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s26ExpressibleByStringLiteralP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s26ExpressibleByStringLiteralP", "NSAttributedString"]
+- !private ["s26ExpressibleByStringLiteralP", ""]
+- !private ["s26ExpressibleByStringLiteralP", "count"]
+- !private ["s26ExpressibleByStringLiteralP", "kCTFontAttributeName"]
+- !private ["s26ExpressibleByStringLiteralP", "size"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "CFRange"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "CGSize"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "NSAttributedString"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", ""]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "count"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "kCTFontAttributeName"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "size"]
+- !private ["SH", "CFRange"]
+- !private ["SH", "CGSize"]
+- !private ["SH", "CTFramesetterCreateWithAttributedString"]
+- !private ["SH", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["SH", "Key"]
+- !private ["SH", "NSAttributedString"]
+- !private ["SH", "RawValue"]
+- !private ["SH", ""]
+- !private ["SH", "count"]
+- !private ["SH", "init"]
+- !private ["SH", "kCTFontAttributeName"]
+- !private ["SH", "size"]
+- !private ["So21NSAttributedStringKeya", "RawValue"]
+- !private ["So21NSAttributedStringKeya", "init"]
+- !private ["s25LosslessStringConvertibleP", "CFRange"]
+- !private ["s25LosslessStringConvertibleP", "CGSize"]
+- !private ["s25LosslessStringConvertibleP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s25LosslessStringConvertibleP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s25LosslessStringConvertibleP", "NSAttributedString"]
+- !private ["s25LosslessStringConvertibleP", ""]
+- !private ["s25LosslessStringConvertibleP", "count"]
+- !private ["s25LosslessStringConvertibleP", "kCTFontAttributeName"]
+- !private ["s25LosslessStringConvertibleP", "size"]
+- !private ["s10MirrorPathP", "CFRange"]
+- !private ["s10MirrorPathP", "CGSize"]
+- !private ["s10MirrorPathP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s10MirrorPathP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s10MirrorPathP", "NSAttributedString"]
+- !private ["s10MirrorPathP", "count"]
+- !private ["s10MirrorPathP", "kCTFontAttributeName"]
+- !private ["s10MirrorPathP", "size"]
+- !private ["So18NSAttributedStringC", "Key"]
+- !private ["So18NSAttributedStringC", "init"]
+- !private ["So8NSCodingP", "Key"]
+- !private ["So8NSCodingP", ""]
+- !private ["So8NSCodingP", "count"]
+- !private ["So8NSCodingP", "init"]
+- !private ["So8NSCodingP", "size"]
+- !private ["So9NSCopyingP", "Key"]
+- !private ["So9NSCopyingP", "count"]
+- !private ["So9NSCopyingP", "init"]
+- !private ["So9NSCopyingP", "size"]
+- !private ["So21NSItemProviderReadingP", "Key"]
+- !private ["So21NSItemProviderReadingP", "count"]
+- !private ["So21NSItemProviderReadingP", "init"]
+- !private ["So21NSItemProviderReadingP", "size"]
+- !private ["So21NSItemProviderWritingP", "Key"]
+- !private ["So21NSItemProviderWritingP", "count"]
+- !private ["So21NSItemProviderWritingP", "init"]
+- !private ["So21NSItemProviderWritingP", "size"]
+- !private ["So16NSMutableCopyingP", "Key"]
+- !private ["So16NSMutableCopyingP", "count"]
+- !private ["So16NSMutableCopyingP", "init"]
+- !private ["So16NSMutableCopyingP", "size"]
+- !private ["So8NSObjectC", "Key"]
+- ["So8NSObjectC", ""]
+- !private ["So8NSObjectC", "attributedStringWithAttachment"]
+- !private ["So8NSObjectC", "count"]
+- !private ["So8NSObjectC", "init"]
+- !private ["So8NSObjectC", "size"]
+- !private ["So8NSObjectC", "sizeWithAttributes"]
+- !private ["So8NSObjectC", "sizeWithFont"]
+- !private ["So8NSObjectP", "Key"]
+- !private ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "attributedStringWithAttachment"]
+- !private ["So8NSObjectP", "count"]
+- !private ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "size"]
+- !private ["So8NSObjectP", "sizeWithAttributes"]
+- !private ["So8NSObjectP", "sizeWithFont"]
+- !private ["So14NSSecureCodingP", "Key"]
+- !private ["So14NSSecureCodingP", "count"]
+- !private ["So14NSSecureCodingP", "init"]
+- !private ["So14NSSecureCodingP", "size"]
+- !private ["So8NSStringC", "count"]
+- !private ["So8NSStringC", "size"]
+- !private ["Sm", "CFRange"]
+- !private ["Sm", "CGSize"]
+- !private ["Sm", "CTFramesetterCreateWithAttributedString"]
+- !private ["Sm", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["Sm", "NSAttributedString"]
+- !private ["Sm", "count"]
+- !private ["Sm", "kCTFontAttributeName"]
+- !private ["Sm", "size"]
+- !private ["SY", "RawValue"]
+- !private ["SY", ""]
+- !private ["SY", "init"]
+- !private ["ST", "CFRange"]
+- !private ["ST", "CGSize"]
+- !private ["ST", "CTFramesetterCreateWithAttributedString"]
+- !private ["ST", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["ST", "NSAttributedString"]
+- !private ["ST", ""]
+- !private ["ST", "count"]
+- !private ["ST", "kCTFontAttributeName"]
+- !private ["ST", "size"]
+- !private ["SS", "CFRange"]
+- ["SS", "CGFloat"]
+- ["SS", "CGSize"]
+- ["SS", "CTFont"]
+- !private ["SS", "CTFramesetterCreateWithAttributedString"]
+- !private ["SS", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["SS", "NSAttributedString"]
+- !private ["SS", "String"]
+- ["SS", ""]
+- !private ["SS", "count"]
+- ["SS", "height"]
+- !private ["SS", "kCTFontAttributeName"]
+- ["SS", "size"]
+- ["SS", "width"]
+- !private ["Sy", "CFRange"]
+- !private ["Sy", "CGSize"]
+- !private ["Sy", "CTFramesetterCreateWithAttributedString"]
+- !private ["Sy", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["Sy", "NSAttributedString"]
+- !private ["Sy", "count"]
+- !private ["Sy", "kCTFontAttributeName"]
+- !private ["Sy", "size"]
+- !private ["s16TextOutputStreamP", "CFRange"]
+- !private ["s16TextOutputStreamP", "CGSize"]
+- !private ["s16TextOutputStreamP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s16TextOutputStreamP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s16TextOutputStreamP", "NSAttributedString"]
+- !private ["s16TextOutputStreamP", ""]
+- !private ["s16TextOutputStreamP", "count"]
+- !private ["s16TextOutputStreamP", "kCTFontAttributeName"]
+- !private ["s16TextOutputStreamP", "size"]
+- !private ["s20TextOutputStreamableP", "CFRange"]
+- !private ["s20TextOutputStreamableP", "CGSize"]
+- !private ["s20TextOutputStreamableP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s20TextOutputStreamableP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s20TextOutputStreamableP", "NSAttributedString"]
+- !private ["s20TextOutputStreamableP", ""]
+- !private ["s20TextOutputStreamableP", "count"]
+- !private ["s20TextOutputStreamableP", "kCTFontAttributeName"]
+- !private ["s20TextOutputStreamableP", "size"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "CFRange"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "CGSize"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "NSAttributedString"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "count"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "height"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "init"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "kCTFontAttributeName"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "size"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "width"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "CFRange"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "CGSize"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "NSAttributedString"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "count"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "kCTFontAttributeName"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "size"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "CFRange"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "CGSize"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "NSAttributedString"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "count"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "kCTFontAttributeName"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "size"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "CFRange"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "CGSize"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "NSAttributedString"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "count"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "kCTFontAttributeName"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "size"]
+- !private ["s19_HasContiguousBytesP", "CFRange"]
+- !private ["s19_HasContiguousBytesP", "CGSize"]
+- !private ["s19_HasContiguousBytesP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s19_HasContiguousBytesP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s19_HasContiguousBytesP", "NSAttributedString"]
+- !private ["s19_HasContiguousBytesP", "count"]
+- !private ["s19_HasContiguousBytesP", "kCTFontAttributeName"]
+- !private ["s19_HasContiguousBytesP", "size"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "RawValue"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", ""]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "count"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "size"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "Key"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "count"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "size"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "Key"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "count"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "init"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "size"]
+- !private ["s21_ObjectiveCBridgeableP", "CFRange"]
+- !private ["s21_ObjectiveCBridgeableP", "CGSize"]
+- !private ["s21_ObjectiveCBridgeableP", "CTFramesetterCreateWithAttributedString"]
+- !private ["s21_ObjectiveCBridgeableP", "CTFramesetterSuggestFrameSizeWithConstraints"]
+- !private ["s21_ObjectiveCBridgeableP", "NSAttributedString"]
+- !private ["s21_ObjectiveCBridgeableP", "RawValue"]
+- !private ["s21_ObjectiveCBridgeableP", "_ObjectiveCType"]
+- !private ["s21_ObjectiveCBridgeableP", "count"]
+- !private ["s21_ObjectiveCBridgeableP", "height"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "kCTFontAttributeName"]
+- !private ["s21_ObjectiveCBridgeableP", "size"]
+- !private ["s21_ObjectiveCBridgeableP", "width"]
+- !private ["s20_SwiftNewtypeWrapperP", "RawValue"]
+- !private ["s20_SwiftNewtypeWrapperP", "init"]
+- !private ["So13CKRecordValueP", "count"]
+- !private ["So13CKRecordValueP", "size"]
+depends-nominal:
+- !private "7SwiftUI10AnimatableP"
+- !private "SK"
+- !private "So7CFRangea"
+- !private "So6CGSizeV"
+- !private "8CloudKit21CKRecordValueProtocolP"
+- !private "s7CVarArgP"
+- !private "Sl"
+- !private "SL"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- !private "s23CustomStringConvertibleP"
+- !private "Se"
+- !private "SE"
+- !private "SQ"
+- !private "s30ExpressibleByDictionaryLiteralP"
+- !private "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s32ExpressibleByStringInterpolationP"
+- !private "s26ExpressibleByStringLiteralP"
+- !private "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "SH"
+- !private "So21NSAttributedStringKeya"
+- !private "s25LosslessStringConvertibleP"
+- !private "s10MirrorPathP"
+- !private "So18NSAttributedStringC"
+- !private "So8NSCodingP"
+- !private "So9NSCopyingP"
+- !private "So21NSItemProviderReadingP"
+- !private "So21NSItemProviderWritingP"
+- !private "So16NSMutableCopyingP"
+- "So8NSObjectC"
+- !private "So8NSObjectP"
+- !private "So14NSSecureCodingP"
+- !private "So8NSStringC"
+- !private "Sm"
+- !private "SY"
+- !private "ST"
+- "SS"
+- !private "Sy"
+- !private "s16TextOutputStreamP"
+- !private "s20TextOutputStreamableP"
+- !private "s30_CustomPlaygroundQuickLookableP"
+- !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s19_HasContiguousBytesP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "10Foundation27_KeyValueCodingAndObservingP"
+- !private "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- !private "s21_ObjectiveCBridgeableP"
+- !private "s20_SwiftNewtypeWrapperP"
+- !private "So13CKRecordValueP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/ObjectiveC.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/SwiftUI.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreData.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreImage.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Combine.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/QuartzCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Dispatch.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Metal.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Darwin.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreLocation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Foundation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreFoundation.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CoreGraphics.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/os.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/UniformTypeIdentifiers.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/Swift.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/UIKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/CloudKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/SwiftOnoneSupport.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/DeveloperToolsSupport.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/mach-o/dyld.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UserNotifications.framework/Headers/UserNotifications.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/os.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UniformTypeIdentifiers.framework/Headers/UniformTypeIdentifiers.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "753f0b2ab11222450b4b0084b55518ca"

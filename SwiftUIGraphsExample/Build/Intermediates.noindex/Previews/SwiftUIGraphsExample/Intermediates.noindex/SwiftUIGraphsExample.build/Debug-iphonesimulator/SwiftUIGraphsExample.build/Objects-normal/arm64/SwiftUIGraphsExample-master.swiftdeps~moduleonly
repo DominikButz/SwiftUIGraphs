@@ -1,0 +1,11 @@
+version: "Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)"
+options: "664bf4f08276df92f99a2ef474c88fc2"
+build_time: [1616658888, 620933000]
+inputs:
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/SwiftUIGraphsExample/ContentView.swift": [1616483480, 13839336]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/SwiftUIGraphsExample/SwiftUIGraphsExampleApp.swift": [1612235304, 724649989]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/SwiftUIGraphsExample/BasicPieChartExample.swift": !dirty [1616658886, 736090012]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/SwiftUIGraphsExample/BasicLineChartExample.swift": [1616643083, 659400878]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/SwiftUIGraphsExample/OverlayView.swift": [1616405259, 407838444]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/SwiftUIGraphsExample/CustomYAxisIntervalExampleLineChart.swift": [1616643083, 673232171]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/SwiftUIGraphsExample/BasicBarChartExample.swift": [1616643083, 702522682]
