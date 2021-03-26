@@ -13,6 +13,7 @@ public struct DYFractionChartInfoView: View {
     let data: [DYChartFraction]
     @Binding var selectedId: String?
     let valueConverter: (Double)->String
+    
     public init(title: String, data: [DYChartFraction], selectedId: Binding<String?>, valueConverter: @escaping (Double)->String) {
         self.title = title
         self.data = data
@@ -25,9 +26,8 @@ public struct DYFractionChartInfoView: View {
         VStack(alignment: .leading, spacing: 5) {
             Text(self.title).font(.headline).bold()
             if let selectedId = selectedId, let fraction = self.fractionFor(id: selectedId) {
-                Text(fraction.title).font(.callout).bold()
-                Text(self.valueConverter(fraction.value))
-                Text(fraction.value.percentageString(totalValue: data.reduce(0) { $0 + $1.value}))
+                Text(fraction.title).font(.headline)
+                Text(self.valueConverter(fraction.value) + " - " + fraction.value.percentageString(totalValue: data.reduce(0) { $0 + $1.value}) )
             }
         }
     }
