@@ -77,7 +77,6 @@ depends-member:
 - ["s18AdditiveArithmeticP", ""]
 - !private ["s18AdditiveArithmeticP", "init"]
 - ["s18AdditiveArithmeticP", "zero"]
-- !private ["7SwiftUI9AlignmentV", "bottom"]
 - !private ["7SwiftUI9AlignmentV", "center"]
 - ["7SwiftUI10AnimatableP", ""]
 - !private ["7SwiftUI10AnimatableP", "bottom"]

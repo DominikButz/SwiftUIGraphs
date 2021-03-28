@@ -1,8 +1,8 @@
 version: "Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)"
 options: "26bfec22000b9769e21583a0d45f63fc"
-build_time: [1616750066, 956889000]
+build_time: [1616916957, 673736000]
 inputs:
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Model/DYChartFraction.swift": [1616728211, 873179846]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Model/DYChartFraction.swift": [1616839642, 568017664]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Model/DYDataPoint.swift": [1614060432, 905550309]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Model/Extensions/Color+Extensions.swift": [1616660778, 750819562]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Model/Extensions/Date+Extensions.swift": [1613553043, 950798478]
@@ -12,13 +12,13 @@ inputs:
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Model/OrientationObserver.swift": [1614405880, 653877435]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Model/Settings/AxisSettings.swift": [1616655171, 264275926]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Model/Settings/DYGridChartSettings.swift": [1616652544, 830936959]
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Model/Settings/DYPieChartSettings.swift": [1616746514, 927453288]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Model/Settings/DYPieChartSettings.swift": [1616840839, 268122819]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Model/YAxisScaler.swift": [1616406183, 58319248]
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Views/Bar Chart/DYBarChartView.swift": [1616652544, 821634279]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Views/Bar Chart/DYBarChartView.swift": [1616916596, 220088363]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Views/Bar Chart/RoundedCornerRectangle.swift": [1613554544, 34201273]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Views/Line Chart/DYLineChartView.swift": [1616652544, 809140750]
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Views/Pie Chart/DYFractionChartInfoView.swift": [1616747664, 125477143]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Views/Pie Chart/DYFractionChartInfoView.swift": [1616815146, 57333050]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Views/Pie Chart/DYFractionChartLegendView.swift": [1616662359, 203061813]
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Views/Pie Chart/DYPieChartView.swift": [1616746948, 875678319]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Views/Pie Chart/DYPieChartView.swift": [1616916957, 614074048]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Views/Shared/DYGridChartHeaderView.swift": [1616643083, 685760491]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Sources/SwiftUIGraphs/Views/Shared/GridChartProtocol.swift": [1616652544, 795407913]

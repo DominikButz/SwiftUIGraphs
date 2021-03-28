@@ -91,7 +91,6 @@ depends-member:
 - !private ["SH", "removeObserver"]
 - !private ["s6HasherV", "combine"]
 - !private ["s25LosslessStringConvertibleP", ""]
-- ["So8NSCodingP", ""]
 - ["So8NSObjectC", ""]
 - !private ["So8NSObjectC", "addObserver"]
 - !private ["So8NSObjectC", "addObserverForName"]
@@ -100,7 +99,7 @@ depends-member:
 - !private ["So8NSObjectC", "orientation"]
 - !private ["So8NSObjectC", "orientationDidChangeNotification"]
 - !private ["So8NSObjectC", "removeObserver"]
-- ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", ""]
 - !private ["So8NSObjectP", "addObserver"]
 - !private ["So8NSObjectP", "addObserverForName"]
 - !private ["So8NSObjectP", "current"]
@@ -165,7 +164,6 @@ depends-member:
 - !private ["So8UIDeviceC", "orientationDidChangeNotification"]
 - !private ["So19UIDeviceOrientationV", "isLandscape"]
 - !private ["So19UIDeviceOrientationV", "isPortrait"]
-- ["So18UIFocusEnvironmentP", ""]
 - !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
 - !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
@@ -199,9 +197,8 @@ depends-nominal:
 - "SH"
 - !private "s6HasherV"
 - !private "s25LosslessStringConvertibleP"
-- "So8NSCodingP"
 - "So8NSObjectC"
-- "So8NSObjectP"
+- !private "So8NSObjectP"
 - !private "10Foundation12NotificationV"
 - !private "So20NSNotificationCenterC"
 - "7Combine16ObservableObjectP"
@@ -215,7 +212,6 @@ depends-nominal:
 - !private "s20TextOutputStreamableP"
 - !private "So8UIDeviceC"
 - !private "So19UIDeviceOrientationV"
-- "So18UIFocusEnvironmentP"
 - !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
 - !private "s35_ExpressibleByBuiltinIntegerLiteralP"
 - !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"

@@ -10,6 +10,7 @@ provides-member:
 - ["13SwiftUIGraphs34DYFractionChartHeaderView_PreviewsV", ""]
 provides-dynamic-lookup:
 depends-top-level:
+- "!="
 - "+"
 - "=="
 - "AssignmentPrecedence"
@@ -31,15 +32,20 @@ depends-top-level:
 depends-member:
 - !private ["s18AdditiveArithmeticP", ""]
 - !private ["s18AdditiveArithmeticP", "percentageString"]
+- ["7SwiftUI10AnimatableP", ""]
 - !private ["Sa", "filter"]
 - !private ["Sa", "first"]
 - !private ["Sa", "reduce"]
-- !private ["SK", ""]
+- ["SK", ""]
 - !private ["SK", "filter"]
 - !private ["SK", "first"]
 - !private ["SK", "reduce"]
 - !private ["SB", "percentageString"]
 - !private ["7SwiftUI7BindingV", "constant"]
+- ["7SwiftUI7BindingV", "init"]
+- ["7SwiftUI7BindingV", "projectedValue"]
+- ["7SwiftUI7BindingV", "subscript"]
+- ["7SwiftUI7BindingV", "wrappedValue"]
 - !private ["8CloudKit21CKRecordValueProtocolP", "filter"]
 - !private ["8CloudKit21CKRecordValueProtocolP", "first"]
 - !private ["8CloudKit21CKRecordValueProtocolP", "percentageString"]
@@ -49,11 +55,11 @@ depends-member:
 - !private ["s7CVarArgP", "first"]
 - !private ["s7CVarArgP", "percentageString"]
 - !private ["s7CVarArgP", "reduce"]
-- !private ["Sl", ""]
+- ["Sl", ""]
 - !private ["Sl", "filter"]
 - !private ["Sl", "first"]
 - !private ["Sl", "reduce"]
-- !private ["SL", ""]
+- ["SL", ""]
 - !private ["SL", "percentageString"]
 - !private ["10Foundation15ContiguousBytesP", "filter"]
 - !private ["10Foundation15ContiguousBytesP", "first"]
@@ -72,7 +78,7 @@ depends-member:
 - !private ["s17CustomReflectableP", "percentageString"]
 - !private ["s17CustomReflectableP", "reduce"]
 - !private ["s17CustomReflectableP", "some"]
-- !private ["s23CustomStringConvertibleP", ""]
+- ["s23CustomStringConvertibleP", ""]
 - !private ["s23CustomStringConvertibleP", "filter"]
 - !private ["s23CustomStringConvertibleP", "first"]
 - !private ["s23CustomStringConvertibleP", "percentageString"]
@@ -138,7 +144,7 @@ depends-member:
 - !private ["SE", "percentageString"]
 - !private ["SE", "reduce"]
 - !private ["SE", "some"]
-- !private ["SQ", ""]
+- ["SQ", ""]
 - !private ["SQ", "bold"]
 - !private ["SQ", "filter"]
 - !private ["SQ", "first"]
@@ -154,6 +160,7 @@ depends-member:
 - !private ["s25ExpressibleByArrayLiteralP", "filter"]
 - !private ["s25ExpressibleByArrayLiteralP", "first"]
 - !private ["s25ExpressibleByArrayLiteralP", "reduce"]
+- ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
 - !private ["s25ExpressibleByFloatLiteralP", ""]
 - !private ["s25ExpressibleByFloatLiteralP", "percentageString"]
 - !private ["s27ExpressibleByIntegerLiteralP", "IntegerLiteralType"]
@@ -163,13 +170,16 @@ depends-member:
 - !private ["s23ExpressibleByNilLiteralP", "headline"]
 - !private ["s23ExpressibleByNilLiteralP", "none"]
 - !private ["s23ExpressibleByNilLiteralP", "some"]
+- ["s32ExpressibleByStringInterpolationP", ""]
+- ["s26ExpressibleByStringLiteralP", ""]
+- ["s33ExpressibleByUnicodeScalarLiteralP", ""]
 - !private ["SF", ""]
 - !private ["SF", "percentageString"]
 - !private ["7SwiftUI4FontV", "headline"]
 - !private ["7SwiftUI7GestureP", "headline"]
 - !private ["7SwiftUI7GestureP", "none"]
 - !private ["7SwiftUI7GestureP", "some"]
-- !private ["SH", ""]
+- ["SH", ""]
 - !private ["SH", "filter"]
 - !private ["SH", "first"]
 - !private ["SH", "headline"]
@@ -183,6 +193,7 @@ depends-member:
 - !private ["s12IdentifiableP", "id"]
 - !private ["s12IdentifiableP", "title"]
 - !private ["s12IdentifiableP", "value"]
+- ["s25LosslessStringConvertibleP", ""]
 - !private ["s25LosslessStringConvertibleP", "percentageString"]
 - !private ["SM", ""]
 - !private ["SM", "filter"]
@@ -191,6 +202,8 @@ depends-member:
 - !private ["10Foundation19MutableDataProtocolP", "filter"]
 - !private ["10Foundation19MutableDataProtocolP", "first"]
 - !private ["10Foundation19MutableDataProtocolP", "reduce"]
+- ["So8NSCodingP", ""]
+- ["So8NSObjectP", ""]
 - !private ["Sj", ""]
 - !private ["Sj", "percentageString"]
 - !private ["Sq", "headline"]
@@ -215,7 +228,7 @@ depends-member:
 - !private ["Sm", "first"]
 - !private ["Sm", "reduce"]
 - !private ["s10SIMDScalarP", "percentageString"]
-- !private ["ST", ""]
+- ["ST", ""]
 - !private ["ST", "filter"]
 - !private ["ST", "first"]
 - !private ["ST", "reduce"]
@@ -226,7 +239,10 @@ depends-member:
 - !private ["7SwiftUI4TextV", "bold"]
 - !private ["7SwiftUI4TextV", "font"]
 - !private ["7SwiftUI4TextV", "init"]
+- ["s16TextOutputStreamP", ""]
+- ["s20TextOutputStreamableP", ""]
 - !private ["s20TextOutputStreamableP", "percentageString"]
+- ["So18UIFocusEnvironmentP", ""]
 - !private ["7SwiftUI6VStackV", "init"]
 - !private ["7SwiftUI16VectorArithmeticP", "percentageString"]
 - ["7SwiftUI4ViewP", "Binding"]
@@ -266,10 +282,12 @@ depends-member:
 - !private ["s24_DestructorSafeContainerP", "filter"]
 - !private ["s24_DestructorSafeContainerP", "first"]
 - !private ["s24_DestructorSafeContainerP", "reduce"]
+- ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
 - !private ["s33_ExpressibleByBuiltinFloatLiteralP", "percentageString"]
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "percentageString"]
 - !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
 - !private ["7SwiftUI18_FormatSpecifiableP", "percentageString"]
 - !private ["s19_HasContiguousBytesP", "filter"]
 - !private ["s19_HasContiguousBytesP", "first"]
@@ -297,18 +315,19 @@ depends-member:
 - ["7SwiftUI16_PreviewProviderP", "previews"]
 depends-nominal:
 - !private "s18AdditiveArithmeticP"
+- "7SwiftUI10AnimatableP"
 - !private "Sa"
-- !private "SK"
+- "SK"
 - !private "SB"
-- !private "7SwiftUI7BindingV"
+- "7SwiftUI7BindingV"
 - !private "8CloudKit21CKRecordValueProtocolP"
 - !private "s7CVarArgP"
-- !private "Sl"
-- !private "SL"
+- "Sl"
+- "SL"
 - !private "10Foundation15ContiguousBytesP"
 - !private "s28CustomDebugStringConvertibleP"
 - !private "s17CustomReflectableP"
-- !private "s23CustomStringConvertibleP"
+- "s23CustomStringConvertibleP"
 - !private "13SwiftUIGraphs15DYChartFractionV"
 - "13SwiftUIGraphs34DYFractionChartHeaderView_PreviewsV"
 - "13SwiftUIGraphs23DYFractionChartInfoViewV"
@@ -317,31 +336,39 @@ depends-nominal:
 - !private "Sd"
 - !private "7SwiftUI15DynamicPropertyP"
 - !private "SE"
-- !private "SQ"
+- "SQ"
 - !private "s25ExpressibleByArrayLiteralP"
+- "s43ExpressibleByExtendedGraphemeClusterLiteralP"
 - !private "s25ExpressibleByFloatLiteralP"
 - !private "s27ExpressibleByIntegerLiteralP"
 - !private "s23ExpressibleByNilLiteralP"
+- "s32ExpressibleByStringInterpolationP"
+- "s26ExpressibleByStringLiteralP"
+- "s33ExpressibleByUnicodeScalarLiteralP"
 - !private "SF"
 - !private "7SwiftUI4FontV"
 - !private "7SwiftUI7GestureP"
-- !private "SH"
+- "SH"
 - !private "7SwiftUI19HorizontalAlignmentV"
 - !private "s12IdentifiableP"
-- !private "s25LosslessStringConvertibleP"
+- "s25LosslessStringConvertibleP"
 - !private "SM"
 - !private "10Foundation19MutableDataProtocolP"
+- "So8NSCodingP"
+- "So8NSObjectP"
 - !private "Sj"
 - !private "Sq"
 - "7SwiftUI15PreviewProviderP"
 - !private "Sk"
 - !private "Sm"
 - !private "s10SIMDScalarP"
-- !private "ST"
+- "ST"
 - !private "s13SignedNumericP"
 - !private "Sx"
 - !private "7SwiftUI4TextV"
-- !private "s20TextOutputStreamableP"
+- "s16TextOutputStreamP"
+- "s20TextOutputStreamableP"
+- "So18UIFocusEnvironmentP"
 - !private "7SwiftUI6VStackV"
 - !private "7SwiftUI16VectorArithmeticP"
 - "7SwiftUI4ViewP"
@@ -351,9 +378,11 @@ depends-nominal:
 - !private "s22_CVarArgPassedAsDoubleP"
 - !private "s30_CustomPlaygroundQuickLookableP"
 - !private "s24_DestructorSafeContainerP"
+- "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
 - !private "s33_ExpressibleByBuiltinFloatLiteralP"
 - !private "s35_ExpressibleByBuiltinIntegerLiteralP"
 - !private "s34_ExpressibleByBuiltinStringLiteralP"
+- "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
 - !private "7SwiftUI18_FormatSpecifiableP"
 - !private "s19_HasContiguousBytesP"
 - !private "s35_HasCustomAnyHashableRepresentationP"

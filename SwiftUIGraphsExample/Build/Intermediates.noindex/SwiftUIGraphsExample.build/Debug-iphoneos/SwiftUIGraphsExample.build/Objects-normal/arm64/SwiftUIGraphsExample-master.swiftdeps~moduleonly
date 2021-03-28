@@ -1,6 +1,12 @@
 version: "Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)"
-options: "d4e5b1a73adad1accc0b1b9061a80f49"
-build_time: [1612489364, 78232000]
+options: "78751f60ae2084dade0e65f5757295e1"
+build_time: [1616916179, 552074000]
 inputs:
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/SwiftUIGraphsExample/ContentView.swift": [1612430810, 411654600]
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/SwiftUIGraphsExample/SwiftUIGraphsExampleApp.swift": [1612235304, 724649989]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/ContentView.swift": [1616839170, 683155952]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/SwiftUIGraphsExampleApp.swift": [1612235304, 724649989]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/BasicPieChartExample.swift": [1616915903, 601549504]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/BasicLineChartExample.swift": [1616725500, 701984561]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/OverlayView.swift": [1616405259, 407838444]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/CustomYAxisIntervalExampleLineChart.swift": [1616725604, 165203197]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/RingChartAndDetailPieChartExample.swift": [1616815726, 452691022]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/BasicBarChartExample.swift": [1616725639, 417202344]

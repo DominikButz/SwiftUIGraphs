@@ -24,7 +24,9 @@ public struct DYFractionChartInfoView: View {
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text(self.title).font(.headline).bold()
+            if self.title != "" {
+                Text(self.title).font(.headline).bold()
+            }
             if let selectedId = selectedId, let fraction = self.fractionFor(id: selectedId) {
                 Text(fraction.title).font(.headline)
                 Text(self.valueConverter(fraction.value) + " - " + fraction.value.percentageString(totalValue: data.reduce(0) { $0 + $1.value}) )

@@ -38,7 +38,7 @@ public struct DYChartFraction: Identifiable {
         
         return [housing, transportation, food, insurance, health, entertainment, cash, other, apparel]
     }
-    
+    // source https://www.statista.com/statistics/247407/average-annual-consumer-spending-in-the-us-by-type/
     public static func exampleFormatter(value: Double)->String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency

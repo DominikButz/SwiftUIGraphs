@@ -9,22 +9,40 @@ import SwiftUI
 import SwiftUIGraphs
 
 
+//for  iex cloud  http get request
+// https://cloud.iexapis.com/stable/stock/twtr/chart/1m?token=
+
 struct ContentView: View {
 
-    init() {
-        
-       // UINavigationBar.appearance().backgroundColor = .clear
-    }
+
     
     var body: some View {
 
         NavigationView {
             List {
-                NavigationLink("Line Chart: Lifting Volume per Workout", destination: BasicLineChartExample())
-                NavigationLink("Line Chart: Workout Time", destination: CustomYAxisIntervalExampleLineChart())
-                NavigationLink("Bar Chart: Workout Volume per Week", destination: BasicBarChartExample())
-                NavigationLink("Pie Chart: Av. US Household Spending", destination: BasicPieChartExample())
-                NavigationLink("Ring Chart: Sales per Country", destination: RingChartAndDetailPieChartExample())
+                Section(header: HStack {
+                    Image(systemName: "waveform.path")
+                    Text("Line Charts")
+                }) {
+                    NavigationLink("Weight Lifting Volume per Workout", destination: BasicLineChartExample())
+                    NavigationLink("Workout Time", destination: CustomYAxisIntervalExampleLineChart())
+                }
+                
+                Section(header: HStack{
+                    Image(systemName: "chart.bar.fill")
+                    Text("Bar Charts")
+                }) {
+                    NavigationLink("Workout Volume", destination: BasicBarChartExample())
+                }
+                Section(header: HStack{
+                    Image(systemName: "chart.pie.fill")
+                    Text("Pie Charts")
+                }) {
+                    NavigationLink("Av. US Household Spending", destination: BasicPieChartExample())
+                    NavigationLink("Sales per Country", destination: RingChartAndDetailPieChartExample())
+                }
+                
+      
                 Spacer()
             }.navigationBarTitle("SwiftUIGraphs Examples", displayMode: .inline).padding()
             // add the first destination view in the list one more time as default for iPad in split view mode...

@@ -31,10 +31,6 @@ depends-member:
 - !private ["7SwiftUI12SceneBuilderV", "buildFinalResult"]
 - !private ["7SwiftUI12SceneBuilderV", "buildIf"]
 - !private ["7SwiftUI12SceneBuilderV", "buildOptional"]
-- !private ["7SwiftUI5StateV", "init"]
-- !private ["7SwiftUI5StateV", "projectedValue"]
-- !private ["7SwiftUI5StateV", "subscript"]
-- !private ["7SwiftUI5StateV", "wrappedValue"]
 - ["20SwiftUIGraphsExample0abC3AppV", "Body"]
 - !private ["20SwiftUIGraphsExample0abC3AppV", "ContentView"]
 - ["20SwiftUIGraphsExample0abC3AppV", "Default_Body"]
@@ -52,18 +48,15 @@ depends-member:
 - !private ["7SwiftUI11ViewBuilderV", "buildIf"]
 - !private ["7SwiftUI11ViewBuilderV", "buildOptional"]
 - !private ["7SwiftUI11WindowGroupV", "init"]
-- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
 depends-nominal:
 - "7SwiftUI3AppP"
 - !private "20SwiftUIGraphsExample11ContentViewV"
 - !private "7SwiftUI5SceneP"
 - !private "7SwiftUI12SceneBuilderV"
-- !private "7SwiftUI5StateV"
 - "20SwiftUIGraphsExample0abC3AppV"
 - !private "7SwiftUI4ViewP"
 - !private "7SwiftUI11ViewBuilderV"
 - !private "7SwiftUI11WindowGroupV"
-- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
 depends-dynamic-lookup:
 depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/ObjectiveC.swiftmodule/arm64-apple-ios.swiftmodule"
@@ -79,7 +72,7 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/Foundation.swiftmodule/arm64-apple-ios.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/CoreFoundation.swiftmodule/arm64-apple-ios.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/CoreGraphics.swiftmodule/arm64-apple-ios.swiftmodule"
-- "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/Build/Products/Debug-iphoneos/SwiftUIGraphs.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/Build/Products/Debug-iphoneos/SwiftUIGraphs.swiftmodule/arm64-apple-ios.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/os.swiftmodule/arm64-apple-ios.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/UniformTypeIdentifiers.swiftmodule/arm64-apple-ios.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/Swift.swiftmodule/arm64-apple-ios.swiftmodule"

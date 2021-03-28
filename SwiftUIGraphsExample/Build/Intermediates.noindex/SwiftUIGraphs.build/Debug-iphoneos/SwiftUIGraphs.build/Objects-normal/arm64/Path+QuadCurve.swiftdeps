@@ -29,7 +29,7 @@ depends-top-level:
 - !private "*"
 - !private "+"
 - "+="
-- "-"
+- !private "-"
 - !private "-="
 - !private "..<"
 - !private "/"

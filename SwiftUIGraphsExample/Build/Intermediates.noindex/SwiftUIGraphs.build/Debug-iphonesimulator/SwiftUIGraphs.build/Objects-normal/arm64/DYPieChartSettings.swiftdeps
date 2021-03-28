@@ -9,27 +9,44 @@ provides-dynamic-lookup:
 depends-top-level:
 - "AssignmentPrecedence"
 - "CGFloat"
+- "Color"
 - "DYPieChartSettings"
 - "Double"
 - "FloatLiteralType"
 - "IntegerLiteralType"
 depends-member:
+- !private ["7SwiftUI5ColorV", "primary"]
+- !private ["s23CustomStringConvertibleP", "primary"]
 - ["13SwiftUIGraphs18DYPieChartSettingsV", "CGFloat"]
+- ["13SwiftUIGraphs18DYPieChartSettingsV", "Color"]
 - ["13SwiftUIGraphs18DYPieChartSettingsV", "Double"]
 - ["13SwiftUIGraphs18DYPieChartSettingsV", "init"]
 - ["13SwiftUIGraphs18DYPieChartSettingsV", "innerCircleRadiusFraction"]
 - ["13SwiftUIGraphs18DYPieChartSettingsV", "minimumFractionForSliceLabelOffset"]
 - ["13SwiftUIGraphs18DYPieChartSettingsV", "selectedSliceScaleEffect"]
+- ["13SwiftUIGraphs18DYPieChartSettingsV", "sliceOutlineColor"]
+- ["13SwiftUIGraphs18DYPieChartSettingsV", "sliceOutlineWidth"]
+- !private ["SQ", ""]
+- !private ["SQ", "primary"]
 - ["s25ExpressibleByFloatLiteralP", "FloatLiteralType"]
 - ["s25ExpressibleByFloatLiteralP", "init"]
 - ["s27ExpressibleByIntegerLiteralP", "IntegerLiteralType"]
 - ["s27ExpressibleByIntegerLiteralP", "init"]
+- !private ["SH", "primary"]
+- !private ["7SwiftUI10ShapeStyleP", "primary"]
+- !private ["7SwiftUI4ViewP", "primary"]
 - ["s33_ExpressibleByBuiltinFloatLiteralP", "init"]
 - ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
 depends-nominal:
+- !private "7SwiftUI5ColorV"
+- !private "s23CustomStringConvertibleP"
 - "13SwiftUIGraphs18DYPieChartSettingsV"
+- !private "SQ"
 - "s25ExpressibleByFloatLiteralP"
 - "s27ExpressibleByIntegerLiteralP"
+- !private "SH"
+- !private "7SwiftUI10ShapeStyleP"
+- !private "7SwiftUI4ViewP"
 - "s33_ExpressibleByBuiltinFloatLiteralP"
 - "s35_ExpressibleByBuiltinIntegerLiteralP"
 depends-dynamic-lookup:
@@ -74,4 +91,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "f4be70bbcea88e099b6a098f14799712"
+interface-hash: "3466e438a33cafdc592cb0e5d34441a1"

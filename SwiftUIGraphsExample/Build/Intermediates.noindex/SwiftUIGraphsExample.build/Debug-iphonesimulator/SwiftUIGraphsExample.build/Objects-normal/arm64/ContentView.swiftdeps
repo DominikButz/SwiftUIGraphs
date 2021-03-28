@@ -16,13 +16,17 @@ depends-top-level:
 - "ContentView"
 - "ContentView_Previews"
 - "CustomYAxisIntervalExampleLineChart"
+- "HStack"
+- "Image"
 - "List"
 - "NavigationLink"
 - !private "NavigationView"
 - "PreviewProvider"
 - "RingChartAndDetailPieChartExample"
+- "Section"
 - "Spacer"
 - !private "StringLiteralType"
+- "Text"
 - "View"
 depends-member:
 - ["7SwiftUI10AnimatableP", ""]
@@ -45,11 +49,15 @@ depends-member:
 - ["20SwiftUIGraphsExample11ContentViewV", "Body"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "CustomYAxisIntervalExampleLineChart"]
 - ["20SwiftUIGraphsExample11ContentViewV", "Default_Body"]
+- !private ["20SwiftUIGraphsExample11ContentViewV", "HStack"]
+- !private ["20SwiftUIGraphsExample11ContentViewV", "Image"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "List"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "NavigationLink"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "NavigationView"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "RingChartAndDetailPieChartExample"]
+- !private ["20SwiftUIGraphsExample11ContentViewV", "Section"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "Spacer"]
+- !private ["20SwiftUIGraphsExample11ContentViewV", "Text"]
 - ["20SwiftUIGraphsExample11ContentViewV", "View"]
 - ["20SwiftUIGraphsExample11ContentViewV", ""]
 - ["20SwiftUIGraphsExample11ContentViewV", "_Default_Body"]
@@ -74,6 +82,7 @@ depends-member:
 - !private ["20SwiftUIGraphsExample019CustomYAxisIntervalC9LineChartV", ""]
 - !private ["20SwiftUIGraphsExample019CustomYAxisIntervalC9LineChartV", "init"]
 - ["SQ", ""]
+- !private ["SQ", "init"]
 - !private ["SQ", "inline"]
 - !private ["SQ", "light"]
 - ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
@@ -82,9 +91,11 @@ depends-member:
 - ["s26ExpressibleByStringLiteralP", ""]
 - !private ["s26ExpressibleByStringLiteralP", "init"]
 - ["s33ExpressibleByUnicodeScalarLiteralP", ""]
+- !private ["7SwiftUI6HStackV", "init"]
 - ["SH", ""]
 - !private ["SH", "inline"]
 - !private ["SH", "light"]
+- !private ["7SwiftUI5ImageV", "init"]
 - !private ["7SwiftUI4ListV", "init"]
 - !private ["7SwiftUI4ListV", "navigationBarTitle"]
 - ["s25LosslessStringConvertibleP", ""]
@@ -107,6 +118,7 @@ depends-member:
 - ["7SwiftUI15PreviewProviderP", "previews"]
 - !private ["20SwiftUIGraphsExample021RingChartAndDetailPieeC0V", ""]
 - !private ["20SwiftUIGraphsExample021RingChartAndDetailPieeC0V", "init"]
+- !private ["7SwiftUI7SectionV", "init"]
 - ["ST", ""]
 - !private ["7SwiftUI6SpacerV", "init"]
 - !private ["7SwiftUI5StateV", "init"]
@@ -117,6 +129,7 @@ depends-member:
 - !private ["7SwiftUI11StateObjectV", "projectedValue"]
 - !private ["7SwiftUI11StateObjectV", "subscript"]
 - !private ["7SwiftUI11StateObjectV", "wrappedValue"]
+- !private ["7SwiftUI4TextV", "init"]
 - ["s16TextOutputStreamP", ""]
 - ["s20TextOutputStreamableP", ""]
 - !private ["7SwiftUI17NavigationBarItemV16TitleDisplayModeO", "inline"]
@@ -126,11 +139,15 @@ depends-member:
 - ["7SwiftUI4ViewP", "Body"]
 - !private ["7SwiftUI4ViewP", "CustomYAxisIntervalExampleLineChart"]
 - ["7SwiftUI4ViewP", "Default_Body"]
+- !private ["7SwiftUI4ViewP", "HStack"]
+- !private ["7SwiftUI4ViewP", "Image"]
 - !private ["7SwiftUI4ViewP", "List"]
 - !private ["7SwiftUI4ViewP", "NavigationLink"]
 - !private ["7SwiftUI4ViewP", "NavigationView"]
 - !private ["7SwiftUI4ViewP", "RingChartAndDetailPieChartExample"]
+- !private ["7SwiftUI4ViewP", "Section"]
 - !private ["7SwiftUI4ViewP", "Spacer"]
+- !private ["7SwiftUI4ViewP", "Text"]
 - ["7SwiftUI4ViewP", ""]
 - ["7SwiftUI4ViewP", "_Default_Body"]
 - ["7SwiftUI4ViewP", "_makeView"]
@@ -180,7 +197,9 @@ depends-nominal:
 - "s32ExpressibleByStringInterpolationP"
 - "s26ExpressibleByStringLiteralP"
 - "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "7SwiftUI6HStackV"
 - "SH"
+- !private "7SwiftUI5ImageV"
 - !private "7SwiftUI4ListV"
 - "s25LosslessStringConvertibleP"
 - "So8NSCodingP"
@@ -189,10 +208,12 @@ depends-nominal:
 - !private "7SwiftUI14NavigationViewV"
 - "7SwiftUI15PreviewProviderP"
 - !private "20SwiftUIGraphsExample021RingChartAndDetailPieeC0V"
+- !private "7SwiftUI7SectionV"
 - "ST"
 - !private "7SwiftUI6SpacerV"
 - !private "7SwiftUI5StateV"
 - !private "7SwiftUI11StateObjectV"
+- !private "7SwiftUI4TextV"
 - "s16TextOutputStreamP"
 - "s20TextOutputStreamableP"
 - !private "7SwiftUI17NavigationBarItemV16TitleDisplayModeO"

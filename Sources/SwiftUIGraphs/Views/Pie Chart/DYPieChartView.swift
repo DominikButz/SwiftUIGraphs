@@ -22,13 +22,14 @@ public struct DYPieChartView<L: View>: View {
     var animationNamespace: Namespace.ID
     var settings: DYPieChartSettings
     
-    
     /// DYPieChartView initializer
     /// - Parameters:
     ///   - data: Array of DYChartFraction structs. The fraction values will not be reordered, so the slices will be arranged exactly in the order of the DYChartFraction structs in the array - starting at 12 o'clock, in clockwise direction.
     ///   - selectedId: The id of the DYChartFraction that is currently selected. Can be nil.
     ///   - sliceLabelView: The view that should be displayed on top of each pie chart slice. If the fraction of a given slice is smaller than the visibility threshold defined in the DYPieChartSettings, the label view will not be shown. Return an EmptyView if no label should be displayed.
-    ///   - settings: DYPieChartSettings
+    ///   - shouldHideMultiFractionSliceOnSelection: This Bool determines whether or not a slice should be hidden on selection in case the DYChartFraction struct of the slice has at least two elements in the detailFractions array. Setting this value to true only makes sense if another DYPieChartView or other view (visualizing the detailFractions) is shown once the slice disappears. Default is false.
+    ///   - animationNamespace: set the @Namespace property in the parent view of your main DYPieChartView and pass it into this initializer. This only has an effect in conjunction with a matchedGeometryEffect property set on a second DYPieChartView - see the property shouldHideMultiFractionSliceOnSelection.
+    ///  - settings: settings struct. if you don't set this parameter, all values set will be the default values - see DYPieChartSettings for details.
     public init(data: [DYChartFraction], selectedId: Binding<String?>, sliceLabelView: @escaping (DYChartFraction)->L, shouldHideMultiFractionSliceOnSelection: Bool = false, animationNamespace: Namespace.ID, settings: DYPieChartSettings = DYPieChartSettings()) {
         self.data  = data
         self._selectedId = selectedId
@@ -46,7 +47,7 @@ public struct DYPieChartView<L: View>: View {
                     
                     if self.showSliceCondition(fraction: fraction) {
                         PieChartSlice(startAngle: self.startAngleFor(fraction: fraction) , endAngle: self.endAngleFor(fraction: fraction))
-                            .foregroundColor(fraction.color)
+                            .fill(fraction.color, opacity: 1, strokeWidth: settings.sliceOutlineWidth, strokeColor: settings.sliceOutlineColor)
                             .scaleEffect(self.selectedId == fraction.id ? settings.selectedSliceScaleEffect : 1, anchor: .center)
                             .shadow(radius: self.selectedId == fraction.id ? 5 : 0)
                             .matchedGeometryEffect(id: fraction.id, in: animationNamespace)
@@ -141,13 +142,25 @@ public struct DYPieChartView<L: View>: View {
     private func labelOffsetFor(fraction: DYChartFraction, diameter: CGFloat)->CGSize {
         let midAngle = self.midAngleFor(fraction: fraction)
         let fractionPercentage = fraction.value / self.totalValue
-        let offsetFactor = fractionPercentage >= self.settings.minimumFractionForSliceLabelOffset ? 0.5 : 1.2
+        let offsetFactor = fractionPercentage >= self.settings.minimumFractionForSliceLabelOffset ? 0.6 : 1.3
         let x = offsetFactor * Double(diameter / 2 ) * cos(midAngle.degrees * Double.pi / 180) / (1 -  (Double(settings.innerCircleRadiusFraction) / 2))
         let y = offsetFactor * Double(diameter / 2) * sin(midAngle.degrees * Double.pi / 180) / (1 -  (Double(settings.innerCircleRadiusFraction) / 2))
         
         return CGSize(width: x, height: y)
     }
+    
 
+
+}
+
+// combine fill color
+extension Shape {
+    func fill<S:ShapeStyle>(_ fillContent: S, opacity: Double, strokeWidth: CGFloat, strokeColor: S) -> some View {
+            ZStack {
+                self.fill(fillContent).opacity(opacity)
+                self.stroke(strokeColor, lineWidth: strokeWidth)
+            }
+    }
 }
 
 

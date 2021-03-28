@@ -22,7 +22,6 @@ struct BasicPieChartExample: View {
                     if proxy.size.height > proxy.size.width {
                         // portrait
                         VStack {
-                  
                             self.content()
                         }
                     } else {
@@ -35,8 +34,7 @@ struct BasicPieChartExample: View {
                     if self.viewModel.selectedId != nil {
                         DYFractionChartInfoView(title: "", data: viewModel.data, selectedId: $viewModel.selectedId) { (value) -> String in
                                 DYChartFraction.exampleFormatter(value: value)
-                            
-                        }.padding(5).infoBoxBackground().padding(10)
+                        }.padding(5).infoBoxBackground().padding(UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10)
                     }
                 }
             }
@@ -46,7 +44,7 @@ struct BasicPieChartExample: View {
     func content()->some View {
         Group {
             
-            Spacer(minLength: 100)
+            Spacer(minLength: 50)
             
             DYPieChartView(data: viewModel.data, selectedId: $viewModel.selectedId, sliceLabelView: {fraction in
                 self.sliceLabelView(fraction: fraction, data: viewModel.data)
@@ -94,7 +92,7 @@ final class BasicPieChartViewModel: ObservableObject {
 extension View {
     
     func infoBoxBackground()->some View {
-        self.background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(LinearGradient(gradient: Gradient(colors: [Color(.systemGray), Color(.systemGray4)]), startPoint: .topLeading, endPoint: .bottomTrailing)).shadow(radius: 5))
+        self.background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(LinearGradient(gradient: Gradient(colors: [Color(.systemGray), Color(.systemGray4)]), startPoint: .topLeading, endPoint: .bottomTrailing)).shadow(radius: 5))
     }
 }
 

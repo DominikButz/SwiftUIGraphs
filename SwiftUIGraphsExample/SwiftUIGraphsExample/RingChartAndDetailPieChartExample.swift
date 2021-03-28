@@ -41,7 +41,7 @@ struct RingChartAndDetailPieChartExample: View {
     func mainPieChart(isPortrait: Bool)->some View {
         VStack(spacing: 10) {
             DYPieChartView(data: chartModel.data, selectedId: $chartModel.selectedId, sliceLabelView: { (fraction)  in
-                self.sliceLabelContentView(fraction: fraction, data:self.chartModel.data)
+                self.sliceLabelContentView(fraction: fraction, data:self.chartModel.data, textColor: .white)
             }, shouldHideMultiFractionSliceOnSelection: true, animationNamespace: animationNamespace, settings: DYPieChartSettings(innerCircleRadiusFraction: 0.3))
             .background(Circle().fill(Color(.systemBackground)).shadow(color: detailChartVisibleCondition ? .clear : .gray, radius:5))
             .rotationEffect(detailChartVisibleCondition ? Angle(degrees: isPortrait ? 45 : -40) : Angle(degrees: 0))
@@ -68,18 +68,18 @@ struct RingChartAndDetailPieChartExample: View {
     func detailChartSliceLabelView(fraction: DYChartFraction, data: [DYChartFraction])->some View {
         Group {
             if fraction.value / data.reduce(0, { $0 + $1.value}) >= 0.11 || self.detailChartSelectedId == fraction.id {
-                self.sliceLabelContentView(fraction: fraction, data:data)
+                self.sliceLabelContentView(fraction: fraction, data:data, textColor: fraction.value / data.reduce(0, { $0 + $1.value}) >= 0.11 ? .white : .primary)
             }
         }
     }
     
-    func sliceLabelContentView(fraction: DYChartFraction, data:[DYChartFraction])-> some View {
+    func sliceLabelContentView(fraction: DYChartFraction, data:[DYChartFraction], textColor: Color)-> some View {
         VStack {
             Text(fraction.title).font(sliceLabelViewFont).lineLimit(2).frame(maxWidth: 85)
             Text(String(format:"%.0f units", fraction.value)).font(sliceLabelViewFont).bold()
             Text(fraction.value.percentageString(totalValue: data.reduce(0) { $0 + $1.value})).font(sliceLabelViewFont)
             
-        }
+        }.foregroundColor(textColor)
     }
     
     var sliceLabelViewFont: Font {

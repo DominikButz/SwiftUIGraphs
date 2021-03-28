@@ -1,12 +1,12 @@
 version: "Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)"
 options: "f344c62e4759a2890e153f1a08278faa"
-build_time: [1616750068, 134266000]
+build_time: [1616917090, 879922000]
 inputs:
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/ContentView.swift": [1616728924, 352034025]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/ContentView.swift": [1616839170, 683155952]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/SwiftUIGraphsExampleApp.swift": [1612235304, 724649989]
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/BasicPieChartExample.swift": [1616748095, 899861124]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/BasicPieChartExample.swift": [1616915903, 601549504]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/BasicLineChartExample.swift": [1616725500, 701984561]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/OverlayView.swift": [1616405259, 407838444]
   "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/CustomYAxisIntervalExampleLineChart.swift": [1616725604, 165203197]
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/RingChartAndDetailPieChartExample.swift": [1616749355, 193979639]
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/BasicBarChartExample.swift": [1616725639, 417202344]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/RingChartAndDetailPieChartExample.swift": [1616815726, 452691022]
+  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/SwiftUIGraphsExample/SwiftUIGraphsExample/BasicBarChartExample.swift": [1616917090, 809912237]

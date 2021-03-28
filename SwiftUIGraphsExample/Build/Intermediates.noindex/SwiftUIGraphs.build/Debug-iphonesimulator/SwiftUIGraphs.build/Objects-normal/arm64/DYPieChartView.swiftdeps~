@@ -9,8 +9,10 @@ provides-nominal:
 - "13SwiftUIGraphs23DYPieChartView_PreviewsV"
 provides-member:
 - ["13SwiftUIGraphs14DYPieChartViewV", ""]
+- ["7SwiftUI5ShapeP", ""]
 - ["13SwiftUIGraphs13PieChartSliceV", ""]
 - ["13SwiftUIGraphs23DYPieChartView_PreviewsV", ""]
+- ["7SwiftUI5ShapeP", "fill"]
 provides-dynamic-lookup:
 depends-top-level:
 - "!="
@@ -49,6 +51,7 @@ depends-top-level:
 - "PreviewProvider"
 - !private "Self"
 - "Shape"
+- "ShapeStyle"
 - "String"
 - "TernaryPrecedence"
 - "Text"
@@ -76,10 +79,15 @@ depends-member:
 - !private ["7SwiftUI5AngleV", "init"]
 - ["7SwiftUI10AnimatableP", "AnimatableData"]
 - ["7SwiftUI10AnimatableP", "Body"]
+- ["7SwiftUI10AnimatableP", "CGFloat"]
 - !private ["7SwiftUI10AnimatableP", "CGPoint"]
 - ["7SwiftUI10AnimatableP", "Default_AnimatableData"]
 - ["7SwiftUI10AnimatableP", "Default_Body"]
+- ["7SwiftUI10AnimatableP", "Double"]
 - !private ["7SwiftUI10AnimatableP", "Path"]
+- ["7SwiftUI10AnimatableP", "ShapeStyle"]
+- ["7SwiftUI10AnimatableP", "View"]
+- !private ["7SwiftUI10AnimatableP", "ZStack"]
 - ["7SwiftUI10AnimatableP", ""]
 - ["7SwiftUI10AnimatableP", "_Default_AnimatableData"]
 - ["7SwiftUI10AnimatableP", "_Default_Body"]
@@ -94,7 +102,7 @@ depends-member:
 - !private ["7SwiftUI10AnimatableP", "center"]
 - !private ["7SwiftUI10AnimatableP", "degrees"]
 - !private ["7SwiftUI10AnimatableP", "endAngle"]
-- !private ["7SwiftUI10AnimatableP", "foregroundColor"]
+- !private ["7SwiftUI10AnimatableP", "fill"]
 - !private ["7SwiftUI10AnimatableP", "height"]
 - !private ["7SwiftUI10AnimatableP", "init"]
 - !private ["7SwiftUI10AnimatableP", "min"]
@@ -222,6 +230,8 @@ depends-member:
 - !private ["13SwiftUIGraphs18DYPieChartSettingsV", "innerCircleRadiusFraction"]
 - !private ["13SwiftUIGraphs18DYPieChartSettingsV", "minimumFractionForSliceLabelOffset"]
 - !private ["13SwiftUIGraphs18DYPieChartSettingsV", "selectedSliceScaleEffect"]
+- !private ["13SwiftUIGraphs18DYPieChartSettingsV", "sliceOutlineColor"]
+- !private ["13SwiftUIGraphs18DYPieChartSettingsV", "sliceOutlineWidth"]
 - !private ["13SwiftUIGraphs14DYPieChartViewV", "$selectedId"]
 - ["13SwiftUIGraphs14DYPieChartViewV", "Angle"]
 - ["13SwiftUIGraphs14DYPieChartViewV", "Binding"]
@@ -478,7 +488,7 @@ depends-member:
 - ["13SwiftUIGraphs13PieChartSliceV", "animatableData"]
 - ["13SwiftUIGraphs13PieChartSliceV", "body"]
 - ["13SwiftUIGraphs13PieChartSliceV", "endAngle"]
-- !private ["13SwiftUIGraphs13PieChartSliceV", "foregroundColor"]
+- !private ["13SwiftUIGraphs13PieChartSliceV", "fill"]
 - ["13SwiftUIGraphs13PieChartSliceV", "init"]
 - !private ["13SwiftUIGraphs13PieChartSliceV", "min"]
 - ["13SwiftUIGraphs13PieChartSliceV", "path"]
@@ -519,10 +529,15 @@ depends-member:
 - !private ["ST", "subscript"]
 - ["7SwiftUI5ShapeP", "AnimatableData"]
 - ["7SwiftUI5ShapeP", "Body"]
+- ["7SwiftUI5ShapeP", "CGFloat"]
 - !private ["7SwiftUI5ShapeP", "CGPoint"]
 - ["7SwiftUI5ShapeP", "Default_AnimatableData"]
 - ["7SwiftUI5ShapeP", "Default_Body"]
+- ["7SwiftUI5ShapeP", "Double"]
 - !private ["7SwiftUI5ShapeP", "Path"]
+- ["7SwiftUI5ShapeP", "ShapeStyle"]
+- ["7SwiftUI5ShapeP", "View"]
+- !private ["7SwiftUI5ShapeP", "ZStack"]
 - ["7SwiftUI5ShapeP", ""]
 - ["7SwiftUI5ShapeP", "_Default_AnimatableData"]
 - ["7SwiftUI5ShapeP", "_Default_Body"]
@@ -535,7 +550,7 @@ depends-member:
 - ["7SwiftUI5ShapeP", "animatableData"]
 - ["7SwiftUI5ShapeP", "body"]
 - !private ["7SwiftUI5ShapeP", "endAngle"]
-- !private ["7SwiftUI5ShapeP", "foregroundColor"]
+- ["7SwiftUI5ShapeP", "fill"]
 - !private ["7SwiftUI5ShapeP", "init"]
 - !private ["7SwiftUI5ShapeP", "min"]
 - ["7SwiftUI5ShapeP", "path"]
@@ -571,6 +586,7 @@ depends-member:
 - ["7SwiftUI4ViewP", "AnimatableData"]
 - ["7SwiftUI4ViewP", "Binding"]
 - ["7SwiftUI4ViewP", "Body"]
+- ["7SwiftUI4ViewP", "CGFloat"]
 - !private ["7SwiftUI4ViewP", "CGPoint"]
 - !private ["7SwiftUI4ViewP", "CGSize"]
 - !private ["7SwiftUI4ViewP", "Circle"]
@@ -578,11 +594,13 @@ depends-member:
 - !private ["7SwiftUI4ViewP", "DYPieChartSettings"]
 - ["7SwiftUI4ViewP", "Default_AnimatableData"]
 - ["7SwiftUI4ViewP", "Default_Body"]
-- !private ["7SwiftUI4ViewP", "Double"]
+- ["7SwiftUI4ViewP", "Double"]
 - !private ["7SwiftUI4ViewP", "ForEach"]
 - !private ["7SwiftUI4ViewP", "GeometryReader"]
 - !private ["7SwiftUI4ViewP", "Path"]
 - !private ["7SwiftUI4ViewP", "PieChartSlice"]
+- ["7SwiftUI4ViewP", "ShapeStyle"]
+- ["7SwiftUI4ViewP", "View"]
 - !private ["7SwiftUI4ViewP", "ZStack"]
 - ["7SwiftUI4ViewP", ""]
 - ["7SwiftUI4ViewP", "_Default_AnimatableData"]
@@ -607,8 +625,8 @@ depends-member:
 - !private ["7SwiftUI4ViewP", "default"]
 - !private ["7SwiftUI4ViewP", "endAngle"]
 - !private ["7SwiftUI4ViewP", "endAngleFor"]
+- !private ["7SwiftUI4ViewP", "fill"]
 - !private ["7SwiftUI4ViewP", "font"]
-- !private ["7SwiftUI4ViewP", "foregroundColor"]
 - !private ["7SwiftUI4ViewP", "init"]
 - !private ["7SwiftUI4ViewP", "labelOffsetFor"]
 - !private ["7SwiftUI4ViewP", "mask"]
@@ -618,6 +636,7 @@ depends-member:
 - !private ["7SwiftUI4ViewP", "none"]
 - !private ["7SwiftUI4ViewP", "offset"]
 - !private ["7SwiftUI4ViewP", "onTapGesture"]
+- !private ["7SwiftUI4ViewP", "opacity"]
 - !private ["7SwiftUI4ViewP", "padding"]
 - ["7SwiftUI4ViewP", "path"]
 - !private ["7SwiftUI4ViewP", "scaleEffect"]
@@ -858,4 +877,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "639ad9a0d8d143f3fef16fb1692fb537"
+interface-hash: "8241cb7f9a345b90414bc84797509d48"
