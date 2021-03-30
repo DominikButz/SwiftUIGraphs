@@ -14,28 +14,33 @@ depends-top-level:
 - "*"
 - "+"
 - "<"
+- !private "=="
 - ">"
 - "BasicLineChartExample"
 - "BasicLineChartExample_Previews"
 - !private "BooleanLiteralType"
+- "CGFloat"
 - !private "DYDataPoint"
 - "DYGridChartHeaderView"
 - "DYLineChartSettings"
 - "DYLineChartView"
+- "DYLineChartXAxisSettings"
 - "Date"
 - "FloatLiteralType"
 - !private "GeometryReader"
 - "Int"
 - "IntegerLiteralType"
-- "LineChartXAxisSettings"
 - "PreviewProvider"
 - "Spacer"
 - "State"
 - "String"
 - !private "StringLiteralType"
-- !private "TernaryPrecedence"
+- "TernaryPrecedence"
+- !private "UIDevice"
 - "VStack"
 - "View"
+- "YAxisSettings"
+- "fontSize"
 depends-member:
 - !private ["s18AdditiveArithmeticP", ""]
 - !private ["s18AdditiveArithmeticP", "toDecimalString"]
@@ -44,20 +49,23 @@ depends-member:
 - !private ["7SwiftUI10AnimatableP", "width"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "$selectedDataIndex"]
 - ["20SwiftUIGraphsExample014BasicLineChartC0V", "Body"]
+- ["20SwiftUIGraphsExample014BasicLineChartC0V", "CGFloat"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "DYDataPoint"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "DYGridChartHeaderView"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "DYLineChartSettings"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "DYLineChartView"]
+- !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "DYLineChartXAxisSettings"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "Date"]
 - ["20SwiftUIGraphsExample014BasicLineChartC0V", "Default_Body"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "GeometryReader"]
 - ["20SwiftUIGraphsExample014BasicLineChartC0V", "Int"]
-- !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "LineChartXAxisSettings"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "Spacer"]
 - ["20SwiftUIGraphsExample014BasicLineChartC0V", "State"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "String"]
+- !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "UIDevice"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "VStack"]
 - ["20SwiftUIGraphsExample014BasicLineChartC0V", "View"]
+- !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "YAxisSettings"]
 - ["20SwiftUIGraphsExample014BasicLineChartC0V", ""]
 - ["20SwiftUIGraphsExample014BasicLineChartC0V", "_Default_Body"]
 - ["20SwiftUIGraphsExample014BasicLineChartC0V", "_makeView"]
@@ -65,6 +73,7 @@ depends-member:
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "_selectedDataIndex"]
 - ["20SwiftUIGraphsExample014BasicLineChartC0V", "_viewListCount"]
 - ["20SwiftUIGraphsExample014BasicLineChartC0V", "body"]
+- ["20SwiftUIGraphsExample014BasicLineChartC0V", "fontSize"]
 - ["20SwiftUIGraphsExample014BasicLineChartC0V", "init"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "selectedDataIndex"]
 - !private ["20SwiftUIGraphsExample014BasicLineChartC9_PreviewsV", "BasicLineChartExample"]
@@ -86,7 +95,9 @@ depends-member:
 - !private ["8CloudKit21CKRecordValueProtocolP", "toDecimalString"]
 - !private ["8CloudKit21CKRecordValueProtocolP", "toString"]
 - !private ["s7CVarArgP", ""]
+- !private ["s7CVarArgP", "current"]
 - !private ["s7CVarArgP", "toDecimalString"]
+- !private ["s7CVarArgP", "userInterfaceIdiom"]
 - ["Sl", ""]
 - !private ["SL", "<"]
 - !private ["SL", "<="]
@@ -97,10 +108,12 @@ depends-member:
 - !private ["SL", "toDecimalString"]
 - !private ["SL", "toString"]
 - !private ["s28CustomDebugStringConvertibleP", ""]
+- !private ["s28CustomDebugStringConvertibleP", "current"]
 - !private ["s28CustomDebugStringConvertibleP", "height"]
 - !private ["s28CustomDebugStringConvertibleP", "init"]
 - !private ["s28CustomDebugStringConvertibleP", "toDecimalString"]
 - !private ["s28CustomDebugStringConvertibleP", "toString"]
+- !private ["s28CustomDebugStringConvertibleP", "userInterfaceIdiom"]
 - !private ["s28CustomDebugStringConvertibleP", "width"]
 - !private ["s17CustomReflectableP", "height"]
 - !private ["s17CustomReflectableP", "init"]
@@ -108,14 +121,18 @@ depends-member:
 - !private ["s17CustomReflectableP", "toString"]
 - !private ["s17CustomReflectableP", "width"]
 - ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "current"]
 - !private ["s23CustomStringConvertibleP", "init"]
 - !private ["s23CustomStringConvertibleP", "toDecimalString"]
 - !private ["s23CustomStringConvertibleP", "toString"]
+- !private ["s23CustomStringConvertibleP", "userInterfaceIdiom"]
 - !private ["13SwiftUIGraphs11DYDataPointV", "exampleData1"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "init"]
 - !private ["13SwiftUIGraphs21DYGridChartHeaderViewV", "init"]
 - !private ["13SwiftUIGraphs19DYGridChartSettingsP", "init"]
 - !private ["13SwiftUIGraphs19DYLineChartSettingsV", "init"]
 - !private ["13SwiftUIGraphs15DYLineChartViewV", "init"]
+- !private ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "init"]
 - !private ["10Foundation4DateV", "init"]
 - !private ["10Foundation4DateV", "toString"]
 - !private ["Se", "height"]
@@ -131,11 +148,16 @@ depends-member:
 - !private ["SE", "toDecimalString"]
 - !private ["SE", "toString"]
 - !private ["SE", "width"]
+- !private ["SQ", "=="]
+- !private ["SQ", "RawValue"]
 - ["SQ", ""]
+- !private ["SQ", "current"]
 - !private ["SQ", "height"]
 - !private ["SQ", "init"]
+- !private ["SQ", "phone"]
 - !private ["SQ", "toDecimalString"]
 - !private ["SQ", "toString"]
+- !private ["SQ", "userInterfaceIdiom"]
 - !private ["SQ", "width"]
 - ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
 - !private ["s25ExpressibleByFloatLiteralP", "FloatLiteralType"]
@@ -160,17 +182,25 @@ depends-member:
 - !private ["7SwiftUI13GeometryProxyV", "size"]
 - !private ["7SwiftUI14GeometryReaderV", "init"]
 - !private ["7SwiftUI14GeometryReaderV", "navigationTitle"]
-- !private ["13SwiftUIGraphs9GridChartP", "init"]
+- !private ["SH", "=="]
+- !private ["SH", "RawValue"]
 - ["SH", ""]
+- !private ["SH", "current"]
 - !private ["SH", "init"]
+- !private ["SH", "phone"]
 - !private ["SH", "toDecimalString"]
 - !private ["SH", "toString"]
+- !private ["SH", "userInterfaceIdiom"]
 - !private ["s12IdentifiableP", "exampleData1"]
-- !private ["13SwiftUIGraphs22LineChartXAxisSettingsV", "init"]
 - ["s25LosslessStringConvertibleP", ""]
 - !private ["s25LosslessStringConvertibleP", "toDecimalString"]
 - ["So8NSCodingP", ""]
+- ["So8NSObjectC", ""]
+- !private ["So8NSObjectC", "current"]
+- !private ["So8NSObjectC", "userInterfaceIdiom"]
 - ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "current"]
+- !private ["So8NSObjectP", "userInterfaceIdiom"]
 - !private ["Sj", ""]
 - !private ["Sj", "toDecimalString"]
 - !private ["7SwiftUI15PreviewProviderP", "BasicLineChartExample"]
@@ -182,6 +212,9 @@ depends-member:
 - ["7SwiftUI15PreviewProviderP", "_previews"]
 - ["7SwiftUI15PreviewProviderP", "platform"]
 - ["7SwiftUI15PreviewProviderP", "previews"]
+- !private ["SY", "=="]
+- !private ["SY", "RawValue"]
+- !private ["SY", "phone"]
 - !private ["10Foundation20ReferenceConvertibleP", "init"]
 - !private ["10Foundation20ReferenceConvertibleP", "toString"]
 - !private ["s10SIMDScalarP", "toDecimalString"]
@@ -198,6 +231,12 @@ depends-member:
 - ["s16TextOutputStreamP", ""]
 - ["s20TextOutputStreamableP", ""]
 - !private ["s20TextOutputStreamableP", "toDecimalString"]
+- !private ["So8UIDeviceC", "current"]
+- !private ["So8UIDeviceC", "userInterfaceIdiom"]
+- !private ["So18UIFocusEnvironmentP", ""]
+- !private ["So20UIUserInterfaceIdiomV", "=="]
+- !private ["So20UIUserInterfaceIdiomV", "RawValue"]
+- !private ["So20UIUserInterfaceIdiomV", "phone"]
 - !private ["7SwiftUI6VStackV", "init"]
 - !private ["7SwiftUI6VStackV", "padding"]
 - !private ["7SwiftUI16VectorArithmeticP", "toDecimalString"]
@@ -207,19 +246,22 @@ depends-member:
 - !private ["7SwiftUI4ViewP", "DYGridChartHeaderView"]
 - !private ["7SwiftUI4ViewP", "DYLineChartSettings"]
 - !private ["7SwiftUI4ViewP", "DYLineChartView"]
+- !private ["7SwiftUI4ViewP", "DYLineChartXAxisSettings"]
 - !private ["7SwiftUI4ViewP", "Date"]
 - ["7SwiftUI4ViewP", "Default_Body"]
 - !private ["7SwiftUI4ViewP", "GeometryReader"]
-- !private ["7SwiftUI4ViewP", "LineChartXAxisSettings"]
 - !private ["7SwiftUI4ViewP", "Spacer"]
 - ["7SwiftUI4ViewP", "State"]
+- !private ["7SwiftUI4ViewP", "UIDevice"]
 - !private ["7SwiftUI4ViewP", "VStack"]
+- !private ["7SwiftUI4ViewP", "YAxisSettings"]
 - ["7SwiftUI4ViewP", ""]
 - ["7SwiftUI4ViewP", "_Default_Body"]
 - ["7SwiftUI4ViewP", "_makeView"]
 - ["7SwiftUI4ViewP", "_makeViewList"]
 - ["7SwiftUI4ViewP", "_viewListCount"]
 - ["7SwiftUI4ViewP", "body"]
+- !private ["7SwiftUI4ViewP", "fontSize"]
 - !private ["7SwiftUI4ViewP", "init"]
 - !private ["7SwiftUI4ViewP", "navigationTitle"]
 - !private ["7SwiftUI4ViewP", "padding"]
@@ -230,6 +272,7 @@ depends-member:
 - !private ["7SwiftUI11ViewBuilderV", "buildIf"]
 - !private ["7SwiftUI11ViewBuilderV", "buildOptional"]
 - !private ["13SwiftUIGraphs13XAxisSettingsP", "init"]
+- !private ["13SwiftUIGraphs13YAxisSettingsV", "init"]
 - !private ["s15_CVarArgAlignedP", "toDecimalString"]
 - !private ["s22_CVarArgPassedAsDoubleP", "toDecimalString"]
 - !private ["s30_CustomPlaygroundQuickLookableP", "height"]
@@ -247,6 +290,10 @@ depends-member:
 - ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
 - !private ["7SwiftUI18_FormatSpecifiableP", "toDecimalString"]
 - !private ["s35_HasCustomAnyHashableRepresentationP", "toDecimalString"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "current"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "userInterfaceIdiom"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "current"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "userInterfaceIdiom"]
 - !private ["s21_ObjectiveCBridgeableP", ""]
 - !private ["s21_ObjectiveCBridgeableP", "height"]
 - !private ["s21_ObjectiveCBridgeableP", "init"]
@@ -278,10 +325,12 @@ depends-nominal:
 - !private "s17CustomReflectableP"
 - "s23CustomStringConvertibleP"
 - !private "13SwiftUIGraphs11DYDataPointV"
+- !private "13SwiftUIGraphs11DYGridChartP"
 - !private "13SwiftUIGraphs21DYGridChartHeaderViewV"
 - !private "13SwiftUIGraphs19DYGridChartSettingsP"
 - !private "13SwiftUIGraphs19DYLineChartSettingsV"
 - !private "13SwiftUIGraphs15DYLineChartViewV"
+- !private "13SwiftUIGraphs24DYLineChartXAxisSettingsV"
 - !private "10Foundation4DateV"
 - !private "Se"
 - !private "Sd"
@@ -297,15 +346,15 @@ depends-nominal:
 - !private "SF"
 - !private "7SwiftUI13GeometryProxyV"
 - !private "7SwiftUI14GeometryReaderV"
-- !private "13SwiftUIGraphs9GridChartP"
 - "SH"
 - !private "s12IdentifiableP"
-- !private "13SwiftUIGraphs22LineChartXAxisSettingsV"
 - "s25LosslessStringConvertibleP"
 - "So8NSCodingP"
+- "So8NSObjectC"
 - "So8NSObjectP"
 - !private "Sj"
 - "7SwiftUI15PreviewProviderP"
+- !private "SY"
 - !private "10Foundation20ReferenceConvertibleP"
 - !private "s10SIMDScalarP"
 - "ST"
@@ -315,11 +364,15 @@ depends-nominal:
 - !private "Sx"
 - "s16TextOutputStreamP"
 - "s20TextOutputStreamableP"
+- !private "So8UIDeviceC"
+- !private "So18UIFocusEnvironmentP"
+- !private "So20UIUserInterfaceIdiomV"
 - !private "7SwiftUI6VStackV"
 - !private "7SwiftUI16VectorArithmeticP"
 - "7SwiftUI4ViewP"
 - !private "7SwiftUI11ViewBuilderV"
 - !private "13SwiftUIGraphs13XAxisSettingsP"
+- !private "13SwiftUIGraphs13YAxisSettingsV"
 - !private "s15_CVarArgAlignedP"
 - !private "s22_CVarArgPassedAsDoubleP"
 - !private "s30_CustomPlaygroundQuickLookableP"
@@ -331,6 +384,8 @@ depends-nominal:
 - "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
 - !private "7SwiftUI18_FormatSpecifiableP"
 - !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "10Foundation27_KeyValueCodingAndObservingP"
+- !private "10Foundation37_KeyValueCodingAndObservingPublishingP"
 - !private "s21_ObjectiveCBridgeableP"
 - "7SwiftUI16_PreviewProviderP"
 depends-dynamic-lookup:
@@ -376,4 +431,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "06f7ca50025abe20381a2e727d2e49da"
+interface-hash: "a3b66673f812a40839217111a006265e"

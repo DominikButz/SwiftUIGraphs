@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct DYBarChartView: View, GridChart {
+public struct DYBarChartView: View, DYGridChart {
     
     var dataPoints: [DYDataPoint]
     var yAxisScaler: YAxisScaler
@@ -27,6 +27,14 @@ public struct DYBarChartView: View, GridChart {
     @StateObject var orientationObserver: OrientationObserver = OrientationObserver()
     @Namespace var namespace
     
+    /// DYBarChartView initializer
+    /// - Parameters:
+    ///   - dataPoints: an array of DYDataPoints.
+    ///   - selectedIndex: index of the selected data point.
+    ///   - xValueConverter: Implement a logic in this closure that format the x-value as string.
+    ///   - yValueConverter:  Implement a logic in this closure  that format the y-value as string.
+    ///   - chartFrameHeight: the height of the chart (including x-axis, if applicable). If an the x-axis view is present, it is recommended to set this value, otherwise the height might be unpredictable.
+    ///   - settings: DYBarChart settings.
     public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, chartFrameHeight:CGFloat? = nil, settings: DYBarChartSettings = DYBarChartSettings()) {
         self._selectedIndex = selectedIndex
         self.xValueConverter = xValueConverter
@@ -80,11 +88,8 @@ public struct DYBarChartView: View, GridChart {
                     }
                 }
             } else {
-                HStack {
-                    //Spacer()
-                    Text("Not enough data!").padding()
-                    Spacer()
-                }
+                // placeholder grid in case not enough data is available
+                self.placeholderGrid(xAxisLineCount: 12, yAxisLineCount: 10).frame(height: self.chartFrameHeight).opacity(0.5).padding()
             }
         }
         

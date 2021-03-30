@@ -1,5 +1,0 @@
-version: "Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)"
-options: "dcaa95e1839a1846bc0e841cc04317b1"
-build_time: [1612250188, 126492000]
-inputs:
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphsExample/SwiftUIGraphsExampleUITests/SwiftUIGraphsExampleUITests.swift": [1612235305, 770038157]

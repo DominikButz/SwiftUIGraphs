@@ -7,12 +7,18 @@
 
 import SwiftUI
 
+/// DYFractionChartLegendView. A legend view showing all DYChartFractions colors and titles. can be used in conjunction with DYPieChartView or potentially other visualizations of fractions.
 public struct DYFractionChartLegendView: View {
  var data: [DYChartFraction]
     var verticalAlignment: Bool = true
     var font: Font
     var textColor: Color
     
+    /// DYFractionChartLegendView
+    /// - Parameters:
+    ///   - data: an array of DYChartFractions
+    ///   - font: the font of the titles.
+    ///   - textColor: title text color. 
     public init(data:  [DYChartFraction], font: Font, textColor: Color) {
         self.data = data
         self.font = font
@@ -50,7 +56,7 @@ public struct DYFractionChartLegendView: View {
     
    private func content(fraction: DYChartFraction)->some View {
         Group {
-            Circle().fill(fraction.color).frame(width: 20)
+            Circle().fill(fraction.color).frame(width: 20, height: 20)
             Text(fraction.title).font(self.font).foregroundColor(self.textColor)
         }
     }

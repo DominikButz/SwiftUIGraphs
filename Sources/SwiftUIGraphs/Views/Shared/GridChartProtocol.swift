@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  DYGridChart.swift
 //  
 //
 //  Created by Dominik Butz on 17/2/2021.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-protocol GridChart: View {
+protocol DYGridChart: View {
     
     var dataPoints: [DYDataPoint] {get set}
     var yAxisScaler: YAxisScaler {get set}
@@ -24,7 +24,7 @@ protocol GridChart: View {
 }
 
 
-extension GridChart {
+extension DYGridChart {
     
     func yAxisView(geo: GeometryProxy)-> some View {
 
@@ -81,8 +81,38 @@ extension GridChart {
         }
     }
     
+    // render placeholder grid with x vertical and x horizontal lines
+    func placeholderGrid(xAxisLineCount: Int, yAxisLineCount: Int)->some View {
+        ZStack {
+            VStack {
+                ForEach(0..<yAxisLineCount) { i in
+                    Line()
+                        .stroke(style: self.settings.yAxisSettings.yAxisLineStrokeStyle)
+                        .foregroundColor(.secondary)
+                        .frame(height:1)
+                    
+                    if i < yAxisLineCount - 1 {
+                        Spacer()
+                    }
+                }
+            }
+            HStack {
+                ForEach(0..<xAxisLineCount) { i in
+                    Line(horizontal: false)
+                        .stroke(style: self.settings.yAxisSettings.yAxisLineStrokeStyle)
+                        .foregroundColor(.secondary)
+                        .frame(width:1)
+                        if i < xAxisLineCount - 1 {
+                            Spacer()
+                        }
+                }
+            }
+            
+        }
+    }
+    
 
-    // helper funcs
+    //MARK:  helper funcs
 
     
      func yAxisMinMax()->(min: Double, max: Double){

@@ -11,6 +11,10 @@ public struct DYDataPoint: Identifiable {
     
     public let id:UUID = UUID()
     
+    /// DYDataPoint initializer
+    /// - Parameters:
+    ///   - xValue: the x-value of the data point.
+    ///   - yValue: the y-value of the data point.
     public init(xValue: Double, yValue: Double) {
         self.xValue = xValue
         self.yValue = yValue
@@ -19,7 +23,7 @@ public struct DYDataPoint: Identifiable {
     public var xValue: Double
     public var yValue: Double
     
-    // e.g. y-values are seconds
+    /// example data: e.g. y-values are seconds.
     public static var exampleData0: [DYDataPoint] {
         var dataPoints:[DYDataPoint] = []
         
@@ -35,11 +39,10 @@ public struct DYDataPoint: Identifiable {
             endDate = endDate.add(units: -randomDayDifference, component: .day)
         }
 
-       // print(dataPoints.map({$0.yValue}))
         return dataPoints
     }
     
-    // e.g. weight volume per exercise
+    /// e.g. weight volume per exercise
     public static var exampleData1: [DYDataPoint] {
         var dataPoints:[DYDataPoint] = []
         
@@ -53,8 +56,7 @@ public struct DYDataPoint: Identifiable {
             let randomDayDifference = Int.random(in: 1 ..< 8)
             endDate = endDate.add(units: -randomDayDifference, component: .day)
         }
-        
-      //  print(dataPoints.map({$0.yValue}))
+
         return dataPoints
     }
     

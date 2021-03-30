@@ -3,50 +3,487 @@ provides-top-level:
 provides-nominal:
 provides-member:
 - ["7SwiftUI5ColorV", ""]
+- ["So7UIColorC", ""]
+- ["SL", ""]
 - ["7SwiftUI5ColorV", "random"]
+- ["7SwiftUI5ColorV", "shadesOf"]
+- ["So7UIColorC", "lighter"]
+- ["So7UIColorC", "darker"]
+- ["So7UIColorC", "adjustBrightness"]
+- ["SL", "clamped"]
 provides-dynamic-lookup:
+- "adjustBrightness"
+- "darker"
+- "lighter"
 depends-top-level:
+- !private "*"
+- !private "+"
+- "-"
+- !private "..."
+- !private "..<"
+- !private "/"
+- !private "<"
+- !private ">"
+- "AssignmentPrecedence"
+- "Bool"
+- "BooleanLiteralType"
+- "CGFloat"
+- "ClosedRange"
 - "Color"
-- !private "FloatLiteralType"
+- "Comparable"
+- "FloatLiteralType"
+- "Int"
 - !private "IntegerLiteralType"
+- "Self"
+- "TernaryPrecedence"
+- "UIColor"
+- !private "abs"
 - !private "drand48"
 depends-member:
+- !private ["s18AdditiveArithmeticP", ""]
+- !private ["s18AdditiveArithmeticP", "clamped"]
+- !private ["s18AdditiveArithmeticP", "init"]
+- !private ["Sa", "append"]
+- !private ["SK", ""]
+- !private ["SK", "append"]
+- !private ["SK", "lowerBound"]
+- !private ["SK", "upperBound"]
+- !private ["SB", "binade"]
+- !private ["SB", "clamped"]
+- !private ["SB", "exponentBitCount"]
+- !private ["SB", "exponentBitPattern"]
+- !private ["SB", "init"]
+- !private ["SB", "isTotallyOrdered"]
+- !private ["SB", "radix"]
+- !private ["SB", "significandBitCount"]
+- !private ["SB", "significandBitPattern"]
+- !private ["SB", "significandWidth"]
+- !private ["12CoreGraphics7CGFloatV", "clamped"]
+- !private ["12CoreGraphics7CGFloatV", "init"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "append"]
+- !private ["s7CVarArgP", "UIColor"]
+- !private ["s7CVarArgP", ""]
+- !private ["s7CVarArgP", "abs"]
+- !private ["s7CVarArgP", "adjustBrightness"]
+- !private ["s7CVarArgP", "append"]
+- !private ["s7CVarArgP", "clamped"]
+- !private ["s7CVarArgP", "darker"]
+- !private ["s7CVarArgP", "getRed"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "lighter"]
+- !private ["SN", "lowerBound"]
+- !private ["SN", "upperBound"]
+- !private ["Sl", ""]
+- !private ["Sl", "append"]
+- !private ["Sl", "lowerBound"]
+- !private ["Sl", "upperBound"]
+- ["7SwiftUI5ColorV", "Bool"]
+- !private ["7SwiftUI5ColorV", "CGFloat"]
 - ["7SwiftUI5ColorV", "Color"]
+- ["7SwiftUI5ColorV", "Int"]
+- !private ["7SwiftUI5ColorV", "UIColor"]
 - ["7SwiftUI5ColorV", ""]
 - !private ["7SwiftUI5ColorV", "drand48"]
 - !private ["7SwiftUI5ColorV", "init"]
 - ["7SwiftUI5ColorV", "random"]
+- ["7SwiftUI5ColorV", "shadesOf"]
+- !private ["SL", "<"]
+- !private ["SL", "<="]
+- !private ["SL", ">"]
+- !private ["SL", ">="]
+- ["SL", "ClosedRange"]
+- ["SL", ""]
+- ["SL", "clamped"]
+- !private ["SL", "init"]
+- !private ["10Foundation15ContiguousBytesP", "append"]
+- !private ["s28CustomDebugStringConvertibleP", "UIColor"]
+- !private ["s28CustomDebugStringConvertibleP", "abs"]
+- !private ["s28CustomDebugStringConvertibleP", "adjustBrightness"]
+- !private ["s28CustomDebugStringConvertibleP", "append"]
+- !private ["s28CustomDebugStringConvertibleP", "darker"]
+- !private ["s28CustomDebugStringConvertibleP", "getRed"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "lighter"]
+- !private ["s28CustomDebugStringConvertibleP", "lowerBound"]
+- !private ["s28CustomDebugStringConvertibleP", "upperBound"]
+- !private ["s17CustomReflectableP", "append"]
+- !private ["s17CustomReflectableP", "clamped"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "lowerBound"]
+- !private ["s17CustomReflectableP", "upperBound"]
+- !private ["s23CustomStringConvertibleP", "CGFloat"]
 - !private ["s23CustomStringConvertibleP", "Color"]
+- !private ["s23CustomStringConvertibleP", "UIColor"]
+- !private ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "abs"]
+- !private ["s23CustomStringConvertibleP", "adjustBrightness"]
+- !private ["s23CustomStringConvertibleP", "append"]
+- !private ["s23CustomStringConvertibleP", "clamped"]
+- !private ["s23CustomStringConvertibleP", "darker"]
 - !private ["s23CustomStringConvertibleP", "drand48"]
+- !private ["s23CustomStringConvertibleP", "getRed"]
 - !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "lighter"]
+- !private ["s23CustomStringConvertibleP", "lowerBound"]
+- !private ["s23CustomStringConvertibleP", "upperBound"]
+- !private ["10Foundation12DataProtocolP", ""]
+- !private ["10Foundation12DataProtocolP", "append"]
+- !private ["Se", "append"]
+- !private ["Se", "clamped"]
+- !private ["Se", "init"]
+- !private ["Se", "lowerBound"]
+- !private ["Se", "upperBound"]
+- !private ["SE", "append"]
+- !private ["SE", "clamped"]
+- !private ["SE", "init"]
+- !private ["SE", "lowerBound"]
+- !private ["SE", "upperBound"]
+- !private ["SQ", "CGFloat"]
+- ["SQ", "ClosedRange"]
 - !private ["SQ", "Color"]
-- !private ["SQ", ""]
+- !private ["SQ", "UIColor"]
+- ["SQ", ""]
+- !private ["SQ", "abs"]
+- !private ["SQ", "adjustBrightness"]
+- !private ["SQ", "append"]
+- !private ["SQ", "clamped"]
+- !private ["SQ", "darker"]
 - !private ["SQ", "displayP3"]
 - !private ["SQ", "drand48"]
+- !private ["SQ", "getRed"]
 - !private ["SQ", "init"]
+- !private ["SQ", "lighter"]
+- !private ["SQ", "lowerBound"]
+- !private ["SQ", "upperBound"]
+- !private ["s25ExpressibleByArrayLiteralP", ""]
+- !private ["s25ExpressibleByArrayLiteralP", "append"]
+- !private ["s25ExpressibleByArrayLiteralP", "init"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
+- ["s25ExpressibleByFloatLiteralP", "FloatLiteralType"]
+- !private ["s25ExpressibleByFloatLiteralP", ""]
+- !private ["s25ExpressibleByFloatLiteralP", "clamped"]
+- ["s25ExpressibleByFloatLiteralP", "init"]
+- !private ["s27ExpressibleByIntegerLiteralP", "IntegerLiteralType"]
+- !private ["s27ExpressibleByIntegerLiteralP", ""]
+- !private ["s27ExpressibleByIntegerLiteralP", "clamped"]
+- !private ["s27ExpressibleByIntegerLiteralP", "init"]
+- !private ["s32ExpressibleByStringInterpolationP", ""]
+- !private ["s26ExpressibleByStringLiteralP", ""]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", ""]
+- !private ["SF", "*"]
+- !private ["SF", "*="]
+- !private ["SF", "+"]
+- !private ["SF", "+="]
+- !private ["SF", "-"]
+- !private ["SF", "-="]
+- !private ["SF", "/"]
+- !private ["SF", "/="]
+- !private ["SF", "<"]
+- !private ["SF", "<="]
+- !private ["SF", ">"]
+- !private ["SF", ">="]
+- !private ["SF", ""]
+- !private ["SF", "addProduct"]
+- !private ["SF", "addingProduct"]
+- !private ["SF", "clamped"]
+- !private ["SF", "exponent"]
+- !private ["SF", "floatingPointClass"]
+- !private ["SF", "formRemainder"]
+- !private ["SF", "formSquareRoot"]
+- !private ["SF", "formTruncatingRemainder"]
+- !private ["SF", "greatestFiniteMagnitude"]
+- !private ["SF", "infinity"]
+- !private ["SF", "init"]
+- !private ["SF", "isCanonical"]
+- !private ["SF", "isEqual"]
+- !private ["SF", "isFinite"]
+- !private ["SF", "isInfinite"]
+- !private ["SF", "isLess"]
+- !private ["SF", "isLessThanOrEqualTo"]
+- !private ["SF", "isNaN"]
+- !private ["SF", "isNormal"]
+- !private ["SF", "isSignalingNaN"]
+- !private ["SF", "isSubnormal"]
+- !private ["SF", "isTotallyOrdered"]
+- !private ["SF", "isZero"]
+- !private ["SF", "leastNonzeroMagnitude"]
+- !private ["SF", "leastNormalMagnitude"]
+- !private ["SF", "maximum"]
+- !private ["SF", "maximumMagnitude"]
+- !private ["SF", "minimum"]
+- !private ["SF", "minimumMagnitude"]
+- !private ["SF", "nan"]
+- !private ["SF", "negate"]
+- !private ["SF", "nextDown"]
+- !private ["SF", "nextUp"]
+- !private ["SF", "pi"]
+- !private ["SF", "radix"]
+- !private ["SF", "remainder"]
+- !private ["SF", "round"]
+- !private ["SF", "rounded"]
+- !private ["SF", "sign"]
+- !private ["SF", "signalingNaN"]
+- !private ["SF", "significand"]
+- !private ["SF", "squareRoot"]
+- !private ["SF", "truncatingRemainder"]
+- !private ["SF", "ulp"]
+- !private ["SF", "ulpOfOne"]
+- !private ["SH", "CGFloat"]
 - !private ["SH", "Color"]
+- !private ["SH", "UIColor"]
+- !private ["SH", ""]
+- !private ["SH", "abs"]
+- !private ["SH", "adjustBrightness"]
+- !private ["SH", "append"]
+- !private ["SH", "clamped"]
+- !private ["SH", "darker"]
 - !private ["SH", "displayP3"]
 - !private ["SH", "drand48"]
+- !private ["SH", "getRed"]
 - !private ["SH", "init"]
+- !private ["SH", "lighter"]
+- !private ["SH", "lowerBound"]
+- !private ["SH", "upperBound"]
+- !private ["s25LosslessStringConvertibleP", ""]
+- !private ["SM", ""]
+- !private ["SM", "append"]
+- !private ["10Foundation19MutableDataProtocolP", "append"]
+- ["So8NSCodingP", "CGFloat"]
+- ["So8NSCodingP", "UIColor"]
 - ["So8NSCodingP", ""]
+- !private ["So8NSCodingP", "abs"]
+- ["So8NSCodingP", "adjustBrightness"]
+- ["So8NSCodingP", "darker"]
+- !private ["So8NSCodingP", "getRed"]
+- !private ["So8NSCodingP", "init"]
+- ["So8NSCodingP", "lighter"]
+- ["So9NSCopyingP", "CGFloat"]
+- ["So9NSCopyingP", "UIColor"]
+- !private ["So9NSCopyingP", "abs"]
+- ["So9NSCopyingP", "adjustBrightness"]
+- ["So9NSCopyingP", "darker"]
+- !private ["So9NSCopyingP", "getRed"]
+- !private ["So9NSCopyingP", "init"]
+- ["So9NSCopyingP", "lighter"]
+- ["So21NSItemProviderReadingP", "CGFloat"]
+- ["So21NSItemProviderReadingP", "UIColor"]
+- !private ["So21NSItemProviderReadingP", "abs"]
+- ["So21NSItemProviderReadingP", "adjustBrightness"]
+- ["So21NSItemProviderReadingP", "darker"]
+- !private ["So21NSItemProviderReadingP", "getRed"]
+- !private ["So21NSItemProviderReadingP", "init"]
+- ["So21NSItemProviderReadingP", "lighter"]
+- ["So21NSItemProviderWritingP", "CGFloat"]
+- ["So21NSItemProviderWritingP", "UIColor"]
+- !private ["So21NSItemProviderWritingP", "abs"]
+- ["So21NSItemProviderWritingP", "adjustBrightness"]
+- ["So21NSItemProviderWritingP", "darker"]
+- !private ["So21NSItemProviderWritingP", "getRed"]
+- !private ["So21NSItemProviderWritingP", "init"]
+- ["So21NSItemProviderWritingP", "lighter"]
+- ["So8NSObjectC", "CGFloat"]
+- ["So8NSObjectC", "UIColor"]
+- ["So8NSObjectC", ""]
+- !private ["So8NSObjectC", "abs"]
+- ["So8NSObjectC", "adjustBrightness"]
+- !private ["So8NSObjectC", "colorNamed"]
+- !private ["So8NSObjectC", "colorWithCGColor"]
+- !private ["So8NSObjectC", "colorWithCIColor"]
+- !private ["So8NSObjectC", "colorWithDisplayP3Red"]
+- !private ["So8NSObjectC", "colorWithDynamicProvider"]
+- !private ["So8NSObjectC", "colorWithHue"]
+- !private ["So8NSObjectC", "colorWithPatternImage"]
+- !private ["So8NSObjectC", "colorWithRed"]
+- !private ["So8NSObjectC", "colorWithWhite"]
+- ["So8NSObjectC", "darker"]
+- !private ["So8NSObjectC", "getRed"]
+- !private ["So8NSObjectC", "init"]
+- ["So8NSObjectC", "lighter"]
+- ["So8NSObjectP", "CGFloat"]
+- ["So8NSObjectP", "UIColor"]
+- ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "abs"]
+- ["So8NSObjectP", "adjustBrightness"]
+- !private ["So8NSObjectP", "colorNamed"]
+- !private ["So8NSObjectP", "colorWithCGColor"]
+- !private ["So8NSObjectP", "colorWithCIColor"]
+- !private ["So8NSObjectP", "colorWithDisplayP3Red"]
+- !private ["So8NSObjectP", "colorWithDynamicProvider"]
+- !private ["So8NSObjectP", "colorWithHue"]
+- !private ["So8NSObjectP", "colorWithPatternImage"]
+- !private ["So8NSObjectP", "colorWithRed"]
+- !private ["So8NSObjectP", "colorWithWhite"]
+- ["So8NSObjectP", "darker"]
+- !private ["So8NSObjectP", "getRed"]
+- !private ["So8NSObjectP", "init"]
+- ["So8NSObjectP", "lighter"]
+- ["So14NSSecureCodingP", "CGFloat"]
+- ["So14NSSecureCodingP", "UIColor"]
+- !private ["So14NSSecureCodingP", "abs"]
+- ["So14NSSecureCodingP", "adjustBrightness"]
+- ["So14NSSecureCodingP", "darker"]
+- !private ["So14NSSecureCodingP", "getRed"]
+- !private ["So14NSSecureCodingP", "init"]
+- ["So14NSSecureCodingP", "lighter"]
+- !private ["Sj", "*"]
+- !private ["Sj", "*="]
+- !private ["Sj", ""]
+- !private ["Sj", "clamped"]
+- !private ["Sj", "init"]
+- !private ["Sj", "magnitude"]
 - !private ["7SwiftUI5ColorV13RGBColorSpaceO", "displayP3"]
+- !private ["Sk", ""]
+- !private ["Sk", "append"]
+- !private ["Sk", "lowerBound"]
+- !private ["Sk", "upperBound"]
+- !private ["SX", "lowerBound"]
+- !private ["SX", "upperBound"]
+- !private ["Sm", ""]
+- !private ["Sm", "append"]
+- !private ["ST", "Element"]
+- !private ["ST", "Iterator"]
+- !private ["ST", ""]
+- !private ["ST", "append"]
+- !private ["ST", "lowerBound"]
+- !private ["ST", "upperBound"]
+- !private ["7SwiftUI10ShapeStyleP", "CGFloat"]
 - !private ["7SwiftUI10ShapeStyleP", "Color"]
+- !private ["7SwiftUI10ShapeStyleP", "UIColor"]
 - !private ["7SwiftUI10ShapeStyleP", "drand48"]
 - !private ["7SwiftUI10ShapeStyleP", "init"]
+- !private ["s13SignedNumericP", "-"]
+- !private ["s13SignedNumericP", ""]
+- !private ["s13SignedNumericP", "clamped"]
+- !private ["s13SignedNumericP", "init"]
+- !private ["Sx", ""]
+- !private ["Sx", "clamped"]
+- !private ["Sx", "init"]
+- !private ["s16TextOutputStreamP", ""]
+- !private ["s20TextOutputStreamableP", ""]
+- ["So7UIColorC", "CGFloat"]
+- ["So7UIColorC", "UIColor"]
+- ["So7UIColorC", ""]
+- !private ["So7UIColorC", "abs"]
+- ["So7UIColorC", "adjustBrightness"]
+- ["So7UIColorC", "darker"]
+- !private ["So7UIColorC", "getRed"]
+- !private ["So7UIColorC", "init"]
+- ["So7UIColorC", "lighter"]
+- !private ["7SwiftUI16VectorArithmeticP", "clamped"]
+- !private ["7SwiftUI16VectorArithmeticP", "init"]
+- !private ["7SwiftUI4ViewP", "CGFloat"]
 - !private ["7SwiftUI4ViewP", "Color"]
+- !private ["7SwiftUI4ViewP", "UIColor"]
 - !private ["7SwiftUI4ViewP", "drand48"]
 - !private ["7SwiftUI4ViewP", "init"]
+- !private ["s14_ArrayProtocolP", "append"]
+- !private ["s15_CVarArgAlignedP", "clamped"]
+- !private ["s15_CVarArgAlignedP", "init"]
+- !private ["s22_CVarArgPassedAsDoubleP", "clamped"]
+- !private ["s22_CVarArgPassedAsDoubleP", "init"]
+- !private ["s24_DestructorSafeContainerP", "append"]
+- ["s35_ExpressibleByBuiltinBooleanLiteralP", "init"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
+- ["s33_ExpressibleByBuiltinFloatLiteralP", "init"]
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
+- !private ["s26_ExpressibleByColorLiteralP", "UIColor"]
+- !private ["s26_ExpressibleByColorLiteralP", "abs"]
+- !private ["s26_ExpressibleByColorLiteralP", "adjustBrightness"]
+- !private ["s26_ExpressibleByColorLiteralP", "darker"]
+- !private ["s26_ExpressibleByColorLiteralP", "getRed"]
+- !private ["s26_ExpressibleByColorLiteralP", "init"]
+- !private ["s26_ExpressibleByColorLiteralP", "lighter"]
+- !private ["7SwiftUI18_FormatSpecifiableP", "clamped"]
+- !private ["7SwiftUI18_FormatSpecifiableP", "init"]
+- !private ["s19_HasContiguousBytesP", "append"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "append"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "UIColor"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "abs"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "adjustBrightness"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "darker"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "getRed"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "lighter"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "UIColor"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "abs"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "adjustBrightness"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "darker"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "getRed"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "init"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "lighter"]
+- !private ["s21_ObjectiveCBridgeableP", "append"]
+- !private ["s21_ObjectiveCBridgeableP", "clamped"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
 depends-nominal:
+- !private "s18AdditiveArithmeticP"
+- !private "Sa"
+- !private "SK"
+- !private "SB"
+- !private "12CoreGraphics7CGFloatV"
+- !private "8CloudKit21CKRecordValueProtocolP"
+- !private "s7CVarArgP"
+- !private "SN"
+- !private "Sl"
 - "7SwiftUI5ColorV"
+- "SL"
+- !private "10Foundation15ContiguousBytesP"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
 - !private "s23CustomStringConvertibleP"
-- !private "SQ"
+- !private "10Foundation12DataProtocolP"
+- !private "Se"
+- !private "SE"
+- "SQ"
+- !private "s25ExpressibleByArrayLiteralP"
+- !private "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- "s25ExpressibleByFloatLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- !private "s32ExpressibleByStringInterpolationP"
+- !private "s26ExpressibleByStringLiteralP"
+- !private "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "SF"
 - !private "SH"
+- !private "s25LosslessStringConvertibleP"
+- !private "SM"
+- !private "10Foundation19MutableDataProtocolP"
 - "So8NSCodingP"
+- "So9NSCopyingP"
+- "So21NSItemProviderReadingP"
+- "So21NSItemProviderWritingP"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- "So14NSSecureCodingP"
+- !private "Sj"
 - !private "7SwiftUI5ColorV13RGBColorSpaceO"
+- !private "Sk"
+- !private "SX"
+- !private "Sm"
+- !private "ST"
 - !private "7SwiftUI10ShapeStyleP"
+- !private "s13SignedNumericP"
+- !private "Sx"
+- !private "s16TextOutputStreamP"
+- !private "s20TextOutputStreamableP"
+- "So7UIColorC"
+- !private "7SwiftUI16VectorArithmeticP"
 - !private "7SwiftUI4ViewP"
+- !private "s14_ArrayProtocolP"
+- !private "s15_CVarArgAlignedP"
+- !private "s22_CVarArgPassedAsDoubleP"
+- !private "s24_DestructorSafeContainerP"
+- "s35_ExpressibleByBuiltinBooleanLiteralP"
+- !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- "s33_ExpressibleByBuiltinFloatLiteralP"
 - !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s26_ExpressibleByColorLiteralP"
+- !private "7SwiftUI18_FormatSpecifiableP"
+- !private "s19_HasContiguousBytesP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "10Foundation27_KeyValueCodingAndObservingP"
+- !private "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- !private "s21_ObjectiveCBridgeableP"
 depends-dynamic-lookup:
 depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/prebuilt-modules/ObjectiveC.swiftmodule/arm64-apple-ios-simulator.swiftmodule"
@@ -89,4 +526,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "20cb5b82042d4e533f5eaf798c801c0e"
+interface-hash: "2f2e339e95cc8ffd521f4f034d225462"

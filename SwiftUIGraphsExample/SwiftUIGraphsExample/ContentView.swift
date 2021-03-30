@@ -9,13 +9,8 @@ import SwiftUI
 import SwiftUIGraphs
 
 
-//for  iex cloud  http get request
-// https://cloud.iexapis.com/stable/stock/twtr/chart/1m?token=
-
 struct ContentView: View {
 
-
-    
     var body: some View {
 
         NavigationView {
@@ -24,8 +19,9 @@ struct ContentView: View {
                     Image(systemName: "waveform.path")
                     Text("Line Charts")
                 }) {
-                    NavigationLink("Weight Lifting Volume per Workout", destination: BasicLineChartExample())
-                    NavigationLink("Workout Time", destination: CustomYAxisIntervalExampleLineChart())
+                   // NavigationLink("Weight Lifting Volume per Workout", destination: BasicLineChartExample())
+                    NavigationLink("Stock Prices (asyn data fetch)", destination: LineChartWithAsyncDataFetch())
+                    NavigationLink("Workout Time per Week", destination: CustomYAxisIntervalExampleLineChart())
                 }
                 
                 Section(header: HStack{
@@ -41,12 +37,13 @@ struct ContentView: View {
                     NavigationLink("Av. US Household Spending", destination: BasicPieChartExample())
                     NavigationLink("Sales per Country", destination: RingChartAndDetailPieChartExample())
                 }
-                
-      
-                Spacer()
+
             }.navigationBarTitle("SwiftUIGraphs Examples", displayMode: .inline).padding()
-            // add the first destination view in the list one more time as default for iPad in split view mode...
-            BasicLineChartExample()
+            
+            // add the first destination view in the list one more time as default for iPad in split view mode, otherwise the detail view will be empty
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                LineChartWithAsyncDataFetch()
+            }
         }
  
 

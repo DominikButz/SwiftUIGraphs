@@ -16,6 +16,16 @@ public extension Double {
         let number = NSNumber(value: self)
         return formatter.string(from: number)!
     }
+    
+    func toCurrencyString(symbol:String = "USD", maxDigits: Int = 0)->String {
+        
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            formatter.currencySymbol = symbol
+            formatter.maximumFractionDigits = maxDigits
+            return formatter.string(for: self)!
+        
+    }
 
  
     func decimalsCount() -> Int {

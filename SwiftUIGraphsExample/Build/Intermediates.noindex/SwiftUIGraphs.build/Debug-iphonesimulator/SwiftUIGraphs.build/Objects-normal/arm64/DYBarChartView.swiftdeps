@@ -31,13 +31,13 @@ depends-top-level:
 - "DYBarChartSettings"
 - "DYBarChartView"
 - "DYDataPoint"
+- "DYGridChart"
 - "DYGridChartSettings"
 - !private "DispatchQueue"
 - "Double"
 - "FloatLiteralType"
 - "ForEach"
 - !private "GeometryReader"
-- "GridChart"
 - "HStack"
 - "Int"
 - "IntegerLiteralType"
@@ -53,7 +53,7 @@ depends-top-level:
 - "String"
 - !private "StringLiteralType"
 - "TernaryPrecedence"
-- "Text"
+- !private "Text"
 - "UISelectionFeedbackGenerator"
 - "VStack"
 - "View"
@@ -77,6 +77,7 @@ depends-member:
 - ["s18AdditiveArithmeticP", ""]
 - !private ["s18AdditiveArithmeticP", "init"]
 - ["s18AdditiveArithmeticP", "zero"]
+- !private ["7SwiftUI9AlignmentV", "bottom"]
 - !private ["7SwiftUI9AlignmentV", "center"]
 - ["7SwiftUI10AnimatableP", ""]
 - !private ["7SwiftUI10AnimatableP", "bottom"]
@@ -295,6 +296,7 @@ depends-member:
 - ["13SwiftUIGraphs14DYBarChartViewV", "marginSum"]
 - ["13SwiftUIGraphs14DYBarChartViewV", "namespace"]
 - ["13SwiftUIGraphs14DYBarChartViewV", "orientationObserver"]
+- !private ["13SwiftUIGraphs14DYBarChartViewV", "placeholderGrid"]
 - ["13SwiftUIGraphs14DYBarChartViewV", "selectedIndex"]
 - ["13SwiftUIGraphs14DYBarChartViewV", "settings"]
 - !private ["13SwiftUIGraphs14DYBarChartViewV", "xAxisIntervalLabelViewFor"]
@@ -311,6 +313,59 @@ depends-member:
 - !private ["13SwiftUIGraphs11DYDataPointV", ""]
 - !private ["13SwiftUIGraphs11DYDataPointV", "xValue"]
 - !private ["13SwiftUIGraphs11DYDataPointV", "yValue"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "$selectedIndex"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "BarView"]
+- ["13SwiftUIGraphs11DYGridChartP", "Binding"]
+- ["13SwiftUIGraphs11DYGridChartP", "Body"]
+- ["13SwiftUIGraphs11DYGridChartP", "CGFloat"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "DYBarChartSettings"]
+- ["13SwiftUIGraphs11DYGridChartP", "Default_Body"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "ForEach"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "GeometryReader"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "HStack"]
+- ["13SwiftUIGraphs11DYGridChartP", "Namespace"]
+- ["13SwiftUIGraphs11DYGridChartP", "OrientationObserver"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "Rectangle"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "Spacer"]
+- ["13SwiftUIGraphs11DYGridChartP", "State"]
+- ["13SwiftUIGraphs11DYGridChartP", "StateObject"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "Text"]
+- ["13SwiftUIGraphs11DYGridChartP", "UISelectionFeedbackGenerator"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "VStack"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "YAxisScaler"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "ZStack"]
+- ["13SwiftUIGraphs11DYGridChartP", ""]
+- ["13SwiftUIGraphs11DYGridChartP", "_Default_Body"]
+- ["13SwiftUIGraphs11DYGridChartP", "_makeView"]
+- ["13SwiftUIGraphs11DYGridChartP", "_makeViewList"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "_selectedIndex"]
+- ["13SwiftUIGraphs11DYGridChartP", "_viewListCount"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "barWidth"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "bars"]
+- ["13SwiftUIGraphs11DYGridChartP", "body"]
+- ["13SwiftUIGraphs11DYGridChartP", "chartFrameHeight"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "convertToXCoordinate"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "convertToYCoordinate"]
+- ["13SwiftUIGraphs11DYGridChartP", "dataPoints"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "generator"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "indexFor"]
+- ["13SwiftUIGraphs11DYGridChartP", "marginSum"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "namespace"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "orientationObserver"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "placeholderGrid"]
+- ["13SwiftUIGraphs11DYGridChartP", "selectedIndex"]
+- ["13SwiftUIGraphs11DYGridChartP", "settings"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "xAxisIntervalLabelViewFor"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "xAxisLabelSteps"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "xAxisLabelStrings"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "xAxisView"]
+- ["13SwiftUIGraphs11DYGridChartP", "xValueConverter"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "yAxisGridLines"]
+- ["13SwiftUIGraphs11DYGridChartP", "yAxisScaler"]
+- ["13SwiftUIGraphs11DYGridChartP", "yAxisValueCount"]
+- ["13SwiftUIGraphs11DYGridChartP", "yAxisValues"]
+- !private ["13SwiftUIGraphs11DYGridChartP", "yAxisView"]
+- ["13SwiftUIGraphs11DYGridChartP", "yValueConverter"]
 - !private ["13SwiftUIGraphs19DYGridChartSettingsP", "chartViewBackgroundColor"]
 - !private ["13SwiftUIGraphs19DYGridChartSettingsP", "gradient"]
 - !private ["13SwiftUIGraphs19DYGridChartSettingsP", "init"]
@@ -379,7 +434,6 @@ depends-member:
 - !private ["SQ", "min"]
 - !private ["SQ", "none"]
 - !private ["SQ", "now"]
-- !private ["SQ", "padding"]
 - !private ["SQ", "position"]
 - !private ["SQ", "prepare"]
 - !private ["SQ", "selectionChanged"]
@@ -411,9 +465,7 @@ depends-member:
 - !private ["s23ExpressibleByNilLiteralP", "some"]
 - !private ["s23ExpressibleByNilLiteralP", "system"]
 - ["s32ExpressibleByStringInterpolationP", ""]
-- !private ["s26ExpressibleByStringLiteralP", "StringLiteralType"]
 - ["s26ExpressibleByStringLiteralP", ""]
-- !private ["s26ExpressibleByStringLiteralP", "init"]
 - ["s33ExpressibleByUnicodeScalarLiteralP", ""]
 - !private ["SF", "*"]
 - !private ["SF", "*="]
@@ -476,58 +528,6 @@ depends-member:
 - !private ["7SwiftUI7GestureP", "none"]
 - !private ["7SwiftUI7GestureP", "some"]
 - !private ["7SwiftUI7GestureP", "system"]
-- !private ["13SwiftUIGraphs9GridChartP", "$selectedIndex"]
-- !private ["13SwiftUIGraphs9GridChartP", "BarView"]
-- ["13SwiftUIGraphs9GridChartP", "Binding"]
-- ["13SwiftUIGraphs9GridChartP", "Body"]
-- ["13SwiftUIGraphs9GridChartP", "CGFloat"]
-- !private ["13SwiftUIGraphs9GridChartP", "DYBarChartSettings"]
-- ["13SwiftUIGraphs9GridChartP", "Default_Body"]
-- !private ["13SwiftUIGraphs9GridChartP", "ForEach"]
-- !private ["13SwiftUIGraphs9GridChartP", "GeometryReader"]
-- !private ["13SwiftUIGraphs9GridChartP", "HStack"]
-- ["13SwiftUIGraphs9GridChartP", "Namespace"]
-- ["13SwiftUIGraphs9GridChartP", "OrientationObserver"]
-- !private ["13SwiftUIGraphs9GridChartP", "Rectangle"]
-- !private ["13SwiftUIGraphs9GridChartP", "Spacer"]
-- ["13SwiftUIGraphs9GridChartP", "State"]
-- ["13SwiftUIGraphs9GridChartP", "StateObject"]
-- !private ["13SwiftUIGraphs9GridChartP", "Text"]
-- ["13SwiftUIGraphs9GridChartP", "UISelectionFeedbackGenerator"]
-- !private ["13SwiftUIGraphs9GridChartP", "VStack"]
-- !private ["13SwiftUIGraphs9GridChartP", "YAxisScaler"]
-- !private ["13SwiftUIGraphs9GridChartP", "ZStack"]
-- ["13SwiftUIGraphs9GridChartP", ""]
-- ["13SwiftUIGraphs9GridChartP", "_Default_Body"]
-- ["13SwiftUIGraphs9GridChartP", "_makeView"]
-- ["13SwiftUIGraphs9GridChartP", "_makeViewList"]
-- !private ["13SwiftUIGraphs9GridChartP", "_selectedIndex"]
-- ["13SwiftUIGraphs9GridChartP", "_viewListCount"]
-- !private ["13SwiftUIGraphs9GridChartP", "barWidth"]
-- !private ["13SwiftUIGraphs9GridChartP", "bars"]
-- ["13SwiftUIGraphs9GridChartP", "body"]
-- ["13SwiftUIGraphs9GridChartP", "chartFrameHeight"]
-- !private ["13SwiftUIGraphs9GridChartP", "convertToXCoordinate"]
-- !private ["13SwiftUIGraphs9GridChartP", "convertToYCoordinate"]
-- ["13SwiftUIGraphs9GridChartP", "dataPoints"]
-- !private ["13SwiftUIGraphs9GridChartP", "generator"]
-- !private ["13SwiftUIGraphs9GridChartP", "indexFor"]
-- ["13SwiftUIGraphs9GridChartP", "marginSum"]
-- !private ["13SwiftUIGraphs9GridChartP", "namespace"]
-- !private ["13SwiftUIGraphs9GridChartP", "orientationObserver"]
-- ["13SwiftUIGraphs9GridChartP", "selectedIndex"]
-- ["13SwiftUIGraphs9GridChartP", "settings"]
-- !private ["13SwiftUIGraphs9GridChartP", "xAxisIntervalLabelViewFor"]
-- !private ["13SwiftUIGraphs9GridChartP", "xAxisLabelSteps"]
-- !private ["13SwiftUIGraphs9GridChartP", "xAxisLabelStrings"]
-- !private ["13SwiftUIGraphs9GridChartP", "xAxisView"]
-- ["13SwiftUIGraphs9GridChartP", "xValueConverter"]
-- !private ["13SwiftUIGraphs9GridChartP", "yAxisGridLines"]
-- ["13SwiftUIGraphs9GridChartP", "yAxisScaler"]
-- ["13SwiftUIGraphs9GridChartP", "yAxisValueCount"]
-- ["13SwiftUIGraphs9GridChartP", "yAxisValues"]
-- !private ["13SwiftUIGraphs9GridChartP", "yAxisView"]
-- ["13SwiftUIGraphs9GridChartP", "yValueConverter"]
 - !private ["7SwiftUI6HStackV", "frame"]
 - !private ["7SwiftUI6HStackV", "init"]
 - !private ["7SwiftUI6HStackV", "onAppear"]
@@ -684,7 +684,6 @@ depends-member:
 - ["Sx", "zero"]
 - !private ["7SwiftUI4TextV", "font"]
 - !private ["7SwiftUI4TextV", "init"]
-- !private ["7SwiftUI4TextV", "padding"]
 - !private ["7SwiftUI4TextV", "position"]
 - ["s16TextOutputStreamP", ""]
 - ["s20TextOutputStreamableP", ""]
@@ -762,6 +761,7 @@ depends-member:
 - !private ["7SwiftUI4ViewP", "opacity"]
 - !private ["7SwiftUI4ViewP", "orientationObserver"]
 - !private ["7SwiftUI4ViewP", "padding"]
+- !private ["7SwiftUI4ViewP", "placeholderGrid"]
 - !private ["7SwiftUI4ViewP", "position"]
 - !private ["7SwiftUI4ViewP", "scale"]
 - !private ["7SwiftUI4ViewP", "scaleEffect"]
@@ -881,6 +881,7 @@ depends-nominal:
 - !private "13SwiftUIGraphs18DYBarChartSettingsV"
 - "13SwiftUIGraphs14DYBarChartViewV"
 - !private "13SwiftUIGraphs11DYDataPointV"
+- "13SwiftUIGraphs11DYGridChartP"
 - !private "13SwiftUIGraphs19DYGridChartSettingsP"
 - !private "10Foundation12DataProtocolP"
 - "Se"
@@ -906,7 +907,6 @@ depends-nominal:
 - !private "7SwiftUI13GeometryProxyV"
 - !private "7SwiftUI14GeometryReaderV"
 - !private "7SwiftUI7GestureP"
-- "13SwiftUIGraphs9GridChartP"
 - !private "7SwiftUI6HStackV"
 - "SH"
 - !private "s12IdentifiableP"
@@ -1017,4 +1017,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "ac6ffcdad7750647cf04a8f5b9915dcf"
+interface-hash: "9492847fbe17dac83719754cbb2eb3d2"

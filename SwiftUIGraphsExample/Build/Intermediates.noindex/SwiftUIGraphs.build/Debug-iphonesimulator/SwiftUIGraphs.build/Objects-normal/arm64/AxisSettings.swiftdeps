@@ -1,44 +1,55 @@
 ### Swift dependencies file v0 ###
 provides-top-level:
-- "LineChartXAxisSettings"
-- "BarChartXAxisSettings"
+- "DYLineChartXAxisSettings"
+- "DYBarChartXAxisSettings"
 - "XAxisSettings"
 - "YAxisSettings"
 provides-nominal:
-- "13SwiftUIGraphs22LineChartXAxisSettingsV"
-- "13SwiftUIGraphs21BarChartXAxisSettingsV"
+- "13SwiftUIGraphs24DYLineChartXAxisSettingsV"
+- "13SwiftUIGraphs23DYBarChartXAxisSettingsV"
 - "13SwiftUIGraphs13XAxisSettingsP"
 - "13SwiftUIGraphs13YAxisSettingsV"
 provides-member:
-- ["13SwiftUIGraphs22LineChartXAxisSettingsV", ""]
-- ["13SwiftUIGraphs21BarChartXAxisSettingsV", ""]
+- ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", ""]
+- ["13SwiftUIGraphs23DYBarChartXAxisSettingsV", ""]
 - ["13SwiftUIGraphs13XAxisSettingsP", ""]
 - ["13SwiftUIGraphs13YAxisSettingsV", ""]
 provides-dynamic-lookup:
 depends-top-level:
 - "Array"
 - "AssignmentPrecedence"
-- "BarChartXAxisSettings"
 - "Bool"
 - "BooleanLiteralType"
 - "CGFloat"
+- "DYBarChartXAxisSettings"
+- "DYLineChartXAxisSettings"
 - "Double"
 - "Edge"
 - "FloatLiteralType"
 - "IntegerLiteralType"
-- "LineChartXAxisSettings"
 - "StrokeStyle"
 - "XAxisSettings"
 - "YAxisSettings"
 depends-member:
 - !private ["7SwiftUI10AnimatableP", "init"]
-- ["13SwiftUIGraphs21BarChartXAxisSettingsV", "Bool"]
-- ["13SwiftUIGraphs21BarChartXAxisSettingsV", "CGFloat"]
-- !private ["13SwiftUIGraphs21BarChartXAxisSettingsV", ""]
-- ["13SwiftUIGraphs21BarChartXAxisSettingsV", "init"]
-- ["13SwiftUIGraphs21BarChartXAxisSettingsV", "showXAxis"]
-- ["13SwiftUIGraphs21BarChartXAxisSettingsV", "xAxisFontSize"]
 - ["s12CaseIterableP", "Set"]
+- ["13SwiftUIGraphs23DYBarChartXAxisSettingsV", "Bool"]
+- ["13SwiftUIGraphs23DYBarChartXAxisSettingsV", "CGFloat"]
+- !private ["13SwiftUIGraphs23DYBarChartXAxisSettingsV", ""]
+- ["13SwiftUIGraphs23DYBarChartXAxisSettingsV", "init"]
+- ["13SwiftUIGraphs23DYBarChartXAxisSettingsV", "showXAxis"]
+- ["13SwiftUIGraphs23DYBarChartXAxisSettingsV", "xAxisFontSize"]
+- ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "Bool"]
+- ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "CGFloat"]
+- ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "Double"]
+- ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "StrokeStyle"]
+- !private ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", ""]
+- ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "init"]
+- ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "showXAxis"]
+- ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "showXAxisLines"]
+- ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "xAxisFontSize"]
+- ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "xAxisInterval"]
+- ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "xAxisLineStrokeStyle"]
 - ["7SwiftUI4EdgeO", "Set"]
 - ["SQ", "Set"]
 - ["SQ", ""]
@@ -50,17 +61,6 @@ depends-member:
 - ["s27ExpressibleByIntegerLiteralP", "IntegerLiteralType"]
 - ["s27ExpressibleByIntegerLiteralP", "init"]
 - ["SH", "Set"]
-- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "Bool"]
-- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "CGFloat"]
-- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "Double"]
-- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "StrokeStyle"]
-- !private ["13SwiftUIGraphs22LineChartXAxisSettingsV", ""]
-- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "init"]
-- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "showXAxis"]
-- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "showXAxisLines"]
-- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "xAxisFontSize"]
-- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "xAxisInterval"]
-- ["13SwiftUIGraphs22LineChartXAxisSettingsV", "xAxisLineStrokeStyle"]
 - !private ["s9OptionSetP", "leading"]
 - ["SY", "Set"]
 - !private ["SY", ""]
@@ -96,14 +96,14 @@ depends-member:
 - ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
 depends-nominal:
 - !private "7SwiftUI10AnimatableP"
-- "13SwiftUIGraphs21BarChartXAxisSettingsV"
 - "s12CaseIterableP"
+- "13SwiftUIGraphs23DYBarChartXAxisSettingsV"
+- "13SwiftUIGraphs24DYLineChartXAxisSettingsV"
 - "7SwiftUI4EdgeO"
 - "SQ"
 - "s25ExpressibleByArrayLiteralP"
 - "s27ExpressibleByIntegerLiteralP"
 - "SH"
-- "13SwiftUIGraphs22LineChartXAxisSettingsV"
 - !private "s9OptionSetP"
 - "SY"
 - !private "7SwiftUI4EdgeO3SetV"
@@ -155,4 +155,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "d2180f9cc59064dab56ec114f38704a9"
+interface-hash: "5ae6916493d9afe25df5091d75c388b8"

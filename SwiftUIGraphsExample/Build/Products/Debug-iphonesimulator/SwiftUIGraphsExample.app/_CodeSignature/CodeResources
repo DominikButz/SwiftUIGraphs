@@ -4,158 +4,92 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Frameworks/XCTAutomationSupport.framework/Info.plist</key>
+		<key>AppIcon60x60@2x.png</key>
 		<data>
-		IZ2cpU6lyNUATpeUo7eSI7eDoZc=
+		+AyN1I5LTzbGnlX2XfhZbyAiuh4=
 		</data>
-		<key>Frameworks/XCTAutomationSupport.framework/XCTAutomationSupport</key>
+		<key>AppIcon76x76@2x~ipad.png</key>
 		<data>
-		YFuZGLLDB4Ea1k0ZzXO2dbp0X1s=
+		eDFJSD0VjhGBZlnFqEj4hwIVdzA=
 		</data>
-		<key>Frameworks/XCTAutomationSupport.framework/_CodeSignature/CodeResources</key>
+		<key>Assets.car</key>
 		<data>
-		jbPEbDlGHXbNd5nYdsfIyt7Em48=
-		</data>
-		<key>Frameworks/XCTAutomationSupport.framework/version.plist</key>
-		<data>
-		FEBP+sQbxwB1dFlBRTJRi1qvtA8=
-		</data>
-		<key>Frameworks/XCTest.framework/Info.plist</key>
-		<data>
-		OK2HhX21AsJhV8pNaFeBSN2GbLM=
-		</data>
-		<key>Frameworks/XCTest.framework/XCTest</key>
-		<data>
-		84Uo43JK5jrAaOsCVgAB3azddpI=
-		</data>
-		<key>Frameworks/XCTest.framework/_CodeSignature/CodeResources</key>
-		<data>
-		kOGqhlDzrfLsJALgBwn5x3zH6Dk=
-		</data>
-		<key>Frameworks/XCTest.framework/version.plist</key>
-		<data>
-		FEBP+sQbxwB1dFlBRTJRi1qvtA8=
-		</data>
-		<key>Frameworks/libXCTestBundleInject.dylib</key>
-		<data>
-		d+7DxuBBpCT6MJ2aUgKxg2LL+hM=
-		</data>
-		<key>Frameworks/libXCTestSwiftSupport.dylib</key>
-		<data>
-		428Umotss3W3Ai3P0wHEIs18xYI=
+		bz7Rqw4xSx/Aido3Ot5JlJkam6s=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Fklwh+fGW1FxaifRJRiHPM8dp0o=
+		zB4sts98DPQzja0+0HEVoWaOhnc=
+		</data>
+		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
+		<data>
+		glcfZ79cvYaFhLwtiQxxSpfrjVc=
+		</data>
+		<key>LaunchScreen.storyboardc/Info.plist</key>
+		<data>
+		n2t8gsDpfE6XkhG31p7IQJRxTxU=
+		</data>
+		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
+		<data>
+		a+JQq7cRb1c2M6vIJLRaO1Ua3RE=
 		</data>
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
 		</data>
-		<key>PlugIns/SwiftUIGraphsExampleTests.xctest/Info.plist</key>
+		<key>SwiftUIGraphsLaunchScreen.png</key>
 		<data>
-		EEkVwglfZmG0K0VTPFClQyA3QLc=
-		</data>
-		<key>PlugIns/SwiftUIGraphsExampleTests.xctest/SwiftUIGraphsExampleTests</key>
-		<data>
-		nsWVUX1halDRwfp3ZiKG0XXb8a0=
-		</data>
-		<key>PlugIns/SwiftUIGraphsExampleTests.xctest/_CodeSignature/CodeResources</key>
-		<data>
-		glG7IRcqJ2YIyMJTvplQiK2M1R8=
+		9XxfanGt4/o01n9DYZ81O2UUWMM=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Frameworks/XCTAutomationSupport.framework/Info.plist</key>
+		<key>AppIcon60x60@2x.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EQbkiWy3gK4/xL2SWzbE7VwEWqY6cawMg2YlvZ5fcic=
+			cvvWBqjpUFe4GxonfGpMNb1THohNdmQPMv4/lxTSQJw=
 			</data>
 		</dict>
-		<key>Frameworks/XCTAutomationSupport.framework/XCTAutomationSupport</key>
+		<key>AppIcon76x76@2x~ipad.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ekOAdTiuYFaRGsnjwsarT1mMfjfYF9PEJorFk6zawiw=
+			eu3sdbebz+7sskGtnMqBuXQ70Dmc4JJzlmAs5ca6tVw=
 			</data>
 		</dict>
-		<key>Frameworks/XCTAutomationSupport.framework/_CodeSignature/CodeResources</key>
+		<key>Assets.car</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Vuq4M8rC4Cv4JQrQBWLm4JzskNmjmJtG43hbAG0FwKc=
+			s0v3hv5air/IqATWFKr/1+tOXfbLoAxiiheHg0XU5V4=
 			</data>
 		</dict>
-		<key>Frameworks/XCTAutomationSupport.framework/version.plist</key>
+		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xK7df/LSaNZaTGvk96UY7KF0zlKK03ygFT8PrJpq1Ao=
+			1RYZC22wAhbZ6E/lvrS4yEIO+WvQhZHuNZBBt5cUYoE=
 			</data>
 		</dict>
-		<key>Frameworks/XCTest.framework/Info.plist</key>
+		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cyPhBXzA5juKirOkiiHuj+CG2//GIWvbXRQo1ajPuDQ=
+			HyVdXMU7Ux4/KalAao30mpWOK/lEPT4gvYN09wf31cg=
 			</data>
 		</dict>
-		<key>Frameworks/XCTest.framework/XCTest</key>
+		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5ymXU1/NZAZNjjuidUBMI+MWrO675Fpi6lhB6kmKAcI=
+			bQpOzOdTpGNh8nGQG/yxMMu+unKMyy+zWvaZq5UQpUA=
 			</data>
 		</dict>
-		<key>Frameworks/XCTest.framework/_CodeSignature/CodeResources</key>
+		<key>SwiftUIGraphsLaunchScreen.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			WPrEocT0Gr1edKqZzypeWFsBo6pYY6ixqvM72VeQH48=
-			</data>
-		</dict>
-		<key>Frameworks/XCTest.framework/version.plist</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			xK7df/LSaNZaTGvk96UY7KF0zlKK03ygFT8PrJpq1Ao=
-			</data>
-		</dict>
-		<key>Frameworks/libXCTestBundleInject.dylib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			hLpFjd/M3uYeUkHMEOb3oGhlqCZIbzL0+brauuYjGkY=
-			</data>
-		</dict>
-		<key>Frameworks/libXCTestSwiftSupport.dylib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			DAnlRZAqvNEgBjddLcY/kEbna/hc8UcAca5KDz34ELk=
-			</data>
-		</dict>
-		<key>PlugIns/SwiftUIGraphsExampleTests.xctest/Info.plist</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			e7OnLlIXkb91PcmBfLBvs38SOAJmdE2yCeNxGq8KHT4=
-			</data>
-		</dict>
-		<key>PlugIns/SwiftUIGraphsExampleTests.xctest/SwiftUIGraphsExampleTests</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			yaXxXxXtYE06tQHkP/SlXI4nxOMoj2kWk93LXgFSo4k=
-			</data>
-		</dict>
-		<key>PlugIns/SwiftUIGraphsExampleTests.xctest/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			AdlnlQ3YYR0cACiZ2j5fFkriYbIm6TtCqpHXHalk05U=
+			UbOGRAOrUMhnVugl4/N7E2HeIfxDeLZZHZzEzruggRc=
 			</data>
 		</dict>
 	</dict>

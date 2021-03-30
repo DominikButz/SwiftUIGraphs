@@ -33,7 +33,7 @@ struct BasicPieChartExample: View {
                     }
                     if self.viewModel.selectedId != nil {
                         DYFractionChartInfoView(title: "", data: viewModel.data, selectedId: $viewModel.selectedId) { (value) -> String in
-                                DYChartFraction.exampleFormatter(value: value)
+                            value.toCurrencyString()
                         }.padding(5).infoBoxBackground().padding(UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10)
                     }
                 }
@@ -63,7 +63,7 @@ struct BasicPieChartExample: View {
             if fraction.value / data.reduce(0, { $0 + $1.value}) >= 0.11  {
                 VStack {
                     Text(fraction.title).font(sliceLabelViewFont).bold().lineLimit(2).frame(maxWidth: 85)
-                    Text(DYChartFraction.exampleFormatter(value: fraction.value)).font(sliceLabelViewFont).bold()
+                    Text(fraction.value.toCurrencyString()).font(sliceLabelViewFont).bold()
                     Text(fraction.value.percentageString(totalValue: data.reduce(0) { $0 + $1.value})).font(sliceLabelViewFont)
                     
                 }

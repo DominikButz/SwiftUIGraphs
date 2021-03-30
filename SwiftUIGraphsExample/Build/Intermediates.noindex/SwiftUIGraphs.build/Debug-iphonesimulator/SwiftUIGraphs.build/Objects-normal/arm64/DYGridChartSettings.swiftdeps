@@ -15,18 +15,18 @@ provides-dynamic-lookup:
 depends-top-level:
 - "Array"
 - "AssignmentPrecedence"
-- "BarChartXAxisSettings"
 - "Bool"
 - "BooleanLiteralType"
 - "CGFloat"
 - "Color"
 - "DYBarChartSettings"
+- "DYBarChartXAxisSettings"
 - "DYGridChartSettings"
 - "DYLineChartSettings"
+- "DYLineChartXAxisSettings"
 - "FloatLiteralType"
 - "Gradient"
 - "IntegerLiteralType"
-- "LineChartXAxisSettings"
 - "LinearGradient"
 - "StrokeStyle"
 - "XAxisSettings"
@@ -35,8 +35,6 @@ depends-member:
 - !private ["7SwiftUI10AnimatableP", "bottom"]
 - !private ["7SwiftUI10AnimatableP", "init"]
 - !private ["7SwiftUI10AnimatableP", "top"]
-- !private ["13SwiftUIGraphs21BarChartXAxisSettingsV", ""]
-- !private ["13SwiftUIGraphs21BarChartXAxisSettingsV", "init"]
 - !private ["SK", ""]
 - !private ["SK", "systemBackground"]
 - !private ["So10CGColorRefa", "systemBackground"]
@@ -60,10 +58,10 @@ depends-member:
 - !private ["s23CustomStringConvertibleP", "orange"]
 - !private ["s23CustomStringConvertibleP", "systemBackground"]
 - !private ["s23CustomStringConvertibleP", "white"]
-- ["13SwiftUIGraphs18DYBarChartSettingsV", "BarChartXAxisSettings"]
 - ["13SwiftUIGraphs18DYBarChartSettingsV", "Bool"]
 - ["13SwiftUIGraphs18DYBarChartSettingsV", "CGFloat"]
 - ["13SwiftUIGraphs18DYBarChartSettingsV", "Color"]
+- ["13SwiftUIGraphs18DYBarChartSettingsV", "DYBarChartXAxisSettings"]
 - !private ["13SwiftUIGraphs18DYBarChartSettingsV", "Gradient"]
 - ["13SwiftUIGraphs18DYBarChartSettingsV", "LinearGradient"]
 - ["13SwiftUIGraphs18DYBarChartSettingsV", "XAxisSettings"]
@@ -77,11 +75,13 @@ depends-member:
 - ["13SwiftUIGraphs18DYBarChartSettingsV", "showSelectionIndicator"]
 - ["13SwiftUIGraphs18DYBarChartSettingsV", "xAxisSettings"]
 - ["13SwiftUIGraphs18DYBarChartSettingsV", "yAxisSettings"]
-- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "BarChartXAxisSettings"]
+- !private ["13SwiftUIGraphs23DYBarChartXAxisSettingsV", ""]
+- !private ["13SwiftUIGraphs23DYBarChartXAxisSettingsV", "init"]
 - ["13SwiftUIGraphs19DYGridChartSettingsP", "CGFloat"]
 - ["13SwiftUIGraphs19DYGridChartSettingsP", "Color"]
+- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "DYBarChartXAxisSettings"]
+- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "DYLineChartXAxisSettings"]
 - !private ["13SwiftUIGraphs19DYGridChartSettingsP", "Gradient"]
-- !private ["13SwiftUIGraphs19DYGridChartSettingsP", "LineChartXAxisSettings"]
 - ["13SwiftUIGraphs19DYGridChartSettingsP", "LinearGradient"]
 - !private ["13SwiftUIGraphs19DYGridChartSettingsP", "StrokeStyle"]
 - ["13SwiftUIGraphs19DYGridChartSettingsP", "XAxisSettings"]
@@ -109,8 +109,8 @@ depends-member:
 - ["13SwiftUIGraphs19DYLineChartSettingsV", "Bool"]
 - ["13SwiftUIGraphs19DYLineChartSettingsV", "CGFloat"]
 - ["13SwiftUIGraphs19DYLineChartSettingsV", "Color"]
+- ["13SwiftUIGraphs19DYLineChartSettingsV", "DYLineChartXAxisSettings"]
 - !private ["13SwiftUIGraphs19DYLineChartSettingsV", "Gradient"]
-- ["13SwiftUIGraphs19DYLineChartSettingsV", "LineChartXAxisSettings"]
 - ["13SwiftUIGraphs19DYLineChartSettingsV", "LinearGradient"]
 - ["13SwiftUIGraphs19DYLineChartSettingsV", "StrokeStyle"]
 - ["13SwiftUIGraphs19DYLineChartSettingsV", "XAxisSettings"]
@@ -134,6 +134,8 @@ depends-member:
 - ["13SwiftUIGraphs19DYLineChartSettingsV", "showPointMarkers"]
 - ["13SwiftUIGraphs19DYLineChartSettingsV", "xAxisSettings"]
 - ["13SwiftUIGraphs19DYLineChartSettingsV", "yAxisSettings"]
+- !private ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", ""]
+- !private ["13SwiftUIGraphs24DYLineChartXAxisSettingsV", "init"]
 - !private ["Se", "systemBackground"]
 - !private ["SE", "systemBackground"]
 - !private ["SQ", ""]
@@ -166,8 +168,6 @@ depends-member:
 - !private ["SH", "systemBackground"]
 - !private ["SH", "top"]
 - !private ["SH", "white"]
-- !private ["13SwiftUIGraphs22LineChartXAxisSettingsV", ""]
-- !private ["13SwiftUIGraphs22LineChartXAxisSettingsV", "init"]
 - !private ["7SwiftUI14LinearGradientV", "init"]
 - !private ["s25LosslessStringConvertibleP", ""]
 - !private ["s25LosslessStringConvertibleP", "systemBackground"]
@@ -224,7 +224,6 @@ depends-member:
 - !private ["s21_ObjectiveCBridgeableP", "systemBackground"]
 depends-nominal:
 - !private "7SwiftUI10AnimatableP"
-- !private "13SwiftUIGraphs21BarChartXAxisSettingsV"
 - !private "SK"
 - !private "So10CGColorRefa"
 - !private "So9CGLineCapV"
@@ -238,8 +237,10 @@ depends-nominal:
 - !private "s17CustomReflectableP"
 - !private "s23CustomStringConvertibleP"
 - "13SwiftUIGraphs18DYBarChartSettingsV"
+- !private "13SwiftUIGraphs23DYBarChartXAxisSettingsV"
 - "13SwiftUIGraphs19DYGridChartSettingsP"
 - "13SwiftUIGraphs19DYLineChartSettingsV"
+- !private "13SwiftUIGraphs24DYLineChartXAxisSettingsV"
 - !private "Se"
 - !private "SE"
 - !private "SQ"
@@ -251,7 +252,6 @@ depends-nominal:
 - !private "s33ExpressibleByUnicodeScalarLiteralP"
 - !private "7SwiftUI8GradientV"
 - !private "SH"
-- !private "13SwiftUIGraphs22LineChartXAxisSettingsV"
 - !private "7SwiftUI14LinearGradientV"
 - !private "s25LosslessStringConvertibleP"
 - !private "s10MirrorPathP"
@@ -332,4 +332,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "f6fc21ac2e60e5f22d33c28477857d52"
+interface-hash: "897872d353bc7027176d1811beef6360"

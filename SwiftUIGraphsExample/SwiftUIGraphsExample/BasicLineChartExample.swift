@@ -28,11 +28,15 @@ struct BasicLineChartExample: View {
             }, yValueConverter: { (yValue) -> String in
                return  yValue.toDecimalString(maxFractionDigits: 0)
               //  return TimeInterval(yValue).toString() ?? ""
-            }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65,  settings: DYLineChartSettings(showPointMarkers: true, lateralPadding: (0, 0), xAxisSettings: LineChartXAxisSettings(showXAxis: true, xAxisInterval: 604800)))  // 604800 seconds per week
+            }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65,  settings: DYLineChartSettings(showPointMarkers: true, lateralPadding: (0, 0), yAxisSettings: YAxisSettings(yAxisFontSize:fontSize), xAxisSettings: DYLineChartXAxisSettings(showXAxis: true, xAxisInterval: 604800, xAxisFontSize: fontSize)))  // 604800 seconds per week
 //yAxisSettings: YAxisSettings(showYAxis: true, yAxisPosition: .leading, yAxisMinMaxOverride: (min: 0, max: Double(Int(exampleData.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), yAxisIntervalOverride: 1800)
             Spacer()
          }.padding()
        }.navigationTitle("Weight Lifting Volume")
+    }
+    
+    var fontSize: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
     }
 }
 

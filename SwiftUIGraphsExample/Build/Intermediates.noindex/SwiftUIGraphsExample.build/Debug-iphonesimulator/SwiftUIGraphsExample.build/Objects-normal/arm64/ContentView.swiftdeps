@@ -10,54 +10,55 @@ provides-member:
 - ["20SwiftUIGraphsExample20ContentView_PreviewsV", ""]
 provides-dynamic-lookup:
 depends-top-level:
+- "=="
 - "BasicBarChartExample"
-- "BasicLineChartExample"
 - "BasicPieChartExample"
 - "ContentView"
 - "ContentView_Previews"
 - "CustomYAxisIntervalExampleLineChart"
 - "HStack"
 - "Image"
+- "LineChartWithAsyncDataFetch"
 - "List"
 - "NavigationLink"
 - !private "NavigationView"
 - "PreviewProvider"
 - "RingChartAndDetailPieChartExample"
 - "Section"
-- "Spacer"
 - !private "StringLiteralType"
 - "Text"
+- "UIDevice"
 - "View"
 depends-member:
 - ["7SwiftUI10AnimatableP", ""]
 - !private ["20SwiftUIGraphsExample013BasicBarChartC0V", ""]
 - !private ["20SwiftUIGraphsExample013BasicBarChartC0V", "init"]
-- !private ["20SwiftUIGraphsExample014BasicLineChartC0V", ""]
-- !private ["20SwiftUIGraphsExample014BasicLineChartC0V", "init"]
 - !private ["20SwiftUIGraphsExample013BasicPieChartC0V", ""]
 - !private ["20SwiftUIGraphsExample013BasicPieChartC0V", "init"]
 - !private ["20SwiftUIGraphsExample22BasicPieChartViewModelC", ""]
 - ["SK", ""]
+- !private ["s7CVarArgP", "current"]
+- !private ["s7CVarArgP", "userInterfaceIdiom"]
 - !private ["s12CaseIterableP", "light"]
 - !private ["20SwiftUIGraphsExample10ChartModelC", ""]
 - ["Sl", ""]
 - !private ["7SwiftUI11ColorSchemeO", "light"]
 - ["SL", ""]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "BasicBarChartExample"]
-- !private ["20SwiftUIGraphsExample11ContentViewV", "BasicLineChartExample"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "BasicPieChartExample"]
 - ["20SwiftUIGraphsExample11ContentViewV", "Body"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "CustomYAxisIntervalExampleLineChart"]
 - ["20SwiftUIGraphsExample11ContentViewV", "Default_Body"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "HStack"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "Image"]
+- !private ["20SwiftUIGraphsExample11ContentViewV", "LineChartWithAsyncDataFetch"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "List"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "NavigationLink"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "NavigationView"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "RingChartAndDetailPieChartExample"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "Section"]
-- !private ["20SwiftUIGraphsExample11ContentViewV", "Spacer"]
 - !private ["20SwiftUIGraphsExample11ContentViewV", "Text"]
+- !private ["20SwiftUIGraphsExample11ContentViewV", "UIDevice"]
 - ["20SwiftUIGraphsExample11ContentViewV", "View"]
 - ["20SwiftUIGraphsExample11ContentViewV", ""]
 - ["20SwiftUIGraphsExample11ContentViewV", "_Default_Body"]
@@ -78,28 +79,66 @@ depends-member:
 - ["20SwiftUIGraphsExample20ContentView_PreviewsV", "init"]
 - ["20SwiftUIGraphsExample20ContentView_PreviewsV", "platform"]
 - ["20SwiftUIGraphsExample20ContentView_PreviewsV", "previews"]
+- !private ["s28CustomDebugStringConvertibleP", "current"]
+- !private ["s28CustomDebugStringConvertibleP", "none"]
+- !private ["s28CustomDebugStringConvertibleP", "some"]
+- !private ["s28CustomDebugStringConvertibleP", "userInterfaceIdiom"]
+- !private ["s17CustomReflectableP", "none"]
+- !private ["s17CustomReflectableP", "some"]
 - ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "current"]
+- !private ["s23CustomStringConvertibleP", "userInterfaceIdiom"]
 - !private ["20SwiftUIGraphsExample019CustomYAxisIntervalC9LineChartV", ""]
 - !private ["20SwiftUIGraphsExample019CustomYAxisIntervalC9LineChartV", "init"]
+- !private ["Se", "none"]
+- !private ["Se", "some"]
+- !private ["SE", "none"]
+- !private ["SE", "some"]
+- !private ["SQ", "=="]
+- !private ["SQ", "RawValue"]
 - ["SQ", ""]
+- !private ["SQ", "current"]
 - !private ["SQ", "init"]
 - !private ["SQ", "inline"]
 - !private ["SQ", "light"]
+- !private ["SQ", "none"]
+- !private ["SQ", "pad"]
+- !private ["SQ", "some"]
+- !private ["SQ", "userInterfaceIdiom"]
 - ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
+- !private ["s23ExpressibleByNilLiteralP", "none"]
+- !private ["s23ExpressibleByNilLiteralP", "some"]
 - ["s32ExpressibleByStringInterpolationP", ""]
 - !private ["s26ExpressibleByStringLiteralP", "StringLiteralType"]
 - ["s26ExpressibleByStringLiteralP", ""]
 - !private ["s26ExpressibleByStringLiteralP", "init"]
 - ["s33ExpressibleByUnicodeScalarLiteralP", ""]
+- !private ["7SwiftUI7GestureP", "none"]
+- !private ["7SwiftUI7GestureP", "some"]
 - !private ["7SwiftUI6HStackV", "init"]
+- !private ["SH", "=="]
+- !private ["SH", "RawValue"]
 - ["SH", ""]
+- !private ["SH", "current"]
 - !private ["SH", "inline"]
 - !private ["SH", "light"]
+- !private ["SH", "none"]
+- !private ["SH", "pad"]
+- !private ["SH", "some"]
+- !private ["SH", "userInterfaceIdiom"]
 - !private ["7SwiftUI5ImageV", "init"]
+- !private ["20SwiftUIGraphsExample27LineChartWithAsyncDataFetchV", ""]
+- !private ["20SwiftUIGraphsExample27LineChartWithAsyncDataFetchV", "init"]
 - !private ["7SwiftUI4ListV", "init"]
 - !private ["7SwiftUI4ListV", "navigationBarTitle"]
 - ["s25LosslessStringConvertibleP", ""]
 - ["So8NSCodingP", ""]
+- ["So8NSObjectC", ""]
+- !private ["So8NSObjectC", "current"]
+- !private ["So8NSObjectC", "userInterfaceIdiom"]
+- ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "current"]
+- !private ["So8NSObjectP", "userInterfaceIdiom"]
 - !private ["7SwiftUI9NamespaceV", "init"]
 - !private ["7SwiftUI9NamespaceV", "projectedValue"]
 - !private ["7SwiftUI9NamespaceV", "subscript"]
@@ -107,6 +146,8 @@ depends-member:
 - !private ["7SwiftUI9NamespaceV", "wrapperValue"]
 - !private ["7SwiftUI14NavigationLinkV", "init"]
 - !private ["7SwiftUI14NavigationViewV", "init"]
+- !private ["Sq", "none"]
+- !private ["Sq", "some"]
 - !private ["7SwiftUI15PreviewProviderP", "ContentView"]
 - ["7SwiftUI15PreviewProviderP", "Default_Previews"]
 - ["7SwiftUI15PreviewProviderP", "Previews"]
@@ -116,11 +157,13 @@ depends-member:
 - ["7SwiftUI15PreviewProviderP", "_previews"]
 - ["7SwiftUI15PreviewProviderP", "platform"]
 - ["7SwiftUI15PreviewProviderP", "previews"]
+- !private ["SY", "=="]
+- !private ["SY", "RawValue"]
+- !private ["SY", "pad"]
 - !private ["20SwiftUIGraphsExample021RingChartAndDetailPieeC0V", ""]
 - !private ["20SwiftUIGraphsExample021RingChartAndDetailPieeC0V", "init"]
 - !private ["7SwiftUI7SectionV", "init"]
 - ["ST", ""]
-- !private ["7SwiftUI6SpacerV", "init"]
 - !private ["7SwiftUI5StateV", "init"]
 - !private ["7SwiftUI5StateV", "projectedValue"]
 - !private ["7SwiftUI5StateV", "subscript"]
@@ -129,25 +172,32 @@ depends-member:
 - !private ["7SwiftUI11StateObjectV", "projectedValue"]
 - !private ["7SwiftUI11StateObjectV", "subscript"]
 - !private ["7SwiftUI11StateObjectV", "wrappedValue"]
+- !private ["20SwiftUIGraphsExample23StockPriceDataViewModelC", ""]
 - !private ["7SwiftUI4TextV", "init"]
 - ["s16TextOutputStreamP", ""]
 - ["s20TextOutputStreamableP", ""]
 - !private ["7SwiftUI17NavigationBarItemV16TitleDisplayModeO", "inline"]
+- !private ["So8UIDeviceC", "current"]
+- !private ["So8UIDeviceC", "userInterfaceIdiom"]
+- ["So18UIFocusEnvironmentP", ""]
+- !private ["So20UIUserInterfaceIdiomV", "=="]
+- !private ["So20UIUserInterfaceIdiomV", "RawValue"]
+- !private ["So20UIUserInterfaceIdiomV", "pad"]
 - !private ["7SwiftUI4ViewP", "BasicBarChartExample"]
-- !private ["7SwiftUI4ViewP", "BasicLineChartExample"]
 - !private ["7SwiftUI4ViewP", "BasicPieChartExample"]
 - ["7SwiftUI4ViewP", "Body"]
 - !private ["7SwiftUI4ViewP", "CustomYAxisIntervalExampleLineChart"]
 - ["7SwiftUI4ViewP", "Default_Body"]
 - !private ["7SwiftUI4ViewP", "HStack"]
 - !private ["7SwiftUI4ViewP", "Image"]
+- !private ["7SwiftUI4ViewP", "LineChartWithAsyncDataFetch"]
 - !private ["7SwiftUI4ViewP", "List"]
 - !private ["7SwiftUI4ViewP", "NavigationLink"]
 - !private ["7SwiftUI4ViewP", "NavigationView"]
 - !private ["7SwiftUI4ViewP", "RingChartAndDetailPieChartExample"]
 - !private ["7SwiftUI4ViewP", "Section"]
-- !private ["7SwiftUI4ViewP", "Spacer"]
 - !private ["7SwiftUI4ViewP", "Text"]
+- !private ["7SwiftUI4ViewP", "UIDevice"]
 - ["7SwiftUI4ViewP", ""]
 - ["7SwiftUI4ViewP", "_Default_Body"]
 - ["7SwiftUI4ViewP", "_makeView"]
@@ -157,7 +207,9 @@ depends-member:
 - !private ["7SwiftUI4ViewP", "colorScheme"]
 - !private ["7SwiftUI4ViewP", "init"]
 - !private ["7SwiftUI4ViewP", "navigationBarTitle"]
+- !private ["7SwiftUI4ViewP", "none"]
 - !private ["7SwiftUI4ViewP", "padding"]
+- !private ["7SwiftUI4ViewP", "some"]
 - !private ["7SwiftUI11ViewBuilderV", "buildBlock"]
 - !private ["7SwiftUI11ViewBuilderV", "buildExpression"]
 - !private ["7SwiftUI11ViewBuilderV", "buildFinalResult"]
@@ -167,6 +219,12 @@ depends-member:
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
 - !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
 - ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "current"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "userInterfaceIdiom"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "current"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "userInterfaceIdiom"]
+- !private ["s21_ObjectiveCBridgeableP", "none"]
+- !private ["s21_ObjectiveCBridgeableP", "some"]
 - !private ["7SwiftUI16_PreviewProviderP", "ContentView"]
 - ["7SwiftUI16_PreviewProviderP", "Default_Previews"]
 - ["7SwiftUI16_PreviewProviderP", "Previews"]
@@ -179,10 +237,10 @@ depends-member:
 depends-nominal:
 - "7SwiftUI10AnimatableP"
 - !private "20SwiftUIGraphsExample013BasicBarChartC0V"
-- !private "20SwiftUIGraphsExample014BasicLineChartC0V"
 - !private "20SwiftUIGraphsExample013BasicPieChartC0V"
 - !private "20SwiftUIGraphsExample22BasicPieChartViewModelC"
 - "SK"
+- !private "s7CVarArgP"
 - !private "s12CaseIterableP"
 - !private "20SwiftUIGraphsExample10ChartModelC"
 - "Sl"
@@ -190,39 +248,56 @@ depends-nominal:
 - "SL"
 - "20SwiftUIGraphsExample11ContentViewV"
 - "20SwiftUIGraphsExample20ContentView_PreviewsV"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
 - "s23CustomStringConvertibleP"
 - !private "20SwiftUIGraphsExample019CustomYAxisIntervalC9LineChartV"
+- !private "Se"
+- !private "SE"
 - "SQ"
 - "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s23ExpressibleByNilLiteralP"
 - "s32ExpressibleByStringInterpolationP"
 - "s26ExpressibleByStringLiteralP"
 - "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "7SwiftUI7GestureP"
 - !private "7SwiftUI6HStackV"
 - "SH"
 - !private "7SwiftUI5ImageV"
+- !private "20SwiftUIGraphsExample27LineChartWithAsyncDataFetchV"
 - !private "7SwiftUI4ListV"
 - "s25LosslessStringConvertibleP"
 - "So8NSCodingP"
+- "So8NSObjectC"
+- "So8NSObjectP"
 - !private "7SwiftUI9NamespaceV"
 - !private "7SwiftUI14NavigationLinkV"
 - !private "7SwiftUI14NavigationViewV"
+- !private "Sq"
 - "7SwiftUI15PreviewProviderP"
+- !private "SY"
 - !private "20SwiftUIGraphsExample021RingChartAndDetailPieeC0V"
 - !private "7SwiftUI7SectionV"
 - "ST"
-- !private "7SwiftUI6SpacerV"
 - !private "7SwiftUI5StateV"
 - !private "7SwiftUI11StateObjectV"
+- !private "20SwiftUIGraphsExample23StockPriceDataViewModelC"
 - !private "7SwiftUI4TextV"
 - "s16TextOutputStreamP"
 - "s20TextOutputStreamableP"
 - !private "7SwiftUI17NavigationBarItemV16TitleDisplayModeO"
+- !private "So8UIDeviceC"
+- "So18UIFocusEnvironmentP"
+- !private "So20UIUserInterfaceIdiomV"
 - "7SwiftUI4ViewP"
 - !private "7SwiftUI11ViewBuilderV"
 - "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
 - !private "s35_ExpressibleByBuiltinIntegerLiteralP"
 - !private "s34_ExpressibleByBuiltinStringLiteralP"
 - "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "10Foundation27_KeyValueCodingAndObservingP"
+- !private "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- !private "s21_ObjectiveCBridgeableP"
 - "7SwiftUI16_PreviewProviderP"
 depends-dynamic-lookup:
 depends-external:
@@ -267,4 +342,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "bd54e518c9b7c8912c1829ec16068e52"
+interface-hash: "5e6fd60bf256db7bdd5f496e7726586a"

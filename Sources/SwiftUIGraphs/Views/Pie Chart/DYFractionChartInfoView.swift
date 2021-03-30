@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// DYFractionChartInfoView. a view that displays details of the selected DYChartFraction. 
 public struct DYFractionChartInfoView: View {
     
     let title: String
@@ -14,6 +15,12 @@ public struct DYFractionChartInfoView: View {
     @Binding var selectedId: String?
     let valueConverter: (Double)->String
     
+    /// DYFractionChartInfoView initializer
+    /// - Parameters:
+    ///   - title: a title.
+    ///   - data: an array of DYChartFractions
+    ///   - selectedId: the id of the selected DYChartFraction
+    ///   - valueConverter: implement a logic to convert the double value to a string.
     public init(title: String, data: [DYChartFraction], selectedId: Binding<String?>, valueConverter: @escaping (Double)->String) {
         self.title = title
         self.data = data
@@ -43,7 +50,7 @@ struct DYFractionChartHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         let data = DYChartFraction.exampleData()
         return DYFractionChartInfoView(title: "Example data", data: data, selectedId: .constant(data.first!.id), valueConverter: { value in
-            DYChartFraction.exampleFormatter(value: value)
+            value.toCurrencyString()
         })
     }
 }

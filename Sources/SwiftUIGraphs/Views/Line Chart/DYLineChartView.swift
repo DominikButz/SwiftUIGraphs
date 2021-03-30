@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-public struct DYLineChartView: View, GridChart {
+/// DYLineChartView
+public struct DYLineChartView: View, DYGridChart {
 
     var dataPoints: [DYDataPoint]
 
@@ -34,6 +35,14 @@ public struct DYLineChartView: View, GridChart {
     
 
     
+    /// DYLineChartView initializer
+    /// - Parameters:
+    ///   - dataPoints: an array of DYDataPoints.
+    ///   - selectedIndex: the index of the selected data point.
+    ///   - xValueConverter: Implement a logic in this closure that format the x-value as string.
+    ///   - yValueConverter: Implement a logic in this closure that format the y-value as string.
+    ///   - chartFrameHeight: the height of the chart (including x-axis, if applicable). If an the x-axis view is present, it is recommended to set this value, otherwise the height might be unpredictable.
+    ///   - settings: DYLineChartSettings
     public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, chartFrameHeight:CGFloat? = nil, settings: DYLineChartSettings = DYLineChartSettings()) {
         self._selectedIndex = selectedIndex
         // sort the data points according to x values
@@ -71,7 +80,7 @@ public struct DYLineChartView: View, GridChart {
                                 if self.settings.yAxisSettings.showYAxisLines {
                                     self.yAxisGridLines().opacity(0.5)
                                 }
-                                if ((self.settings as! DYLineChartSettings).xAxisSettings as! LineChartXAxisSettings).showXAxisLines {
+                                if ((self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).showXAxisLines {
                                     self.xAxisGridLines().opacity(0.5)
                                 }
                                 
@@ -87,7 +96,7 @@ public struct DYLineChartView: View, GridChart {
                                         }
                                         self.addUserInteraction()
                                     }.transition(AnyTransition.opacity.animation(Animation.easeIn(duration: 0.8)))
-                                    
+                                
                                 }
                                 
                             }.background(settings.chartViewBackgroundColor)
@@ -102,26 +111,22 @@ public struct DYLineChartView: View, GridChart {
                             self.xAxisView()
                         }
                     }
+                    .transition(AnyTransition.opacity)
+                    .onAppear {
+                        withAnimation(.easeInOut(duration: 1.4)) {
+                            self.lineEnd = 1
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                            self.showWithAnimation = true
+                        }
+                    }
                             
                 } else {
-                    HStack {
-                        Spacer()
-                        Text("Not enough data!").padding()
-                        Spacer()
-                    }
+                    // placeholder grid in case not enough data is available
+                    self.placeholderGrid(xAxisLineCount: 12, yAxisLineCount: 10).frame(height: self.chartFrameHeight).opacity(0.5).padding()
                 }
             }
-            .onAppear {
- 
-                withAnimation(.easeInOut(duration: 1.4)) {
-                    self.lineEnd = 1
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
-                    self.showWithAnimation = true
-                }
-
-            }
+       
 
         }
         
@@ -168,7 +173,7 @@ public struct DYLineChartView: View, GridChart {
                     let totalHeight = geo.size.height
                     var xPosition: CGFloat = self.settings.lateralPadding.leading
                     let count = self.xAxisLineCount()
-                    let interval:Double = ((self.settings as! DYLineChartSettings).xAxisSettings as! LineChartXAxisSettings).xAxisInterval
+                    let interval:Double = ((self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).xAxisInterval
                     let xAxisMinMax = self.xAxisMinMax()
                     let convertedXAxisInterval = totalWidth * CGFloat(interval / (xAxisMinMax.max - xAxisMinMax.min))
                     for _ in 0..<count + 1 {
@@ -176,7 +181,7 @@ public struct DYLineChartView: View, GridChart {
                         p.addLine(to: CGPoint(x:xPosition, y: totalHeight))
                         xPosition += convertedXAxisInterval
                     }
-                }.stroke(style: ((self.settings as! DYLineChartSettings).xAxisSettings as! LineChartXAxisSettings).xAxisLineStrokeStyle)
+                }.stroke(style: ((self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).xAxisLineStrokeStyle)
                 .foregroundColor(.secondary)
             }
 
@@ -186,11 +191,14 @@ public struct DYLineChartView: View, GridChart {
     
     private func line()->some View {
       GeometryReader { geo in
-        self.pathFor(width: geo.size.width - marginSum, height: geo.size.height, closeShape: false)
-            .trim(from: 0, to: self.lineEnd)
-            .stroke(style: (self.settings as! DYLineChartSettings).lineStrokeStyle)
-            .foregroundColor((self.settings as! DYLineChartSettings).lineColor)
-
+        Group {
+            if self.dataPoints.count >= 2 {
+                self.pathFor(width: geo.size.width - marginSum, height: geo.size.height, closeShape: false)
+                    .trim(from: 0, to: self.lineEnd)
+                    .stroke(style: (self.settings as! DYLineChartSettings).lineStrokeStyle)
+                    .foregroundColor((self.settings as! DYLineChartSettings).lineColor)
+            }
+        }
       }
  
     }
@@ -201,9 +209,10 @@ public struct DYLineChartView: View, GridChart {
             .opacity(0.7)
             .mask(
                GeometryReader { geo in
-                    self.pathFor(width: geo.size.width - marginSum, height: geo.size.height, closeShape: true)
-
-                  }
+                    if self.dataPoints.count >= 2 {
+                        self.pathFor(width: geo.size.width - marginSum, height: geo.size.height, closeShape: true)
+                    }
+                }
             )
     }
     
@@ -222,7 +231,10 @@ public struct DYLineChartView: View, GridChart {
     }
     
     func drawLineWith(path: inout Path, height: CGFloat, width: CGFloat)->Path {
-        var point1 = CGPoint(x: settings.lateralPadding.leading, y: height - self.convertToYCoordinate(value: dataPoints[0].yValue, height: height))
+        
+        guard let firstYValue = dataPoints.first?.yValue else {return path}
+        
+        var point1 = CGPoint(x: settings.lateralPadding.leading, y: height - self.convertToYCoordinate(value: firstYValue, height: height))
         path.move(to: point1)
         var index:CGFloat = 0
         
@@ -415,7 +427,7 @@ public struct DYLineChartView: View, GridChart {
 
         let xAxisMinMax = self.xAxisMinMax()
    
-        let count = (xAxisMinMax.max - xAxisMinMax.min) / ((self.settings as! DYLineChartSettings).xAxisSettings as! LineChartXAxisSettings).xAxisInterval
+        let count = (xAxisMinMax.max - xAxisMinMax.min) / ((self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).xAxisInterval
         
         return Int(count)
     
@@ -429,7 +441,7 @@ public struct DYLineChartView: View, GridChart {
         var currentValue = self.xAxisMinMax().min
         for _ in 0..<(count + 1) {
             values.append(currentValue)
-            currentValue += ((self.settings as! DYLineChartSettings).xAxisSettings as! LineChartXAxisSettings).xAxisInterval
+            currentValue += ((self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).xAxisInterval
             
         }
         return values

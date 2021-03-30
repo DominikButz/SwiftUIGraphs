@@ -7,7 +7,7 @@ provides-member:
 - ["13SwiftUIGraphs22RoundedCornerRectangleV", ""]
 provides-dynamic-lookup:
 depends-top-level:
-- "-"
+- !private "-"
 - !private "/"
 - !private "Angle"
 - !private "BooleanLiteralType"
@@ -52,13 +52,10 @@ depends-member:
 - !private ["7SwiftUI10AnimatableP", "tl"]
 - !private ["7SwiftUI10AnimatableP", "tr"]
 - !private ["7SwiftUI10AnimatableP", "width"]
-- ["SK", ""]
 - !private ["So7CGPointV", "init"]
 - !private ["So6CGRectV", "size"]
 - !private ["So6CGSizeV", "height"]
 - !private ["So6CGSizeV", "width"]
-- ["Sl", ""]
-- ["SL", ""]
 - !private ["SL", "init"]
 - !private ["s28CustomDebugStringConvertibleP", "height"]
 - !private ["s28CustomDebugStringConvertibleP", "init"]
@@ -68,7 +65,7 @@ depends-member:
 - !private ["s17CustomReflectableP", "init"]
 - !private ["s17CustomReflectableP", "size"]
 - !private ["s17CustomReflectableP", "width"]
-- ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", ""]
 - !private ["s23CustomStringConvertibleP", "addArc"]
 - !private ["s23CustomStringConvertibleP", "addLine"]
 - !private ["s23CustomStringConvertibleP", "init"]
@@ -89,23 +86,15 @@ depends-member:
 - !private ["SQ", "move"]
 - !private ["SQ", "size"]
 - !private ["SQ", "width"]
-- ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
 - ["s25ExpressibleByFloatLiteralP", "FloatLiteralType"]
 - ["s25ExpressibleByFloatLiteralP", "init"]
 - !private ["s27ExpressibleByIntegerLiteralP", "IntegerLiteralType"]
 - !private ["s27ExpressibleByIntegerLiteralP", "init"]
-- ["s32ExpressibleByStringInterpolationP", ""]
-- ["s26ExpressibleByStringLiteralP", ""]
-- ["s33ExpressibleByUnicodeScalarLiteralP", ""]
-- ["SH", ""]
 - !private ["SH", "init"]
-- ["s25LosslessStringConvertibleP", ""]
 - !private ["s25LosslessStringConvertibleP", "addArc"]
 - !private ["s25LosslessStringConvertibleP", "addLine"]
 - !private ["s25LosslessStringConvertibleP", "init"]
 - !private ["s25LosslessStringConvertibleP", "move"]
-- ["So8NSCodingP", ""]
-- !private ["So8NSObjectP", ""]
 - !private ["7SwiftUI4PathV", "addArc"]
 - !private ["7SwiftUI4PathV", "addLine"]
 - !private ["7SwiftUI4PathV", "init"]
@@ -135,7 +124,6 @@ depends-member:
 - ["13SwiftUIGraphs22RoundedCornerRectangleV", "path"]
 - ["13SwiftUIGraphs22RoundedCornerRectangleV", "tl"]
 - ["13SwiftUIGraphs22RoundedCornerRectangleV", "tr"]
-- ["ST", ""]
 - !private ["7SwiftUI5ShapeP", "Angle"]
 - ["7SwiftUI5ShapeP", "AnimatableData"]
 - ["7SwiftUI5ShapeP", "Body"]
@@ -165,8 +153,6 @@ depends-member:
 - !private ["Sx", "_step"]
 - !private ["Sx", "advanced"]
 - !private ["Sx", "distance"]
-- ["s16TextOutputStreamP", ""]
-- ["s20TextOutputStreamableP", ""]
 - !private ["7SwiftUI4ViewP", "Angle"]
 - ["7SwiftUI4ViewP", "AnimatableData"]
 - ["7SwiftUI4ViewP", "Body"]
@@ -198,10 +184,8 @@ depends-member:
 - !private ["s30_CustomPlaygroundQuickLookableP", "size"]
 - !private ["s30_CustomPlaygroundQuickLookableP", "width"]
 - !private ["s35_ExpressibleByBuiltinBooleanLiteralP", "init"]
-- ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
 - ["s33_ExpressibleByBuiltinFloatLiteralP", "init"]
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
-- ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
 - !private ["s21_ObjectiveCBridgeableP", "height"]
 - !private ["s21_ObjectiveCBridgeableP", "init"]
 - !private ["s21_ObjectiveCBridgeableP", "size"]
@@ -211,42 +195,29 @@ depends-nominal:
 - "s18AdditiveArithmeticP"
 - !private "7SwiftUI5AngleV"
 - "7SwiftUI10AnimatableP"
-- "SK"
 - !private "So7CGPointV"
 - !private "So6CGRectV"
 - !private "So6CGSizeV"
-- "Sl"
-- "SL"
+- !private "SL"
 - !private "s28CustomDebugStringConvertibleP"
 - !private "s17CustomReflectableP"
-- "s23CustomStringConvertibleP"
+- !private "s23CustomStringConvertibleP"
 - !private "Se"
 - !private "SE"
 - "SQ"
-- "s43ExpressibleByExtendedGraphemeClusterLiteralP"
 - "s25ExpressibleByFloatLiteralP"
 - !private "s27ExpressibleByIntegerLiteralP"
-- "s32ExpressibleByStringInterpolationP"
-- "s26ExpressibleByStringLiteralP"
-- "s33ExpressibleByUnicodeScalarLiteralP"
-- "SH"
-- "s25LosslessStringConvertibleP"
-- "So8NSCodingP"
-- !private "So8NSObjectP"
+- !private "SH"
+- !private "s25LosslessStringConvertibleP"
 - !private "7SwiftUI4PathV"
 - "13SwiftUIGraphs22RoundedCornerRectangleV"
-- "ST"
 - "7SwiftUI5ShapeP"
 - !private "Sx"
-- "s16TextOutputStreamP"
-- "s20TextOutputStreamableP"
 - "7SwiftUI4ViewP"
 - !private "s30_CustomPlaygroundQuickLookableP"
 - !private "s35_ExpressibleByBuiltinBooleanLiteralP"
-- "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
 - "s33_ExpressibleByBuiltinFloatLiteralP"
 - !private "s35_ExpressibleByBuiltinIntegerLiteralP"
-- "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
 - !private "s21_ObjectiveCBridgeableP"
 - !private "7SwiftUI11_VectorMathP"
 depends-dynamic-lookup:

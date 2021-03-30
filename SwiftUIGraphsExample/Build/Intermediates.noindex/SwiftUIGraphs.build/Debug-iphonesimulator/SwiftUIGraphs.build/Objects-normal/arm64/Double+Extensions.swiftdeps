@@ -5,6 +5,7 @@ provides-member:
 - ["Sd", ""]
 - ["Si", ""]
 - ["Sd", "toDecimalString"]
+- ["Sd", "toCurrencyString"]
 - ["Sd", "decimalsCount"]
 - ["Sd", "percentageString"]
 - ["Si", "nearest"]
@@ -25,13 +26,13 @@ depends-top-level:
 - !private "BooleanLiteralType"
 - !private "DateComponentsFormatter"
 - "Double"
-- !private "FloatLiteralType"
+- "FloatLiteralType"
 - "Int"
-- !private "IntegerLiteralType"
+- "IntegerLiteralType"
 - !private "NSNumber"
 - !private "NumberFormatter"
 - "String"
-- !private "StringLiteralType"
+- "StringLiteralType"
 - "TernaryPrecedence"
 - "TimeInterval"
 - "UInt"
@@ -80,6 +81,7 @@ depends-member:
 - !private ["s7CVarArgP", ""]
 - !private ["s7CVarArgP", "allowedUnits"]
 - !private ["s7CVarArgP", "count"]
+- !private ["s7CVarArgP", "currencySymbol"]
 - !private ["s7CVarArgP", "hasPrefix"]
 - !private ["s7CVarArgP", "init"]
 - !private ["s7CVarArgP", "maximumFractionDigits"]
@@ -113,6 +115,7 @@ depends-member:
 - !private ["s28CustomDebugStringConvertibleP", "String"]
 - !private ["s28CustomDebugStringConvertibleP", "allowedUnits"]
 - !private ["s28CustomDebugStringConvertibleP", "count"]
+- !private ["s28CustomDebugStringConvertibleP", "currencySymbol"]
 - !private ["s28CustomDebugStringConvertibleP", "hasPrefix"]
 - !private ["s28CustomDebugStringConvertibleP", "init"]
 - !private ["s28CustomDebugStringConvertibleP", "maximumFractionDigits"]
@@ -141,6 +144,7 @@ depends-member:
 - !private ["s23CustomStringConvertibleP", ""]
 - !private ["s23CustomStringConvertibleP", "allowedUnits"]
 - !private ["s23CustomStringConvertibleP", "count"]
+- !private ["s23CustomStringConvertibleP", "currencySymbol"]
 - !private ["s23CustomStringConvertibleP", "hasPrefix"]
 - !private ["s23CustomStringConvertibleP", "init"]
 - !private ["s23CustomStringConvertibleP", "maximumFractionDigits"]
@@ -175,6 +179,7 @@ depends-member:
 - ["Sd", "decimalsCount"]
 - !private ["Sd", "init"]
 - ["Sd", "percentageString"]
+- ["Sd", "toCurrencyString"]
 - ["Sd", "toDecimalString"]
 - ["Sd", "toString"]
 - !private ["SE", "DateComponentsFormatter"]
@@ -198,6 +203,8 @@ depends-member:
 - !private ["SQ", ""]
 - !private ["SQ", "allowedUnits"]
 - !private ["SQ", "count"]
+- !private ["SQ", "currency"]
+- !private ["SQ", "currencySymbol"]
 - !private ["SQ", "decimal"]
 - !private ["SQ", "hasPrefix"]
 - !private ["SQ", "hour"]
@@ -271,6 +278,7 @@ depends-member:
 - !private ["SF", "init"]
 - ["So11NSFormatterC", ""]
 - !private ["So11NSFormatterC", "allowedUnits"]
+- !private ["So11NSFormatterC", "currencySymbol"]
 - !private ["So11NSFormatterC", "init"]
 - !private ["So11NSFormatterC", "maximumFractionDigits"]
 - !private ["So11NSFormatterC", "minimumFractionDigits"]
@@ -292,6 +300,8 @@ depends-member:
 - !private ["SH", ""]
 - !private ["SH", "allowedUnits"]
 - !private ["SH", "count"]
+- !private ["SH", "currency"]
+- !private ["SH", "currencySymbol"]
 - !private ["SH", "decimal"]
 - !private ["SH", "hasPrefix"]
 - !private ["SH", "init"]
@@ -329,6 +339,7 @@ depends-member:
 - !private ["So8NSCodingP", ""]
 - !private ["So8NSCodingP", "allowedUnits"]
 - !private ["So8NSCodingP", "count"]
+- !private ["So8NSCodingP", "currencySymbol"]
 - !private ["So8NSCodingP", "hasPrefix"]
 - !private ["So8NSCodingP", "init"]
 - !private ["So8NSCodingP", "maximumFractionDigits"]
@@ -359,6 +370,7 @@ depends-member:
 - !private ["So8NSCodingP", "zeroFormattingBehavior"]
 - !private ["So9NSCopyingP", "allowedUnits"]
 - !private ["So9NSCopyingP", "count"]
+- !private ["So9NSCopyingP", "currencySymbol"]
 - !private ["So9NSCopyingP", "hasPrefix"]
 - !private ["So9NSCopyingP", "init"]
 - !private ["So9NSCopyingP", "maximumFractionDigits"]
@@ -401,6 +413,7 @@ depends-member:
 - ["So8NSObjectC", ""]
 - !private ["So8NSObjectC", "allowedUnits"]
 - !private ["So8NSObjectC", "count"]
+- !private ["So8NSObjectC", "currencySymbol"]
 - !private ["So8NSObjectC", "hasPrefix"]
 - !private ["So8NSObjectC", "init"]
 - !private ["So8NSObjectC", "maximumFractionDigits"]
@@ -447,6 +460,7 @@ depends-member:
 - !private ["So8NSObjectP", ""]
 - !private ["So8NSObjectP", "allowedUnits"]
 - !private ["So8NSObjectP", "count"]
+- !private ["So8NSObjectP", "currencySymbol"]
 - !private ["So8NSObjectP", "hasPrefix"]
 - !private ["So8NSObjectP", "init"]
 - !private ["So8NSObjectP", "maximumFractionDigits"]
@@ -527,6 +541,7 @@ depends-member:
 - !private ["So7NSValueC", "numberWithUnsignedLong"]
 - !private ["So7NSValueC", "numberWithUnsignedLongLong"]
 - !private ["So7NSValueC", "numberWithUnsignedShort"]
+- !private ["So17NSNumberFormatterC", "currencySymbol"]
 - !private ["So17NSNumberFormatterC", "init"]
 - !private ["So17NSNumberFormatterC", "maximumFractionDigits"]
 - !private ["So17NSNumberFormatterC", "minimumFractionDigits"]
@@ -554,6 +569,7 @@ depends-member:
 - !private ["SY", "ArrayLiteralElement"]
 - !private ["SY", "Element"]
 - !private ["SY", ""]
+- !private ["SY", "currency"]
 - !private ["SY", "decimal"]
 - !private ["SY", "hour"]
 - !private ["SY", "init"]
@@ -608,6 +624,7 @@ depends-member:
 - !private ["Sy", "hasPrefix"]
 - !private ["Sy", "init"]
 - !private ["Sy", "removeFirst"]
+- !private ["So22NSNumberFormatterStyleV", "currency"]
 - !private ["So22NSNumberFormatterStyleV", "decimal"]
 - !private ["So22NSNumberFormatterStyleV", "percent"]
 - !private ["s16TextOutputStreamP", ""]
@@ -687,10 +704,10 @@ depends-member:
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "NSNumber"]
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "NumberFormatter"]
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "String"]
-- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
 - !private ["s34_ExpressibleByBuiltinStringLiteralP", "count"]
 - !private ["s34_ExpressibleByBuiltinStringLiteralP", "hasPrefix"]
-- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
 - !private ["s34_ExpressibleByBuiltinStringLiteralP", "removeFirst"]
 - !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
 - !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "count"]
@@ -720,6 +737,7 @@ depends-member:
 - !private ["s35_HasCustomAnyHashableRepresentationP", "removeFirst"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "allowedUnits"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "count"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "currencySymbol"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "hasPrefix"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "maximumFractionDigits"]
@@ -731,6 +749,7 @@ depends-member:
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "zeroFormattingBehavior"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "allowedUnits"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "count"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "currencySymbol"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "hasPrefix"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "init"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "maximumFractionDigits"]
@@ -829,8 +848,8 @@ depends-nominal:
 - !private "s35_ExpressibleByBuiltinBooleanLiteralP"
 - !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
 - !private "s33_ExpressibleByBuiltinFloatLiteralP"
-- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
-- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- "s35_ExpressibleByBuiltinIntegerLiteralP"
+- "s34_ExpressibleByBuiltinStringLiteralP"
 - !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
 - !private "7SwiftUI18_FormatSpecifiableP"
 - !private "s19_HasContiguousBytesP"
@@ -881,4 +900,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "8e7957677917bdc90fafc17ab274f859"
+interface-hash: "9e8883c4f356703134a128c402fa5dd4"

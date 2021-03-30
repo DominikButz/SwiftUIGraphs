@@ -1,6 +1,0 @@
-version: "Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)"
-options: "df319ca94eb6bf1c60178108508c87fe"
-build_time: [1613546879, 240788000]
-inputs:
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Tests/SwiftUIGraphsTests/SwiftUIGraphsTests.swift": [1613546879, 122046329]
-  "/Users/Dominik/Documents/Programmieren/Libraries/SwiftUIGraphs/Tests/SwiftUIGraphsTests/XCTestManifests.swift": [1612430243, 277968049]

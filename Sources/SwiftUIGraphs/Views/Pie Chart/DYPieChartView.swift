@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// DYPieChartView
 public struct DYPieChartView<L: View>: View {
     
     @Binding private var selectedId:String?
@@ -26,7 +27,7 @@ public struct DYPieChartView<L: View>: View {
     /// - Parameters:
     ///   - data: Array of DYChartFraction structs. The fraction values will not be reordered, so the slices will be arranged exactly in the order of the DYChartFraction structs in the array - starting at 12 o'clock, in clockwise direction.
     ///   - selectedId: The id of the DYChartFraction that is currently selected. Can be nil.
-    ///   - sliceLabelView: The view that should be displayed on top of each pie chart slice. If the fraction of a given slice is smaller than the visibility threshold defined in the DYPieChartSettings, the label view will not be shown. Return an EmptyView if no label should be displayed.
+    ///   - sliceLabelView: The view that should be displayed on top of each pie chart slice. If the fraction of a given slice is smaller than the visibility threshold defined in the DYPieChartSettings, the label view will be shown outside the pie chart. Return an EmptyView if no label should be displayed.
     ///   - shouldHideMultiFractionSliceOnSelection: This Bool determines whether or not a slice should be hidden on selection in case the DYChartFraction struct of the slice has at least two elements in the detailFractions array. Setting this value to true only makes sense if another DYPieChartView or other view (visualizing the detailFractions) is shown once the slice disappears. Default is false.
     ///   - animationNamespace: set the @Namespace property in the parent view of your main DYPieChartView and pass it into this initializer. This only has an effect in conjunction with a matchedGeometryEffect property set on a second DYPieChartView - see the property shouldHideMultiFractionSliceOnSelection.
     ///  - settings: settings struct. if you don't set this parameter, all values set will be the default values - see DYPieChartSettings for details.
@@ -191,7 +192,7 @@ struct DYPieChartView_Previews: PreviewProvider {
         DYPieChartView(data: data, selectedId: .constant(data.first!.id), sliceLabelView: { fraction in
             VStack {
                 Text(fraction.title).font(.body)
-                Text(DYChartFraction.exampleFormatter(value: fraction.value)).font(.callout).bold()
+                Text(fraction.value.toCurrencyString()).font(.callout).bold()
                 Text(fraction.value.percentageString(totalValue: data.reduce(0) { $0 + $1.value})).font(.callout)
                 
             }

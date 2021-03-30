@@ -25,12 +25,16 @@ struct BasicBarChartExample: View {
                     return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
                 }, yValueConverter: { (yValue) -> String in
                     return  yValue.toDecimalString(maxFractionDigits: 0)
-                }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(yAxisSettings: YAxisSettings(yAxisPosition: .trailing, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: BarChartXAxisSettings()))
+                }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(yAxisSettings: YAxisSettings(yAxisPosition: .trailing, yAxisFontSize: fontSize, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: fontSize)))
                 
                 Spacer()
             }.padding()
             .navigationTitle("Workout Volume")
         }
+    }
+    
+    var fontSize: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
     }
 }
 

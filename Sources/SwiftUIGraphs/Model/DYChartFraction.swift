@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// DYChartFraction
 public struct DYChartFraction: Identifiable {
     
     public var id: String
@@ -16,6 +17,13 @@ public struct DYChartFraction: Identifiable {
     public var title: String
     public var detailFractions:[DYChartFraction]
     
+    /// DY Chart Fraction initializer
+    /// - Parameters:
+    ///   - id: a unique string id. if not set, a random uuid-string will be set as default.
+    ///   - value: value of the fraction.
+    ///   - color: color of the slice in the fraction chart view.
+    ///   - title: title of the fraction.
+    ///   - detailFractions: fractions that this parent fraction struct is composed of. Make sure that the sum of the values are equal to the value of the parent DYChartFraction. Should be empty or contain at least two child DYChartFractions.
     public init(id: String? = UUID().uuidString, value: Double, color: Color = Color.random(), title: String, detailFractions: [DYChartFraction]) {
         self.id = id ?? UUID().uuidString
         self.value = value
@@ -24,6 +32,8 @@ public struct DYChartFraction: Identifiable {
         self.detailFractions = detailFractions
     }
     
+    /// example data: source https://www.statista.com/statistics/247407/average-annual-consumer-spending-in-the-us-by-type/
+    /// - Returns: an array of DYChart Fractions.
     public static func exampleData()->[DYChartFraction] {
         
         let housing = DYChartFraction(value: 20679, title: "Housing", detailFractions: [])
@@ -38,15 +48,6 @@ public struct DYChartFraction: Identifiable {
         
         return [housing, transportation, food, insurance, health, entertainment, cash, other, apparel]
     }
-    // source https://www.statista.com/statistics/247407/average-annual-consumer-spending-in-the-us-by-type/
-    public static func exampleFormatter(value: Double)->String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencySymbol = "USD"
-        formatter.maximumFractionDigits = 0
-        return formatter.string(for: value)!
-    }
     
-    
-    
+
 }

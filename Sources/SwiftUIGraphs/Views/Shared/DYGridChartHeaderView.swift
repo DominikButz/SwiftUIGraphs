@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// DYGridChartHeaderView. header view for DYBarChart and DYLineChart
 public struct DYGridChartHeaderView: View {
 
     let title: String
@@ -17,6 +18,14 @@ public struct DYGridChartHeaderView: View {
     @Binding var selectedIndex: Int
     var isLandscape: Bool
     
+    /// DYGridChartHeaderView
+    /// - Parameters:
+    ///   - title: title of the header view
+    ///   - dataPoints: array of DYDataPoints
+    ///   - selectedIndex: index of the selected DYDataPoint
+    ///   - isLandscape: set to true if the parent view is in landscape mode. Determines where the maximum value subview will be displayed.
+    ///   - xValueConverter: implement a logic to convert the double x-value to a string.
+    ///   - yValueConverter: implement a logic to convert the double y-value to a string.
     public init(title: String, dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, isLandscape: Bool,  xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String) {
         self.title = title
         let sortedData = dataPoints.sorted(by: {$0.xValue < $1.xValue})
@@ -31,25 +40,30 @@ public struct DYGridChartHeaderView: View {
         
         VStack(alignment: .leading, spacing: 5) {
            
+            HStack {
                 Text(title).font(.headline)
+                Spacer()
+            }
             if self.dataPoints.count >= 2 {
-                if self.isLandscape == false  {
-                    self.maximumValueView
-                    Divider()
-                }
-                
-                HStack {
-                    if selectedIndex >= 0 && selectedIndex <= self.dataPoints.count {
-                        Text(yValueConverter(dataPoints[selectedIndex].yValue)).font(.body).bold()
-                        Text(xValueConverter(dataPoints[selectedIndex].xValue)).foregroundColor(.secondary)
-                    }
-                    if self.isLandscape {
-                        Text(" | ")
+                Group {
+                    if self.isLandscape == false  {
                         self.maximumValueView
+                        Divider()
                     }
                     
-                    Spacer()
-                }
+                    HStack {
+                        if selectedIndex >= 0 && selectedIndex <= self.dataPoints.count {
+                            Text(yValueConverter(dataPoints[selectedIndex].yValue)).font(.body).bold()
+                            Text(xValueConverter(dataPoints[selectedIndex].xValue)).foregroundColor(.secondary)
+                        }
+                        if self.isLandscape {
+                            Text(" | ")
+                            self.maximumValueView
+                        }
+                        
+                        Spacer()
+                    }
+                }.transition(AnyTransition.opacity)
             }
             
         }

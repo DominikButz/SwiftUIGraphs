@@ -1,4 +1,0 @@
-module Introspect {
-header "Introspect-Swift.h"
-export *
-}
