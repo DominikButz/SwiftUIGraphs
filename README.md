@@ -9,7 +9,7 @@ SwiftUIGraphs is a simple Swift package for iOS and iPadOS 14.0 and later. It fe
 * Create an interactive line chart and customize the visuals: gradient below the line, x-axis, y-axis etc.
 * Create a bar chart with an appear-animation and various customization options. 
 * Create a pie chart or doughnut chart with customizable colors and a cool pop out effect to present a detail pie chart.
-* The chart views feature separate header / info views that can be replaced by custom solution easily. The pie chart additionallly features a legend view that can be replaced easily. 
+* The chart views feature separate header / info views that can be replaced by custom solutions easily. The pie chart additionallly features a legend view that can be replaced easily. 
 
 Check out the examples below for details. The folder SwiftUIGraphsExample contains an example project, make sure to check it out for more implementation details. All public structs / classes include in-code-documentation.
     
