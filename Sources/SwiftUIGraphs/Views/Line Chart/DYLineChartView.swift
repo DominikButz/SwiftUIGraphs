@@ -268,7 +268,7 @@ public struct DYLineChartView: View, DYGridChart {
                 Circle()
                     .stroke(style: (self.settings as! DYLineChartSettings).pointStrokeStyle)
                     .frame(width: (self.settings as! DYLineChartSettings).pointDiameter, height: (self.settings as! DYLineChartSettings).pointDiameter, alignment: .center)
-                    .foregroundColor((self.settings as! DYLineChartSettings).pointColor)
+                    .foregroundColor(dataPoint.pointColor ?? (self.settings as! DYLineChartSettings).pointColor)
                     .background((self.settings as! DYLineChartSettings).pointBackgroundColor)
                     .cornerRadius(5)
                     //((geo.size.width - marginSum) / CGFloat(self.dataPoints.count - 1)) * CGFloat(i) - 5
