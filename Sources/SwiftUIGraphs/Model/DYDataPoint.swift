@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 public struct DYDataPoint: Identifiable {
     
@@ -16,16 +15,13 @@ public struct DYDataPoint: Identifiable {
     /// - Parameters:
     ///   - xValue: the x-value of the data point.
     ///   - yValue: the y-value of the data point.
-    ///   - pointColor: the foreground color of the data point.
-    public init(xValue: Double, yValue: Double, pointColor: Color? = .black) {
+    public init(xValue: Double, yValue: Double) {
         self.xValue = xValue
         self.yValue = yValue
-        self.pointColor = pointColor
     }
     
     public var xValue: Double
     public var yValue: Double
-    public var pointColor: Color?
     
     /// example data: e.g. y-values are seconds.
     public static var exampleData0: [DYDataPoint] {
@@ -34,10 +30,9 @@ public struct DYDataPoint: Identifiable {
         var endDate = Date().add(units: -3, component: .hour)
         
         for _ in 0..<20 {
-          let yValue = Int.random(in: 6000 ..< 12000)
-
+            let yValue = Int.random(in: 6000 ..< 12000)
             let xValue =  endDate.timeIntervalSinceReferenceDate
-           let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
+            let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
             dataPoints.append(dataPoint)
             let randomDayDifference = Int.random(in: 1 ..< 8)
             endDate = endDate.add(units: -randomDayDifference, component: .day)
@@ -53,10 +48,9 @@ public struct DYDataPoint: Identifiable {
         var endDate = Date().add(units: -3, component: .hour)
         
         for _ in 0..<14 {
-            let randomColor = Color.random()
-          let yValue = Double.random(in: 1500 ..< 1940)
+            let yValue = Double.random(in: 1500 ..< 1940)
             let xValue =  endDate.timeIntervalSinceReferenceDate
-           let dataPoint = DYDataPoint(xValue: xValue, yValue: yValue)
+            let dataPoint = DYDataPoint(xValue: xValue, yValue: yValue)
             dataPoints.append(dataPoint)
             let randomDayDifference = Int.random(in: 1 ..< 8)
             endDate = endDate.add(units: -randomDayDifference, component: .day)
@@ -75,7 +69,7 @@ public struct DYDataPoint: Identifiable {
           let yValue = Int.random(in: 6000 ..< 12000)
 
             let xValue =  endDate.timeIntervalSinceReferenceDate
-            let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue), pointColor: Color.random())
+            let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
             dataPoints.append(dataPoint)
             let randomDayDifference = Int.random(in: 1 ..< 8)
             endDate = endDate.add(units: -randomDayDifference, component: .day)

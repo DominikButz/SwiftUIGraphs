@@ -28,7 +28,10 @@ public struct DYLineChartView: View, DYGridChart {
     var yAxisScaler: YAxisScaler
     var xValueConverter:  (Double)->String
     var yValueConverter: (Double)->String
-    
+    var diameterPerPoint: ((DYDataPoint)->CGFloat)?
+    var strokeStylePerPoint: ((DYDataPoint)->StrokeStyle)?
+    var colorPerPoint: ((DYDataPoint)->Color)?
+    var backgroundColorPerPoint: ((DYDataPoint)->Color)?
     var marginSum: CGFloat {
         return settings.lateralPadding.leading + settings.lateralPadding.trailing
     }
@@ -41,15 +44,23 @@ public struct DYLineChartView: View, DYGridChart {
     ///   - selectedIndex: the index of the selected data point.
     ///   - xValueConverter: Implement a logic in this closure that format the x-value as string.
     ///   - yValueConverter: Implement a logic in this closure that format the y-value as string.
+    ///   - diameterPerPoint: overrides the point diameter property in the DYLineChartSettings. Default value is nil (no override).
+    ///   - strokeStylePerPoint: overrides the point stroke style property in the DYLineChartSettings. Default value is nil (no override).
+    ///   - colorPerPoint: overrides the point (stroke) color property in the DYLineChartSettings. Default value is nil (no override).
+    ///   - backgroundColorPerPoint: overrides the background point color property in the DYLineChartSettings. Default value is nil (no override).
     ///   - chartFrameHeight: the height of the chart (including x-axis, if applicable). If an the x-axis view is present, it is recommended to set this value, otherwise the height might be unpredictable.
     ///   - settings: DYLineChartSettings
-    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, chartFrameHeight:CGFloat? = nil, settings: DYLineChartSettings = DYLineChartSettings()) {
+    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, diameterPerPoint: ((DYDataPoint)->CGFloat)? = nil, strokeStylePerPoint: ((DYDataPoint)->StrokeStyle)? = nil, colorPerPoint:((DYDataPoint)->Color)? = nil, backgroundColorPerPoint:((DYDataPoint)->Color)? = nil,  chartFrameHeight:CGFloat? = nil, settings: DYLineChartSettings = DYLineChartSettings()) {
         self._selectedIndex = selectedIndex
         // sort the data points according to x values
         let sortedData = dataPoints.sorted(by: {$0.xValue < $1.xValue})
         self.dataPoints = sortedData
         self.xValueConverter = xValueConverter
         self.yValueConverter = yValueConverter
+        self.diameterPerPoint = diameterPerPoint
+        self.strokeStylePerPoint = strokeStylePerPoint
+        self.colorPerPoint = colorPerPoint
+        self.backgroundColorPerPoint = backgroundColorPerPoint
         self.chartFrameHeight = chartFrameHeight
         self.settings = settings
         
@@ -266,10 +277,10 @@ public struct DYLineChartView: View, DYGridChart {
             let width = geo.size.width - marginSum
            ForEach(dataPoints) { dataPoint in
                 Circle()
-                    .stroke(style: (self.settings as! DYLineChartSettings).pointStrokeStyle)
-                    .frame(width: (self.settings as! DYLineChartSettings).pointDiameter, height: (self.settings as! DYLineChartSettings).pointDiameter, alignment: .center)
-                    .foregroundColor(dataPoint.pointColor ?? (self.settings as! DYLineChartSettings).pointColor)
-                    .background((self.settings as! DYLineChartSettings).pointBackgroundColor)
+                    .stroke(style: strokeStylePerPoint?(dataPoint) ?? (self.settings as! DYLineChartSettings).pointStrokeStyle)
+                    .frame(width: diameterPerPoint?(dataPoint) ?? (self.settings as! DYLineChartSettings).pointDiameter, height: diameterPerPoint?(dataPoint) ?? (self.settings as! DYLineChartSettings).pointDiameter, alignment: .center)
+                    .foregroundColor(colorPerPoint?(dataPoint) ?? (self.settings as! DYLineChartSettings).pointColor)
+                    .background(backgroundColorPerPoint?(dataPoint) ?? (self.settings as! DYLineChartSettings).pointBackgroundColor)
                     .cornerRadius(5)
                     //((geo.size.width - marginSum) / CGFloat(self.dataPoints.count - 1)) * CGFloat(i) - 5
                     .offset(x: settings.lateralPadding.leading + self.convertToXCoordinate(value: dataPoint.xValue, width: width) - 5, y: (height - self.convertToYCoordinate(value: dataPoint.yValue, height: height)) - 5)

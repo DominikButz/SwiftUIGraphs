@@ -11,6 +11,8 @@ import SwiftUIGraphs
 
 struct ContentView: View {
 
+    @State private var linkActive: Bool = true
+    
     var body: some View {
 
         NavigationView {
@@ -21,7 +23,7 @@ struct ContentView: View {
                 }) {
                    // NavigationLink("Weight Lifting Volume per Workout", destination: BasicLineChartExample())
                     NavigationLink("Stock Prices (asyn data fetch)", destination: LineChartWithAsyncDataFetch())
-                    NavigationLink("Workout Time per Week", destination: CustomYAxisIntervalExampleLineChart())
+                    NavigationLink("Workout Time per Week", destination: CustomYAxisIntervalExampleLineChart(), isActive: $linkActive)
                 }
                 
                 Section(header: HStack{

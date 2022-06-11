@@ -24,8 +24,8 @@ struct BasicBarChartExample: View {
                 DYBarChartView(dataPoints: exampleData, selectedIndex: $selectedDataIndex, xValueConverter: { (xValue) -> String in
                     return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
                 }, yValueConverter: { (yValue) -> String in
-                    return  yValue.toDecimalString(maxFractionDigits: 0)
-                }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(yAxisSettings: YAxisSettings(yAxisPosition: .trailing, yAxisFontSize: fontSize, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: fontSize)))
+                    return  yValue.toDecimalString(maxFractionDigits: 0)  
+                }, gradientPerBar: {(dataPoint) in  LinearGradient(colors: [Color.random(), Color.random()], startPoint: .top, endPoint: .bottom)}, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(yAxisSettings: YAxisSettings(yAxisPosition: .trailing, yAxisFontSize: fontSize, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: fontSize)))
                 
                 Spacer()
             }.padding()
