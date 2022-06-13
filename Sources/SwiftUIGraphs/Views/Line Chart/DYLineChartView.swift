@@ -16,11 +16,12 @@ public struct DYLineChartView: View, DYGridChart {
     
     @Binding var selectedIndex: Int
     
-    @State var lineOffset: CGFloat = 0 // Vertical line offset
-    @State var selectedYPos: CGFloat = 0 // User Y touch location
-    @State var isSelected: Bool = false // Is the user touching the graph
+    @State private var lineOffset: CGFloat = 0 // Vertical line offset
+    @State private var selectedYPos: CGFloat = 0 // User Y touch location
+    @State private var isSelected: Bool = false // Is the user touching the graph
     @State private var lineEnd: CGFloat = 0 // for line animation
-    @State var showWithAnimation: Bool = false
+    @State private var showLineSegments: Bool = false
+    @State private var showWithAnimation: Bool = false
 
     var chartFrameHeight: CGFloat?
     var settings: DYGridChartSettings
@@ -99,7 +100,7 @@ public struct DYLineChartView: View, DYGridChart {
                                 }
                                 
                                 if let _ = self.colorPerLineSegment {
-                                    self.lines()
+                                  self.lineSegments()
                                 } else {
                                     self.line()
                                 }
@@ -130,10 +131,11 @@ public struct DYLineChartView: View, DYGridChart {
                             self.xAxisView()
                         }
                     }
-                    .transition(AnyTransition.opacity)
+                    //.transition(AnyTransition.opacity)
                     .onAppear {
                         withAnimation(.easeInOut(duration: 1.4)) {
                             self.lineEnd = 1
+                            self.showLineSegments = true
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
                             self.showWithAnimation = true
@@ -222,29 +224,37 @@ public struct DYLineChartView: View, DYGridChart {
  
     }
     
-    // new!
-    private func lines()-> some View {
+    // for separate
+    private func lineSegments()-> some View {
         GeometryReader { geo in
-          Group {
-              if self.dataPoints.count >= 2 {
-                  ForEach(0..<dataPoints.count ) { index in
-                      
-                      Path { path in
-                         path =  self.drawLineWith(path: &path, index: index, height: geo.size.height, width: geo.size.width)
+            
+            Group {
+                if self.dataPoints.count >= 2 {
+                    ForEach(0..<dataPoints.count ) { index in
                         
-                      }
-                       .trim(from: 0, to: self.lineEnd)
-                      .stroke(style: (self.settings as! DYLineChartSettings).lineStrokeStyle)
-                      .foregroundColor(self.colorPerLineSegment!(dataPoints[index]))
-                      
-                  
-                  }
-          
-                  
-              }
-          }
+                        Path { path in
+                            path =  self.drawPathWith(path: &path, index: index, height: geo.size.height, width: geo.size.width)
+                            
+                        }
+                        .stroke(style: (self.settings as! DYLineChartSettings).lineStrokeStyle)
+                        .foregroundColor(self.colorPerLineSegment!(dataPoints[index]))
+                        
+                        
+                    }.mask(lineAnimationMaskingView(width:geo.size.width))
+                    
+                }
+            }
+            
         }
         
+    }
+    
+    /// for line drawing animation if line composed of several paths in separate colours
+    private func lineAnimationMaskingView(width: CGFloat)->some View {
+        HStack {
+            Rectangle().fill(Color.white.opacity(0.5)).frame(width: self.showLineSegments ? width : 0, alignment: .trailing)
+            Spacer()
+        }
     }
     
     private func gradient() -> some View {
@@ -263,7 +273,7 @@ public struct DYLineChartView: View, DYGridChart {
     func pathFor(width: CGFloat, height: CGFloat, closeShape: Bool)->Path {
         Path { path in
 
-           path  = self.drawLineWith(path: &path, height: height, width: width)
+           path  = self.drawCompletePathWith(path: &path, height: height, width: width)
 
             // Finally close the subpath off by looping around to the beginning point.
             if closeShape {
@@ -273,8 +283,9 @@ public struct DYLineChartView: View, DYGridChart {
             }
         }
     }
-    /// new
-    func drawLineWith(path: inout Path, index: Int, height: CGFloat, width: CGFloat) -> Path {
+    
+    ///
+    func drawPathWith(path: inout Path, index: Int, height: CGFloat, width: CGFloat) -> Path {
         
             let mappedYValue0 = self.convertToYCoordinate(value: dataPoints[index].yValue, height: height)
             let mappedXValue0 = self.convertToXCoordinate(value: dataPoints[index].xValue, width: width)
@@ -282,45 +293,28 @@ public struct DYLineChartView: View, DYGridChart {
             path.move(to: point0)
             if index < self.dataPoints.count - 1 {
                 let nextIndex = index + 1
-                let mappedYValue1 = self.convertToYCoordinate(value: dataPoints[nextIndex].yValue, height: height)
-                let mappedXValue1 = self.convertToXCoordinate(value: dataPoints[nextIndex].xValue, width: width)
-                let point1 = CGPoint(x: settings.lateralPadding.leading + mappedXValue1, y: height - mappedYValue1)
-                let midPoint = CGPoint.midPointForPoints(p1: point0, p2: point1)
- 
-                path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point0))
-                path.addQuadCurve(to: point1, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point1))
-                path.addLine(to: point1)
-            
+                
+                _ = self.connectPointsWith(path: &path, index: nextIndex, point0: point0, height: height, width: width)
 
             }
-           // point1 = point2
-            
-      //  }
 
-        
         return path
         
     }
     
-    func drawLineWith(path: inout Path, height: CGFloat, width: CGFloat)->Path {
+    func drawCompletePathWith(path: inout Path, height: CGFloat, width: CGFloat)->Path {
         
         guard let firstYValue = dataPoints.first?.yValue else {return path}
         
-        var point1 = CGPoint(x: settings.lateralPadding.leading, y: height - self.convertToYCoordinate(value: firstYValue, height: height))
-        path.move(to: point1)
-        var index:CGFloat = 0
+        var point0 = CGPoint(x: settings.lateralPadding.leading, y: height - self.convertToYCoordinate(value: firstYValue, height: height))
+        path.move(to: point0)
+        var index:Int = 0
         
         for _ in dataPoints {
             if index != 0 {
 
-                let mappedYValue = self.convertToYCoordinate(value: dataPoints[Int(index)].yValue, height: height)
-                let mappedXValue = self.convertToXCoordinate(value: dataPoints[Int(index)].xValue, width: width)
-                let point2 = CGPoint(x: settings.lateralPadding.leading + mappedXValue, y: height - mappedYValue)
-                let midPoint = CGPoint.midPointForPoints(p1: point1, p2: point2)
-                path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point1))
-                path.addQuadCurve(to: point2, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point2))
-                path.addLine(to: point2)
-                point1 = point2
+                point0 = self.connectPointsWith(path: &path, index: index, point0: point0, height: height, width: width)
+             
             }
             index += 1
             
@@ -328,6 +322,18 @@ public struct DYLineChartView: View, DYGridChart {
         
         return path
         
+    }
+    
+    private func connectPointsWith(path: inout Path, index: Int, point0: CGPoint, height: CGFloat, width: CGFloat)->CGPoint {
+
+        let mappedYValue = self.convertToYCoordinate(value: dataPoints[index].yValue, height: height)
+        let mappedXValue = self.convertToXCoordinate(value: dataPoints[index].xValue, width: width)
+        let point1 = CGPoint(x: settings.lateralPadding.leading + mappedXValue, y: height - mappedYValue)
+        let midPoint = CGPoint.midPointForPoints(p1: point0, p2: point1)
+        path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point0))
+        path.addQuadCurve(to: point1, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point1))
+        path.addLine(to: point1)
+        return point1
     }
     
     private func points()->some View {

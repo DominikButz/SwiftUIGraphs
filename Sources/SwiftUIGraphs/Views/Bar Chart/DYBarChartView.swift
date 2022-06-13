@@ -37,7 +37,7 @@ public struct DYBarChartView: View, DYGridChart {
     ///   - gradientPerBar: overrides the gradient in the DYBarChartSettings for each individual bar. Default value is nil (all bars are filled with the gradient of the DYBarChartSettings.
     ///   - chartFrameHeight: the height of the chart (including x-axis, if applicable). If an the x-axis view is present, it is recommended to set this value, otherwise the height might be unpredictable.
     ///   - settings: DYBarChart settings.
-    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, gradientPerBar: ((DYDataPoint)->LinearGradient)? = nil, chartFrameHeight:CGFloat? = nil, settings: DYBarChartSettings = DYBarChartSettings()) {
+    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String,  gradientPerBar: ((DYDataPoint)->LinearGradient)? = nil, chartFrameHeight:CGFloat? = nil, settings: DYBarChartSettings = DYBarChartSettings()) {
         self._selectedIndex = selectedIndex
         self.xValueConverter = xValueConverter
         self.yValueConverter = yValueConverter
@@ -117,7 +117,7 @@ public struct DYBarChartView: View, DYGridChart {
                                 .matchedGeometryEffect(id: "selectionIndicator", in: namespace)
                         }
                         Spacer(minLength: 0)
-                        BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, selectionFeedbackGenerator: self.generator)
+                        BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, selectedBarGradient: (settings as! DYBarChartSettings).selectedBarGradient, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, selectionFeedbackGenerator: self.generator)
                     }
                     Spacer(minLength: 0)
                     
@@ -185,6 +185,7 @@ public struct DYBarChartView: View, DYGridChart {
 internal struct BarView: View {
     
     var gradient: LinearGradient
+    var selectedBarGradient: LinearGradient? = nil
     var width: CGFloat
     var height: CGFloat
     var index: Int
@@ -198,7 +199,7 @@ internal struct BarView: View {
     var body: some View {
         
         RoundedCornerRectangle(tl: 5, tr: 5, bl: 0, br: 0)
-            .fill(gradient)
+            .fill(selectedIndex == index ? (selectedBarGradient ?? gradient) : gradient)
             .frame(width: width, height: self.currentHeight, alignment: .bottom)
             .scaleEffect(self.scale, anchor: .bottom) // for selection scale effect
             .onTapGesture {
@@ -229,8 +230,8 @@ internal struct BarView: View {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 withAnimation(Animation.spring()) {
-                    self.scale = 1
                     self.selectedIndex = index
+                    self.scale = 1
                 }
             }
             

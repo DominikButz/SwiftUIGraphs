@@ -234,6 +234,11 @@ struct RingChartAndDetailPieChartExample: View {
 
 ## Change log
 
+#### [Version 0.7.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.7.1)
+- A segmented line with several color-segments now appears with a continuous draw-style animation from left to right.
+- Added selectedBarGradient property to DYBarSettings. Setting this value will apply a separate linear gradient to the selected bar.
+- Code optimisation
+
 #### [Version 0.7](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.7)
 It is now possible to set individual colors per data point and per line section using closures in the initialiser of DYLineChartView. Additionally, it is possible to set a different color per each bar in the DYBarChartView initialiser. Special thanks to SAleksiev for his suggestion and help. 
 

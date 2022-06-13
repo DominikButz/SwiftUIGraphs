@@ -101,12 +101,14 @@ public struct DYBarChartSettings: DYGridChartSettings {
     
     public var chartViewBackgroundColor: Color
     public var gradient: LinearGradient
+    
     public var lateralPadding: (leading: CGFloat, trailing: CGFloat)
     public var yAxisSettings: YAxisSettings
     public var xAxisSettings: XAxisSettings
     
     var showSelectionIndicator: Bool
     var selectionIndicatorColor: Color
+    public var selectedBarGradient: LinearGradient?
     
     /// Initializer of DYBarChartSettings
     /// - Parameters:
@@ -115,12 +117,14 @@ public struct DYBarChartSettings: DYGridChartSettings {
     ///   - lateralPadding: adds padding, leading and trailing, before the first and after the last bar.
     ///   - showSelectionIndicator: determines if the selection indicator should be shown at the top of the grid. selection changes on bar tap.
     ///   - selectionIndicatorColor: color of the selection indicator.
+    ///   - selectedBarGradient: Linear gradient for the selected bar. Default is nil (no different gradient for the selected bar).
     ///   - yAxisSettings: y-axis settings
     ///   - xAxisSettings: x-axis settings
-    public init(chartViewBackgroundColor: Color = Color(.systemBackground), gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, Color.orange.opacity(0.8)]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), showSelectionIndicator: Bool = true, selectionIndicatorColor: Color = .orange, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: DYBarChartXAxisSettings = DYBarChartXAxisSettings()) {
+    public init(chartViewBackgroundColor: Color = Color(.systemBackground), gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, Color.orange.opacity(0.8)]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), showSelectionIndicator: Bool = true, selectionIndicatorColor: Color = .orange, selectedBarGradient: LinearGradient? = nil, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: DYBarChartXAxisSettings = DYBarChartXAxisSettings()) {
         
         self.chartViewBackgroundColor = chartViewBackgroundColor
         self.gradient = gradient
+        self.selectedBarGradient = selectedBarGradient
         self.lateralPadding = lateralPadding
         self.showSelectionIndicator = showSelectionIndicator
         self.selectionIndicatorColor = selectionIndicatorColor
