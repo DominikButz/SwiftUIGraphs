@@ -31,6 +31,7 @@ public struct DYLineChartView: View, DYGridChart {
     var diameterPerPoint: ((DYDataPoint)->CGFloat)?
     var strokeStylePerPoint: ((DYDataPoint)->StrokeStyle)?
     var colorPerPoint: ((DYDataPoint)->Color)?
+    var colorPerLineSegment: ((DYDataPoint)->Color)?
     var backgroundColorPerPoint: ((DYDataPoint)->Color)?
     var marginSum: CGFloat {
         return settings.lateralPadding.leading + settings.lateralPadding.trailing
@@ -48,9 +49,10 @@ public struct DYLineChartView: View, DYGridChart {
     ///   - strokeStylePerPoint: overrides the point stroke style property in the DYLineChartSettings. Default value is nil (no override).
     ///   - colorPerPoint: overrides the point (stroke) color property in the DYLineChartSettings. Default value is nil (no override).
     ///   - backgroundColorPerPoint: overrides the background point color property in the DYLineChartSettings. Default value is nil (no override).
+    ///   - colorPerLineSegment: sets the line color for each line segment between two points, thus overriding the lineColor property in DYLineChartSettings. Default value is nil.
     ///   - chartFrameHeight: the height of the chart (including x-axis, if applicable). If an the x-axis view is present, it is recommended to set this value, otherwise the height might be unpredictable.
     ///   - settings: DYLineChartSettings
-    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, diameterPerPoint: ((DYDataPoint)->CGFloat)? = nil, strokeStylePerPoint: ((DYDataPoint)->StrokeStyle)? = nil, colorPerPoint:((DYDataPoint)->Color)? = nil, backgroundColorPerPoint:((DYDataPoint)->Color)? = nil,  chartFrameHeight:CGFloat? = nil, settings: DYLineChartSettings = DYLineChartSettings()) {
+    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, diameterPerPoint: ((DYDataPoint)->CGFloat)? = nil, strokeStylePerPoint: ((DYDataPoint)->StrokeStyle)? = nil, colorPerPoint:((DYDataPoint)->Color)? = nil, backgroundColorPerPoint:((DYDataPoint)->Color)? = nil, colorPerLineSegment: ((DYDataPoint)->Color)? = nil,  chartFrameHeight:CGFloat? = nil, settings: DYLineChartSettings = DYLineChartSettings()) {
         self._selectedIndex = selectedIndex
         // sort the data points according to x values
         let sortedData = dataPoints.sorted(by: {$0.xValue < $1.xValue})
@@ -61,6 +63,7 @@ public struct DYLineChartView: View, DYGridChart {
         self.strokeStylePerPoint = strokeStylePerPoint
         self.colorPerPoint = colorPerPoint
         self.backgroundColorPerPoint = backgroundColorPerPoint
+        self.colorPerLineSegment = colorPerLineSegment
         self.chartFrameHeight = chartFrameHeight
         self.settings = settings
         
@@ -95,7 +98,12 @@ public struct DYLineChartView: View, DYGridChart {
                                     self.xAxisGridLines().opacity(0.5)
                                 }
                                 
-                                self.line()
+                                if let _ = self.colorPerLineSegment {
+                                    self.lines()
+                                } else {
+                                    self.line()
+                                }
+                              
                                 
                                 if self.showWithAnimation {
                                     Group {
@@ -214,6 +222,31 @@ public struct DYLineChartView: View, DYGridChart {
  
     }
     
+    // new!
+    private func lines()-> some View {
+        GeometryReader { geo in
+          Group {
+              if self.dataPoints.count >= 2 {
+                  ForEach(0..<dataPoints.count ) { index in
+                      
+                      Path { path in
+                         path =  self.drawLineWith(path: &path, index: index, height: geo.size.height, width: geo.size.width)
+                        
+                      }
+                       .trim(from: 0, to: self.lineEnd)
+                      .stroke(style: (self.settings as! DYLineChartSettings).lineStrokeStyle)
+                      .foregroundColor(self.colorPerLineSegment!(dataPoints[index]))
+                      
+                  
+                  }
+          
+                  
+              }
+          }
+        }
+        
+    }
+    
     private func gradient() -> some View {
         settings.gradient
             .padding(.bottom, 1)
@@ -239,6 +272,34 @@ public struct DYLineChartView: View, DYGridChart {
                 path.closeSubpath()
             }
         }
+    }
+    /// new
+    func drawLineWith(path: inout Path, index: Int, height: CGFloat, width: CGFloat) -> Path {
+        
+            let mappedYValue0 = self.convertToYCoordinate(value: dataPoints[index].yValue, height: height)
+            let mappedXValue0 = self.convertToXCoordinate(value: dataPoints[index].xValue, width: width)
+            let point0 = CGPoint(x: settings.lateralPadding.leading + mappedXValue0, y: height - mappedYValue0)
+            path.move(to: point0)
+            if index < self.dataPoints.count - 1 {
+                let nextIndex = index + 1
+                let mappedYValue1 = self.convertToYCoordinate(value: dataPoints[nextIndex].yValue, height: height)
+                let mappedXValue1 = self.convertToXCoordinate(value: dataPoints[nextIndex].xValue, width: width)
+                let point1 = CGPoint(x: settings.lateralPadding.leading + mappedXValue1, y: height - mappedYValue1)
+                let midPoint = CGPoint.midPointForPoints(p1: point0, p2: point1)
+ 
+                path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point0))
+                path.addQuadCurve(to: point1, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point1))
+                path.addLine(to: point1)
+            
+
+            }
+           // point1 = point2
+            
+      //  }
+
+        
+        return path
+        
     }
     
     func drawLineWith(path: inout Path, height: CGFloat, width: CGFloat)->Path {

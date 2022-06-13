@@ -91,6 +91,9 @@ struct LineChartWithAsyncDataFetch: View {
 }
 
 ```
+In the initialiser you can also set the colorPerPoint (+ diameterPerPoint, strokeStylePerPoint, backgroundColorPerPoint) and/or colorPerLineSegment to override the values in the DYLineChartSettings.
+Example:
+![SwiftUIGraphs example](gitResources/LineChartExampleColorPerPoint.gif) 
 
 ### Code example: Bar Chart
 
@@ -129,6 +132,9 @@ struct BasicBarChartExample: View {
     }
 }
 ```
+
+You can also override the bar color gradient by setting the 
+
 ### Code example: Ring Chart with detail pie chart (pop-out effect)
 
 ![SwiftUIGraphs example](gitResources/PieChartExample0.gif) 
