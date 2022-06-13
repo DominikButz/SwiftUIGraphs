@@ -18,6 +18,7 @@ public struct DYBarChartView: View, DYGridChart {
     var chartFrameHeight: CGFloat?
     var yValueConverter: (Double)->String
     var xValueConverter: (Double)->String
+    var gradientPerBar: ((DYDataPoint)->LinearGradient)?
     
     let generator = UISelectionFeedbackGenerator()
     
@@ -33,14 +34,15 @@ public struct DYBarChartView: View, DYGridChart {
     ///   - selectedIndex: index of the selected data point.
     ///   - xValueConverter: Implement a logic in this closure that format the x-value as string.
     ///   - yValueConverter:  Implement a logic in this closure  that format the y-value as string.
+    ///   - gradientPerBar: overrides the gradient in the DYBarChartSettings for each individual bar. Default value is nil (all bars are filled with the gradient of the DYBarChartSettings.
     ///   - chartFrameHeight: the height of the chart (including x-axis, if applicable). If an the x-axis view is present, it is recommended to set this value, otherwise the height might be unpredictable.
     ///   - settings: DYBarChart settings.
-    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, chartFrameHeight:CGFloat? = nil, settings: DYBarChartSettings = DYBarChartSettings()) {
+    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, gradientPerBar: ((DYDataPoint)->LinearGradient)? = nil, chartFrameHeight:CGFloat? = nil, settings: DYBarChartSettings = DYBarChartSettings()) {
         self._selectedIndex = selectedIndex
         self.xValueConverter = xValueConverter
         self.yValueConverter = yValueConverter
+        self.gradientPerBar = gradientPerBar
         // sort the data points according to x values
-    
         let sortedData = dataPoints.sorted(by: {$0.xValue < $1.xValue})
         self.dataPoints = sortedData
   
@@ -115,7 +117,7 @@ public struct DYBarChartView: View, DYGridChart {
                                 .matchedGeometryEffect(id: "selectionIndicator", in: namespace)
                         }
                         Spacer(minLength: 0)
-                        BarView(gradient: settings.gradient, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, selectionFeedbackGenerator: self.generator)
+                        BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, selectionFeedbackGenerator: self.generator)
                     }
                     Spacer(minLength: 0)
                     

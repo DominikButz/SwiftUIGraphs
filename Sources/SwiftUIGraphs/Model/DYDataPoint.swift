@@ -30,10 +30,9 @@ public struct DYDataPoint: Identifiable {
         var endDate = Date().add(units: -3, component: .hour)
         
         for _ in 0..<20 {
-          let yValue = Int.random(in: 6000 ..< 12000)
-
+            let yValue = Int.random(in: 6000 ..< 12000)
             let xValue =  endDate.timeIntervalSinceReferenceDate
-           let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
+            let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
             dataPoints.append(dataPoint)
             let randomDayDifference = Int.random(in: 1 ..< 8)
             endDate = endDate.add(units: -randomDayDifference, component: .day)
@@ -49,9 +48,9 @@ public struct DYDataPoint: Identifiable {
         var endDate = Date().add(units: -3, component: .hour)
         
         for _ in 0..<14 {
-          let yValue = Double.random(in: 1500 ..< 1940)
+            let yValue = Double.random(in: 1500 ..< 1940)
             let xValue =  endDate.timeIntervalSinceReferenceDate
-           let dataPoint = DYDataPoint(xValue: xValue, yValue: yValue)
+            let dataPoint = DYDataPoint(xValue: xValue, yValue: yValue)
             dataPoints.append(dataPoint)
             let randomDayDifference = Int.random(in: 1 ..< 8)
             endDate = endDate.add(units: -randomDayDifference, component: .day)
@@ -60,4 +59,22 @@ public struct DYDataPoint: Identifiable {
         return dataPoints
     }
     
+    /// example data: e.g. y-values are seconds. It also contains random colours for each data point.
+    public static var exampleData2: [DYDataPoint] {
+        var dataPoints:[DYDataPoint] = []
+        
+        var endDate = Date().add(units: -3, component: .hour)
+        
+        for _ in 0..<20 {
+          let yValue = Int.random(in: 6000 ..< 12000)
+
+            let xValue =  endDate.timeIntervalSinceReferenceDate
+            let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
+            dataPoints.append(dataPoint)
+            let randomDayDifference = Int.random(in: 1 ..< 8)
+            endDate = endDate.add(units: -randomDayDifference, component: .day)
+        }
+
+        return dataPoints
+    }
 }
