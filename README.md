@@ -6,7 +6,7 @@ SwiftUIGraphs is a simple Swift package for iOS and iPadOS 14.0 and later. It fe
 
 ## Feature Overview
 
-* Create an interactive line chart and customize the visuals: gradient below the line, x-axis, y-axis etc.
+* Create an interactive line chart and customize the visuals: gradient below the line, x-axis, y-axis. The package also allows setting separate data point colors and line section colors.
 * Create a bar chart with an appear-animation and various customization options. 
 * Create a pie chart or doughnut chart with customizable colors and a cool pop out effect to present a detail pie chart.
 * The chart views feature separate header / info views that can be replaced by custom solutions easily. The pie chart additionallly features a legend view that can be replaced easily. 
@@ -93,6 +93,7 @@ struct LineChartWithAsyncDataFetch: View {
 ```
 In the initialiser you can also set the colorPerPoint (+ diameterPerPoint, strokeStylePerPoint, backgroundColorPerPoint) and/or colorPerLineSegment to override the values in the DYLineChartSettings.
 Example:
+
 ![SwiftUIGraphs example](gitResources/LineChartExampleColorPerPoint.gif) 
 
 ### Code example: Bar Chart
@@ -133,7 +134,7 @@ struct BasicBarChartExample: View {
 }
 ```
 
-You can also override the bar color gradient by setting the 
+You can also override the bar color gradient by setting the gradientPerBar closure in the initialiser (default value is nil).
 
 ### Code example: Ring Chart with detail pie chart (pop-out effect)
 
@@ -232,6 +233,9 @@ struct RingChartAndDetailPieChartExample: View {
 - Special thanks to David Malan and his team of Harvard's CS50 Introduction to Computer Science. There is no better course to learn programming basics. 
 
 ## Change log
+
+#### [Version 0.7](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.7)
+It is now possible to set individual colors per data point and per line section using closures in the initialiser of DYLineChartView. Additionally, it is possible to set a different color per each bar in the DYBarChartView initialiser. Special thanks to SAleksiev for his suggestion and help. 
 
 #### [Version 0.6.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.6.1)
 Initial public release. Added documentation to all public struct and class initializers. Minor visual improvements.
