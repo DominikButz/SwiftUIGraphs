@@ -134,7 +134,8 @@ struct BasicBarChartExample: View {
 }
 ```
 
-You can also override the bar color gradient by setting the gradientPerBar closure in the initialiser (default value is nil).
+You can override the bar color gradient by setting the gradientPerBar closure in the initialiser (default value is nil).
+In order to apply a different color gradient to the selected bar, set the selectedBarGradient property in the DYBarSettings struct. 
 
 ### Code example: Ring Chart with detail pie chart (pop-out effect)
 
