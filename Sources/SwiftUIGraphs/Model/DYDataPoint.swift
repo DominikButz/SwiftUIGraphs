@@ -29,7 +29,7 @@ public struct DYDataPoint: Identifiable {
         
         var endDate = Date().add(units: -3, component: .hour)
         
-        for _ in 0..<20 {
+        for _ in 0..<50 {
             let yValue = Int.random(in: 6000 ..< 12000)
             let xValue =  endDate.timeIntervalSinceReferenceDate
             let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))

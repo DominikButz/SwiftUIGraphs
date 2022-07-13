@@ -42,13 +42,14 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
     var markerLineColor: Color
     var markerLinePointColor: Color
     
+    var interpolationType: InterpolationType
+    
     /// yAxis settings
     public var yAxisSettings: YAxisSettings
     
     /// xAxis settings
     public var xAxisSettings: XAxisSettings
 
-    
     /// DYLineChart settings
     /// - Parameters:
     ///   - chartViewBackgroundColor: background color of the chart view
@@ -66,9 +67,10 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
     ///   - selectorLinePointDiameter: the diameter of the selector point.
     ///   - selectorLineColor: color of the selector line.
     ///   - selectorLinePointColor: color of the selector line point.
+    ///   - interpolationType: Determines if the paths between the points are drawn by linear interpolation or by a quad-curve. Default value is quad-curve
     ///   - yAxisSettings: y-axis settings
     ///   - xAxisSettings: x-axis settings.
-    public init(chartViewBackgroundColor: Color = Color(.systemBackground), lineStrokeStyle:StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: Color = Color.orange, showPointMarkers: Bool = true, showGradient: Bool = true, gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, .white]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), pointDiameter: CGFloat = 10, pointStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), pointColor: Color = Color.orange, pointBackgroundColor: Color = Color(.systemBackground), selectorLineWidth: CGFloat = 2, selectorLinePointDiameter: CGFloat = 12, selectorLineColor: Color = .orange, selectorLinePointColor: Color = .orange, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: DYLineChartXAxisSettings = DYLineChartXAxisSettings()) {
+    public init(chartViewBackgroundColor: Color = Color(.systemBackground), lineStrokeStyle:StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: Color = Color.orange, showPointMarkers: Bool = true, showGradient: Bool = true, gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, .white]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), pointDiameter: CGFloat = 10, pointStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), pointColor: Color = Color.orange, pointBackgroundColor: Color = Color(.systemBackground), selectorLineWidth: CGFloat = 2, selectorLinePointDiameter: CGFloat = 12, selectorLineColor: Color = .orange, selectorLinePointColor: Color = .orange, interpolationType: InterpolationType = .quadCurve, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: DYLineChartXAxisSettings = DYLineChartXAxisSettings()) {
         
         self.chartViewBackgroundColor = chartViewBackgroundColor
         self.lineColor = lineColor
@@ -85,7 +87,7 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
         self.markerLinePointDiameter = selectorLinePointDiameter
         self.markerLineColor = selectorLineColor
         self.markerLinePointColor = selectorLinePointColor
-        
+        self.interpolationType = interpolationType
         self.yAxisSettings = yAxisSettings
         
         self.xAxisSettings = xAxisSettings
@@ -94,6 +96,11 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
     }
     
 }
+
+public enum InterpolationType {
+    case linear, quadCurve
+}
+
 
 
 /// Bar Chart settings. conforms to DYGridChartSettings protocol

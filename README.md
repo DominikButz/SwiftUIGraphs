@@ -235,6 +235,9 @@ struct RingChartAndDetailPieChartExample: View {
 
 ## Change log
 
+#### [Version 0.7.2](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.7.2)
+  Added DYLineChartSettings property that allows switching the interpolation type for path drawing between points to linear instead of quadCurve. 
+  
 #### [Version 0.7.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.7.1)
 - A segmented line with several color-segments now appears with a continuous draw-style animation from left to right.
 - Added selectedBarGradient property to DYBarSettings. Setting this value will apply a separate linear gradient to the selected bar.

@@ -230,7 +230,7 @@ public struct DYLineChartView: View, DYGridChart {
             
             Group {
                 if self.dataPoints.count >= 2 {
-                    ForEach(0..<dataPoints.count ) { index in
+                    ForEach(0..<dataPoints.count, id: \.self) { index in
                         
                         Path { path in
                             path =  self.drawPathWith(path: &path, index: index, height: geo.size.height, width: geo.size.width)
@@ -329,9 +329,11 @@ public struct DYLineChartView: View, DYGridChart {
         let mappedYValue = self.convertToYCoordinate(value: dataPoints[index].yValue, height: height)
         let mappedXValue = self.convertToXCoordinate(value: dataPoints[index].xValue, width: width)
         let point1 = CGPoint(x: settings.lateralPadding.leading + mappedXValue, y: height - mappedYValue)
-        let midPoint = CGPoint.midPointForPoints(p1: point0, p2: point1)
-        path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point0))
-        path.addQuadCurve(to: point1, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point1))
+        if (self.settings as! DYLineChartSettings).interpolationType == .quadCurve {
+            let midPoint = CGPoint.midPointForPoints(p1: point0, p2: point1)
+            path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point0))
+            path.addQuadCurve(to: point1, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point1))
+        }
         path.addLine(to: point1)
         return point1
     }

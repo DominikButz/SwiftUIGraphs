@@ -85,7 +85,7 @@ extension DYGridChart {
     func placeholderGrid(xAxisLineCount: Int, yAxisLineCount: Int)->some View {
         ZStack {
             VStack {
-                ForEach(0..<yAxisLineCount) { i in
+                ForEach(0..<yAxisLineCount, id:\.self) { i in
                     Line()
                         .stroke(style: self.settings.yAxisSettings.yAxisLineStrokeStyle)
                         .foregroundColor(.secondary)
@@ -97,7 +97,7 @@ extension DYGridChart {
                 }
             }
             HStack {
-                ForEach(0..<xAxisLineCount) { i in
+                ForEach(0..<xAxisLineCount, id: \.self) { i in
                     Line(horizontal: false)
                         .stroke(style: self.settings.yAxisSettings.yAxisLineStrokeStyle)
                         .foregroundColor(.secondary)
@@ -176,18 +176,18 @@ extension DYGridChart {
         let fontSize =  settings.xAxisSettings.xAxisFontSize
 
         let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
-        // let 5 be the padding
-        var totalWidthAllLabels: CGFloat = allLabels.map({$0.width(ctFont: ctFont) + 5}).reduce(0, +)
+        // let x be the padding
+        var count = 1
+        var totalWidthAllLabels: CGFloat = allLabels.map({$0.width(ctFont: ctFont)}).reduce(0, +)
         if totalWidthAllLabels < totalWidth {
-            return 1
+            return count
         }
         
         var labels: [String] = allLabels
-        var count = 1
-        while totalWidthAllLabels > totalWidth {
+        while totalWidthAllLabels  > totalWidth {
             count += 1
             labels = labels.indices.compactMap({
-                if $0 % 2 != 0 { return labels[$0] }
+                if $0 % count != 0 { return labels[$0] }
                    else { return nil }
             })
             totalWidthAllLabels = labels.map({$0.width(ctFont: ctFont)}).reduce(0, +)
