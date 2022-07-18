@@ -235,6 +235,11 @@ struct RingChartAndDetailPieChartExample: View {
 
 ## Change log
 
+
+#### [Version 0.8](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.8)
+- added labelView paramenter (closure) to DYLineChartView and DYBarChartView initialisers to display custom label views above data points / bars if required.
+- added (optional) additional grid line properties to x-axis and y-axis settings (currently for DYLineChartView only). 
+
 #### [Version 0.7.2](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.7.2)
   Added DYLineChartSettings property that allows switching the interpolation type for path drawing between points to linear instead of quadCurve. 
   

@@ -29,9 +29,9 @@ struct CustomYAxisIntervalExampleLineChart: View {
                 // this is for the x-Axis values - date should be short
                 return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
                 
-            }, yValueConverter: { (yValue) -> String in
+            }, labelView: nil, yValueConverter: { (yValue) -> String in
                 return TimeInterval(yValue).toString() ?? ""
-            }, colorPerPoint: {(dataPoint) in return dataPointSegmentColor(dataPoint: dataPoint)}, colorPerLineSegment: {(dataPoint) in dataPointSegmentColor(dataPoint: dataPoint)}, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65,  settings: DYLineChartSettings(lineColor: .blue, showGradient: true, gradient: LinearGradient(gradient: Gradient(colors: [.blue, Color.white]), startPoint: .top, endPoint: .bottom), pointColor: .blue, selectorLineColor: .blue, selectorLinePointColor: .blue, yAxisSettings: YAxisSettings(showYAxis: true, yAxisPosition: .trailing, yAxisViewWidth: self.yAxisWidth, yAxisFontSize: fontSize, yAxisMinMaxOverride: (min: 0, max: Double(Int(exampleData.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), yAxisIntervalOverride: 1800), xAxisSettings: DYLineChartXAxisSettings(showXAxis: true, xAxisInterval: 604800, xAxisFontSize: fontSize)))  // 604800 seconds per week
+            }, colorPerPoint: nil, colorPerLineSegment: nil, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65,  settings: DYLineChartSettings(lineColor: .blue, showGradient: true, gradient: LinearGradient(gradient: Gradient(colors: [.blue, Color.white]), startPoint: .top, endPoint: .bottom), pointColor: .blue, selectorLineColor: .blue, selectorLinePointColor: .blue, yAxisSettings: YAxisSettings(showYAxis: true, yAxisPosition: .trailing, yAxisViewWidth: self.yAxisWidth, showYAxisDataPointLines: false, showYAxisSelectedDataPointLine: true,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min: 0, max: Double(Int(exampleData.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), yAxisIntervalOverride: 1800), xAxisSettings: DYLineChartXAxisSettings(showXAxis: true, showXAxisDataPointLines: false, showXAxisSelectedDataPointLine: true, xAxisInterval: 604800, xAxisFontSize: fontSize)))  // 604800 seconds per week
             Spacer()
          }.padding()
          .navigationTitle("Workout Time Per Week")
@@ -42,6 +42,11 @@ struct CustomYAxisIntervalExampleLineChart: View {
     }
     var yAxisWidth: CGFloat {
         UIDevice.current.userInterfaceIdiom == .phone ? 40 : 45
+    }
+    
+    func labelView(dataPoint: DYDataPoint)-> AnyView {
+        
+        return Text("Text").font(.caption).foregroundColor(.blue).eraseToAnyView()
     }
     
     func dataPointSegmentColor(dataPoint: DYDataPoint)->Color {

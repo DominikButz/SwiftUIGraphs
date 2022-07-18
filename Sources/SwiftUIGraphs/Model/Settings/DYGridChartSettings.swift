@@ -13,6 +13,7 @@ public protocol DYGridChartSettings  {
     var chartViewBackgroundColor: Color {get set}
     var gradient: LinearGradient {get set}
     var lateralPadding: (leading: CGFloat, trailing: CGFloat) {get set}
+    var labelViewDefaultOffset: CGSize {get set}
     var yAxisSettings: YAxisSettings {get set }
     var xAxisSettings: XAxisSettings {get set}
 }
@@ -27,6 +28,9 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
     /// lateral padding, leading and trailing
     public var lateralPadding: (leading: CGFloat, trailing: CGFloat)
     
+    /// in case a label view is returned in initialiser, this value determines the offset of the label view relative to the data point
+    public var labelViewDefaultOffset: CGSize
+    
     var lineColor: Color
     var lineStrokeStyle:  StrokeStyle
     var showPointMarkers: Bool
@@ -37,10 +41,11 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
     var pointColor: Color
     var pointBackgroundColor: Color
     
-    var markerLineWidth: CGFloat
-    var markerLinePointDiameter: CGFloat
-    var markerLineColor: Color
-    var markerLinePointColor: Color
+    var selectorLineWidth: CGFloat
+    var selectorLinePointDiameter: CGFloat
+    var selectorLinePointColor: Color
+    var selectorLineColor: Color
+    
     
     var interpolationType: InterpolationType
     
@@ -59,6 +64,7 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
     ///   - showGradient: If set tot true, a gradient will be displayed underneath the line.
     ///   - gradient: Linear gradient underneath the line.
     ///   - lateralPadding: Set padding left to the first data point and to the right of the last data point. default 0,0.
+    ///   - labelViewDefaultOffset: In case a label view is returned in the line chart labelView closure, this value determines the offset of the label view relative to the data point. Default is (0, -12)
     ///   - pointDiameter: Diameter of the data point markers..
     ///   - pointStrokeStyle: stroke style of the data point markers.
     ///   - pointColor: color of the data point markers.
@@ -70,7 +76,7 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
     ///   - interpolationType: Determines if the paths between the points are drawn by linear interpolation or by a quad-curve. Default value is quad-curve
     ///   - yAxisSettings: y-axis settings
     ///   - xAxisSettings: x-axis settings.
-    public init(chartViewBackgroundColor: Color = Color(.systemBackground), lineStrokeStyle:StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: Color = Color.orange, showPointMarkers: Bool = true, showGradient: Bool = true, gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, .white]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), pointDiameter: CGFloat = 10, pointStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), pointColor: Color = Color.orange, pointBackgroundColor: Color = Color(.systemBackground), selectorLineWidth: CGFloat = 2, selectorLinePointDiameter: CGFloat = 12, selectorLineColor: Color = .orange, selectorLinePointColor: Color = .orange, interpolationType: InterpolationType = .quadCurve, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: DYLineChartXAxisSettings = DYLineChartXAxisSettings()) {
+    public init(chartViewBackgroundColor: Color = Color(.systemBackground), lineStrokeStyle:StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: Color = Color.orange, showPointMarkers: Bool = true, showGradient: Bool = true, gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, .white]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), labelViewDefaultOffset: CGSize = CGSize(width: 0, height: -12), pointDiameter: CGFloat = 10, pointStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), pointColor: Color = Color.orange, pointBackgroundColor: Color = Color(.systemBackground), selectorLineWidth: CGFloat = 2, selectorLinePointDiameter: CGFloat = 12, selectorLineColor: Color = .orange, selectorLinePointColor: Color = .orange, interpolationType: InterpolationType = .quadCurve, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: DYLineChartXAxisSettings = DYLineChartXAxisSettings()) {
         
         self.chartViewBackgroundColor = chartViewBackgroundColor
         self.lineColor = lineColor
@@ -79,14 +85,15 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
         self.showGradient = showGradient
         self.gradient = gradient
         self.lateralPadding = lateralPadding
+        self.labelViewDefaultOffset = labelViewDefaultOffset
         self.pointDiameter = pointDiameter
         self.pointStrokeStyle = pointStrokeStyle
         self.pointColor = pointColor
         self.pointBackgroundColor = pointBackgroundColor
-        self.markerLineWidth = selectorLineWidth
-        self.markerLinePointDiameter = selectorLinePointDiameter
-        self.markerLineColor = selectorLineColor
-        self.markerLinePointColor = selectorLinePointColor
+        self.selectorLineWidth = selectorLineWidth
+        self.selectorLinePointDiameter = selectorLinePointDiameter
+        self.selectorLineColor = selectorLineColor
+        self.selectorLinePointColor = selectorLinePointColor
         self.interpolationType = interpolationType
         self.yAxisSettings = yAxisSettings
         
@@ -110,6 +117,8 @@ public struct DYBarChartSettings: DYGridChartSettings {
     public var gradient: LinearGradient
     
     public var lateralPadding: (leading: CGFloat, trailing: CGFloat)
+    /// in case a label view is returned in initialiser, this value determines the offset of the label view relative to the data point
+    public var labelViewDefaultOffset: CGSize
     public var yAxisSettings: YAxisSettings
     public var xAxisSettings: XAxisSettings
     
@@ -122,17 +131,19 @@ public struct DYBarChartSettings: DYGridChartSettings {
     ///   - chartViewBackgroundColor: background color of the chart grid.
     ///   - gradient: Fill the bars with a linear gradient.
     ///   - lateralPadding: adds padding, leading and trailing, before the first and after the last bar.
+    ///   - labelViewDefaultOffset: In case a label view is set in the initialiser, this value determines the offset of the label view relative the y-value of the bar (its height). Default is (0, -12)
     ///   - showSelectionIndicator: determines if the selection indicator should be shown at the top of the grid. selection changes on bar tap.
     ///   - selectionIndicatorColor: color of the selection indicator.
     ///   - selectedBarGradient: Linear gradient for the selected bar. Default is nil (no different gradient for the selected bar).
     ///   - yAxisSettings: y-axis settings
     ///   - xAxisSettings: x-axis settings
-    public init(chartViewBackgroundColor: Color = Color(.systemBackground), gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, Color.orange.opacity(0.8)]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), showSelectionIndicator: Bool = true, selectionIndicatorColor: Color = .orange, selectedBarGradient: LinearGradient? = nil, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: DYBarChartXAxisSettings = DYBarChartXAxisSettings()) {
+    public init(chartViewBackgroundColor: Color = Color(.systemBackground), gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, Color.orange.opacity(0.8)]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), labelViewDefaultOffset: CGSize = CGSize(width: 0, height: -12),  showSelectionIndicator: Bool = true, selectionIndicatorColor: Color = .orange, selectedBarGradient: LinearGradient? = nil, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: DYBarChartXAxisSettings = DYBarChartXAxisSettings()) {
         
         self.chartViewBackgroundColor = chartViewBackgroundColor
         self.gradient = gradient
         self.selectedBarGradient = selectedBarGradient
         self.lateralPadding = lateralPadding
+        self.labelViewDefaultOffset = labelViewDefaultOffset
         self.showSelectionIndicator = showSelectionIndicator
         self.selectionIndicatorColor = selectionIndicatorColor
         self.yAxisSettings = yAxisSettings

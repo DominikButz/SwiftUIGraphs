@@ -24,6 +24,7 @@ public struct DYLineChartView: View, DYGridChart {
     @State private var showWithAnimation: Bool = false
 
     var chartFrameHeight: CGFloat?
+    var labelView:((DYDataPoint)->AnyView?)?
     var settings: DYGridChartSettings
     
     var yAxisScaler: YAxisScaler
@@ -44,6 +45,7 @@ public struct DYLineChartView: View, DYGridChart {
     /// - Parameters:
     ///   - dataPoints: an array of DYDataPoints.
     ///   - selectedIndex: the index of the selected data point.
+    ///   - labelView: A custom view that should appear above the respective point. Default value is nil.
     ///   - xValueConverter: Implement a logic in this closure that format the x-value as string.
     ///   - yValueConverter: Implement a logic in this closure that format the y-value as string.
     ///   - diameterPerPoint: overrides the point diameter property in the DYLineChartSettings. Default value is nil (no override).
@@ -53,7 +55,7 @@ public struct DYLineChartView: View, DYGridChart {
     ///   - colorPerLineSegment: sets the line color for each line segment between two points, thus overriding the lineColor property in DYLineChartSettings. Default value is nil.
     ///   - chartFrameHeight: the height of the chart (including x-axis, if applicable). If an the x-axis view is present, it is recommended to set this value, otherwise the height might be unpredictable.
     ///   - settings: DYLineChartSettings
-    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String, diameterPerPoint: ((DYDataPoint)->CGFloat)? = nil, strokeStylePerPoint: ((DYDataPoint)->StrokeStyle)? = nil, colorPerPoint:((DYDataPoint)->Color)? = nil, backgroundColorPerPoint:((DYDataPoint)->Color)? = nil, colorPerLineSegment: ((DYDataPoint)->Color)? = nil,  chartFrameHeight:CGFloat? = nil, settings: DYLineChartSettings = DYLineChartSettings()) {
+    public init(dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, xValueConverter: @escaping (Double)->String, labelView: ((DYDataPoint)->AnyView?)? = nil, yValueConverter: @escaping (Double)->String, diameterPerPoint: ((DYDataPoint)->CGFloat)? = nil, strokeStylePerPoint: ((DYDataPoint)->StrokeStyle)? = nil, colorPerPoint:((DYDataPoint)->Color)? = nil, backgroundColorPerPoint:((DYDataPoint)->Color)? = nil, colorPerLineSegment: ((DYDataPoint)->Color)? = nil,  chartFrameHeight:CGFloat? = nil, settings: DYLineChartSettings = DYLineChartSettings()) {
         self._selectedIndex = selectedIndex
         // sort the data points according to x values
         let sortedData = dataPoints.sorted(by: {$0.xValue < $1.xValue})
@@ -66,6 +68,7 @@ public struct DYLineChartView: View, DYGridChart {
         self.backgroundColorPerPoint = backgroundColorPerPoint
         self.colorPerLineSegment = colorPerLineSegment
         self.chartFrameHeight = chartFrameHeight
+        self.labelView = labelView
         self.settings = settings
         
         var min =  dataPoints.map({$0.yValue}).min() ?? 0
@@ -92,12 +95,26 @@ public struct DYLineChartView: View, DYGridChart {
                             }
                             ZStack {
                                 
-                                if self.settings.yAxisSettings.showYAxisLines {
+                                if self.settings.yAxisSettings.showYAxisGridLines {
                                     self.yAxisGridLines().opacity(0.5)
                                 }
-                                if ((self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).showXAxisLines {
+                                if ((self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).showXAxisGridLines {
                                     self.xAxisGridLines().opacity(0.5)
                                 }
+                                
+                                if (self.settings.xAxisSettings as! DYLineChartXAxisSettings).showXAxisDataPointLines {
+                                    self.dataPointMarkerLines(isXAxis: true)
+                                }
+                                
+                                if self.settings.yAxisSettings.showYAxisDataPointLines {
+                                    self.dataPointMarkerLines(isXAxis: false)
+                                }
+                                
+                                if self.showWithAnimation {
+                                    self.selectedDataPointAxisLines()  // horizontal and/ or vertical line emanating from selected marker point
+                                        .transition(AnyTransition.opacity.animation(Animation.easeIn(duration: 0.8)))
+                                }
+                                
                                 
                                 if let _ = self.colorPerLineSegment {
                                   self.lineSegments()
@@ -114,6 +131,7 @@ public struct DYLineChartView: View, DYGridChart {
                                         if (self.settings as! DYLineChartSettings).showPointMarkers {
                                             self.points()
                                         }
+                                        self.pointLabelViews()
                                         self.addUserInteraction()
                                     }.transition(AnyTransition.opacity.animation(Animation.easeIn(duration: 0.8)))
                                 
@@ -186,6 +204,39 @@ public struct DYLineChartView: View, DYGridChart {
     }
 //
 //
+    
+    private func dataPointMarkerLines(isXAxis: Bool)->some View {
+        let xAxisSettings = ((self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings)
+        let yAxisSettings = (self.settings as! DYLineChartSettings).yAxisSettings
+        
+        let strokeStyle = isXAxis ? xAxisSettings.xAxisDataPointLinesStrokeStyle : yAxisSettings.yAxisDataPointLinesStrokeStyle
+        let color = isXAxis ? xAxisSettings.xAxisDataPointLinesColor : yAxisSettings.yAxisDataPointLinesColor
+        
+        return GeometryReader { geo in
+            let totalHeight = geo.size.height
+            let totalWidth = geo.size.width - marginSum
+            
+                Path { p in
+                    for point in self.dataPoints {
+                        let xPosition = self.convertToXCoordinate(value: point.xValue, width: totalWidth)
+                        let yPosition = totalHeight - self.convertToYCoordinate(value: point.yValue, height: totalHeight)
+                        p.move(to: CGPoint(x: xPosition, y: yPosition))
+                        if isXAxis {
+                            p.addLine(to: CGPoint(x: xPosition, y: totalHeight))
+                        } else {
+                            let xValue  = self.settings.yAxisSettings.yAxisPosition == .trailing ? totalWidth : self.settings.lateralPadding.leading
+                            p.addLine(to: CGPoint(x: xValue, y: yPosition))
+                        }
+                    }
+
+                }.stroke(style: strokeStyle)
+                    .foregroundColor(color)
+
+        }
+    }
+    
+
+    
     private func xAxisGridLines()-> some View {
         GeometryReader { geo in
             VStack(spacing: 0) {
@@ -351,12 +402,61 @@ public struct DYLineChartView: View, DYGridChart {
                     .foregroundColor(colorPerPoint?(dataPoint) ?? (self.settings as! DYLineChartSettings).pointColor)
                     .background(backgroundColorPerPoint?(dataPoint) ?? (self.settings as! DYLineChartSettings).pointBackgroundColor)
                     .cornerRadius(5)
-                    //((geo.size.width - marginSum) / CGFloat(self.dataPoints.count - 1)) * CGFloat(i) - 5
                     .offset(x: settings.lateralPadding.leading + self.convertToXCoordinate(value: dataPoint.xValue, width: width) - 5, y: (height - self.convertToYCoordinate(value: dataPoint.yValue, height: height)) - 5)
             }
        }
         
     }
+    
+    private func pointLabelViews()-> some View {
+        GeometryReader { geo in
+            
+            let height = geo.size.height
+            let width = geo.size.width - marginSum
+            ForEach(dataPoints) { dataPoint in
+                
+                self.labelView?(dataPoint)
+                    .position(x: settings.lateralPadding.leading + self.convertToXCoordinate(value: dataPoint.xValue, width: width), y: (height - self.convertToYCoordinate(value: dataPoint.yValue, height: height)))
+                    .offset(x: self.settings.labelViewDefaultOffset.width, y:  self.settings.labelViewDefaultOffset.height)
+           
+                
+            }
+        }
+        
+    }
+    
+    // selection point x and y axis marker lines
+    private func selectedDataPointAxisLines()-> some View {
+        
+        GeometryReader { geo in
+            let height = geo.size.height
+            let width = geo.size.width - marginSum
+            let selectedDataPoint = self.dataPoints[self.selectedIndex]
+            let xValue = self.convertToXCoordinate(value: selectedDataPoint.xValue, width: width)
+            let yValue = height - self.convertToYCoordinate(value: selectedDataPoint.yValue, height: height)
+            
+            if (( self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).showXAxisSelectedDataPointLine {
+                Path { p in  // vertical from selected point to x-axis
+                    p.move(to: CGPoint(x: xValue, y: yValue))
+                    p.addLine(to: CGPoint(x: xValue, y: height))
+                }.stroke(style:(( self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).xAxisSelectedDataPointLineStrokeStyle)
+                    .foregroundColor( (( self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).xAxisSelectedDataPointLineColor)
+                    .opacity(isSelected ? 0 : 1)
+            }
+            
+            if self.settings.yAxisSettings.showYAxisSelectedDataPointLine {
+                Path { p in  // horizontal from selected point to y-axis
+                    p.move(to: CGPoint(x: xValue, y: yValue))
+                    let xCoordinate = self.settings.yAxisSettings.yAxisPosition  == .trailing ? width : self.settings.lateralPadding.leading
+                    p.addLine(to: CGPoint(x: xCoordinate, y: yValue))
+                }.stroke(style:self.settings.yAxisSettings.yAxisSelectedDataPointLineStrokeStyle)
+                    .foregroundColor(self.settings.yAxisSettings.yAxisSelectedDataPointLineColor)
+                    .opacity(isSelected ? 0 : 1)
+            }
+        }
+        
+    }
+    
     
     private func addUserInteraction() -> some View {
       GeometryReader { geo in
@@ -367,26 +467,53 @@ public struct DYLineChartView: View, DYGridChart {
 
             ZStack(alignment: .leading) {
                 
-                (self.settings as! DYLineChartSettings).markerLineColor
+                (self.settings as! DYLineChartSettings).selectorLineColor
                                 .frame(width: 2)
                                 .opacity(self.isSelected ? 1 : 0) // hide the vertical indicator line if user not touching the chart
                                 .overlay(
                                     Circle()
                                         .frame(width: 24, height: 24, alignment: .center)
-                                        .foregroundColor((self.settings as! DYLineChartSettings).markerLinePointColor)
+                                        .foregroundColor((self.settings as! DYLineChartSettings).selectorLinePointColor)
                                         .opacity(0.2)
                                         .overlay(
                                             Circle()
                                                 .fill()
-                                                .frame(width: (self.settings as! DYLineChartSettings).markerLinePointDiameter, height: (self.settings as! DYLineChartSettings).markerLinePointDiameter, alignment: .center)
-                                                .foregroundColor((self.settings as! DYLineChartSettings).markerLinePointColor)
+                                                .frame(width: (self.settings as! DYLineChartSettings).selectorLinePointDiameter, height: (self.settings as! DYLineChartSettings).selectorLinePointDiameter, alignment: .center)
+                                                .foregroundColor((self.settings as! DYLineChartSettings).selectorLinePointColor)
                                         )
                                         //CGFloat(self.dataPoints.count) - self.convertToYCoordinate(value: Double(selectedYPos), height: height)
                      //+ CGFloat(self.dataPoints.count)
-                                        .offset(x: 0, y: isSelected ? selectedYPos - height + (self.settings as! DYLineChartSettings).markerLinePointDiameter :  (self.settings as! DYLineChartSettings).markerLinePointDiameter - self.convertToYCoordinate(value: dataPoints[selectedIndex].yValue, height: height))
+                                        .offset(x: 0, y: isSelected ? selectedYPos - height + (self.settings as! DYLineChartSettings).selectorLinePointDiameter :  (self.settings as! DYLineChartSettings).selectorLinePointDiameter - self.convertToYCoordinate(value: dataPoints[selectedIndex].yValue, height: height))
                                     , alignment: .bottom)
                     .offset(x: isSelected ? lineOffset : settings.lateralPadding.leading + self.convertToXCoordinate(value: dataPoints[selectedIndex].xValue, width: width), y: 0)
                                 .animation(Animation.spring().speed(4))
+                
+//                // selection point x and y axis marker lines
+//
+//                let selectedDataPoint = self.dataPoints[self.selectedIndex]
+//                let xValue = self.convertToXCoordinate(value: selectedDataPoint.xValue, width: width)
+//                let yValue = height - self.convertToYCoordinate(value: selectedDataPoint.yValue, height: height)
+//
+//                if (( self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).showXAxisSelectedDataPointLine {
+//                    Path { p in  // vertical from selected point to x-axis
+//                        p.move(to: CGPoint(x: xValue, y: yValue))
+//                        p.addLine(to: CGPoint(x: xValue, y: height))
+//                    }.stroke(style:(( self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).xAxisSelectedDataPointLineStrokeStyle)
+//                        .foregroundColor( (( self.settings as! DYLineChartSettings).xAxisSettings as! DYLineChartXAxisSettings).xAxisSelectedDataPointLineColor)
+//                        .opacity(isSelected ? 0 : 1)
+//                }
+//
+//                if self.settings.yAxisSettings.showYAxisSelectedDataPointLine {
+//                    Path { p in  // horizontal from selected point to y-axis
+//                        p.move(to: CGPoint(x: xValue, y: yValue))
+//                        let xCoordinate = self.settings.yAxisSettings.yAxisPosition  == .trailing ? width : self.settings.lateralPadding.leading
+//                        p.addLine(to: CGPoint(x: xCoordinate, y: yValue))
+//                    }.stroke(style:self.settings.yAxisSettings.yAxisSelectedDataPointLineStrokeStyle)
+//                        .foregroundColor(self.settings.yAxisSettings.yAxisSelectedDataPointLineColor)
+//                        .opacity(isSelected ? 0 : 1)
+//                }
+                
+                
                 
                 Color.white.opacity(0.1)
                     .gesture(

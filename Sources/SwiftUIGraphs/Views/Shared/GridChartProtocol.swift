@@ -16,6 +16,7 @@ protocol DYGridChart: View {
     var settings: DYGridChartSettings {get set}
     var marginSum: CGFloat {get}
     var chartFrameHeight: CGFloat? {get set}
+    var labelView:((DYDataPoint)->AnyView?)? {get set}
     var yValueConverter: (Double)->String {get set}
     var xValueConverter: (Double)->String {get set}
     
@@ -73,7 +74,7 @@ extension DYGridChart {
                     }
 
                     
-                }.stroke(style: settings.yAxisSettings.yAxisLineStrokeStyle)
+                }.stroke(style: settings.yAxisSettings.yAxisGridLinesStrokeStyle)
                 .foregroundColor(.secondary)
                 
             }
@@ -81,13 +82,15 @@ extension DYGridChart {
         }
     }
     
+
+    
     // render placeholder grid with x vertical and x horizontal lines
     func placeholderGrid(xAxisLineCount: Int, yAxisLineCount: Int)->some View {
         ZStack {
             VStack {
                 ForEach(0..<yAxisLineCount, id:\.self) { i in
                     Line()
-                        .stroke(style: self.settings.yAxisSettings.yAxisLineStrokeStyle)
+                        .stroke(style: self.settings.yAxisSettings.yAxisGridLinesStrokeStyle)
                         .foregroundColor(.secondary)
                         .frame(height:1)
                     
@@ -99,7 +102,7 @@ extension DYGridChart {
             HStack {
                 ForEach(0..<xAxisLineCount, id: \.self) { i in
                     Line(horizontal: false)
-                        .stroke(style: self.settings.yAxisSettings.yAxisLineStrokeStyle)
+                        .stroke(style: self.settings.yAxisSettings.yAxisGridLinesStrokeStyle)
                         .foregroundColor(.secondary)
                         .frame(width:1)
                         if i < xAxisLineCount - 1 {

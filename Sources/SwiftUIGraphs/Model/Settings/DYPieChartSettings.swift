@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  DYPieChartSettings.swift
 //  
 //
 //  Created by Dominik Butz on 25/3/2021.
