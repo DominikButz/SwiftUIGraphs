@@ -20,6 +20,13 @@ struct LineChartWithAsyncDataFetch: View {
                             viewModel.loadDataPoints()
                         }).textFieldStyle(RoundedBorderTextFieldStyle()).font(.headline).foregroundColor(.orange).padding()
                         
+                        if self.viewModel.token == "" {
+                            HStack {
+                                Text("Get a free auth token from https://iexcloud.io to get started.").foregroundColor(.red)
+                                Spacer()
+                            }.padding()
+                        }
+                        
                         DYGridChartHeaderView(title: "\(self.viewModel.stockSymbol) Share Price, last 30 days", dataPoints: self.viewModel.dataPoints, selectedIndex: self.$viewModel.selectedIndex, isLandscape: proxy.size.height < proxy.size.width, xValueConverter: { (xValue) -> String in
                         return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy")
                     }, yValueConverter: { (yValue) -> String in

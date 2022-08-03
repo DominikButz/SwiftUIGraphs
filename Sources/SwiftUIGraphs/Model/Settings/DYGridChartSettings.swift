@@ -33,6 +33,7 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
     
     var lineColor: Color
     var lineStrokeStyle:  StrokeStyle
+    var lineAnimationDuration: TimeInterval
     var showPointMarkers: Bool
     var showGradient: Bool
 
@@ -60,6 +61,7 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
     ///   - chartViewBackgroundColor: background color of the chart view
     ///   - lineStrokeStyle: The stroke style of the line graph.
     ///   - lineColor: The color of the line graph.
+    ///   - lineAnimationDuration: the duration in seconds during which the line is drawn when the view appears.
     ///   - showPointMarkers: This boolean determines whether or not to show the data points.
     ///   - showGradient: If set tot true, a gradient will be displayed underneath the line.
     ///   - gradient: Linear gradient underneath the line.
@@ -76,11 +78,12 @@ public struct  DYLineChartSettings:  DYGridChartSettings {
     ///   - interpolationType: Determines if the paths between the points are drawn by linear interpolation or by a quad-curve. Default value is quad-curve
     ///   - yAxisSettings: y-axis settings
     ///   - xAxisSettings: x-axis settings.
-    public init(chartViewBackgroundColor: Color = Color(.systemBackground), lineStrokeStyle:StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: Color = Color.orange, showPointMarkers: Bool = true, showGradient: Bool = true, gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, .white]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), labelViewDefaultOffset: CGSize = CGSize(width: 0, height: -12), pointDiameter: CGFloat = 10, pointStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), pointColor: Color = Color.orange, pointBackgroundColor: Color = Color(.systemBackground), selectorLineWidth: CGFloat = 2, selectorLinePointDiameter: CGFloat = 12, selectorLineColor: Color = .orange, selectorLinePointColor: Color = .orange, interpolationType: InterpolationType = .quadCurve, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: DYLineChartXAxisSettings = DYLineChartXAxisSettings()) {
+    public init(chartViewBackgroundColor: Color = Color(.systemBackground), lineStrokeStyle:StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: Color = Color.orange, lineAnimationDuration: TimeInterval = 1.4, showPointMarkers: Bool = true, showGradient: Bool = true, gradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color.orange, .white]), startPoint: .top, endPoint: .bottom), lateralPadding: (leading: CGFloat, trailing: CGFloat) = (0, 0), labelViewDefaultOffset: CGSize = CGSize(width: 0, height: -12), pointDiameter: CGFloat = 10, pointStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), pointColor: Color = Color.orange, pointBackgroundColor: Color = Color(.systemBackground), selectorLineWidth: CGFloat = 2, selectorLinePointDiameter: CGFloat = 12, selectorLineColor: Color = .orange, selectorLinePointColor: Color = .orange, interpolationType: InterpolationType = .quadCurve, yAxisSettings: YAxisSettings = YAxisSettings(), xAxisSettings: DYLineChartXAxisSettings = DYLineChartXAxisSettings()) {
         
         self.chartViewBackgroundColor = chartViewBackgroundColor
         self.lineColor = lineColor
         self.lineStrokeStyle = lineStrokeStyle
+        self.lineAnimationDuration = lineAnimationDuration
         self.showPointMarkers = showPointMarkers
         self.showGradient = showGradient
         self.gradient = gradient

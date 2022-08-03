@@ -235,6 +235,8 @@ struct RingChartAndDetailPieChartExample: View {
 
 ## Change log
 
+#### [Version 0.8.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.8.1)
+Added lineAnimationDuration property to DYLineChartSettings. 
 
 #### [Version 0.8](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.8)
 - added labelView paramenter (closure) to DYLineChartView and DYBarChartView initialisers to display custom label views above data points / bars if required.

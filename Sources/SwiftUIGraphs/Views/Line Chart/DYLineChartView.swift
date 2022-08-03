@@ -151,11 +151,12 @@ public struct DYLineChartView: View, DYGridChart {
                     }
                     //.transition(AnyTransition.opacity)
                     .onAppear {
-                        withAnimation(.easeInOut(duration: 1.4)) {
+                     
+                        withAnimation(.easeIn(duration: (self.settings as! DYLineChartSettings).lineAnimationDuration)) {
                             self.lineEnd = 1
                             self.showLineSegments = true
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + (self.settings as! DYLineChartSettings).lineAnimationDuration) {
                             self.showWithAnimation = true
                         }
                     }
