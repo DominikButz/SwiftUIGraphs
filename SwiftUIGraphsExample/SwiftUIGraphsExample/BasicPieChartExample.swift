@@ -48,7 +48,7 @@ struct BasicPieChartExample: View {
             
             DYPieChartView(data: viewModel.data, selectedId: $viewModel.selectedId, sliceLabelView: {fraction in
                 self.sliceLabelView(fraction: fraction, data: viewModel.data)
-            }, animationNamespace: animationNamespace, settings: DYPieChartSettings(minimumFractionForSliceLabelOffset: 0.11))
+            }, animationNamespace: animationNamespace, settings: DYPieChartSettings(minimumFractionForSliceLabelOffset: 0.11, allowUserInteraction: false))
             .background(Circle().fill(Color(.systemBackground)).shadow(radius: 5))
             .padding(10)
             

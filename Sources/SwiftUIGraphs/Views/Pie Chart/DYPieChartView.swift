@@ -49,15 +49,17 @@ public struct DYPieChartView<L: View>: View {
                     if self.showSliceCondition(fraction: fraction) {
                         PieChartSlice(startAngle: self.startAngleFor(fraction: fraction) , endAngle: self.endAngleFor(fraction: fraction))
                             .fill(fraction.color, opacity: 1, strokeWidth: settings.sliceOutlineWidth, strokeColor: settings.sliceOutlineColor)
-                            .scaleEffect(self.selectedId == fraction.id ? settings.selectedSliceScaleEffect : 1, anchor: .center)
-                            .shadow(radius: self.selectedId == fraction.id ? 5 : 0)
+                            .scaleEffect(self.selectedId == fraction.id && self.settings.allowUserInteraction ? settings.selectedSliceScaleEffect : 1, anchor: .center)
+                            .shadow(radius: self.selectedId == fraction.id && self.settings.allowUserInteraction ? 5 : 0)
                             .matchedGeometryEffect(id: fraction.id, in: animationNamespace)
                             .onTapGesture {
-                                withAnimation(.default) {
-                                    if self.selectedId != fraction.id {
-                                        self.selectedId = fraction.id
-                                    } else {
-                                        self.selectedId = nil
+                                if self.settings.allowUserInteraction {
+                                    withAnimation(.default) {
+                                        if self.selectedId != fraction.id {
+                                            self.selectedId = fraction.id
+                                        } else {
+                                            self.selectedId = nil
+                                        }
                                     }
                                 }
                             }

@@ -235,6 +235,9 @@ struct RingChartAndDetailPieChartExample: View {
 
 ## Change log
 
+#### [Version 0.8.2](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.8.2)
+Added allowUserInteration parameter to all three chart type settings (default is true).
+
 #### [Version 0.8.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.8.1)
 Added lineAnimationDuration property to DYLineChartSettings. 
 

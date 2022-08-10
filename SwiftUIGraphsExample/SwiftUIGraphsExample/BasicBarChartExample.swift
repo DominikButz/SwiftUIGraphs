@@ -26,7 +26,7 @@ struct BasicBarChartExample: View {
                     return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
                 }, yValueConverter: { (yValue) -> String in
                     return  yValue.toDecimalString(maxFractionDigits: 0)
-                }, gradientPerBar: nil, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(selectionIndicatorColor: .green, selectedBarGradient: LinearGradient(colors: [.green, .green.opacity(0.8)], startPoint: .top, endPoint: .bottom) , yAxisSettings: YAxisSettings(yAxisPosition: .trailing,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: fontSize)))
+                }, gradientPerBar: nil, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(selectionIndicatorColor: .green, selectedBarGradient: LinearGradient(colors: [.green, .green.opacity(0.8)], startPoint: .top, endPoint: .bottom), yAxisSettings: YAxisSettings(yAxisPosition: .trailing,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: fontSize)))
                 
                 Spacer()
             }.padding()

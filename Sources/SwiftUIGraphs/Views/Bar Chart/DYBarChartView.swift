@@ -128,7 +128,7 @@ public struct DYBarChartView: View, DYGridChart {
                                 .matchedGeometryEffect(id: "selectionIndicator", in: namespace)
                         }
                         Spacer(minLength: 0)
-                        BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, selectedBarGradient: (settings as! DYBarChartSettings).selectedBarGradient, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, labelView: self.labelView?(dataPoint), labelOffset: self.settings.labelViewDefaultOffset, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, selectionFeedbackGenerator: self.generator)
+                        BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, selectedBarGradient: (settings as! DYBarChartSettings).selectedBarGradient, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, labelView: self.labelView?(dataPoint), labelOffset: self.settings.labelViewDefaultOffset, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, allowUserInteraction: self.settings.allowUserInteraction, selectionFeedbackGenerator: self.generator)
 
                     }
                      Spacer(minLength: 0)
@@ -278,6 +278,7 @@ internal struct BarView: View {
     @State var currentHeight: CGFloat = 0
     @State var scale:CGFloat = 1
     @Binding var selectedIndex: Int
+    var allowUserInteraction: Bool
     var selectionFeedbackGenerator: UISelectionFeedbackGenerator
     
     var body: some View {
@@ -310,7 +311,7 @@ internal struct BarView: View {
     
     func updateSelectionIfNeeded() {
         
-        if self.selectedIndex != self.index {
+        if self.selectedIndex != self.index && self.allowUserInteraction  {
             
             self.selectionFeedbackGenerator.selectionChanged() // haptic feedback
             

@@ -515,17 +515,18 @@ public struct DYLineChartView: View, DYGridChart {
 //                }
                 
                 
-                
-                Color.white.opacity(0.1)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { dragValue in
-                               dragOnChanged(value: dragValue, geo: geo)
-                            }
-                            .onEnded { dragValue in
-                                dragOnEnded(value: dragValue, geo: geo)
-                            }
-                    )
+                if self.settings.allowUserInteraction {
+                    Color.white.opacity(0.1)
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { dragValue in
+                                   dragOnChanged(value: dragValue, geo: geo)
+                                }
+                                .onEnded { dragValue in
+                                    dragOnEnded(value: dragValue, geo: geo)
+                                }
+                        )
+                }
             }.onAppear {
                 self.lineOffset = self.settings.lateralPadding.leading
             }
