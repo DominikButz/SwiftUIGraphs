@@ -18,8 +18,9 @@ struct LineChartWithAsyncDataFetch: View {
                     VStack {
                         TextField("US Stock Symbol", text: $viewModel.stockSymbol, onCommit: {
                             viewModel.loadDataPoints()
+                            
                         }).textFieldStyle(RoundedBorderTextFieldStyle()).font(.headline).foregroundColor(.orange).padding()
-                        
+                       
                         if self.viewModel.token == "" {
                             HStack {
                                 Text("Get a free auth token from https://iexcloud.io to get started.").foregroundColor(.red)
@@ -44,11 +45,17 @@ struct LineChartWithAsyncDataFetch: View {
                         formatter.maximumFractionDigits = 2
                         return formatter.string(for: yValue)!
                         //  return TimeInterval(yValue).toString() ?? ""
-                    }, colorPerPoint: nil, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65,  settings: DYLineChartSettings(showPointMarkers: true, lateralPadding: (0, 0), yAxisSettings: YAxisSettings(yAxisFontSize: fontSize), xAxisSettings: DYLineChartXAxisSettings(showXAxis: true, xAxisInterval: 172800, xAxisFontSize: fontSize)))  //seconds per 48 hours
+                    }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65,  settings: DYLineChartSettings(showPointMarkers: true, lateralPadding: (0, 0), yAxisSettings: YAxisSettings(yAxisFontSize: fontSize), xAxisSettings: DYLineChartXAxisSettings(showXAxis: true, xAxisInterval: 172800, xAxisFontSize: fontSize)))  //seconds per 48 hours
                     Spacer()
                 }.padding()
+            }.onAppear {
+                if viewModel.stockSymbol == "" {
+                    viewModel.stockSymbol = "AAPL"
+                    viewModel.loadDataPoints()
+                }
             }
         }.navigationTitle("Stock price")
+            
 
     }
     
@@ -82,7 +89,9 @@ final class StockPriceDataViewModel: ObservableObject {
     
     func loadDataPoints() {
         self.objectWillChange.send()
-        self.dataPoints.removeAll()
+        withAnimation {
+            self.dataPoints.removeAll()
+        }
         let url = "https://cloud.iexapis.com/stable/stock/\(self.stockSymbol)/chart/1m?token=\(self.token)"
         
         if let url = URL(string:url ) {
@@ -106,7 +115,9 @@ final class StockPriceDataViewModel: ObservableObject {
                                     let timeInterval = date.timeIntervalSinceReferenceDate
                                     // let's make sure the data points array is updated on the main thread!
                                     DispatchQueue.main.async {
-                                        self.dataPoints.append(DYDataPoint(xValue: timeInterval, yValue: closePrice))
+                                        withAnimation {
+                                            self.dataPoints.append(DYDataPoint(xValue: timeInterval, yValue: closePrice))
+                                        }
                                     }
              
                                 }

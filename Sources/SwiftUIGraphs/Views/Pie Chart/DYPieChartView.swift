@@ -50,7 +50,7 @@ public struct DYPieChartView<L: View>: View {
                         PieChartSlice(startAngle: self.startAngleFor(fraction: fraction) , endAngle: self.endAngleFor(fraction: fraction))
                             .fill(fraction.color, opacity: 1, strokeWidth: settings.sliceOutlineWidth, strokeColor: settings.sliceOutlineColor)
                             .scaleEffect(self.selectedId == fraction.id && self.settings.allowUserInteraction ? settings.selectedSliceScaleEffect : 1, anchor: .center)
-                            .shadow(radius: self.selectedId == fraction.id && self.settings.allowUserInteraction ? 5 : 0)
+                            .shadow(color: self.selectedSliceShadow(fractionId: fraction.id).color, radius: self.selectedSliceShadow(fractionId: fraction.id).radius, x: self.selectedSliceShadow(fractionId: fraction.id).x, y: self.selectedSliceShadow(fractionId: fraction.id).y)
                             .matchedGeometryEffect(id: fraction.id, in: animationNamespace)
                             .onTapGesture {
                                 if self.settings.allowUserInteraction {
@@ -77,7 +77,16 @@ public struct DYPieChartView<L: View>: View {
                 }
             }
         }
+          
+    }
+    
+    private func selectedSliceShadow(fractionId: String)->Shadow {
         
+        if self.selectedId != fractionId || self.settings.allowUserInteraction == false  {
+            return Shadow(color: .clear, radius: 0, x: 0, y: 0)
+        } else {
+            return self.settings.selectedSliceDropShadow
+        }
         
     }
     

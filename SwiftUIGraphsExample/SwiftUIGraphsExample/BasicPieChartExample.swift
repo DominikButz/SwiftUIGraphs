@@ -48,8 +48,9 @@ struct BasicPieChartExample: View {
             
             DYPieChartView(data: viewModel.data, selectedId: $viewModel.selectedId, sliceLabelView: {fraction in
                 self.sliceLabelView(fraction: fraction, data: viewModel.data)
-            }, animationNamespace: animationNamespace, settings: DYPieChartSettings(minimumFractionForSliceLabelOffset: 0.11, allowUserInteraction: false))
-            .background(Circle().fill(Color(.systemBackground)).shadow(radius: 5))
+            }, animationNamespace: animationNamespace, settings: DYPieChartSettings(minimumFractionForSliceLabelOffset: 0.11, allowUserInteraction: true))
+            .background(Circle().fill(Color(.systemBackground))
+            .shadow(radius: 8))
             .padding(10)
             
             DYFractionChartLegendView(data: viewModel.data, font: UIDevice.current.userInterfaceIdiom == .pad ? .callout : .caption, textColor: .white).frame(width: 250, height: 250).padding(10).infoBoxBackground().padding(10)

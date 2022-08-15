@@ -50,6 +50,32 @@ extension DYGridChart {
         //.frame(height: geo.size.height)
     }
     
+    func yAxisViewNew(yValueConverter: @escaping (Double)->String, yAxisPosition: Edge.Set = .leading)-> some View {
+        GeometryReader { geo in
+            ZStack(alignment: .trailing) {
+                let interval = self.yAxisScaler.tickSpacing ?? self.settings.yAxisSettings.yAxisIntervalOverride ?? 0
+                if let maxValue = self.yAxisValues().first, maxValue >=  interval {
+                    self.yAxisIntervalLabelViewFor(value: maxValue, yValueConverter: yValueConverter, totalHeight: geo.size.height)
+                }
+                ForEach(self.yAxisValues(), id: \.self) {value in
+                    if value != self.yAxisMinMax().max {
+                       // Spacer(minLength: 0)
+                        self.yAxisIntervalLabelViewFor(value: value, yValueConverter: yValueConverter, totalHeight: geo.size.height)
+                    }
+                    
+                }
+
+            }.frame(width: self.settings.yAxisSettings.yAxisViewWidth)
+         
+                //.padding(yAxisPosition == .leading ? .trailing : .leading, 12)
+     
+        }
+    }
+    
+    private func yAxisIntervalLabelViewFor(value:Double, yValueConverter: (Double)->String, totalHeight: CGFloat)-> some View {
+        Text(yValueConverter(value)).font(.system(size:(settings as! DYLineChartSettings).yAxisSettings.yAxisFontSize)).position(x: self.settings.yAxisSettings.yAxisViewWidth / 2, y: totalHeight - self.convertToYCoordinate(value: value, height: totalHeight))
+    }
+    
      func yAxisGridLines() -> some View {
         GeometryReader { geo in
             VStack(spacing: 0) {

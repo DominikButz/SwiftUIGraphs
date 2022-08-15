@@ -14,7 +14,7 @@ public struct DYGridChartHeaderView: View {
     var dataPoints: [DYDataPoint]
     var xValueConverter: (Double)->String
     var yValueConverter:  (Double)->String
-    
+    var selectedYValueTextColor: Color?
     @Binding var selectedIndex: Int
     var isLandscape: Bool
     
@@ -26,11 +26,12 @@ public struct DYGridChartHeaderView: View {
     ///   - isLandscape: set to true if the parent view is in landscape mode. Determines where the maximum value subview will be displayed.
     ///   - xValueConverter: implement a logic to convert the double x-value to a string.
     ///   - yValueConverter: implement a logic to convert the double y-value to a string.
-    public init(title: String, dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, isLandscape: Bool,  xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String) {
+    public init(title: String, dataPoints: [DYDataPoint], selectedIndex: Binding<Int>, selectedYValueTextColor: Color? = nil, isLandscape: Bool,  xValueConverter: @escaping (Double)->String, yValueConverter: @escaping (Double)->String) {
         self.title = title
         let sortedData = dataPoints.sorted(by: {$0.xValue < $1.xValue})
         self.dataPoints = sortedData
         self._selectedIndex = selectedIndex
+        self.selectedYValueTextColor = selectedYValueTextColor
         self.isLandscape = isLandscape
         self.xValueConverter = xValueConverter
         self.yValueConverter = yValueConverter
@@ -53,7 +54,7 @@ public struct DYGridChartHeaderView: View {
                     
                     HStack {
                         if selectedIndex >= 0 && selectedIndex <= self.dataPoints.count {
-                            Text(yValueConverter(dataPoints[selectedIndex].yValue)).font(.body).bold()
+                            Text(yValueConverter(dataPoints[selectedIndex].yValue)).font(.body).foregroundColor(self.selectedYValueTextColor).bold()
                             Text(xValueConverter(dataPoints[selectedIndex].xValue)).foregroundColor(.secondary)
                         }
                         if self.isLandscape {

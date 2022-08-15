@@ -10,6 +10,7 @@ SwiftUIGraphs is a simple Swift package for iOS and iPadOS 14.0 and later. It fe
 * Create a bar chart with an appear-animation and various customization options. 
 * Create a pie chart or doughnut chart with customizable colors and a cool pop out effect to present a detail pie chart.
 * The chart views feature separate header / info views that can be replaced by custom solutions easily. The pie chart additionallly features a legend view that can be replaced easily. 
+* Add drop shadows to the line chart, gradient, bars and selected pie slice.
 
 Check out the examples below for details. The folder SwiftUIGraphsExample contains an example project, make sure to check it out for more implementation details. All public structs / classes include in-code-documentation.
     
@@ -91,36 +92,43 @@ struct LineChartWithAsyncDataFetch: View {
 }
 
 ```
-In the initialiser you can also set the colorPerPoint (+ diameterPerPoint, strokeStylePerPoint, backgroundColorPerPoint) and/or colorPerLineSegment to override the values in the DYLineChartSettings.
+In the initialiser you can set the colorPerPoint (+ diameterPerPoint, strokeStylePerPoint, backgroundColorPerPoint) and/or colorPerLineSegment to override the values in the DYLineChartSettings.
 Example:
 
 ![SwiftUIGraphs example](gitResources/LineChartExampleColorPerPoint.gif) 
+
+Additionally, you can add a drop shadow underneath the gradient (and / or the line):
+
+![SwiftUIGraphs example](gitResources/LineChartExampleShadow.gif) 
+
+
 
 ### Code example: Bar Chart
 
 ![SwiftUIGraphs example](gitResources/BarChartExample0.gif) 
 
+You can set a different linear color gradient for the selected bar. Moreover, you can add a drop shadow underneath the bars (and a separate shadow for the selected bar if required). Check out the following example. 
+
 ``` Swift 
 
-struct BasicBarChartExample: View {
-    // put the selected index into a viewModel as @Published property in case you need to implement a control flow that would lead to reloading the view and resetting the state variable. 
-    @State private var selectedDataIndex: Int = 0
+    @State var selectedDataIndex: Int = 0
+    let exampleData = DYDataPoint.exampleData1
     
     var body: some View {
-        let exampleData = DYDataPoint.exampleData1
+       
         GeometryReader { proxy in
             VStack {
-                DYGridChartHeaderView(title: "Workout Volume (KG)", dataPoints: exampleData, selectedIndex: self.$selectedDataIndex, isLandscape: proxy.size.height < proxy.size.width, xValueConverter: { (xValue) -> String in
+                DYGridChartHeaderView(title: "Workout Volume (KG)", dataPoints: exampleData, selectedIndex: self.$selectedDataIndex, selectedYValueTextColor: Color.green, isLandscape: proxy.size.height < proxy.size.width, xValueConverter: { (xValue) -> String in
                     return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy HH:mm")
                 }, yValueConverter: { (yValue) -> String in
                     return  yValue.toDecimalString(maxFractionDigits: 1) + " KG"
                 })
                 
-                DYBarChartView(dataPoints: exampleData, selectedIndex: $selectedDataIndex, xValueConverter: { (xValue) -> String in
+                DYBarChartView(dataPoints: exampleData, selectedIndex: $selectedDataIndex, labelView: nil, xValueConverter: { (xValue) -> String in
                     return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
                 }, yValueConverter: { (yValue) -> String in
                     return  yValue.toDecimalString(maxFractionDigits: 0)
-                }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(yAxisSettings: YAxisSettings(yAxisPosition: .trailing, yAxisFontSize: fontSize, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: fontSize)))
+                }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(selectedBarGradient: LinearGradient(colors: [.green, .green.opacity(0.8)], startPoint: .top, endPoint: .bottom), barDropShadow: self.dropShadow, showSelectionIndicator: false, selectionIndicatorColor: .green, yAxisSettings: YAxisSettings(yAxisPosition: .trailing,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: fontSize)))
                 
                 Spacer()
             }.padding()
@@ -131,6 +139,17 @@ struct BasicBarChartExample: View {
     var fontSize: CGFloat {
         UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
     }
+    
+    var dropShadow: Shadow {
+       return Shadow(color: .gray, radius:8, x:-4, y:-3)
+    }
+    
+    func labelView(dataPoint: DYDataPoint)-> AnyView {
+        
+        return Text("Text").font(.caption).foregroundColor(.blue).eraseToAnyView()
+    }
+
+    
 }
 ```
 
@@ -234,6 +253,13 @@ struct RingChartAndDetailPieChartExample: View {
 - Special thanks to David Malan and his team of Harvard's CS50 Introduction to Computer Science. There is no better course to learn programming basics. 
 
 ## Change log
+
+#### [Version 0.9](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.9)
+"Shady update": You can now set drop shadows to show underneath the line and line gradient and underneath each bar and pie chart slice.
+Moreover, in the DYGridChartHeaderView you can now set the selected y-value text label to a different text color. 
+Bug fixes:
+- lateral padding should work properly now and should not shift subviews any more.
+- the y-axis labels are now positioned more precisely.
 
 #### [Version 0.8.2](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.8.2)
 Added allowUserInteration parameter to all three chart type settings (default is true).

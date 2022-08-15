@@ -22,7 +22,7 @@ public struct DYBarChartView: View, DYGridChart {
     var gradientPerBar: ((DYDataPoint)->LinearGradient)?
     
     let generator = UISelectionFeedbackGenerator()
-    
+    @State var showBars: Bool = false
     @Binding var selectedIndex: Int
     @State private var barEnd = CGFloat.zero
     
@@ -85,8 +85,9 @@ public struct DYBarChartView: View, DYGridChart {
 //                            if self.settings.yAxisSettings.showYAxisSelectedDataPointLine {
 //                                self.selectedDataPointYAxisLine()
 //                            }
-
-                            self.bars()
+                            if self.showBars {
+                                self.bars()
+                            }
 
                         }.background(settings.chartViewBackgroundColor)
 
@@ -99,7 +100,15 @@ public struct DYBarChartView: View, DYGridChart {
                     if self.settings.xAxisSettings.showXAxis {
                         self.xAxisView(totalWidth: geo.size.width - settings.yAxisSettings.yAxisViewWidth - marginSum)
                     }
+                }.onAppear {
+                    self.showBars = true
                 }
+                .onChange(of: self.orientationObserver.orientation, perform: { _ in
+                    self.showBars = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        self.showBars = true
+                    }
+                })
             } else {
                 // placeholder grid in case not enough data is available
                 self.placeholderGrid(xAxisLineCount: 12, yAxisLineCount: 10).frame(height: self.chartFrameHeight).opacity(0.5).padding()
@@ -128,7 +137,7 @@ public struct DYBarChartView: View, DYGridChart {
                                 .matchedGeometryEffect(id: "selectionIndicator", in: namespace)
                         }
                         Spacer(minLength: 0)
-                        BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, selectedBarGradient: (settings as! DYBarChartSettings).selectedBarGradient, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, labelView: self.labelView?(dataPoint), labelOffset: self.settings.labelViewDefaultOffset, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, allowUserInteraction: self.settings.allowUserInteraction, selectionFeedbackGenerator: self.generator)
+                        BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, selectedBarGradient: (settings as! DYBarChartSettings).selectedBarGradient, barDropShadow: (settings as! DYBarChartSettings).barDropShadow, selectedBarDropShadow: (settings as! DYBarChartSettings).selectedBarDropShadow, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, labelView: self.labelView?(dataPoint), labelOffset: self.settings.labelViewDefaultOffset, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, allowUserInteraction: self.settings.allowUserInteraction, selectionFeedbackGenerator: self.generator)
 
                     }
                      Spacer(minLength: 0)
@@ -268,6 +277,8 @@ internal struct BarView: View {
     
     var gradient: LinearGradient
     var selectedBarGradient: LinearGradient? = nil
+    var barDropShadow: Shadow? = nil
+    var selectedBarDropShadow: Shadow? = nil
     var width: CGFloat
     var height: CGFloat
     var index: Int
@@ -296,6 +307,7 @@ internal struct BarView: View {
                     .offset(x: labelOffset.width, y: labelOffset.height)
             }
         }.scaleEffect(self.scale, anchor: .bottom) // for selection scale effect
+            .shadow(color: self.index == selectedIndex ? self.selectedBarDropShadow?.color ?? self.barDropShadow?.color ??  .clear : self.barDropShadow?.color ?? .clear, radius:  self.index == selectedIndex ? self.selectedBarDropShadow?.radius ?? self.barDropShadow?.radius ?? 0 : self.barDropShadow?.radius ?? 0, x:  self.index == selectedIndex ? self.selectedBarDropShadow?.x ?? self.barDropShadow?.x ?? 0 : self.barDropShadow?.x ?? 0, y:  self.index == selectedIndex ? self.selectedBarDropShadow?.y ?? self.barDropShadow?.y ?? 0 : self.barDropShadow?.y ?? 0)
             .onAppear {
 
                 withAnimation(Animation.default.delay(0.1 * Double(index))) {
@@ -303,9 +315,7 @@ internal struct BarView: View {
                 }
 
             }
-            .onChange(of: self.orientationObserver.orientation, perform: { _ in
-                self.currentHeight = height
-            })
+
 
     }
     
