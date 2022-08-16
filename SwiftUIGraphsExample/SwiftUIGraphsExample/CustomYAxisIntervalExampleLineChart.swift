@@ -12,7 +12,7 @@ struct CustomYAxisIntervalExampleLineChart: View {
     
     @State private var selectedDataIndex: Int = 0
     
-    let exampleData = DYDataPoint.exampleData0
+    @State var exampleData = DYDataPoint.exampleData0
     
     var body: some View {
         
@@ -32,6 +32,20 @@ struct CustomYAxisIntervalExampleLineChart: View {
             }, labelView: nil, yValueConverter: { (yValue) -> String in
                 return TimeInterval(yValue).toString() ?? ""
             }, colorPerPoint: nil, colorPerLineSegment: nil, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65,  settings: DYLineChartSettings(lineStrokeStyle: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: .blue, showGradient: true, gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), gradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), lateralPadding: (0, 0), pointColor: .blue, selectorLineColor: .blue, selectorLinePointColor: .blue, yAxisSettings: YAxisSettings(showYAxis: true, yAxisPosition: .trailing, yAxisViewWidth: self.yAxisWidth, showYAxisDataPointLines: false, showYAxisSelectedDataPointLine: true,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min: 0, max: Double(Int(exampleData.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), yAxisIntervalOverride: 1800), xAxisSettings: DYLineChartXAxisSettings(showXAxis: true, showXAxisDataPointLines: false, showXAxisSelectedDataPointLine: true, xAxisInterval: 604800, xAxisFontSize: fontSize)))  // 604800 seconds per week
+//             Button {
+//                 let yValue = Int.random(in: 6000 ..< 12000)
+//                 let xValues = self.exampleData.map{$0.xValue}
+//                 let maxValue = xValues.max()!
+//                 let maxIndex = xValues.firstIndex(where: {$0 == maxValue})!
+//                 let xValue =  self.exampleData[maxIndex].xValue + 86400 * 5 // add 5 days
+//                 let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
+//                 withAnimation {
+//                     exampleData.append(dataPoint)
+//                 }
+//             } label: {
+//                 Text("add data")
+//             }
+
             Spacer()
          }.padding()
          .navigationTitle("Workout Time Per Week")

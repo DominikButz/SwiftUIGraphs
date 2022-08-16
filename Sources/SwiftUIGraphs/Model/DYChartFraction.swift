@@ -30,6 +30,15 @@ public struct DYChartFraction: Identifiable {
         self.color = color
         self.title = title
         self.detailFractions = detailFractions
+        if detailFractions.count > 0 {
+            if self.detailFractions.count == 1 {
+                assertionFailure("You can either add none or at least two detail fractions.")
+            }
+            let valueSum = detailFractions.map{$0.value}.reduce(0,+)
+            if valueSum != self.value {
+                assertionFailure("The sum of all detail fraction values needs to be equal to the parent chart fraction value!")
+            }
+        }
     }
     
     /// example data: source https://www.statista.com/statistics/247407/average-annual-consumer-spending-in-the-us-by-type/

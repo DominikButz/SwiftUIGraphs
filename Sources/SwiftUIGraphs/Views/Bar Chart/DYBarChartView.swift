@@ -70,7 +70,8 @@ public struct DYBarChartView: View, DYGridChart {
                 VStack(spacing: 0) {
                     HStack(spacing:0) {
                         if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .leading {
-                            self.yAxisView(geo: geo).padding(.trailing, 5).frame(width:settings.yAxisSettings.yAxisViewWidth)
+                            self.yAxisViewNew(yValueConverter: self.yValueConverter)
+
                         }
                         ZStack {
 
@@ -78,22 +79,15 @@ public struct DYBarChartView: View, DYGridChart {
                                 self.yAxisGridLines().opacity(0.5)
                             }
                             
-//                            if self.settings.yAxisSettings.showYAxisDataPointLines {
-//                                self.yAxisPointMarkerLines()
-//                            }
-//
-//                            if self.settings.yAxisSettings.showYAxisSelectedDataPointLine {
-//                                self.selectedDataPointYAxisLine()
-//                            }
                             if self.showBars {
                                 self.bars()
                             }
 
-                        }.background(settings.chartViewBackgroundColor)
+                        }.frame(width: geo.size.width - self.settings.yAxisSettings.yAxisViewWidth).background(settings.chartViewBackgroundColor)
 
                         if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing {
-                            self.yAxisView(geo: geo).padding(.leading, 5).frame(width:settings.yAxisSettings.yAxisViewWidth)
-                               // .frame(height: chartFrameHeight)
+                            self.yAxisViewNew(yValueConverter: self.yValueConverter, yAxisPosition: .trailing)
+
                         }
                     }.frame(height: chartFrameHeight)
 
@@ -117,44 +111,44 @@ public struct DYBarChartView: View, DYGridChart {
         
     }
     
-   private func bars()->some View {
-        GeometryReader {geo in
-            let height = geo.size.height
-            let width = geo.size.width - marginSum
-            let barWidth:CGFloat = self.barWidth(totalWidth: width)
-            
-            HStack(spacing: 0) {
-                
-               Spacer(minLength: 0)
-                
-                ForEach(dataPoints) { dataPoint in
-                    VStack( spacing: 0) {
-                        let i = self.indexFor(dataPoint: dataPoint) ?? 0
-                        if i == self.selectedIndex && (settings as! DYBarChartSettings).showSelectionIndicator {
-                            Rectangle().fill((settings as! DYBarChartSettings).selectionIndicatorColor)
-                                .frame(width:barWidth, height: 2)
-                                .offset(y: -2)
-                                .matchedGeometryEffect(id: "selectionIndicator", in: namespace)
-                        }
-                        Spacer(minLength: 0)
-                        BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, selectedBarGradient: (settings as! DYBarChartSettings).selectedBarGradient, barDropShadow: (settings as! DYBarChartSettings).barDropShadow, selectedBarDropShadow: (settings as! DYBarChartSettings).selectedBarDropShadow, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, labelView: self.labelView?(dataPoint), labelOffset: self.settings.labelViewDefaultOffset, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, allowUserInteraction: self.settings.allowUserInteraction, selectionFeedbackGenerator: self.generator)
+    private func bars()->some View {
+         GeometryReader {geo in
+             let height = geo.size.height
+             let width = geo.size.width - marginSum
+             let barWidth:CGFloat = self.barWidth(totalWidth: width)
+             
+             ZStack {
 
-                    }
-                     Spacer(minLength: 0)
-                    
-                }
+                 ForEach(dataPoints) { dataPoint in
+                     ZStack {
+                     let i = self.indexFor(dataPoint: dataPoint) ?? 0
                 
-             //  Spacer(minLength: 0)
-  
-            }
-            .onAppear {
-                self.generator.prepare()
-            }
-            
-        }
-        
-        
-    }
+                         if i == self.selectedIndex && (settings as! DYBarChartSettings).showSelectionIndicator {
+                             Rectangle().fill((settings as! DYBarChartSettings).selectionIndicatorColor)
+                                 .frame(width:barWidth, height: 2)
+                                 .position(x:self.settings.lateralPadding.leading + self.convertToXCoordinate(index: i, totalWidth: width), y:0)
+                                 .offset(y: -2)
+                                 .matchedGeometryEffect(id: "selectionIndicator", in: namespace)
+                      
+                         }
+                 
+                         BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, selectedBarGradient: (settings as! DYBarChartSettings).selectedBarGradient, barDropShadow: (settings as! DYBarChartSettings).barDropShadow, selectedBarDropShadow: (settings as! DYBarChartSettings).selectedBarDropShadow, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, labelView: self.labelView?(dataPoint), labelOffset: self.settings.labelViewDefaultOffset, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, allowUserInteraction: self.settings.allowUserInteraction, selectionFeedbackGenerator: self.generator)
+
+                     .position(x: self.settings.lateralPadding.leading + self.convertToXCoordinate(index: i, totalWidth: width), y: height  - self.convertToYCoordinate(value: dataPoint.yValue, height: height) / 2)
+                     }
+                 }
+
+             }
+             .onAppear {
+                 self.generator.prepare()
+             }
+             
+         }
+         
+         
+     }
+    
+
     
     /// not working properly
 //    private func selectedDataPointYAxisLine()-> some View {
@@ -220,14 +214,13 @@ public struct DYBarChartView: View, DYGridChart {
             }
         }
         .padding(.leading, settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .leading ?  settings.yAxisSettings.yAxisViewWidth : 0)
-        .padding(.leading, settings.lateralPadding.leading )
+       // .padding(.leading, settings.lateralPadding.leading )
         .padding(.trailing, settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing ? settings.yAxisSettings.yAxisViewWidth : 0)
-        .padding(.trailing, settings.lateralPadding.trailing)
 
     }
     
     private func xAxisIntervalLabelViewFor(label: String, index: Int, totalWidth: CGFloat)-> some View {
-        Text(label).font(.system(size: settings.xAxisSettings.xAxisFontSize)).position(x: self.convertToXCoordinate(index: index, totalWidth: totalWidth), y: 10)
+        Text(label).font(.system(size: settings.xAxisSettings.xAxisFontSize)).position(x:self.settings.lateralPadding.leading + self.convertToXCoordinate(index: index, totalWidth: totalWidth), y: 10)
     }
     
 
@@ -237,25 +230,7 @@ public struct DYBarChartView: View, DYGridChart {
     private func barWidth(totalWidth:CGFloat)->CGFloat {
        return (totalWidth / 2) / CGFloat(self.dataPoints.count)
     }
-    
-    private func barPaddingWidth(totalWidth: CGFloat)->CGFloat {
-        let barWidth = self.barWidth(totalWidth: totalWidth)
-        let totalWhiteSpace = totalWidth - barWidth * CGFloat(self.dataPoints.count)
-        return totalWhiteSpace / CGFloat(self.dataPoints.count) + 1
-    }
-    
-    private func barPointPosition(dataPoint: DYDataPoint, totalWidth: CGFloat, totalHeight: CGFloat)->CGPoint {
-        
-        if let index = self.dataPoints.firstIndex(where: { $0.id == dataPoint.id}) {
-            let barWidth = self.barWidth(totalWidth: totalWidth)
-            let barPaddingWidth = self.barWidth(totalWidth: totalWidth)
-            let xPosition = CGFloat(index) * (barWidth + barPaddingWidth) + barPaddingWidth + barWidth / 2
-            let yPosition = totalHeight - self.convertToYCoordinate(value: dataPoint.yValue, height: totalHeight)
-            return CGPoint(x: xPosition, y: yPosition)
-        }
-        
-        return CGPoint.zero
-    }
+
  
     private func convertToXCoordinate(index:Int, totalWidth: CGFloat)->CGFloat {
 
@@ -286,35 +261,45 @@ internal struct BarView: View {
     var labelOffset: CGSize
     @ObservedObject var orientationObserver: OrientationObserver
     
-    @State var currentHeight: CGFloat = 0
-    @State var scale:CGFloat = 1
+ //   @State var currentHeight: CGFloat = 0
+    @State var showLabelView: Bool = false
+    @State var barHeightFactor: CGFloat = 0
+    @State var selectionScale:CGFloat = 1
     @Binding var selectedIndex: Int
     var allowUserInteraction: Bool
     var selectionFeedbackGenerator: UISelectionFeedbackGenerator
     
     var body: some View {
         ZStack {
-        RoundedCornerRectangle(tl: 5, tr: 5, bl: 0, br: 0)
-            .fill(selectedIndex == index ? (selectedBarGradient ?? gradient) : gradient)
-            .frame(width: width, height: self.currentHeight, alignment: .bottom)
-            .onTapGesture {
-                self.updateSelectionIfNeeded()
+                RoundedCornerRectangle(tl: 5, tr: 5, bl: 0, br: 0)
+                    .fill(selectedIndex == index ? (selectedBarGradient ?? gradient) : gradient)
+                    .frame(width: width, height: self.height)
+                    .scaleEffect(x: 1,  y: self.barHeightFactor, anchor: .bottom)  // for show animation
+                    .shadow(color: self.index == selectedIndex ? self.selectedBarDropShadow?.color ?? self.barDropShadow?.color ??  .clear : self.barDropShadow?.color ?? .clear, radius:  self.index == selectedIndex ? self.selectedBarDropShadow?.radius ?? self.barDropShadow?.radius ?? 0 : self.barDropShadow?.radius ?? 0, x:  self.index == selectedIndex ? self.selectedBarDropShadow?.x ?? self.barDropShadow?.x ?? 0 : self.barDropShadow?.x ?? 0, y:  self.index == selectedIndex ? self.selectedBarDropShadow?.y ?? self.barDropShadow?.y ?? 0 : self.barDropShadow?.y ?? 0)
+                        .onTapGesture {
+                            self.updateSelectionIfNeeded()
+                        }
+            
+            if self.showLabelView {
+                self.labelView
+                    .offset(x: 0, y: -height / 2)
+                    .offset(x: labelOffset.width, y: labelOffset.height).transition(.opacity)
+            }
+ 
+        }.scaleEffect(self.selectionScale, anchor: .bottom) // for selection scale effect
+        .onAppear {
+            
+            withAnimation(Animation.default.delay(0.1 * Double(index))) {
+                self.barHeightFactor = 1
+            }
+            if let _ = self.labelView {
+                withAnimation(Animation.default.delay(0.11 * Double(index))) {
+                    self.showLabelView = true
+                }
             }
             
-            if self.currentHeight == height {
-                self.labelView?
-                    .offset(x: 0, y: -currentHeight / 2)
-                    .offset(x: labelOffset.width, y: labelOffset.height)
-            }
-        }.scaleEffect(self.scale, anchor: .bottom) // for selection scale effect
-            .shadow(color: self.index == selectedIndex ? self.selectedBarDropShadow?.color ?? self.barDropShadow?.color ??  .clear : self.barDropShadow?.color ?? .clear, radius:  self.index == selectedIndex ? self.selectedBarDropShadow?.radius ?? self.barDropShadow?.radius ?? 0 : self.barDropShadow?.radius ?? 0, x:  self.index == selectedIndex ? self.selectedBarDropShadow?.x ?? self.barDropShadow?.x ?? 0 : self.barDropShadow?.x ?? 0, y:  self.index == selectedIndex ? self.selectedBarDropShadow?.y ?? self.barDropShadow?.y ?? 0 : self.barDropShadow?.y ?? 0)
-            .onAppear {
 
-                withAnimation(Animation.default.delay(0.1 * Double(index))) {
-                    self.currentHeight = height
-                }
-
-            }
+        }
 
 
     }
@@ -326,13 +311,13 @@ internal struct BarView: View {
             self.selectionFeedbackGenerator.selectionChanged() // haptic feedback
             
             withAnimation(Animation.spring()) {
-                self.scale = 1.08
+                self.selectionScale = 1.08
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 withAnimation(Animation.spring()) {
                     self.selectedIndex = index
-                    self.scale = 1
+                    self.selectionScale = 1
                 }
             }
             

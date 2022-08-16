@@ -44,6 +44,7 @@ In order to try out the stock price example, you need to sign up with https://ie
 
 ![SwiftUIGraphs example](gitResources/LineChartExample0.gif) 
 
+
 ```Swift
 
 struct LineChartWithAsyncDataFetch: View {
@@ -253,6 +254,13 @@ struct RingChartAndDetailPieChartExample: View {
 - Special thanks to David Malan and his team of Harvard's CS50 Introduction to Computer Science. There is no better course to learn programming basics. 
 
 ## Change log
+
+#### [Version 0.9.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.9.1)
+Bug fixes: 
+- DYBarChart yAxis labels are now positioned more precisely
+- lateral padding works correctly in DYBarChartView
+- bars won't surpass the bounds of the chart area any more when device orientation is changed.
+- DYPieChart: if the sum of detailFractions' values is not equal to the parent chart fraction value, an assertionFailure is thrown.
 
 #### [Version 0.9](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.9)
 "Shady update": You can now set drop shadows to show underneath the line and line gradient and underneath each bar and pie chart slice.

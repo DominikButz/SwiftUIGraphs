@@ -73,7 +73,7 @@ extension DYGridChart {
     }
     
     private func yAxisIntervalLabelViewFor(value:Double, yValueConverter: (Double)->String, totalHeight: CGFloat)-> some View {
-        Text(yValueConverter(value)).font(.system(size:(settings as! DYLineChartSettings).yAxisSettings.yAxisFontSize)).position(x: self.settings.yAxisSettings.yAxisViewWidth / 2, y: totalHeight - self.convertToYCoordinate(value: value, height: totalHeight))
+        Text(yValueConverter(value)).font(.system(size:settings.yAxisSettings.yAxisFontSize)).position(x: self.settings.yAxisSettings.yAxisViewWidth / 2, y: totalHeight - self.convertToYCoordinate(value: value, height: totalHeight))
     }
     
      func yAxisGridLines() -> some View {

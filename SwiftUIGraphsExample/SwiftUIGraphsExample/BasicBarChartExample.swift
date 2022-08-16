@@ -22,11 +22,11 @@ struct BasicBarChartExample: View {
                     return  yValue.toDecimalString(maxFractionDigits: 1) + " KG"
                 })
                 
-                DYBarChartView(dataPoints: exampleData, selectedIndex: $selectedDataIndex, labelView: nil, xValueConverter: { (xValue) -> String in
+                DYBarChartView(dataPoints: exampleData, selectedIndex: $selectedDataIndex, labelView: {dataPoint in self.labelView(dataPoint: dataPoint)}, xValueConverter: { (xValue) -> String in
                     return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
                 }, yValueConverter: { (yValue) -> String in
                     return  yValue.toDecimalString(maxFractionDigits: 0)
-                }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(selectedBarGradient: LinearGradient(colors: [.green, .green.opacity(0.8)], startPoint: .top, endPoint: .bottom), barDropShadow: self.dropShadow, showSelectionIndicator: false, selectionIndicatorColor: .green, yAxisSettings: YAxisSettings(yAxisPosition: .trailing,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: fontSize)))
+                }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(selectedBarGradient: LinearGradient(colors: [.green, .green.opacity(0.8)], startPoint: .top, endPoint: .bottom), lateralPadding: (0, 0), barDropShadow: self.dropShadow, showSelectionIndicator: false, selectionIndicatorColor: .green, yAxisSettings: YAxisSettings(yAxisPosition: .trailing, yAxisFontSize: fontSize, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: fontSize)))
                 
                 Spacer()
             }.padding()
@@ -44,7 +44,10 @@ struct BasicBarChartExample: View {
     
     func labelView(dataPoint: DYDataPoint)-> AnyView {
         
-        return Text("Text").font(.caption).foregroundColor(.blue).eraseToAnyView()
+        let yValue = dataPoint.yValue
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 1
+        return Text(formatter.string(for: yValue) ?? "").font(.caption).eraseToAnyView()
     }
     
     func gradientPerBar(_ dataPoint: DYDataPoint)->LinearGradient {
