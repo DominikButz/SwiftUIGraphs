@@ -255,6 +255,9 @@ struct RingChartAndDetailPieChartExample: View {
 
 ## Change log
 
+#### [Version 0.9.2](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.9.2)
+Added showAppearAnimation parameter to settings of DYLineChartView and DYBarChartView. If it is set to false, the line, line gradient (if any) and the bars will appear instantly without any transition animation.
+
 #### [Version 0.9.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.9.1)
 Bug fixes: 
 - DYBarChart yAxis labels are now positioned more precisely

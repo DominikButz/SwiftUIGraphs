@@ -70,7 +70,7 @@ public struct DYLineChartView: View, DYGridChart {
         self.chartFrameHeight = chartFrameHeight
         self.labelView = labelView
         self.settings = settings
-        
+
         var min =  dataPoints.map({$0.yValue}).min() ?? 0
         if let overrideMin = settings.yAxisSettings.yAxisMinMaxOverride?.min, overrideMin < min {
             min = overrideMin
@@ -80,6 +80,7 @@ public struct DYLineChartView: View, DYGridChart {
             max = overrideMax
         }
          self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10)
+        
     }
     
     
@@ -136,7 +137,7 @@ public struct DYLineChartView: View, DYGridChart {
                                         
                                         self.addUserInteraction()
                                         
-                                    }.transition(AnyTransition.opacity.animation(Animation.easeIn(duration: 0.8)))
+                                    }.transition(AnyTransition.opacity.animation(Animation.easeIn(duration: self.settings.showAppearAnimation ? 0.8 : 0)))
                                 
                                 }
 
@@ -153,7 +154,7 @@ public struct DYLineChartView: View, DYGridChart {
                         if (self.settings as! DYLineChartSettings).xAxisSettings.showXAxis {
                             self.xAxisView()
                         }
-                    }.transition(AnyTransition.opacity)
+                    }
                     .onAppear {
                         self.showChartContent()
                     }
@@ -170,6 +171,15 @@ public struct DYLineChartView: View, DYGridChart {
     }
     
     private func showChartContent() {
+        print("line end \(lineEnd)")
+        guard self.settings.showAppearAnimation  else {
+                self.lineEnd = 1
+                self.showLineSegments = true
+                self.showWithAnimation = true
+            return
+            
+        }
+        
         withAnimation(.easeIn(duration: (self.settings as! DYLineChartSettings).lineAnimationDuration)) {
             self.lineEnd = 1
             self.showLineSegments = true // for different color line segments

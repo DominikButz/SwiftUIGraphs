@@ -132,7 +132,7 @@ public struct DYBarChartView: View, DYGridChart {
                       
                          }
                  
-                         BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, selectedBarGradient: (settings as! DYBarChartSettings).selectedBarGradient, barDropShadow: (settings as! DYBarChartSettings).barDropShadow, selectedBarDropShadow: (settings as! DYBarChartSettings).selectedBarDropShadow, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, labelView: self.labelView?(dataPoint), labelOffset: self.settings.labelViewDefaultOffset, orientationObserver: self.orientationObserver, selectedIndex: self.$selectedIndex, allowUserInteraction: self.settings.allowUserInteraction, selectionFeedbackGenerator: self.generator)
+                         BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, settings: self.settings as! DYBarChartSettings, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, labelView: self.labelView?(dataPoint), labelOffset: self.settings.labelViewDefaultOffset, orientationObserver: self.orientationObserver, showLabelView: self.settings.showAppearAnimation ? false : true, barHeightFactor: self.settings.showAppearAnimation ? 0 : 1, selectedIndex: self.$selectedIndex, allowUserInteraction: self.settings.allowUserInteraction, selectionFeedbackGenerator: self.generator)
 
                      .position(x: self.settings.lateralPadding.leading + self.convertToXCoordinate(index: i, totalWidth: width), y: height  - self.convertToYCoordinate(value: dataPoint.yValue, height: height) / 2)
                      }
@@ -251,9 +251,7 @@ public struct DYBarChartView: View, DYGridChart {
 internal struct BarView: View {
     
     var gradient: LinearGradient
-    var selectedBarGradient: LinearGradient? = nil
-    var barDropShadow: Shadow? = nil
-    var selectedBarDropShadow: Shadow? = nil
+    var settings: DYBarChartSettings
     var width: CGFloat
     var height: CGFloat
     var index: Int
@@ -272,10 +270,10 @@ internal struct BarView: View {
     var body: some View {
         ZStack {
                 RoundedCornerRectangle(tl: 5, tr: 5, bl: 0, br: 0)
-                    .fill(selectedIndex == index ? (selectedBarGradient ?? gradient) : gradient)
+                .fill(selectedIndex == index ? (settings.selectedBarGradient ?? gradient) : gradient)
                     .frame(width: width, height: self.height)
                     .scaleEffect(x: 1,  y: self.barHeightFactor, anchor: .bottom)  // for show animation
-                    .shadow(color: self.index == selectedIndex ? self.selectedBarDropShadow?.color ?? self.barDropShadow?.color ??  .clear : self.barDropShadow?.color ?? .clear, radius:  self.index == selectedIndex ? self.selectedBarDropShadow?.radius ?? self.barDropShadow?.radius ?? 0 : self.barDropShadow?.radius ?? 0, x:  self.index == selectedIndex ? self.selectedBarDropShadow?.x ?? self.barDropShadow?.x ?? 0 : self.barDropShadow?.x ?? 0, y:  self.index == selectedIndex ? self.selectedBarDropShadow?.y ?? self.barDropShadow?.y ?? 0 : self.barDropShadow?.y ?? 0)
+                    .shadow(color: self.index == selectedIndex ? self.settings.selectedBarDropShadow?.color ?? self.settings.barDropShadow?.color ??  .clear : self.settings.barDropShadow?.color ?? .clear, radius:  self.index == selectedIndex ? self.settings.selectedBarDropShadow?.radius ?? self.settings.barDropShadow?.radius ?? 0 : self.settings.barDropShadow?.radius ?? 0, x:  self.index == selectedIndex ? self.settings.selectedBarDropShadow?.x ?? self.settings.barDropShadow?.x ?? 0 : self.settings.barDropShadow?.x ?? 0, y:  self.index == selectedIndex ? self.settings.selectedBarDropShadow?.y ?? self.settings.barDropShadow?.y ?? 0 : self.settings.barDropShadow?.y ?? 0)
                         .onTapGesture {
                             self.updateSelectionIfNeeded()
                         }
