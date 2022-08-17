@@ -175,7 +175,7 @@ public struct DYLineChartView: View, DYGridChart {
         guard self.settings.showAppearAnimation  else {
                 self.lineEnd = 1
                 self.showLineSegments = true
-                self.showWithAnimation = true
+                self.showWithAnimation = false
             return
             
         }
