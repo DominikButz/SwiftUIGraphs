@@ -19,7 +19,7 @@ public struct DYLineChartView: View, DYGridChart {
     @State private var lineOffset: CGFloat = 0 // Vertical line offset
     @State private var selectedYPos: CGFloat = 0 // User Y touch location
     @State private var isSelected: Bool = false // Is the user touching the graph
-    @State private var lineEnd: CGFloat = 0 // for line animation
+    @State private var lineEnd: CGFloat = 1 // for line animation
     @State private var showLineSegments: Bool = false
     @State private var showWithAnimation: Bool = false
 
