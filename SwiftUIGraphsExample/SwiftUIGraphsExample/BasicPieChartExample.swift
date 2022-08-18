@@ -12,7 +12,7 @@ struct BasicPieChartExample: View {
     
     @StateObject var viewModel = BasicPieChartViewModel()
     @Namespace var animationNamespace
-    
+    @State private var pieScale:CGSize = .zero
     
     var body: some View {
     
@@ -51,11 +51,16 @@ struct BasicPieChartExample: View {
             }, animationNamespace: animationNamespace, settings: DYPieChartSettings(minimumFractionForSliceLabelOffset: 0.11, allowUserInteraction: true))
             .background(Circle().fill(Color(.systemBackground))
             .shadow(radius: 8))
+            .scaleEffect(self.pieScale)
             .padding(10)
             
             DYFractionChartLegendView(data: viewModel.data, font: UIDevice.current.userInterfaceIdiom == .pad ? .callout : .caption, textColor: .white).frame(width: 250, height: 250).padding(10).infoBoxBackground().padding(10)
   
             
+        }.onAppear {
+            withAnimation(.spring()) {
+                self.pieScale = CGSize(width: 1, height: 1)
+            }
         }
     }
     

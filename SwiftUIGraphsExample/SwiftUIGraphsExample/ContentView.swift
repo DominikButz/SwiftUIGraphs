@@ -12,7 +12,7 @@ import SwiftUIGraphs
 struct ContentView: View {
 
     @State private var linkActive: Bool = true
-    
+
     var body: some View {
 
         NavigationView {

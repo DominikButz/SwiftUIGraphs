@@ -30,8 +30,8 @@ struct CustomYAxisIntervalExampleLineChart: View {
                 return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
                 
             }, labelView: nil, yValueConverter: { (yValue) -> String in
-                return TimeInterval(yValue).toString() ?? ""
-            }, colorPerPoint: nil, colorPerLineSegment: nil, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65,  settings: DYLineChartSettings(lineStrokeStyle: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: .blue, showAppearAnimation: true, showGradient: true, gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), gradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), lateralPadding: (0, 0), pointColor: .blue, selectorLineColor: .blue, selectorLinePointColor: .blue, yAxisSettings: YAxisSettings(showYAxis: true, yAxisPosition: .trailing, yAxisViewWidth: self.yAxisWidth, showYAxisDataPointLines: false, showYAxisSelectedDataPointLine: true,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min: 0, max: Double(Int(exampleData.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), yAxisIntervalOverride: 1800), xAxisSettings: DYLineChartXAxisSettings(showXAxis: true, showXAxisDataPointLines: false, showXAxisSelectedDataPointLine: true, xAxisInterval: 604800, xAxisFontSize: fontSize)))  // 604800 seconds per week
+                return TimeInterval(yValue).toString() ?? ""  //{ dataPoint in self.dataPointSegmentColor(dataPoint: dataPoint)}
+            }, colorPerPoint: nil, colorPerLineSegment: nil, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65,  settings: lineChartSettings)  // 604800 seconds per week
 //             Button {
 //                 let yValue = Int.random(in: 6000 ..< 12000)
 //                 let xValues = self.exampleData.map{$0.xValue}
@@ -51,6 +51,19 @@ struct CustomYAxisIntervalExampleLineChart: View {
          .navigationTitle("Workout Time Per Week")
        }
     }
+    
+    var lineChartSettings: DYLineChartSettings {
+        DYLineChartSettings(lineStrokeStyle: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: .blue, showAppearAnimation: true, showGradient: true, gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), gradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), lateralPadding: (0, 0), pointColor: .blue, selectorLineColor: .blue, selectorLinePointColor: .blue, allowUserInteraction: true, yAxisSettings:  yAxisSettings, xAxisSettings: xAxisSettings)
+    }
+    
+    var xAxisSettings: DYLineChartXAxisSettings {
+        DYLineChartXAxisSettings(showXAxis: true, showXAxisDataPointLines: false, showXAxisSelectedDataPointLine: true, xAxisInterval: 604800, xAxisFontSize: fontSize)
+    }
+    
+    var yAxisSettings: YAxisSettings {
+        YAxisSettings(showYAxis: true, yAxisPosition: .trailing, yAxisViewWidth: self.yAxisWidth, showYAxisDataPointLines: false, showYAxisSelectedDataPointLine: true,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min: 0, max: Double(Int(exampleData.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), yAxisIntervalOverride: 1800)
+    }
+    
     var fontSize: CGFloat {
         UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
     }

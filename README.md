@@ -255,6 +255,9 @@ struct RingChartAndDetailPieChartExample: View {
 
 ## Change log
 
+#### [Version 0.9.3](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.9.3)
+Bug fix: in the line chart, user interaction (provided it is switched on) works again if showAppearAnimation set to false
+
 #### [Version 0.9.2](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.9.2)
 Added showAppearAnimation parameter to settings of DYLineChartView and DYBarChartView. If it is set to false, the line, line gradient (if any) and the bars will appear instantly without any transition animation.
 

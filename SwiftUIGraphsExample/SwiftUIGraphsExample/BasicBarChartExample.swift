@@ -10,7 +10,8 @@ import SwiftUIGraphs
 
 struct BasicBarChartExample: View {
     @State var selectedDataIndex: Int = 0
-    let exampleData = DYDataPoint.exampleData1
+    
+    let exampleData = DYDataPoint.exampleData1.sorted(by: {$0.xValue < $1.xValue})
     
     var body: some View {
        
@@ -47,7 +48,11 @@ struct BasicBarChartExample: View {
         let yValue = dataPoint.yValue
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 1
-        return Text(formatter.string(for: yValue) ?? "").font(.caption).eraseToAnyView()
+        var color: Color?
+        if let index = self.exampleData.firstIndex(where: {$0.id == dataPoint.id}), index == self.selectedDataIndex {
+            color = .green
+        }
+        return Text(formatter.string(for: yValue) ?? "").font(.caption).foregroundColor(color).eraseToAnyView()
     }
     
     func gradientPerBar(_ dataPoint: DYDataPoint)->LinearGradient {
