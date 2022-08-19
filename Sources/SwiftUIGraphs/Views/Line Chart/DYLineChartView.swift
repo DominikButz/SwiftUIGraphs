@@ -285,7 +285,7 @@ public struct DYLineChartView: View, DYGridChart {
         Group {
             if self.dataPoints.count >= 2 {
                 self.pathFor(width: geo.size.width - marginSum, height: geo.size.height, closeShape: false)
-                    .trim(from: 0, to: self.lineEnd)
+                    .trim(from: settings.showAppearAnimation ? .zero : 1, to: self.lineEnd)
                     .stroke(style: (self.settings as! DYLineChartSettings).lineStrokeStyle)
                     .foregroundColor((self.settings as! DYLineChartSettings).lineColor)
                     .shadow(color: (self.settings as! DYLineChartSettings).lineDropShadow?.color ?? .clear, radius:  (self.settings as! DYLineChartSettings).lineDropShadow?.radius ?? 0, x:  (self.settings as! DYLineChartSettings).lineDropShadow?.x ?? 0, y:  (self.settings as! DYLineChartSettings).lineDropShadow?.y ?? 0)
