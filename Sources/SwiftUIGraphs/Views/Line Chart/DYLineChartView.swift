@@ -12,7 +12,7 @@ public struct DYLineChartView: View, DYGridChart {
 
     var dataPoints: [DYDataPoint]
 
-   @State private var convertedXValues: [CGFloat]  = []
+    @State private var convertedXValues: [CGFloat]  = []
     
     @Binding var selectedIndex: Int
     
@@ -79,8 +79,8 @@ public struct DYLineChartView: View, DYGridChart {
         if let overrideMax = settings.yAxisSettings.yAxisMinMaxOverride?.max, overrideMax > max {
             max = overrideMax
         }
-         self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10)
-        
+        self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10)
+        self.lineEnd = settings.showAppearAnimation ? .zero : 1
     }
     
     
@@ -173,9 +173,9 @@ public struct DYLineChartView: View, DYGridChart {
     private func showChartContent() {
         print("line end \(lineEnd)")
         guard self.settings.showAppearAnimation  else {
-                self.lineEnd = 0
-                self.showLineSegments = false
-                self.showWithAnimation = false
+                self.lineEnd = 1
+                self.showLineSegments = true
+                self.showWithAnimation = true
             return
             
         }
