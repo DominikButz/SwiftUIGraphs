@@ -9,6 +9,18 @@ import Foundation
 
 public extension Double {
     
+    
+    static func normalizationFactor(value: Double, maxValue: Double, minValue: Double)->Double {
+       
+       return (value - minValue) / (maxValue - minValue)
+   }
+    
+    func convertToCoordinate(min: Double, max: Double,  length: CGFloat)->CGFloat {
+       
+        return length * CGFloat(Double.normalizationFactor(value: self, maxValue: max, minValue: min))
+
+   }
+    
     func toDecimalString(maxFractionDigits: Int)->String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal

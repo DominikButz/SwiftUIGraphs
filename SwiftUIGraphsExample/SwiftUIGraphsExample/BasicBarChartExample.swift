@@ -9,68 +9,71 @@ import SwiftUI
 import SwiftUIGraphs
 
 struct BasicBarChartExample: View {
-    @State var selectedDataIndex: Int = 0
-    
-    let exampleData = DYDataPoint.exampleData1.sorted(by: {$0.xValue < $1.xValue})
-    
+    @State private var selectedBarDataSet: DYBarDataSet?
+    @State private var barDataSets: [DYBarDataSet] = []
+
     var body: some View {
        
         GeometryReader { proxy in
-            VStack {
-                DYGridChartHeaderView(title: "Workout Volume (KG)", dataPoints: exampleData, selectedIndex: self.$selectedDataIndex, selectedYValueTextColor: Color.green, isLandscape: proxy.size.height < proxy.size.width, xValueConverter: { (xValue) -> String in
-                    return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy HH:mm")
-                }, yValueConverter: { (yValue) -> String in
-                    return  yValue.toDecimalString(maxFractionDigits: 1) + " KG"
-                })
+            VStack(alignment: .leading) {
                 
-                DYBarChartView(dataPoints: exampleData, selectedIndex: $selectedDataIndex, labelView: {dataPoint in self.labelView(dataPoint: dataPoint)}, xValueConverter: { (xValue) -> String in
-                    return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
-                }, yValueConverter: { (yValue) -> String in
-                    return  yValue.toDecimalString(maxFractionDigits: 0)
-                }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(selectedBarGradient: LinearGradient(colors: [.green, .green.opacity(0.8)], startPoint: .top, endPoint: .bottom), lateralPadding: (0, 0), barDropShadow: self.dropShadow, showSelectionIndicator: false, selectionIndicatorColor: .green, yAxisSettings: YAxisSettings(yAxisPosition: .trailing, yAxisFontSize: fontSize, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: fontSize)))
+                DYBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet)
+                .barDropShadow(Shadow(color: .gray, radius:8, x:-4, y:-3))
+                .selectedBar(borderColor: .blue)
+                .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .yAxisPosition(.trailing)
+                .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .frame(height: self.chartHeight(proxy: proxy))
                 
+                self.selectedDataSetView().padding()
+
                 Spacer()
             }.padding()
-            .navigationTitle("Workout Volume")
+            .navigationTitle("Weight Lifting Volume per Week (kg)")
+            .onAppear{
+                self.createBarDataSets()
+            }
         }
     }
     
-    var fontSize: CGFloat {
-        UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
+    
+    func chartHeight(proxy: GeometryProxy)->CGFloat {
+        return proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.75
     }
     
-    var dropShadow: Shadow {
-       return Shadow(color: .gray, radius:8, x:-4, y:-3)
-    }
-    
-    func labelView(dataPoint: DYDataPoint)-> AnyView {
+    func selectedDataSetView()->some View {
         
-        let yValue = dataPoint.yValue
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 1
-        var color: Color?
-        if let index = self.exampleData.firstIndex(where: {$0.id == dataPoint.id}), index == self.selectedDataIndex {
-            color = .green
+        Group {
+            if let barDataSet = selectedBarDataSet {
+      
+                let startDate = barDataSet.xValue!
+                let endDate = startDate.advanced(by: 604800)
+                VStack(alignment: .leading) {
+                    Text("\(Date(timeIntervalSinceReferenceDate: startDate).toString(format:"dd MMM")) - \(Date(timeIntervalSinceReferenceDate: endDate).toString(format:"dd MMM YYYY"))").bold()
+                    
+                    Text(barDataSet.positiveYValue.toDecimalString(maxFractionDigits: 1) + " kg")
+                }
+            }
         }
-        return Text(formatter.string(for: yValue) ?? "").font(.caption).foregroundColor(color).eraseToAnyView()
     }
     
-    func gradientPerBar(_ dataPoint: DYDataPoint)->LinearGradient {
-        
-        let index = exampleData.firstIndex(where: { (cDataPoint) in
-            cDataPoint.id == dataPoint.id
-        })!
-        
-        let nIndex = index + 1
-        
-        if nIndex == 1 || nIndex % 3 == 0 {
-            return LinearGradient(gradient: Gradient(colors: [Color.purple, Color.purple.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
-        } else if nIndex % 2 == 0 {
-            return LinearGradient(gradient: Gradient(colors: [Color.red, Color.red.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
-        } else {
-            return LinearGradient(gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
+    
+    func createBarDataSets() {
+        var barDataSets: [DYBarDataSet] = []
+        var endDate = Date().add(units: -105, component: .day)
+        for _ in 0..<14 {
+            let yValue = Double.random(in: 1500 ..< 1940)
+           let xValue = endDate.timeIntervalSinceReferenceDate
+            let xValueLabel = Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
+            
+            let dataSet = DYBarDataSet(fractions: [DYBarDataFraction(value: yValue, gradient: LinearGradient(colors: [Color.orange, Color.orange.opacity(0.7)], startPoint: .top, endPoint: .bottom))], xValue: xValue, xAxisLabel: xValueLabel, labelView: { value in
+                return Text(value.toDecimalString(maxFractionDigits: 0)).font(.footnote).eraseToAnyView()
+            })
+            barDataSets.append(dataSet)
+            let dayDifference = 7
+            endDate = endDate.add(units: dayDifference, component: .day)
         }
-
+        self.barDataSets = barDataSets
     }
     
 }

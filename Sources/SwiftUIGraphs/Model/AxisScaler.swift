@@ -1,6 +1,6 @@
 
 //
-//  YAxisScaler.swift
+//  AxisScaler.swift
 
 //
 //  Copyright (c) 2020 Roman Baitaliuk
@@ -27,18 +27,22 @@
 
 import Foundation
 
-struct YAxisScaler {
-    private var minPoint: Double
-    private var maxPoint: Double
+public struct AxisScaler {
+    var minPoint: Double
+    var maxPoint: Double
+    var minOverride: Bool
+    var maxOverride: Bool
     private var maxTicks: Int
     private(set) var tickSpacing: Double?
     private(set) var scaledMin: Double?
     private(set) var scaledMax: Double?
     
-    init(min: Double, max: Double, maxTicks: Int) {
+    init(min: Double, max: Double, maxTicks: Int, minOverride: Bool = false, maxOverride: Bool = false) {
         self.maxTicks = maxTicks
         self.minPoint = min
         self.maxPoint = max
+        self.minOverride = minOverride
+        self.maxOverride = maxOverride
         self.calculate()
     }
     
@@ -70,6 +74,12 @@ struct YAxisScaler {
     
     private func removeTrailingZeros(_ value: Double, to decimalsCount: Int) -> Double {
         return Double(String(format: "%.\(decimalsCount)f", value))!
+    }
+     
+    var axisMinMax: (min: Double, max: Double) {
+        let min = self.minOverride ? self.minPoint : self.scaledMin ?? 0
+        let max = self.maxOverride ? self.maxPoint : self.scaledMax ?? 1
+        return (min, max)
     }
     
     private func scale(_ range: Double, round: Bool) -> Double {
