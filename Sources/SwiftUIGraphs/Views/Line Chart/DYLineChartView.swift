@@ -10,7 +10,7 @@ import SwiftUI
 /// DYLineChartView
 public struct DYLineChartView: View, DYGridChart {
 
-    var dataPoints: [DYDataPoint]
+   var dataPoints: [DYDataPoint]
 
    @State private var convertedXValues: [CGFloat]  = []
     
