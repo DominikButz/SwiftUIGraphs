@@ -9,6 +9,11 @@ import Foundation
 
 public extension Double {
     
+    static func normalizationFactor(value: Double, maxValue: Double, minValue: Double)->Double {
+       
+       return (value - minValue) / (maxValue - minValue)
+   }
+    
     func toDecimalString(maxFractionDigits: Int)->String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal

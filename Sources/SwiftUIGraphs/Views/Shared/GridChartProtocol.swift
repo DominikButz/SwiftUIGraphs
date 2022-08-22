@@ -150,7 +150,6 @@ extension DYGridChart {
         
         return (min: scaledMin, max: scaledMax)
 
-
     }
     
     

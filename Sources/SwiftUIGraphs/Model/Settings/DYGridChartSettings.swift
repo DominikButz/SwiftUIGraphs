@@ -21,6 +21,8 @@ public protocol DYGridChartSettings  {
  
 }
 
+
+
 /// Line Chart Settings
 public struct  DYLineChartSettings:  DYGridChartSettings {
     

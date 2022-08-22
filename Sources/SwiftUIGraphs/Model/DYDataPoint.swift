@@ -77,4 +77,9 @@ public struct DYDataPoint: Identifiable {
 
         return dataPoints
     }
+    
+    internal func indexFor(dataPoints:[DYDataPoint])->Int? {
+        return dataPoints.firstIndex(where: {$0.id == self.id})
+    }
+    
 }
