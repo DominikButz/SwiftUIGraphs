@@ -171,7 +171,7 @@ public struct DYLineChartView: View, DYGridChart {
     }
     
     private func showChartContent() {
-
+        print("line end \(self.lineEnd)")
         guard self.settings.showAppearAnimation  else {
             return
             
