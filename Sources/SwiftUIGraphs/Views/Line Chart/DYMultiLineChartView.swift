@@ -16,7 +16,9 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     var xValueAsString: (Double)->String
     var yValueAsString: (Double)->String
     
-    @State private var userTouchingChart: Bool = false
+   // @State private var userTouchingChart: Bool = false
+    @State private var touchingXPosition: CGFloat? // User X touch location
+    @State private var selectorLineOffset: CGFloat = 0
     
     public init?(lineDataSets: [DYLineDataSet], plotAreaSettings: DYPlotAreaSettings = DYPlotAreaSettings(), plotAreaHeight: CGFloat? = nil, xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
         if lineDataSets.isEmpty {
@@ -74,8 +76,16 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                                     self.xAxisGridLines().opacity(0.5)
                                 }
                                 
+                                self.selectorLine()
+                                
                                 ForEach(self.lineDataSets) { dataSet in
-                                    DYLineView(lineDataSet: dataSet, yAxisSettings: self.settings.yAxisSettings, yAxisScaler: self.yAxisScaler)
+                                    DYLineView(lineDataSet: dataSet,  yAxisSettings: self.settings.yAxisSettings, yAxisScaler: self.yAxisScaler, touchingXPosition: self.$touchingXPosition, selectorLineOffset: self.$selectorLineOffset)
+                                    
+                                }
+                                
+
+                                if self.settings.allowUserInteraction {
+                                    self.userInteraction()
                                 }
                                 
                             }.frame(width: geo.size.width - self.settings.yAxisSettings.yAxisViewWidth).background(settings.plotAreaBackgroundGradient)
@@ -103,6 +113,48 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
             
         }
     }
+    
+    
+    private func selectorLine() -> some View {
+        GeometryReader { geo in
+            self.settings.selectorLineColor
+                .frame(width: self.settings.selectorLineWidth)
+                .opacity(touchingXPosition != nil ? 1 : 0) // hide the vertical indicator line if user not touching the chart
+                .position(x: self.selectorLineOffset, y: geo.size.height / 2)
+                .animation(Animation.spring().speed(4))
+        }
+    }
+    
+    private func userInteraction()-> some View {
+        GeometryReader { geo in
+            Color.white.opacity(0.1)
+                .gesture(
+                    DragGesture(minimumDistance: 0)
+                        .onChanged { dragValue in
+                           dragOnChanged(value: dragValue, geo: geo)
+                        }
+                        .onEnded { dragValue in
+                            dragOnEnded(value: dragValue, geo: geo)
+                        }
+                )
+        }
+    }
+    
+    private func dragOnChanged(value: DragGesture.Value, geo: GeometryProxy) {
+        let xPos = value.location.x
+        self.touchingXPosition = xPos
+        self.selectorLineOffset = min(max(0, xPos), geo.size.width )
+        
+    }
+    
+    private func dragOnEnded(value: DragGesture.Value, geo: GeometryProxy) {
+        //let xPos = value.location.x
+        self.touchingXPosition = nil
+     //   self.userTouchingChart = false
+      //  let index = (xPos - leadingMargin) / (((geo.size.width - marginSum) / CGFloat(self.dataPoints.count - 1)))
+
+    }
+    
     
     
     //MARK: xAxis
@@ -226,113 +278,6 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     
 }
 
-
-internal struct DYLineView: View, DataPointConversion {
-
-    var lineDataSet: DYLineDataSet
-    var yAxisSettings: YAxisSettingsNew
-    var yAxisScaler: YAxisScaler
-    
-    @State private var lineEnd: CGFloat = 0 // for line animation
-    
-    var body: some View {
-        
-        ZStack {
-            self.line()
-            
-        }.onAppear {
-            self.showLine()
-        }
-    }
-    
-    private func showLine() {
-
-        guard self.lineDataSet.settings.showAppearAnimation  else {
-            return
-            
-        }
-        
-        withAnimation(.easeIn(duration: self.lineDataSet.settings.lineAnimationDuration)) {
-            self.lineEnd = 1
-           // self.showLineSegments = true // for different color line segments
-        }
-//        DispatchQueue.main.asyncAfter(deadline: .now() + (self.lineDataSet.settings.lineAnimationDuration) {
-//            withAnimation(.easeIn) {
-//                self.showSupplementaryViews = true
-//            }
-//        }
-    }
-    
-    private func line()->some View {
-      GeometryReader { geo in
-        Group {
-            if self.lineDataSet.dataPoints.count >= 2 {
-                self.pathFor(width: geo.size.width, height: geo.size.height, closeShape: false)
-                    .trim(from: 0, to: self.lineDataSet.settings.showAppearAnimation ? self.lineEnd : 1)
-                    .stroke(style: self.lineDataSet.settings.lineStrokeStyle)
-                    .foregroundColor(self.lineDataSet.settings.lineColor)
-                    .shadow(color: self.lineDataSet.settings.lineDropShadow?.color ?? .clear, radius: self.lineDataSet.settings.lineDropShadow?.radius ?? 0, x:  self.lineDataSet.settings.lineDropShadow?.x ?? 0, y:  self.lineDataSet.settings.lineDropShadow?.y ?? 0)
-            }
-        }
-      }
- 
-    }
-    
-    func pathFor(width: CGFloat, height: CGFloat, closeShape: Bool)->Path {
-        Path { path in
-
-           path  = self.drawCompletePathWith(path: &path, height: height, width: width)
-
-            // Finally close the subpath off by looping around to the beginning point.
-            if closeShape {
-                path.addLine(to: CGPoint(x: width, y: height))
-                path.addLine(to: CGPoint(x: 0, y: height))
-                path.closeSubpath()
-            }
-        }
-    }
-    
-    func drawCompletePathWith(path: inout Path, height: CGFloat, width: CGFloat)->Path {
-        
-        guard let firstYValue = lineDataSet.dataPoints.first?.yValue else {return path}
-        
-        var point0 = CGPoint(x: 0, y: height - self.convertToCoordinate(value: firstYValue, min: self.yAxisMinMax(settings: self.yAxisSettings).min, max: self.yAxisMinMax(settings: self.yAxisSettings).max, length: height))
-        path.move(to: point0)
-        var index:Int = 0
-        
-        for _ in lineDataSet.dataPoints {
-            if index != 0 {
-
-                point0 = self.connectPointsWith(path: &path, index: index, point0: point0, height: height, width: width)
-             
-            }
-            index += 1
-            
-        }
-        
-        return path
-        
-    }
-    
-    private func connectPointsWith(path: inout Path, index: Int, point0: CGPoint, height: CGFloat, width: CGFloat)->CGPoint {
-
-        let mappedYValue = self.convertToCoordinate(value: lineDataSet.dataPoints[index].yValue, min: self.yAxisMinMax(settings: self.yAxisSettings).min, max: self.yAxisMinMax(settings: self.yAxisSettings).max, length: height)
-        let xValues = lineDataSet.dataPoints.map({$0.xValue})
-        let maxX = xValues.max() ?? 0
-        let minX = xValues.min() ?? 0
-        let mappedXValue = self.convertToCoordinate(value: lineDataSet.dataPoints[index].xValue, min: minX, max: maxX, length: width)
-        let point1 = CGPoint(x: mappedXValue, y: height - mappedYValue)
-        if self.lineDataSet.settings.interpolationType == .quadCurve {
-            let midPoint = CGPoint.midPointForPoints(p1: point0, p2: point1)
-            path.addQuadCurve(to: midPoint, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point0))
-            path.addQuadCurve(to: point1, control: CGPoint.controlPointForPoints(p1: midPoint, p2: point1))
-        }
-        path.addLine(to: point1)
-        return point1
-    }
-
-    
-}
 //struct DYMultiLineChartView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        DYMultiLineChartView()

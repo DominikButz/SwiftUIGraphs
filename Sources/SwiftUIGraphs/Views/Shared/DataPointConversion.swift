@@ -33,4 +33,6 @@ extension DataPointConversion {
         return length * CGFloat(Double.normalizationFactor(value: value, maxValue: max, minValue: min))
 
    }
+    
+    
 }

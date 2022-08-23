@@ -14,11 +14,18 @@ public struct DYPlotAreaSettings {
     var plotAreaBackgroundGradient: LinearGradient
     var xAxisSettings: DYLineChartXAxisSettingsNew
     var yAxisSettings: YAxisSettingsNew
+    var selectorLineWidth: CGFloat
+    var selectorLineColor: Color
+    var allowUserInteraction: Bool
     
-    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), xAxisSettings: DYLineChartXAxisSettingsNew = DYLineChartXAxisSettingsNew(), yAxisSettings: YAxisSettingsNew = YAxisSettingsNew()) {
+    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), xAxisSettings: DYLineChartXAxisSettingsNew = DYLineChartXAxisSettingsNew(), yAxisSettings: YAxisSettingsNew = YAxisSettingsNew(), selectorLineWidth: CGFloat = 2, selectorLineColor: Color = .orange, allowUserInteraction: Bool = true) {
         self.plotAreaBackgroundGradient = plotAreaBackgroundGradient
         self.xAxisSettings = xAxisSettings
         self.yAxisSettings = yAxisSettings
+        self.selectorLineWidth = selectorLineWidth
+        self.selectorLineColor = selectorLineColor
+        self.allowUserInteraction = allowUserInteraction
+        
     }
     
     
