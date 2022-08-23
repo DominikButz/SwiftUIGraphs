@@ -19,8 +19,7 @@ public struct DYLineChartView: View, DYGridChart {
     @State private var lineOffset: CGFloat = 0 // Vertical line offset
     @State private var selectedYPos: CGFloat = 0 // User Y touch location
     @State private var isSelected: Bool = false // Is the user touching the graph
-    @State private var lineEnd: CGFloat = 0 // for line animation
-    @State private var showLineSegments: Bool = false
+    @State private var showLine: Bool = false
     @State private var showSupplementaryViews: Bool = false
 
     var chartFrameHeight: CGFloat?
@@ -171,15 +170,14 @@ public struct DYLineChartView: View, DYGridChart {
     }
     
     private func showChartContent() {
-        print("line end \(self.lineEnd)")
+        print("show line?  \(self.showLine)")
         guard self.settings.showAppearAnimation  else {
             return
             
         }
         
         withAnimation(.easeIn(duration: (self.settings as! DYLineChartSettings).lineAnimationDuration)) {
-            self.lineEnd = 1
-            self.showLineSegments = true // for different color line segments
+            self.showLine = true
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + (self.settings as! DYLineChartSettings).lineAnimationDuration) {
             withAnimation(.easeIn) {
@@ -277,10 +275,10 @@ public struct DYLineChartView: View, DYGridChart {
         Group {
             if self.dataPoints.count >= 2 {
                 self.pathFor(width: geo.size.width - marginSum, height: geo.size.height, closeShape: false)
-                    .trim(from: 0, to: self.settings.showAppearAnimation ? self.lineEnd : 1)
                     .stroke(style: (self.settings as! DYLineChartSettings).lineStrokeStyle)
                     .foregroundColor((self.settings as! DYLineChartSettings).lineColor)
                     .shadow(color: (self.settings as! DYLineChartSettings).lineDropShadow?.color ?? .clear, radius:  (self.settings as! DYLineChartSettings).lineDropShadow?.radius ?? 0, x:  (self.settings as! DYLineChartSettings).lineDropShadow?.x ?? 0, y:  (self.settings as! DYLineChartSettings).lineDropShadow?.y ?? 0)
+                    .mask(lineAnimationMaskingView(width:geo.size.width))
             }
         }
       }
@@ -317,7 +315,7 @@ public struct DYLineChartView: View, DYGridChart {
     /// for line drawing animation if line composed of several paths in separate colours
     private func lineAnimationMaskingView(width: CGFloat)->some View {
         HStack {
-            Rectangle().fill(Color.white.opacity(0.5)).frame(width: self.showLineSegments || self.settings.showAppearAnimation == false ? width : 0, alignment: .trailing)
+            Rectangle().fill(Color.white.opacity(0.5)).frame(width: self.showLine || self.settings.showAppearAnimation == false ? width : 0, alignment: .trailing)
             Spacer()
         }
     }
