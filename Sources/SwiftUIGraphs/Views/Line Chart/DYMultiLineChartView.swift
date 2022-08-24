@@ -11,6 +11,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
 
     var lineDataSets: [DYLineDataSet]
     var settings: DYPlotAreaSettings
+    var selectedIndices: [Binding<Int>]
     var plotAreaHeight: CGFloat?
     var yAxisScaler: YAxisScaler
     var xValueAsString: (Double)->String
@@ -20,13 +21,11 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     @State private var touchingXPosition: CGFloat? // User X touch location
     @State private var selectorLineOffset: CGFloat = 0
     
-    public init?(lineDataSets: [DYLineDataSet], plotAreaSettings: DYPlotAreaSettings = DYPlotAreaSettings(), plotAreaHeight: CGFloat? = nil, xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
-        if lineDataSets.isEmpty {
-            assertionFailure("You need to add at least one line data set")
-            return nil
-        }
+    public init?(lineDataSets: [DYLineDataSet],  selectedIndices: [Binding<Int>], plotAreaSettings: DYPlotAreaSettings = DYPlotAreaSettings(), plotAreaHeight: CGFloat? = nil, xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
+
         self.lineDataSets = lineDataSets
         self.settings = plotAreaSettings
+        self.selectedIndices = selectedIndices
         self.plotAreaHeight = plotAreaHeight
         
         self.xValueAsString = xValueAsString
@@ -76,12 +75,15 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                                     self.xAxisGridLines().opacity(0.5)
                                 }
                                 
-                                self.selectorLine()
-                                
+
                                 ForEach(self.lineDataSets) { dataSet in
-                                    DYLineView(lineDataSet: dataSet,  yAxisSettings: self.settings.yAxisSettings, yAxisScaler: self.yAxisScaler, touchingXPosition: self.$touchingXPosition, selectorLineOffset: self.$selectorLineOffset)
+                                    let index = self.lineDataSets.firstIndex(where: {$0.id == dataSet.id})!
+    
+                                    DYLineView(lineDataSet: dataSet, yAxisSettings: self.settings.yAxisSettings, yAxisScaler: self.yAxisScaler, selectedIndex: self.selectedIndices[index], touchingXPosition: self.$touchingXPosition, selectorLineOffset: self.$selectorLineOffset)
                                     
                                 }
+                                
+                                self.selectorLine()
                                 
 
                                 if self.settings.allowUserInteraction {

@@ -14,8 +14,7 @@ internal struct DYLineView: View, DataPointConversion {
     var lineDataSet: DYLineDataSet
     var yAxisSettings: YAxisSettingsNew
     var yAxisScaler: YAxisScaler
-    @State private var selectedIndex: Int = 0
-   // @Binding var userTouchingChart: Bool
+    @Binding var selectedIndex: Int
     @Binding var touchingXPosition: CGFloat? // User Y touch location
     @Binding var selectorLineOffset: CGFloat
     
@@ -26,13 +25,24 @@ internal struct DYLineView: View, DataPointConversion {
     var body: some View {
         GeometryReader { geo in
             ZStack {
+                
+                if let _ = self.lineDataSet.settings.lineAreaGradient {
+                    self.gradient()
+                }
+                
                 self.line()
+
                 if let _ = self.lineDataSet.pointView, self.showSupplementaryViews {
                     self.points()
                 }
                 
-
-                self.selectorView()
+                
+                
+                if self.lineDataSet.settings.allowUserInteraction, self.showSupplementaryViews {
+                    self.selectorView()
+                }
+                
+                
                 
                 
             }.onAppear {
@@ -112,6 +122,23 @@ internal struct DYLineView: View, DataPointConversion {
         }
     }
     
+    private func gradient()->some View {
+        GeometryReader { geo in
+            self.lineDataSet.settings.lineAreaGradient
+                .padding(.bottom, 1)
+                .mask(
+                   GeometryReader { geo in
+                       if self.lineDataSet.dataPoints.count >= 2 {
+                            self.pathFor(width: geo.size.width, height: geo.size.height, closeShape: true)
+                        }
+                    }
+                )
+    //            .shadow(color: (self.settings as! DYLineChartSettings).gradientDropShadow?.color ?? .clear, radius:  (self.settings as! DYLineChartSettings).gradientDropShadow?.radius ?? 0, x:  (self.settings as! DYLineChartSettings).gradientDropShadow?.x ?? 0, y:  (self.settings as! DYLineChartSettings).gradientDropShadow?.y ?? 0)
+        }
+    }
+    
+    //MARK: Helpers
+    
     private func fractionIndexFor(xPosition: CGFloat, geo: GeometryProxy)->CGFloat {
         let convertedXValues = self.lineDataSet.dataPoints.map({convertToCoordinate(value: $0.xValue, min: self.lineDataSet.xValuesMinMax.min, max: self.lineDataSet.xValuesMinMax.max, length: geo.size.width)})
         for i in 0..<convertedXValues.count {
@@ -130,6 +157,7 @@ internal struct DYLineView: View, DataPointConversion {
     }
     
     private func setSelected(index: CGFloat) {
+        
         if index.truncatingRemainder(dividingBy: 1) >= 0.5 && index < CGFloat(self.lineDataSet.dataPoints.count - 1) {
             self.selectedIndex = Int(index) + 1
         } else {
@@ -137,13 +165,7 @@ internal struct DYLineView: View, DataPointConversion {
         }
     }
     
-//    let index = self.fractionIndexFor(xPosition: xPos , geo: geo)
-
-//    if index.truncatingRemainder(dividingBy: 1) >= 0.5 && index < CGFloat(self.dataPoints.count  - 1) {
-//        self.selectedIndex = Int(index) + 1
-//    } else {
-//        self.selectedIndex = Int(index)
-//    }
+    
     
     
     //MARK: Path drawing
@@ -152,11 +174,16 @@ internal struct DYLineView: View, DataPointConversion {
         Path { path in
 
            path  = self.drawCompletePathWith(path: &path, height: height, width: width)
-
+           
             // Finally close the subpath off by looping around to the beginning point.
             if closeShape {
-                path.addLine(to: CGPoint(x: width, y: height))
-                path.addLine(to: CGPoint(x: 0, y: height))
+                let yAxisMinMax = yAxisMinMax(settings: self.yAxisSettings)
+                var y = height
+                if yAxisMinMax.min <= 0 {
+                    y = height - self.convertToCoordinate(value: 0, min: yAxisMinMax.min, max: yAxisMinMax.max, length: height)
+                }
+                path.addLine(to: CGPoint(x: width, y: y))
+                path.addLine(to: CGPoint(x: 0, y: y))
                 path.closeSubpath()
             }
         }
