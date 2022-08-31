@@ -22,11 +22,11 @@ struct MultiLineChartExample: View {
         let selectedIndices = [$blueLineSelectedIndex, $orangeLineSelectedIndex, $greenLineSelectedIndex]
         GeometryReader { proxy in
             VStack {
-                DYMultiLineChartView(lineDataSets: self.exampleData, selectedIndices: selectedIndices, plotAreaSettings: DYPlotAreaSettings(xAxisSettings: xAxisSettings), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65) { xValue in
+                DYMultiLineChartView(lineDataSets: self.exampleData, selectedIndices: selectedIndices, plotAreaSettings: DYPlotAreaSettings(xAxisSettings: xAxisSettings), plotAreaHeight: chartHeight(proxy: proxy)) { xValue in
                     self.stringified(value: xValue, allowFloat: false)
                 } yValueAsString: { yValue in
                     self.stringified(value:yValue, allowFloat: true)
-                }
+                }.frame(height: self.chartHeight(proxy: proxy) + 30)
                 .padding()
                 
                 if self.exampleData.isEmpty == false {
@@ -42,29 +42,36 @@ struct MultiLineChartExample: View {
             }
     }
     
+    func chartHeight(proxy: GeometryProxy)->CGFloat {
+        return proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65
+    }
+    
     var legendView: some View {
         VStack {
             HStack {
-                Text("Blue xValue: \(self.stringified(value: self.exampleData[0].dataPoints[blueLineSelectedIndex].xValue, allowFloat: true))")
-                Text("Blue yValue: \(self.stringified(value: self.exampleData[0].dataPoints[blueLineSelectedIndex].yValue, allowFloat: true))")
+                self.pointViewFor(index: 0)
+                Text("X: \(self.stringified(value: self.exampleData[0].dataPoints[blueLineSelectedIndex].xValue, allowFloat: true))")
+                Text("Y: \(self.stringified(value: self.exampleData[0].dataPoints[blueLineSelectedIndex].yValue, allowFloat: true))")
                 Spacer()
             }
 
             HStack {
-                Text("Orange xValue: \(self.stringified(value: self.exampleData[1].dataPoints[orangeLineSelectedIndex].xValue, allowFloat: true))")
-                Text("Orange yValue: \(self.stringified(value: self.exampleData[1].dataPoints[orangeLineSelectedIndex].yValue, allowFloat: true))")
+                self.pointViewFor(index: 1)
+                Text("X: \(self.stringified(value: self.exampleData[1].dataPoints[orangeLineSelectedIndex].xValue, allowFloat: true))")
+                Text("Y: \(self.stringified(value: self.exampleData[1].dataPoints[orangeLineSelectedIndex].yValue, allowFloat: true))")
                 Spacer()
             }
 
             HStack {
-                Text("Green xValue: \(self.stringified(value: self.exampleData[2].dataPoints[greenLineSelectedIndex].xValue, allowFloat: true))")
-                Text("Green yValue: \(self.stringified(value: self.exampleData[2].dataPoints[greenLineSelectedIndex].yValue, allowFloat: true))")
+                self.pointViewFor(index: 2)
+                Text("X: \(self.stringified(value: self.exampleData[2].dataPoints[greenLineSelectedIndex].xValue, allowFloat: true))")
+                Text("Y: \(self.stringified(value: self.exampleData[2].dataPoints[greenLineSelectedIndex].yValue, allowFloat: true))")
                 Spacer()
             }
 
      
 
-        }.background(Color.gray)
+        }
     }
     
     func stringified(value: Double, allowFloat: Bool)->String {
@@ -105,9 +112,10 @@ struct MultiLineChartExample: View {
             
             let dataSet = DYLineDataSet(dataPoints: dataPoints, pointView: { _ in
                 return self.pointView(index: i)
-            }, selectorView: selectorPointView(index: i), settings: DYLineSettings(lineColor: colors[i], interpolationType: .quadCurve, lineAreaGradient: nil))
+            }, selectorView: selectorPointView(index: i), settings: DYLineSettings(lineColor: colors[i], interpolationType: .quadCurve, lineAreaGradient: nil, xValueSelectedDataPointLineColor: colors[i], yValueSelectedDataPointLineColor: colors[i]))
             dataSets.append(dataSet)
         }
+        print("example data blue line x values \(dataSets[0].dataPoints.map({$0.xValue}))")
      //LinearGradient(colors: [colors[i], .white], startPoint: .top, endPoint: .bottom)
         return dataSets
     }
@@ -115,19 +123,20 @@ struct MultiLineChartExample: View {
     func pointView(index: Int)->AnyView {
 
         Group {
-            self.pointViewFor(index: index, edgeLength: 10)
+            self.pointViewFor(index: index)
         }.eraseToAnyView()
     }
     
-    func pointViewFor(index: Int, edgeLength: CGFloat)-> some View {
+    func pointViewFor(index: Int)-> some View {
         Group {
             switch index {
                 case 0:
-                Circle().pointStyle(color: colors[index], edgeLength: edgeLength).cornerRadius(edgeLength / 2)
+                Circle().pointStyle(color: colors[index], edgeLength: 12).cornerRadius(6)
                 case 1:
-                    Rectangle().pointStyle(color: colors[index], edgeLength: edgeLength)
+                    Rectangle().pointStyle(color: colors[index], edgeLength: 10)
                 default:
-                self.triangle(edgeLength: edgeLength).pointStyle(color: colors[index], edgeLength: edgeLength).clipShape(self.triangle(edgeLength: edgeLength))
+                self.triangle(edgeLength: 13).pointStyle(color: colors[index], edgeLength: 13)
+                    .clipShape(self.triangle(edgeLength: 13))
             }
         }
     }

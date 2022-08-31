@@ -31,6 +31,8 @@ internal struct DYLineView: View, DataPointConversion {
                 }
                 
                 self.line()
+                
+                self.selectedDataPointAxisLines()
 
                 if let _ = self.lineDataSet.pointView, self.showSupplementaryViews {
                     self.points()
@@ -49,11 +51,12 @@ internal struct DYLineView: View, DataPointConversion {
                // self.selectedIndex = self.lineDataSet.selectedIndex
                 self.showLine()
             }.onChange(of: self.touchingXPosition) { newValue in
-      
+               //print("touching x pos \(newValue)")
                 if newValue == nil {
+                    //print("line offset \(self.selectorLineOffset)")
                     let index = self.fractionIndexFor(xPosition: self.selectorLineOffset, geo: geo)
                     self.setSelected(index: index)
-                    
+                    //print("setting selected to index \(index)")
                 }
             }
         }
@@ -137,6 +140,38 @@ internal struct DYLineView: View, DataPointConversion {
         }
     }
     
+    // selection point x and y axis marker lines
+    private func selectedDataPointAxisLines()-> some View {
+        
+        GeometryReader { geo in
+            let height = geo.size.height
+            let width = geo.size.width
+            let selectedDataPoint = self.lineDataSet.dataPoints[self.selectedIndex]
+            let xValue =  self.convertToCoordinate(value:  selectedDataPoint.xValue, min: self.lineDataSet.xValuesMinMax.min, max: self.lineDataSet.xValuesMinMax.max, length: width)
+            let yValue = height - self.convertToCoordinate(value: selectedDataPoint.yValue, min: self.yAxisMinMax(settings: self.yAxisSettings).min, max:  self.yAxisMinMax(settings: self.yAxisSettings).max, length: height)
+            
+            if let xLineColor = lineDataSet.settings.xValueSelectedDataPointLineColor {
+                Path { p in  // vertical from selected point to x-axis
+                    p.move(to: CGPoint(x: xValue, y: yValue))
+                    p.addLine(to: CGPoint(x: xValue, y: height))
+                }.stroke(style:lineDataSet.settings.xValueSelectedDataPointLineStrokeStyle)
+                    .foregroundColor(xLineColor)
+                    .opacity(self.touchingXPosition == nil ? 1 : 0)
+            }
+            
+            if let yLineColor = lineDataSet.settings.yValueSelectedDataPointLineColor {
+                Path { p in  // horizontal from selected point to y-axis
+                    p.move(to: CGPoint(x: xValue, y: yValue))
+                    let xCoordinate = self.yAxisSettings.yAxisPosition  == .trailing ? width  : 0
+                    p.addLine(to: CGPoint(x: xCoordinate, y: yValue))
+                }.stroke(style: lineDataSet.settings.yValueSelectedDataPointLineStrokeStyle)
+                    .foregroundColor(yLineColor)
+                    .opacity(self.touchingXPosition == nil  ? 1 : 0)
+            }
+        }
+        
+    }
+    
     //MARK: Helpers
     
     private func fractionIndexFor(xPosition: CGFloat, geo: GeometryProxy)->CGFloat {
@@ -152,9 +187,10 @@ internal struct DYLineView: View, DataPointConversion {
             }
         }
 
-        
         return 0
     }
+    
+
     
     private func setSelected(index: CGFloat) {
         

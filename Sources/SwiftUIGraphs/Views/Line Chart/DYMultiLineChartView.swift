@@ -43,6 +43,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
         }
          self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10)
 
+        print("x axis min max: \(self.xAxisMinMax().min), \(self.xAxisMinMax().max)")
         
     }
     
@@ -69,10 +70,10 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                             
                             ZStack {
                                 if self.settings.yAxisSettings.showYAxisGridLines {
-                                    self.yAxisGridLines().opacity(0.5)
+                                    self.yAxisGridLines()
                                 }
                                 if settings.xAxisSettings.showXAxisGridLines {
-                                    self.xAxisGridLines().opacity(0.5)
+                                    self.xAxisGridLines()
                                 }
                                 
 
@@ -121,7 +122,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
         GeometryReader { geo in
             self.settings.selectorLineColor
                 .frame(width: self.settings.selectorLineWidth)
-                .opacity(touchingXPosition != nil ? 1 : 0) // hide the vertical indicator line if user not touching the chart
+                 .opacity(touchingXPosition != nil ? 1 : 0) // hide the vertical indicator line if user not touching the chart
                 .position(x: self.selectorLineOffset, y: geo.size.height / 2)
                 .animation(Animation.spring().speed(4))
         }
@@ -143,9 +144,8 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     }
     
     private func dragOnChanged(value: DragGesture.Value, geo: GeometryProxy) {
-        let xPos = value.location.x
-        self.touchingXPosition = xPos
-        self.selectorLineOffset = min(max(0, xPos), geo.size.width )
+        self.touchingXPosition =  value.location.x
+        self.selectorLineOffset = min(max(0, touchingXPosition!), geo.size.width )
         
     }
     
@@ -198,8 +198,8 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                         p.addLine(to: CGPoint(x:xPosition, y: totalHeight))
                         xPosition += convertedXAxisInterval
                     }
-                }.stroke(style: self.settings.xAxisSettings.xAxisLineStrokeStyle)
-                .foregroundColor(.secondary)
+                }.stroke(style: self.settings.xAxisSettings.xAxisGridLineStrokeStyle)
+                    .foregroundColor(self.settings.xAxisSettings.xAxisGridLineColor)
             }
 
         }

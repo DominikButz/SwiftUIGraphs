@@ -67,7 +67,7 @@ extension PlotAreaChart {
 
                     
                 }.stroke(style: settings.yAxisSettings.yAxisGridLinesStrokeStyle)
-                .foregroundColor(.secondary)
+                    .foregroundColor(settings.yAxisSettings.yAxisGridLineColor)
                 
             }
 
