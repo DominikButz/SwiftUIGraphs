@@ -33,13 +33,13 @@ public struct DYPlotAreaSettings {
 }
 
 
-public struct DYLineChartXAxisSettingsNew {
+public struct DYLineChartXAxisSettingsNew: XAxisSettings {
     
-    var showXAxis: Bool
+    public var showXAxis: Bool
     var showXAxisGridLines: Bool
     var xAxisGridLineStrokeStyle: StrokeStyle
     var xAxisGridLineColor: Color
-    var xAxisFontSize: CGFloat
+    public var labelFontSize: CGFloat
     var xAxisInterval: Double
 
     /// DYLineChartXAxisSettings initializer.
@@ -57,7 +57,7 @@ public struct DYLineChartXAxisSettingsNew {
         self.xAxisGridLineStrokeStyle = xAxisGridLineStrokeStyle
         self.xAxisGridLineColor = xAxisGridLineColor
         self.xAxisInterval = xAxisInterval
-        self.xAxisFontSize = xAxisFontSize
+        self.labelFontSize = xAxisFontSize
         
     }
 }

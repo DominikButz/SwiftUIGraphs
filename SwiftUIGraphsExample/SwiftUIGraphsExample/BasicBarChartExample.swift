@@ -17,7 +17,7 @@ struct BasicBarChartExample: View {
        
         GeometryReader { proxy in
             VStack {
-                DYGridChartHeaderView(title: "Workout Volume (KG)", dataPoints: exampleData, selectedIndex: self.$selectedDataIndex, selectedYValueTextColor: Color.green, isLandscape: proxy.size.height < proxy.size.width, xValueConverter: { (xValue) -> String in
+                DYGridChartHeaderView(title: "Weight Volume (KG)", dataPoints: exampleData, selectedIndex: self.$selectedDataIndex, selectedYValueTextColor: Color.green, isLandscape: proxy.size.height < proxy.size.width, xValueConverter: { (xValue) -> String in
                     return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy HH:mm")
                 }, yValueConverter: { (yValue) -> String in
                     return  yValue.toDecimalString(maxFractionDigits: 1) + " KG"
@@ -31,7 +31,7 @@ struct BasicBarChartExample: View {
                 
                 Spacer()
             }.padding()
-            .navigationTitle("Workout Volume")
+            .navigationTitle("Weight Lifting Volume")
         }
     }
     

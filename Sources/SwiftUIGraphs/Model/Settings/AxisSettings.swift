@@ -12,7 +12,7 @@ import SwiftUI
 public struct DYLineChartXAxisSettings: XAxisSettings {
     
    public var showXAxis: Bool
-   public var xAxisFontSize: CGFloat
+   public var labelFontSize: CGFloat
     
     var showXAxisGridLines: Bool
     var xAxisLineStrokeStyle: StrokeStyle
@@ -54,7 +54,7 @@ public struct DYLineChartXAxisSettings: XAxisSettings {
         self.xAxisSelectedDataPointLineColor = xAxisSelectedDataPointLineColor
         
         self.xAxisInterval = xAxisInterval
-        self.xAxisFontSize = xAxisFontSize
+        self.labelFontSize = xAxisFontSize
         
     }
 }
@@ -63,7 +63,7 @@ public struct DYLineChartXAxisSettings: XAxisSettings {
 public struct DYBarChartXAxisSettings: XAxisSettings {
     
    public var showXAxis: Bool
-   public var xAxisFontSize: CGFloat
+   public var labelFontSize: CGFloat
     
     /// DYBarChartXAxisSettings
     /// - Parameters:
@@ -72,13 +72,13 @@ public struct DYBarChartXAxisSettings: XAxisSettings {
     public init(showXAxis: Bool = true, xAxisFontSize: CGFloat = 8) {
         
         self.showXAxis = showXAxis
-        self.xAxisFontSize = xAxisFontSize
+        self.labelFontSize = xAxisFontSize
     }
 }
 
 public protocol XAxisSettings {
     var showXAxis: Bool {get set}
-    var xAxisFontSize: CGFloat {get set}
+    var labelFontSize: CGFloat {get set}
     
 }
 

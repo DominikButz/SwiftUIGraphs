@@ -24,14 +24,14 @@ struct ContentView: View {
                    // NavigationLink("Weight Lifting Volume per Workout", destination: BasicLineChartExample())
                     NavigationLink("Stock Prices (asyn data fetch)", destination: LineChartWithAsyncDataFetch())
                     NavigationLink("Workout Time per Week", destination: CustomYAxisIntervalExampleLineChart())
-                    NavigationLink("Av. Temperature ºC per City", destination: MultiLineChartExample(), isActive: $linkActive)
+                    NavigationLink("Multi-Line Example", destination: MultiLineChartExample(), isActive: $linkActive)
                 }
                 
                 Section(header: HStack{
                     Image(systemName: "chart.bar.fill")
                     Text("Bar Charts")
                 }) {
-                    NavigationLink("Workout Volume", destination: BasicBarChartExample())
+                    NavigationLink("Weight Lifting Volume", destination: BasicBarChartExample())
                 }
                 Section(header: HStack{
                     Image(systemName: "chart.pie.fill")

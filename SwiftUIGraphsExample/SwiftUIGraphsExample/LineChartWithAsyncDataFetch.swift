@@ -10,7 +10,8 @@ import SwiftUIGraphs
 
 struct LineChartWithAsyncDataFetch: View {
     //TODO: sign up with https://iexcloud.io to get a free auth token and insert it here
-    @StateObject var viewModel = StockPriceDataViewModel(token: "")
+    @StateObject var viewModel = StockPriceDataViewModel(token: "pk_dc07c756ff5e4f2b95a19843e6c3ae5e")
+    @State var selectedIndex:Int = 0
     
     var body: some View {
         GeometryReader { proxy in
@@ -28,25 +29,22 @@ struct LineChartWithAsyncDataFetch: View {
                             }.padding()
                         }
                         
-                        DYGridChartHeaderView(title: "\(self.viewModel.stockSymbol) Share Price, last 30 days", dataPoints: self.viewModel.dataPoints, selectedIndex: self.$viewModel.selectedIndex, isLandscape: proxy.size.height < proxy.size.width, xValueConverter: { (xValue) -> String in
+                        DYGridChartHeaderView(title: "\(self.viewModel.stockSymbol) Share Price, last 30 days", dataPoints: self.viewModel.dataPoints, selectedIndex: self.$selectedIndex, isLandscape: proxy.size.height < proxy.size.width, xValueConverter: { (xValue) -> String in
                         return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy")
                     }, yValueConverter: { (yValue) -> String in
                         
                         return  yValue.toCurrencyString(maxDigits: 2)
                         
                     })
-                    
-                    DYLineChartView(dataPoints: self.viewModel.dataPoints, selectedIndex: self.$viewModel.selectedIndex, xValueConverter: { (xValue) -> String in
-                        // this is for the x-Axis values - date should be short
-                        return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
-                    }, yValueConverter: { (yValue) -> String in
-                        // return without currency symbol
-                        let formatter = NumberFormatter()
-                        formatter.maximumFractionDigits = 2
-                        return formatter.string(for: yValue)!
-                        //  return TimeInterval(yValue).toString() ?? ""
-                    }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65,  settings: DYLineChartSettings(showPointMarkers: true, lateralPadding: (0, 0), yAxisSettings: YAxisSettings(yAxisFontSize: fontSize), xAxisSettings: DYLineChartXAxisSettings(showXAxis: true, xAxisInterval: 172800, xAxisFontSize: fontSize)))  //seconds per 48 hours
-                    Spacer()
+                        
+                        DYMultiLineChartView(lineDataSets: [self.dataSet], selectedIndices: [self.$selectedIndex], plotAreaSettings: DYPlotAreaSettings(xAxisSettings: DYLineChartXAxisSettingsNew(xAxisInterval: 172800, xAxisFontSize: fontSize), yAxisSettings: YAxisSettingsNew(yAxisFontSize: fontSize)), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65) { xValue in
+                            return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
+                        } yValueAsString: { yValue in
+                            let formatter = NumberFormatter()
+                            formatter.maximumFractionDigits = 2
+                            return formatter.string(for: yValue)!
+                        }
+
                 }.padding()
             }.onAppear {
                 if viewModel.stockSymbol == "" {
@@ -58,6 +56,27 @@ struct LineChartWithAsyncDataFetch: View {
             
 
     }
+    
+    var dataSet: DYLineDataSet {
+        DYLineDataSet(dataPoints: viewModel.dataPoints, pointView: { dataPoint in
+            DYLineDataSet.defaultPointView(color: .orange)
+        }, labelView: { dataPoint in
+            self.labelView(dataPoint: dataPoint)
+        }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red), settings: DYLineSettings(xValueSelectedDataPointLineColor: .orange,  yValueSelectedDataPointLineColor: .orange))
+    }
+    
+    func labelView(dataPoint: DYDataPoint)-> AnyView {
+        if let index = self.viewModel.dataPoints.firstIndex(where: {$0.id == dataPoint.id}) {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            formatter.currencyCode = "USD"
+            formatter.maximumFractionDigits = 2
+            return Text(index % 2 == 0 ? "" : formatter.string(for: dataPoint.yValue)!).bold().font(.caption).foregroundColor(.primary).eraseToAnyView()
+        }
+      
+        return Text("").eraseToAnyView()
+    }
+
     
     var fontSize: CGFloat {
         UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
@@ -80,7 +99,7 @@ final class StockPriceDataViewModel: ObservableObject {
     @Published var stockSymbol: String = ""
     
     @Published var dataPoints:[DYDataPoint] = []
-    @Published var selectedIndex:Int = 0
+    
     
     init(token: String) {
         self.token = token
@@ -132,6 +151,8 @@ final class StockPriceDataViewModel: ObservableObject {
             
         }
     }
+    
+
     
     
 }

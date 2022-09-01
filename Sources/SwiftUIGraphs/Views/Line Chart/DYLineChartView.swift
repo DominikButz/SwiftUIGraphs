@@ -212,7 +212,7 @@ public struct DYLineChartView: View, DYGridChart {
     }
 
     private func xAxisIntervalLabelViewFor(value:Double, totalWidth: CGFloat)-> some View {
-        Text(self.xValueConverter(value)).font(.system(size:(settings as! DYLineChartSettings).xAxisSettings.xAxisFontSize)).position(x: self.settings.lateralPadding.leading + self.convertToXCoordinate(value: value, width: totalWidth), y: 10)
+        Text(self.xValueConverter(value)).font(.system(size:(settings as! DYLineChartSettings).xAxisSettings.labelFontSize)).position(x: self.settings.lateralPadding.leading + self.convertToXCoordinate(value: value, width: totalWidth), y: 10)
     }
 //
 //

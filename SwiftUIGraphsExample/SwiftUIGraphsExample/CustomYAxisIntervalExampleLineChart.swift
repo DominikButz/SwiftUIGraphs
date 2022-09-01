@@ -24,14 +24,10 @@ struct CustomYAxisIntervalExampleLineChart: View {
            
                return TimeInterval(yValue).toString() ?? ""
             })
+             
+             DYMultiLineChartView(lineDataSets: [exampleLineDataSet], selectedIndices: [$selectedDataIndex], plotAreaSettings: DYPlotAreaSettings(xAxisSettings: xAxisSettings, yAxisSettings: yAxisSettings), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, xValueAsString: {xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")}, yValueAsString: { yValue in  TimeInterval(yValue).toString() ?? ""})
         
-            DYLineChartView(dataPoints: exampleData, selectedIndex: $selectedDataIndex, xValueConverter: { (xValue) -> String in
-                // this is for the x-Axis values - date should be short
-                return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
-                
-            }, labelView: nil, yValueConverter: { (yValue) -> String in
-                return TimeInterval(yValue).toString() ?? ""  //{ dataPoint in self.dataPointSegmentColor(dataPoint: dataPoint)}
-            }, colorPerPoint: nil, colorPerLineSegment: nil, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65,  settings: lineChartSettings)  // 604800 seconds per week
+
 //             Button {
 //                 let yValue = Int.random(in: 6000 ..< 12000)
 //                 let xValues = self.exampleData.map{$0.xValue}
@@ -52,16 +48,21 @@ struct CustomYAxisIntervalExampleLineChart: View {
        }
     }
     
-    var lineChartSettings: DYLineChartSettings {
-        DYLineChartSettings(lineStrokeStyle: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: .blue, showAppearAnimation: true, showGradient: true, gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), gradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), lateralPadding: (0, 0), pointColor: .blue, selectorLineColor: .blue, selectorLinePointColor: .blue, allowUserInteraction: true, yAxisSettings:  yAxisSettings, xAxisSettings: xAxisSettings)
+//    var lineChartSettings: DYLineChartSettings {
+//        DYLineChartSettings(lineStrokeStyle: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: .blue, showAppearAnimation: true, showGradient: true, gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), gradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), lateralPadding: (0, 0), pointColor: .blue, selectorLineColor: .blue, selectorLinePointColor: .blue, allowUserInteraction: true, yAxisSettings:  yAxisSettings, xAxisSettings: xAxisSettings)
+//    }
+    
+    var xAxisSettings: DYLineChartXAxisSettingsNew {
+        DYLineChartXAxisSettingsNew(showXAxis: true, xAxisInterval: 604800, xAxisFontSize: fontSize)
     }
     
-    var xAxisSettings: DYLineChartXAxisSettings {
-        DYLineChartXAxisSettings(showXAxis: true, showXAxisDataPointLines: false, showXAxisSelectedDataPointLine: true, xAxisInterval: 604800, xAxisFontSize: fontSize)
-    }
+//    var xAxisGridLineStrokeStyle: StrokeStyle
+//    var xAxisGridLineColor: Color
+//    var xAxisFontSize: CGFloat
+//    var xAxisInterval: Double
     
-    var yAxisSettings: YAxisSettings {
-        YAxisSettings(showYAxis: true, yAxisPosition: .trailing, yAxisViewWidth: self.yAxisWidth, showYAxisDataPointLines: false, showYAxisSelectedDataPointLine: true,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min: 0, max: Double(Int(exampleData.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), yAxisIntervalOverride: 1800)
+    var yAxisSettings: YAxisSettingsNew {
+        YAxisSettingsNew(showYAxis: true, yAxisPosition: .trailing, yAxisViewWidth: self.yAxisWidth,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min: 0, max: Double(Int(exampleData.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), yAxisIntervalOverride: 1800)
     }
     
     var fontSize: CGFloat {
@@ -96,6 +97,29 @@ struct CustomYAxisIntervalExampleLineChart: View {
         
         return Color.green
     }
+    
+    var exampleLineDataSet: DYLineDataSet {
+        var dataPoints:[DYDataPoint] = []
+        
+        var endDate = Date().add(units: -3, component: .hour)
+        
+        for _ in 0..<50 {
+            let yValue = Int.random(in: 6000 ..< 12000)
+            let xValue =  endDate.timeIntervalSinceReferenceDate
+            let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
+            dataPoints.append(dataPoint)
+            let randomDayDifference = Int.random(in: 1 ..< 8)
+            endDate = endDate.add(units: -randomDayDifference, component: .day)
+        }
+
+        return DYLineDataSet(dataPoints: dataPoints, pointView: { _ in
+            DYLineDataSet.defaultPointView(color: .blue)
+        }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red), settings: DYLineSettings(lineColor: .blue,   lineAreaGradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), lineAreaGradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), xValueSelectedDataPointLineColor: .red, yValueSelectedDataPointLineColor: .red))
+    }
+    
+//    var lineChartSettings: DYLineChartSettings {
+//        DYLineChartSettings(lineStrokeStyle: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: .blue, showAppearAnimation: true, showGradient: true, gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), gradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), lateralPadding: (0, 0), pointColor: .blue, selectorLineColor: .blue, selectorLinePointColor: .blue, allowUserInteraction: true, yAxisSettings:  yAxisSettings, xAxisSettings: xAxisSettings)
+//    }
     
 }
 

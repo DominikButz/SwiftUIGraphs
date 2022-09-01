@@ -47,30 +47,18 @@ struct MultiLineChartExample: View {
     }
     
     var legendView: some View {
-        VStack {
-            HStack {
-                self.pointViewFor(index: 0)
-                Text("X: \(self.stringified(value: self.exampleData[0].dataPoints[blueLineSelectedIndex].xValue, allowFloat: true))")
-                Text("Y: \(self.stringified(value: self.exampleData[0].dataPoints[blueLineSelectedIndex].yValue, allowFloat: true))")
-                Spacer()
+        let selectedIndices = [blueLineSelectedIndex, orangeLineSelectedIndex, greenLineSelectedIndex]
+        return HStack(spacing:15) {
+            ForEach(0..<self.exampleData.count, id:\.self) { i in
+                HStack {
+                    self.pointViewFor(index: i)
+                    Text("X: \(self.stringified(value: self.exampleData[i].dataPoints[selectedIndices[i]].xValue, allowFloat: true))")
+                    Text("Y: \(self.stringified(value: self.exampleData[i].dataPoints[selectedIndices[i]].yValue, allowFloat: true))")
+                   
+                }
+                
             }
-
-            HStack {
-                self.pointViewFor(index: 1)
-                Text("X: \(self.stringified(value: self.exampleData[1].dataPoints[orangeLineSelectedIndex].xValue, allowFloat: true))")
-                Text("Y: \(self.stringified(value: self.exampleData[1].dataPoints[orangeLineSelectedIndex].yValue, allowFloat: true))")
-                Spacer()
-            }
-
-            HStack {
-                self.pointViewFor(index: 2)
-                Text("X: \(self.stringified(value: self.exampleData[2].dataPoints[greenLineSelectedIndex].xValue, allowFloat: true))")
-                Text("Y: \(self.stringified(value: self.exampleData[2].dataPoints[greenLineSelectedIndex].yValue, allowFloat: true))")
-                Spacer()
-            }
-
-     
-
+            Spacer()
         }
     }
     
@@ -101,7 +89,7 @@ struct MultiLineChartExample: View {
         for i in 0..<3 {
  
             var dataPoints: [DYDataPoint] = []
-            var xValue:Double = 1
+            var xValue = Double.random(in: 1...1.5)
             for _ in 0..<12 {
             
                 let yValue = Double.random(in: -10...40)
@@ -112,7 +100,9 @@ struct MultiLineChartExample: View {
             
             let dataSet = DYLineDataSet(dataPoints: dataPoints, pointView: { _ in
                 return self.pointView(index: i)
-            }, selectorView: selectorPointView(index: i), settings: DYLineSettings(lineColor: colors[i], interpolationType: .quadCurve, lineAreaGradient: nil, xValueSelectedDataPointLineColor: colors[i], yValueSelectedDataPointLineColor: colors[i]))
+            },  selectorView: DYLineDataSet.defaultSelectorPointView(color:.red),  settings: DYLineSettings(lineColor: colors[i], lineDropShadow: Shadow(color: .gray, radius: 5, x: -5, y: -5), interpolationType: .quadCurve,  xValueSelectedDataPointLineColor: colors[i], yValueSelectedDataPointLineColor: colors[i]))
+            //lineAreaGradient: LinearGradient(colors: [colors[i].opacity(0.7), .clear], startPoint: .top, endPoint: .bottom),
+            //lineAreaGradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7),
             dataSets.append(dataSet)
         }
         print("example data blue line x values \(dataSets[0].dataPoints.map({$0.xValue}))")
@@ -141,6 +131,10 @@ struct MultiLineChartExample: View {
         }
     }
    
+    func labelView(dataPoint: DYDataPoint)-> AnyView {
+        
+        return Text("Text").font(.caption).foregroundColor(.blue).eraseToAnyView()
+    }
 
     
     func selectorPointView(index: Int)->AnyView {
@@ -167,25 +161,30 @@ struct MultiLineChartExample: View {
             
         }
     }
-}
-
-extension Shape {
-    func pointStyle(color: Color, edgeLength: CGFloat)-> some View {
-            self
-            .stroke(style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0))
-            .foregroundColor(color)
-            .frame(width: edgeLength, height: edgeLength, alignment: .center)
-            .background(Color(.systemBackground))
-          
+    
+    func dataPointSegmentColor(index: Int)->Color {
+            let nIndex = index + 1
+            
+            if nIndex == 1 || nIndex % 3 == 0 {
+                return Color.purple
+            } else if nIndex % 2 == 0 {
+                return Color.red
+            } else {
+                return Color.green
+            }
+           
     }
+    
+
 }
-
-
-
-
 
 struct MultiLineChartExample_Previews: PreviewProvider {
     static var previews: some View {
-        MultiLineChartExample()
+        if #available(iOS 15.0, *) {
+            MultiLineChartExample()
+                .previewInterfaceOrientation(.portrait)
+        } else {
+            MultiLineChartExample()
+        }
     }
 }

@@ -56,6 +56,13 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
         
     }
     
+    private var xValuesMinMax: (min: Double, max: Double) {
+        let xValues = allDataPoints.map({$0.xValue})
+        let maxX = xValues.max() ?? 0
+        let minX = xValues.min() ?? 0
+        return (minX, maxX)
+}
+    
     public var body: some View  {
         GeometryReader { geo in
             Group {
@@ -79,8 +86,8 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
 
                                 ForEach(self.lineDataSets) { dataSet in
                                     let index = self.lineDataSets.firstIndex(where: {$0.id == dataSet.id})!
-    
-                                    DYLineView(lineDataSet: dataSet, yAxisSettings: self.settings.yAxisSettings, yAxisScaler: self.yAxisScaler, selectedIndex: self.selectedIndices[index], touchingXPosition: self.$touchingXPosition, selectorLineOffset: self.$selectorLineOffset)
+                                    
+                                    DYLineView(lineDataSet: dataSet, yAxisSettings: self.settings.yAxisSettings, yAxisScaler: self.yAxisScaler, xValuesMinMax: xValuesMinMax, selectedIndex: self.selectedIndices[index], touchingXPosition: self.$touchingXPosition, selectorLineOffset: self.$selectorLineOffset)
                                     
                                 }
                                 
@@ -162,29 +169,28 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     //MARK: xAxis
     
     private func xAxisView()-> some View {
-
-        ZStack(alignment: .center) {
-            GeometryReader { geo in
-                let labelSteps = self.xAxisLabelSteps(totalWidth: geo.size.width)
-                ForEach(self.xAxisValues(), id:\.self) { value in
-                    let i = self.xAxisValues().firstIndex(of: value) ?? 0
-                    if  i % labelSteps == 0 {
-                        self.xAxisIntervalLabelViewFor(value: value, totalWidth: geo.size.width)
+        GeometryReader { geo in
+            ZStack {
+             
+                    let labelSteps = self.xAxisLabelSteps(totalWidth: geo.size.width)
+                    ForEach(self.xAxisValues(), id:\.self) { value in
+                        let i = self.xAxisValues().firstIndex(of: value) ?? 0
+                        if  i % labelSteps == 0 {
+                            self.xAxisIntervalLabelViewFor(value: value, totalWidth: geo.size.width)
+                        }
                     }
                 }
-            }
-
+   
+            .frame(height: 30)
         }
         .padding(.leading, settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .leading ?  settings.yAxisSettings.yAxisViewWidth : 0)
         .padding(.trailing, settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing ? settings.yAxisSettings.yAxisViewWidth : 0)
-        .frame(height: 30)
-
 
     }
     
     private func xAxisGridLines()-> some View {
         GeometryReader { geo in
-            VStack(spacing: 0) {
+            ZStack {
                 Path { p in
                     let totalWidth = geo.size.width
                     let totalHeight = geo.size.height
@@ -211,7 +217,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
         let minX = xValues.min() ?? 0
         let mappedXValue = self.convertToCoordinate(value:value, min: minX, max: maxX, length: totalWidth)
         
-        return Text(self.xValueAsString(value)).font(.system(size:settings.xAxisSettings.xAxisFontSize)).position(x: mappedXValue, y: 10)
+        return Text(self.xValueAsString(value)).font(.system(size:settings.xAxisSettings.labelFontSize)).position(x: mappedXValue, y: 10)
     }
     
     func xAxisLabelStrings()->[String] {
@@ -221,7 +227,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     func xAxisLabelSteps(totalWidth: CGFloat)->Int {
         let allLabels = xAxisLabelStrings()
 
-        let fontSize =  settings.xAxisSettings.xAxisFontSize
+        let fontSize =  settings.xAxisSettings.labelFontSize
 
         let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
         // let x be the padding

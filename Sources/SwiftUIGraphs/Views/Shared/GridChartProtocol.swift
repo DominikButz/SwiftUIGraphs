@@ -201,7 +201,7 @@ extension DYGridChart {
     func xAxisLabelSteps(totalWidth: CGFloat)->Int {
         let allLabels = xAxisLabelStrings()
 
-        let fontSize =  settings.xAxisSettings.xAxisFontSize
+        let fontSize =  settings.xAxisSettings.labelFontSize
 
         let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
         // let x be the padding

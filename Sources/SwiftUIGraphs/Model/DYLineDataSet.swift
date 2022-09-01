@@ -22,6 +22,15 @@ public struct DYLineDataSet: Identifiable, Equatable {
     var selectorView: AnyView?
     var settings: DYLineSettings
     
+    /// Line Data Set initialiser
+    /// - Parameters:
+    ///   - id: a unique id
+    ///   - dataPoints: an array of data points which are connected to draw a line.
+    ///   - pointView: a view to mark each data point on the line. Default is nil - no point view.
+    ///   - labelView: a label view to appear above each point. Default is nil - no label.
+    ///   - colorPerLineSegment: Set a different color for each line segment (connecting two points) if needed. Default is nil, which means the complete line will have the color specified in the settings.
+    ///   - selectorView: A marker view that will appear on top of the selected point and which will move along the line while swiping horizontally over the plot area.
+    ///   - settings: settings for the line data set. 
     public init(id: UUID = UUID(), dataPoints: [DYDataPoint], pointView: ((DYDataPoint)-> AnyView)? = nil, labelView: ((DYDataPoint)->AnyView?)? = nil, colorPerLineSegment: ((DYDataPoint)->Color)? = nil, selectorView: AnyView? = nil, settings: DYLineSettings = DYLineSettings()) {
         self.id = id
         self.dataPoints = dataPoints.sorted(by: {$0.xValue < $1.xValue})
@@ -41,6 +50,26 @@ public struct DYLineDataSet: Identifiable, Equatable {
         return (minX, maxX)
     }
     
+    public static func defaultSelectorPointView(color: Color)->AnyView {
+        AnyView(
+            Circle()
+                .frame(width: 26, height: 26, alignment: .center)
+                .foregroundColor(color)
+                .opacity(0.2)
+                .overlay(
+                    Circle()
+                        .fill()
+                        .frame(width: 14, height: 14, alignment: .center)
+                        .foregroundColor(color)
+                )
+        )
+    }
+    
+    public static func defaultPointView(color: Color)-> AnyView {
+        AnyView(Circle().pointStyle(color: color, edgeLength: 12).cornerRadius(6))
+    }
     
     
 }
+
+

@@ -220,7 +220,7 @@ public struct DYBarChartView: View, DYGridChart {
     }
     
     private func xAxisIntervalLabelViewFor(label: String, index: Int, totalWidth: CGFloat)-> some View {
-        Text(label).font(.system(size: settings.xAxisSettings.xAxisFontSize)).position(x:self.settings.lateralPadding.leading + self.convertToXCoordinate(index: index, totalWidth: totalWidth), y: 10)
+        Text(label).font(.system(size: settings.xAxisSettings.labelFontSize)).position(x:self.settings.lateralPadding.leading + self.convertToXCoordinate(index: index, totalWidth: totalWidth), y: 10)
     }
     
 
