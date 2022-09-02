@@ -10,7 +10,7 @@ import SwiftUI
 
 protocol PlotAreaChart: DataPointConversion {
     var settings: DYPlotAreaSettings {get set}
-  
+    func xAxisLabelStrings()->[String]
 }
 
 extension PlotAreaChart {
@@ -104,6 +104,35 @@ extension PlotAreaChart {
     }
     
     //MARK: Helper funcs
+    
+    func xAxisLabelSteps(totalWidth: CGFloat)->Int {
+        let allLabels = xAxisLabelStrings()
+
+        let fontSize =  settings.xAxisSettings.labelFontSize
+
+        let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
+        // let x be the padding
+        var count = 1
+        var totalWidthAllLabels: CGFloat = allLabels.map({$0.width(ctFont: ctFont)}).reduce(0, +)
+        if totalWidthAllLabels < totalWidth {
+            return count
+        }
+        
+        var labels: [String] = allLabels
+        while totalWidthAllLabels  > totalWidth {
+            count += 1
+            labels = labels.indices.compactMap({
+                if $0 % count != 0 { return labels[$0] }
+                   else { return nil }
+            })
+            totalWidthAllLabels = labels.map({$0.width(ctFont: ctFont)}).reduce(0, +)
+            
+
+        }
+        
+        return count
+        
+    }
     
     func yAxisValues()->[Double] {
         

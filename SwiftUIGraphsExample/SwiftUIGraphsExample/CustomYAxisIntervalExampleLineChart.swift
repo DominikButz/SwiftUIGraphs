@@ -25,7 +25,7 @@ struct CustomYAxisIntervalExampleLineChart: View {
                return TimeInterval(yValue).toString() ?? ""
             })
              
-             DYMultiLineChartView(lineDataSets: [exampleLineDataSet], selectedIndices: [$selectedDataIndex], plotAreaSettings: DYPlotAreaSettings(xAxisSettings: xAxisSettings, yAxisSettings: yAxisSettings), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, xValueAsString: {xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")}, yValueAsString: { yValue in  TimeInterval(yValue).toString() ?? ""})
+             DYMultiLineChartView(lineDataSets: [exampleLineDataSet], selectedIndices: [$selectedDataIndex], settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings, yAxisSettings: yAxisSettings), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, xValueAsString: {xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")}, yValueAsString: { yValue in  TimeInterval(yValue).toString() ?? ""})
         
 
 //             Button {

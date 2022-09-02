@@ -121,20 +121,19 @@ public struct DYBarChartView: View, DYGridChart {
 
                  ForEach(dataPoints) { dataPoint in
                      ZStack {
-                     let i = self.indexFor(dataPoint: dataPoint) ?? 0
-                
+                         let i = self.indexFor(dataPoint: dataPoint) ?? 0
+                         
                          if i == self.selectedIndex && (settings as! DYBarChartSettings).showSelectionIndicator {
                              Rectangle().fill((settings as! DYBarChartSettings).selectionIndicatorColor)
                                  .frame(width:barWidth, height: 2)
                                  .position(x:self.settings.lateralPadding.leading + self.convertToXCoordinate(index: i, totalWidth: width), y:0)
                                  .offset(y: -2)
                                  .matchedGeometryEffect(id: "selectionIndicator", in: namespace)
-                      
+                             
                          }
-                 
-                         BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, settings: self.settings as! DYBarChartSettings, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, labelView: self.labelView?(dataPoint), labelOffset: self.settings.labelViewDefaultOffset, orientationObserver: self.orientationObserver, showLabelView: self.settings.showAppearAnimation ? false : true, barHeightFactor: self.settings.showAppearAnimation ? 0 : 1, selectedIndex: self.$selectedIndex, allowUserInteraction: self.settings.allowUserInteraction, selectionFeedbackGenerator: self.generator)
-
-                     .position(x: self.settings.lateralPadding.leading + self.convertToXCoordinate(index: i, totalWidth: width), y: height  - self.convertToYCoordinate(value: dataPoint.yValue, height: height) / 2)
+                         
+                         BarView(gradient: gradientPerBar?(dataPoint) ?? settings.gradient, settings: self.settings as! DYBarChartSettings, width: barWidth, height: self.convertToYCoordinate(value: dataPoint.yValue, height: height), index: i, labelView: self.labelView?(dataPoint), labelOffset: self.settings.labelViewDefaultOffset, showLabelView: self.settings.showAppearAnimation ? false : true, barHeightFactor: self.settings.showAppearAnimation ? 0 : 1, selectedIndex: self.$selectedIndex, allowUserInteraction: self.settings.allowUserInteraction, selectionFeedbackGenerator: self.generator)
+                             .position(x: self.settings.lateralPadding.leading + self.convertToXCoordinate(index: i, totalWidth: width), y: height  - self.convertToYCoordinate(value: dataPoint.yValue, height: height) / 2)
                      }
                  }
 
@@ -257,7 +256,7 @@ internal struct BarView: View {
     var index: Int
     var labelView:AnyView?
     var labelOffset: CGSize
-    @ObservedObject var orientationObserver: OrientationObserver
+    //@ObservedObject var orientationObserver: OrientationObserver
     
  //   @State var currentHeight: CGFloat = 0
     @State var showLabelView: Bool = false

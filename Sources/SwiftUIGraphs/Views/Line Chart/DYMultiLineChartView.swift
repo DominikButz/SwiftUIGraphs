@@ -8,9 +8,9 @@
 import SwiftUI
 
 public struct DYMultiLineChartView: View, PlotAreaChart {
-
-    var lineDataSets: [DYLineDataSet]
+   
     var settings: DYPlotAreaSettings
+    var lineDataSets: [DYLineDataSet]
     var selectedIndices: [Binding<Int>]
     var plotAreaHeight: CGFloat?
     var yAxisScaler: YAxisScaler
@@ -21,10 +21,10 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     @State private var touchingXPosition: CGFloat? // User X touch location
     @State private var selectorLineOffset: CGFloat = 0
     
-    public init?(lineDataSets: [DYLineDataSet],  selectedIndices: [Binding<Int>], plotAreaSettings: DYPlotAreaSettings = DYPlotAreaSettings(), plotAreaHeight: CGFloat? = nil, xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
+    public init?(lineDataSets: [DYLineDataSet],  selectedIndices: [Binding<Int>], settings: DYLineChartSettingsNew = DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew()), plotAreaHeight: CGFloat? = nil, xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
 
         self.lineDataSets = lineDataSets
-        self.settings = plotAreaSettings
+        self.settings = settings
         self.selectedIndices = selectedIndices
         self.plotAreaHeight = plotAreaHeight
         
@@ -79,7 +79,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                                 if self.settings.yAxisSettings.showYAxisGridLines {
                                     self.yAxisGridLines()
                                 }
-                                if settings.xAxisSettings.showXAxisGridLines {
+                                if (settings.xAxisSettings as! DYLineChartXAxisSettingsNew).showXAxisGridLines {
                                     self.xAxisGridLines()
                                 }
                                 
@@ -127,8 +127,8 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     
     private func selectorLine() -> some View {
         GeometryReader { geo in
-            self.settings.selectorLineColor
-                .frame(width: self.settings.selectorLineWidth)
+            (self.settings as! DYLineChartSettingsNew).selectorLineColor
+                .frame(width: (self.settings as! DYLineChartSettingsNew).selectorLineWidth)
                  .opacity(touchingXPosition != nil ? 1 : 0) // hide the vertical indicator line if user not touching the chart
                 .position(x: self.selectorLineOffset, y: geo.size.height / 2)
                 .animation(Animation.spring().speed(4))
@@ -196,7 +196,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                     let totalHeight = geo.size.height
                     var xPosition: CGFloat = 0
                     let count = self.xAxisLineCount()
-                    let interval:Double =  self.settings.xAxisSettings.xAxisInterval
+                    let interval:Double =  (settings.xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisInterval
                     let xAxisMinMax = self.xAxisMinMax()
                     let convertedXAxisInterval = totalWidth * CGFloat(interval / (xAxisMinMax.max - xAxisMinMax.min))
                     for _ in 0..<count + 1 {
@@ -204,8 +204,8 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                         p.addLine(to: CGPoint(x:xPosition, y: totalHeight))
                         xPosition += convertedXAxisInterval
                     }
-                }.stroke(style: self.settings.xAxisSettings.xAxisGridLineStrokeStyle)
-                    .foregroundColor(self.settings.xAxisSettings.xAxisGridLineColor)
+                }.stroke(style: (settings.xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisGridLineStrokeStyle)
+                    .foregroundColor((settings.xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisGridLineColor)
             }
 
         }
@@ -224,40 +224,13 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
         return self.allDataPoints.map({self.xValueAsString($0.xValue)})
     }
     
-    func xAxisLabelSteps(totalWidth: CGFloat)->Int {
-        let allLabels = xAxisLabelStrings()
-
-        let fontSize =  settings.xAxisSettings.labelFontSize
-
-        let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
-        // let x be the padding
-        var count = 1
-        var totalWidthAllLabels: CGFloat = allLabels.map({$0.width(ctFont: ctFont)}).reduce(0, +)
-        if totalWidthAllLabels < totalWidth {
-            return count
-        }
-        
-        var labels: [String] = allLabels
-        while totalWidthAllLabels  > totalWidth {
-            count += 1
-            labels = labels.indices.compactMap({
-                if $0 % count != 0 { return labels[$0] }
-                   else { return nil }
-            })
-            totalWidthAllLabels = labels.map({$0.width(ctFont: ctFont)}).reduce(0, +)
-            
-
-        }
-        
-        return count
-        
-    }
+  
     
     private func xAxisLineCount()->Int {
 
         let xAxisMinMax = self.xAxisMinMax()
    
-        let count = (xAxisMinMax.max - xAxisMinMax.min) / settings.xAxisSettings.xAxisInterval
+        let count = (xAxisMinMax.max - xAxisMinMax.min) / (settings.xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisInterval
         
         return Int(count)
     
@@ -271,7 +244,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
         var currentValue = self.xAxisMinMax().min
         for _ in 0..<(count + 1) {
             values.append(currentValue)
-            currentValue += settings.xAxisSettings.xAxisInterval
+            currentValue += (settings.xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisInterval
             
         }
         return values

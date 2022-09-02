@@ -8,18 +8,26 @@
 import Foundation
 import SwiftUI
 
-public struct DYPlotAreaSettings {
+public protocol DYPlotAreaSettings {
+    
+    var plotAreaBackgroundGradient: LinearGradient {get set}
+    var xAxisSettings: XAxisSettings {get set}
+    var yAxisSettings: YAxisSettingsNew {get set}
+    var allowUserInteraction: Bool {get set }
+}
+
+public struct DYLineChartSettingsNew: DYPlotAreaSettings {
 
     
-    var plotAreaBackgroundGradient: LinearGradient
-    var xAxisSettings: DYLineChartXAxisSettingsNew
-    var yAxisSettings: YAxisSettingsNew
-    var allowUserInteraction: Bool
+    public var plotAreaBackgroundGradient: LinearGradient
+    public var xAxisSettings: XAxisSettings
+    public var yAxisSettings: YAxisSettingsNew
+    public var allowUserInteraction: Bool
     var selectorLineWidth: CGFloat
     var selectorLineColor: Color
     
     
-    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), xAxisSettings: DYLineChartXAxisSettingsNew = DYLineChartXAxisSettingsNew(), yAxisSettings: YAxisSettingsNew = YAxisSettingsNew(), selectorLineWidth: CGFloat = 2, selectorLineColor: Color = .red, allowUserInteraction: Bool = true) {
+    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), xAxisSettings: XAxisSettings, yAxisSettings: YAxisSettingsNew = YAxisSettingsNew(), selectorLineWidth: CGFloat = 2, selectorLineColor: Color = .red, allowUserInteraction: Bool = true) {
         self.plotAreaBackgroundGradient = plotAreaBackgroundGradient
         self.xAxisSettings = xAxisSettings
         self.yAxisSettings = yAxisSettings
@@ -30,6 +38,28 @@ public struct DYPlotAreaSettings {
     }
     
     
+}
+
+public struct DYStackedBarChartSettings: DYPlotAreaSettings {
+
+    public var plotAreaBackgroundGradient: LinearGradient
+    public var xAxisSettings: XAxisSettings
+    public var yAxisSettings: YAxisSettingsNew
+    public var allowUserInteraction: Bool
+    var barDropShadow: Shadow?
+    var selectedBarDropShadow: Shadow?
+    var labelViewOffset: CGSize
+    
+    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), xAxisSettings: XAxisSettings = DYBarChartXAxisSettings(), yAxisSettings: YAxisSettingsNew = YAxisSettingsNew(), allowUserInteraction: Bool = true, barDropShadow: Shadow? = nil, selectedBarDropShadow: Shadow? = nil, labelViewOffset: CGSize = CGSize(width: 0, height: -10)) {
+       self.plotAreaBackgroundGradient = plotAreaBackgroundGradient
+       self.xAxisSettings = xAxisSettings
+       self.yAxisSettings = yAxisSettings
+       self.allowUserInteraction = allowUserInteraction
+       self.barDropShadow = barDropShadow
+       self.selectedBarDropShadow = selectedBarDropShadow
+       self.labelViewOffset = labelViewOffset
+   }
+  
 }
 
 
@@ -100,3 +130,5 @@ public struct YAxisSettingsNew {
         
     }
 }
+
+

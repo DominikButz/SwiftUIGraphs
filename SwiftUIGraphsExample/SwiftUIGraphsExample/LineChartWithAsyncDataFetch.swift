@@ -10,7 +10,7 @@ import SwiftUIGraphs
 
 struct LineChartWithAsyncDataFetch: View {
     //TODO: sign up with https://iexcloud.io to get a free auth token and insert it here
-    @StateObject var viewModel = StockPriceDataViewModel(token: "pk_dc07c756ff5e4f2b95a19843e6c3ae5e")
+    @StateObject var viewModel = StockPriceDataViewModel(token: "")
     @State var selectedIndex:Int = 0
     
     var body: some View {
@@ -37,7 +37,7 @@ struct LineChartWithAsyncDataFetch: View {
                         
                     })
                         
-                        DYMultiLineChartView(lineDataSets: [self.dataSet], selectedIndices: [self.$selectedIndex], plotAreaSettings: DYPlotAreaSettings(xAxisSettings: DYLineChartXAxisSettingsNew(xAxisInterval: 172800, xAxisFontSize: fontSize), yAxisSettings: YAxisSettingsNew(yAxisFontSize: fontSize)), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65) { xValue in
+                        DYMultiLineChartView(lineDataSets: [self.dataSet], selectedIndices: [self.$selectedIndex], settings: DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew(xAxisInterval: 172800, xAxisFontSize: fontSize), yAxisSettings: YAxisSettingsNew(yAxisFontSize: fontSize)), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65) { xValue in
                             return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
                         } yValueAsString: { yValue in
                             let formatter = NumberFormatter()

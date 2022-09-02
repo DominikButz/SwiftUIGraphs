@@ -79,8 +79,10 @@ public struct DYBarChartXAxisSettings: XAxisSettings {
 public protocol XAxisSettings {
     var showXAxis: Bool {get set}
     var labelFontSize: CGFloat {get set}
-    
+
 }
+
+
 
 public struct YAxisSettings {
     

@@ -22,7 +22,7 @@ struct MultiLineChartExample: View {
         let selectedIndices = [$blueLineSelectedIndex, $orangeLineSelectedIndex, $greenLineSelectedIndex]
         GeometryReader { proxy in
             VStack {
-                DYMultiLineChartView(lineDataSets: self.exampleData, selectedIndices: selectedIndices, plotAreaSettings: DYPlotAreaSettings(xAxisSettings: xAxisSettings), plotAreaHeight: chartHeight(proxy: proxy)) { xValue in
+                DYMultiLineChartView(lineDataSets: self.exampleData, selectedIndices: selectedIndices, settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings), plotAreaHeight: chartHeight(proxy: proxy)) { xValue in
                     self.stringified(value: xValue, allowFloat: false)
                 } yValueAsString: { yValue in
                     self.stringified(value:yValue, allowFloat: true)

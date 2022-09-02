@@ -20,6 +20,7 @@
 		B437B5D325C8F9A90068CB91 /* SwiftUIGraphsExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437B5D225C8F9A90068CB91 /* SwiftUIGraphsExampleTests.swift */; };
 		B437B5DE25C8F9A90068CB91 /* SwiftUIGraphsExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437B5DD25C8F9A90068CB91 /* SwiftUIGraphsExampleUITests.swift */; };
 		B451709C28B34CFB00739334 /* MultiLineChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B451709B28B34CFB00739334 /* MultiLineChartExample.swift */; };
+		B47F4F2C28C1F86F002C94A4 /* MultiBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */; };
 		B480715B25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480715A25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift */; };
 		B480716325D7E2B1002D3A1C /* BasicLineChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480716225D7E2B1002D3A1C /* BasicLineChartExample.swift */; };
 		B480716825DD1BA6002D3A1C /* BasicBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480716725DD1BA6002D3A1C /* BasicBarChartExample.swift */; };
@@ -63,6 +64,7 @@
 		B437B5DD25C8F9A90068CB91 /* SwiftUIGraphsExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIGraphsExampleUITests.swift; sourceTree = "<group>"; };
 		B437B5DF25C8F9A90068CB91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B451709B28B34CFB00739334 /* MultiLineChartExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLineChartExample.swift; sourceTree = "<group>"; };
+		B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiBarChartExample.swift; sourceTree = "<group>"; };
 		B480715A25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomYAxisIntervalExampleLineChart.swift; sourceTree = "<group>"; };
 		B480716225D7E2B1002D3A1C /* BasicLineChartExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLineChartExample.swift; sourceTree = "<group>"; };
 		B480716725DD1BA6002D3A1C /* BasicBarChartExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBarChartExample.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				B437B5C625C8F9A90068CB91 /* Preview Content */,
 				B4ECDC3628AA38D6001B6D35 /* View+Extensions.swift */,
 				B451709B28B34CFB00739334 /* MultiLineChartExample.swift */,
+				B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */,
 			);
 			path = SwiftUIGraphsExample;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B437B5C325C8F9A80068CB91 /* ContentView.swift in Sources */,
+				B47F4F2C28C1F86F002C94A4 /* MultiBarChartExample.swift in Sources */,
 				B451709C28B34CFB00739334 /* MultiLineChartExample.swift in Sources */,
 				B4ECDC3728AA38D6001B6D35 /* View+Extensions.swift in Sources */,
 				B437B5C125C8F9A80068CB91 /* SwiftUIGraphsExampleApp.swift in Sources */,
