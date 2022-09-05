@@ -10,14 +10,43 @@ import SwiftUI
 
 public struct DYBarDataSet: Identifiable  {
 
-    
     public let id:UUID
     var fractions: [DYBarDataFraction]
     let xAxisLabel: String
     var labelView: ((_ value: Double)-> AnyView)?
-    var yValue: Double {
-        fractions.map({$0.value}).reduce(0, +)
+    
+    
+    var positiveFractions: [DYBarDataFraction] {
+        return fractions.filter({$0.value >= 0})
     }
+    
+    var negativeFractions: [DYBarDataFraction] {
+        return fractions.filter({$0.value < 0})
+    }
+    
+    var positiveYValue: Double {
+        positiveFractions.map({$0.value}).reduce(0, +)
+    }
+    
+    var negativeYValue: Double {
+        negativeFractions.map({$0.value}).reduce(0, +)
+    }
+    
+    var yInterval: Double {
+        return positiveYValue + abs(negativeYValue)
+    }
+    
+    var minValue: Double? {
+        return fractions.map({$0.value}).min()
+    }
+    
+    var maxValue: Double? {
+        return fractions.map({$0.value}).max()
+    }
+    
+//    var yValue: Double {
+//        fractions.map({$0.value}).reduce(0, +)
+//    }
     
     public init(id: UUID = UUID(), fractions: [DYBarDataFraction], xAxisLabel: String, labelView: ((Double) -> AnyView)? = nil) {
         self.id = id
