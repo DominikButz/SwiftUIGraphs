@@ -15,6 +15,7 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
     var yAxisScaler: YAxisScaler
     var yValueAsString: (Double)->String
     let generator = UISelectionFeedbackGenerator()
+    
     @State var showBars: Bool = false
     
     public init(barDataSets: [DYBarDataSet], settings: DYStackedBarChartSettings = DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings()), plotAreaHeight: CGFloat? = nil, yValueAsString: @escaping (Double) -> String) {
@@ -22,11 +23,11 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
         self.barDataSets = barDataSets
         self.plotAreaHeight = plotAreaHeight
         self.yValueAsString = yValueAsString
-        var min =  barDataSets.map({$0.minValue ?? 0}).min() ?? 0
+        var min =  barDataSets.map({$0.negativeYValue}).min() ?? 0
         if let overrideMin = settings.yAxisSettings.yAxisMinMaxOverride?.min, overrideMin < min {
             min = overrideMin
         }
-        var max = self.barDataSets.map({$0.maxValue ?? 0}).max() ?? 0
+        var max = self.barDataSets.map({$0.positiveYValue}).max() ?? 0
         if let overrideMax = settings.yAxisSettings.yAxisMinMaxOverride?.max, overrideMax > max {
             max = overrideMax
         }
@@ -46,7 +47,7 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
                         ZStack {
 
                             if self.settings.yAxisSettings.showYAxisGridLines {
-                                self.yAxisGridLines().opacity(0.5)
+                                self.yAxisGridLines()
                             }
                             
                             if self.showBars {
@@ -54,6 +55,7 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
                             }
 
                         }.frame(width: geo.size.width - self.settings.yAxisSettings.yAxisViewWidth).background(settings.plotAreaBackgroundGradient)
+                        
 
                         if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing {
                             self.yAxisView(yValueAsString: self.yValueAsString, yAxisPosition: .trailing)
@@ -95,16 +97,25 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
 
                      let positiveBarHeight =  dataSet.positiveYValue / (yMinMax.max - yMinMax.min) * totalHeight
                      let negativeBarHeight = abs(dataSet.negativeYValue) / (yMinMax.max - yMinMax.min) * totalHeight
+                     let dropShadow = (settings as! DYStackedBarChartSettings).barDropShadow
+                     let positiveBarYPosition = self.barYPosition(barHeight: positiveBarHeight, totalHeight: totalHeight, zeroYCoord: zeroYcoord, valueNegative: false)
+                     let negativeBarYPosition = self.barYPosition(barHeight: negativeBarHeight, totalHeight: totalHeight, zeroYCoord: zeroYcoord, valueNegative: true)
+                     let shouldShowPositiveLabel: Bool = positiveBarYPosition - positiveBarHeight / 2 + (settings as! DYStackedBarChartSettings).labelViewOffset.height  > (settings as! DYStackedBarChartSettings).minimumTopEdgeBarLabelMargin
+                     let shouldShowNegativeLabel = negativeBarYPosition + negativeBarHeight / 2 - (settings as! DYStackedBarChartSettings).labelViewOffset.height < totalHeight - (settings as! DYStackedBarChartSettings).minimumBottomEdgeBarLabelMargin
                      
                      let i = self.indexFor(dataSet: dataSet) ?? 0
                      ZStack {
-                         StackedBarView(fractions: dataSet.positiveFractions, width: barWidth, height: positiveBarHeight, index: i, yAxisScaler: yAxisScaler, settings: settings as! DYStackedBarChartSettings)
-                            .position(x: self.convertToXCoordinate(index: i, totalWidth: totalWidth), y: self.barYPosition(barHeight: positiveBarHeight, totalHeight: totalHeight, zeroYCoord: zeroYcoord, valueNegative: false))
-                         
-                         StackedBarView(fractions: dataSet.negativeFractions, width: barWidth, height: negativeBarHeight, index: i, yAxisScaler: yAxisScaler, settings: settings as! DYStackedBarChartSettings)
-                            .position(x: self.convertToXCoordinate(index: i, totalWidth: totalWidth), y: self.barYPosition(barHeight: negativeBarHeight, totalHeight: totalHeight, zeroYCoord: zeroYcoord, valueNegative: true))
+                         // positive bar
+                         StackedBarView(fractions: dataSet.positiveFractions, width: barWidth, height: positiveBarHeight, index: i, yAxisScaler: yAxisScaler, labelView: shouldShowPositiveLabel ?  dataSet.labelView?(dataSet.positiveYValue) : nil, settings: settings as! DYStackedBarChartSettings)
+                            .position(x: self.convertToXCoordinate(index: i, totalWidth: totalWidth), y: positiveBarYPosition)
+                         // negative bar
+                         StackedBarView(fractions: dataSet.negativeFractions, width: barWidth, height: negativeBarHeight, index: i, yAxisScaler: yAxisScaler, labelView: shouldShowNegativeLabel ?  dataSet.labelView?(dataSet.negativeYValue) : nil, settings: settings as! DYStackedBarChartSettings)
+                            .position(x: self.convertToXCoordinate(index: i, totalWidth: totalWidth), y: negativeBarYPosition)
                          
                      }
+                     .shadow(color: dropShadow?.color ?? .clear, radius:  dropShadow?.radius ?? 0, x:  dropShadow?.x ?? 0, y: dropShadow?.y ?? 0)
+             
+                     
                      
                  }
 
@@ -187,26 +198,42 @@ internal struct StackedBarView: View, DataPointConversion {
     let height: CGFloat
     let index: Int
     var yAxisScaler: YAxisScaler
+    var labelView: AnyView?
     let settings: DYStackedBarChartSettings
 
-    @State var barHeightFactor: CGFloat = 0
+    @State private var barHeightFactor: CGFloat = 0
+    @State private var showLabelView: Bool = false
     
     var body: some View {
         
         ZStack {
+
             VStack(spacing: 0) {
                 ForEach(fractions) { fraction in
-                    Rectangle().fill(fraction.gradient).frame(height: abs(fraction.value) /  abs(valueSum) * height)
-                    
+                    let fractionHeight = abs(fraction.value) /  abs(valueSum) * height
+                    Rectangle().fill(fraction.gradient).frame(height: fractionHeight)
+                        .overlay(MaxHeightOptionalView(maxHeight: fractionHeight - 3, view: fraction.labelView?()))
                 }
             }
             .frame(width: width, height: height)
-            .clipShape(roundedRectangle)
+            .clipShape(RoundedCornerRectangle(tl: 5, tr: 5, bl: 0, br: 0).rotation(Angle(degrees: valueSum > 0 ? 0 : 180)))
             .scaleEffect(x: 1,  y: self.barHeightFactor, anchor: valueSum >= 0 ? .bottom : .top)
+            
+            if let labelView = labelView, showLabelView {
+                 labelView
+                    .offset(x: barLabelTotalOffset.width, y: barLabelTotalOffset.height).transition(.opacity)
+            }
+            
         }
         .onAppear {
             withAnimation(Animation.default.delay(0.1 * Double(index))) {
                 self.barHeightFactor = 1
+            }
+            
+            if let _ = self.labelView {
+                withAnimation(Animation.default.delay(0.11 * Double(index))) {
+                    self.showLabelView = true
+                }
             }
         }
     }
@@ -215,16 +242,21 @@ internal struct StackedBarView: View, DataPointConversion {
         return fractions.map({$0.value}).reduce(0, +)
     }
     
-    var roundedRectangle:  some Shape {
+    var barLabelTotalOffset: CGSize {
         
-        if valueSum >= 0 {
-            return RoundedCornerRectangle(tl: 5, tr: 5, bl: 0, br: 0)
-        } else {
-            return RoundedCornerRectangle(tl: 0, tr: 0, bl: 5, br: 5)
-        }
-        
+        let widthOffset: CGFloat = valueSum > 0 ? settings.labelViewOffset.width :  -settings.labelViewOffset.width
+        let heightOffset: CGFloat = valueSum > 0 ?  -height / 2 + settings.labelViewOffset.height : height / 2 - settings.labelViewOffset.height
+       
+        return CGSize(width: widthOffset, height: heightOffset)
+
     }
+    
+
+
+    
 }
+
+
 
 //struct DYStackedBarChartView_Previews: PreviewProvider {
 //    static var previews: some View {

@@ -44,32 +44,35 @@ extension PlotAreaChart {
     
      func yAxisGridLines() -> some View {
         GeometryReader { geo in
-            VStack(spacing: 0) {
+           // VStack(spacing: 0) {
                 let width = geo.size.width
-                Path { p in
-                
-                    var yPosition:CGFloat = 0
+                let height = geo.size.height
+                var yPosition:CGFloat = 0
 
-                    let count = self.yAxisValueCount()
-                    let yAxisInterval = self.settings.yAxisSettings.yAxisIntervalOverride ?? self.yAxisScaler.tickSpacing ?? 1
+                let count = self.yAxisValueCount()
+                let yAxisInterval = self.settings.yAxisSettings.yAxisIntervalOverride ?? self.yAxisScaler.tickSpacing ?? 1
 
-                    let min = self.yAxisMinMax(settings: settings.yAxisSettings).min
-                    let max = self.yAxisMinMax(settings: settings.yAxisSettings).max
-                    let convertedYAxisInterval  = geo.size.height * CGFloat(yAxisInterval / (max - min))
-                    
-                    for _ in 0..<count    {
-                         
-                        p.move(to: CGPoint(x: 0, y: yPosition))
-                        p.addLine(to: CGPoint(x: width, y: yPosition))
-                        p.closeSubpath()
-                        yPosition += convertedYAxisInterval
+                let min = self.yAxisMinMax(settings: settings.yAxisSettings).min
+                let max = self.yAxisMinMax(settings: settings.yAxisSettings).max
+                let convertedYAxisInterval  = height * CGFloat(yAxisInterval / (max - min))
+                let zeroYPosition = height - self.convertToCoordinate(value: 0, min: min, max: max, length: height)
+
+            
+                ZStack {
+                    ForEach(0..<count, id: \.self)   { _ in
+                        let strokeStyle = yPosition == zeroYPosition ?  settings.yAxisSettings.yAxisZeroGridLineStrokeStyle ??  settings.yAxisSettings.yAxisGridLinesStrokeStyle  : settings.yAxisSettings.yAxisGridLinesStrokeStyle
+                        let color = yPosition == zeroYPosition ? settings.yAxisSettings.yAxisZeroGridLineColor ?? settings.yAxisSettings.yAxisGridLineColor : settings.yAxisSettings.yAxisGridLineColor
+                        Path { p in
+                                p.move(to: CGPoint(x: 0, y: yPosition))
+                                p.addLine(to: CGPoint(x: width, y: yPosition))
+                                p.closeSubpath()
+                                yPosition += convertedYAxisInterval
+     
+                        }.stroke(style: strokeStyle)
+                            .foregroundColor(color)
                     }
-
-                    
-                }.stroke(style: settings.yAxisSettings.yAxisGridLinesStrokeStyle)
-                    .foregroundColor(settings.yAxisSettings.yAxisGridLineColor)
-                
-            }
+                }
+       //     }
 
         }
     }

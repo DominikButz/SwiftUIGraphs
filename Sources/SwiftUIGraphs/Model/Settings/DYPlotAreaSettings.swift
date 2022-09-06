@@ -49,8 +49,11 @@ public struct DYStackedBarChartSettings: DYPlotAreaSettings {
     var barDropShadow: Shadow?
     var selectedBarDropShadow: Shadow?
     var labelViewOffset: CGSize
+    var minimumTopEdgeBarLabelMargin: CGFloat
+    var minimumBottomEdgeBarLabelMargin: CGFloat
     
-    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), xAxisSettings: XAxisSettings = DYBarChartXAxisSettings(), yAxisSettings: YAxisSettingsNew = YAxisSettingsNew(), allowUserInteraction: Bool = true, barDropShadow: Shadow? = nil, selectedBarDropShadow: Shadow? = nil, labelViewOffset: CGSize = CGSize(width: 0, height: -10)) {
+    
+    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), xAxisSettings: XAxisSettings = DYBarChartXAxisSettings(), yAxisSettings: YAxisSettingsNew = YAxisSettingsNew(), allowUserInteraction: Bool = true, barDropShadow: Shadow? = nil, selectedBarDropShadow: Shadow? = nil, labelViewOffset: CGSize = CGSize(width: 0, height: -10), minimumTopEdgeBarLabelMargin: CGFloat = 0, minimumBottomEdgeBarLabelMargin: CGFloat = 10) {
        self.plotAreaBackgroundGradient = plotAreaBackgroundGradient
        self.xAxisSettings = xAxisSettings
        self.yAxisSettings = yAxisSettings
@@ -58,6 +61,8 @@ public struct DYStackedBarChartSettings: DYPlotAreaSettings {
        self.barDropShadow = barDropShadow
        self.selectedBarDropShadow = selectedBarDropShadow
        self.labelViewOffset = labelViewOffset
+       self.minimumTopEdgeBarLabelMargin = minimumTopEdgeBarLabelMargin
+       self.minimumBottomEdgeBarLabelMargin = minimumBottomEdgeBarLabelMargin
    }
   
 }
@@ -100,6 +105,8 @@ public struct YAxisSettingsNew {
     var showYAxisGridLines: Bool
     var yAxisGridLinesStrokeStyle: StrokeStyle
     var yAxisGridLineColor: Color
+    var yAxisZeroGridLineStrokeStyle: StrokeStyle?
+    var yAxisZeroGridLineColor: Color?
 
     var yAxisFontSize: CGFloat
     var yAxisMinMaxOverride: (min:Double?, max:Double?)?
@@ -113,10 +120,12 @@ public struct YAxisSettingsNew {
     ///   - showYAxisGridLines: determines if the (horizontal) y-axis grid lines should be shown.
     ///   - yAxisGridLineStrokeStyle: stroke style of the y-axis grid lines.
     ///   - yAxisGridLineColor: color of the y-axis grid lines.
+    ///   - yAxisZeroGridLineStrokeStyle: overrides the yAxisGridLineStrokeStyle only for the 0-line. Default is nil (no override).
+    ///   - yAxisZeroGridLineColor: overrides the yAxisGridLineColor only for the 0-line. Default is nil (no override).
     ///  - yAxisFontSize: font size of the y-axis marker labels.
     ///  - yAxisMinMaxOverride: override the max and min values of the y-axis. if not set, the min and max value will be calculated automatically.
     ///  - yAxisIntervalOverride: override the interval of the y-axis values. If not set, the interval will be calculated automatically.
-    public init(showYAxis: Bool = true, yAxisPosition: Edge.Set = .leading, yAxisViewWidth: CGFloat = 35, showYAxisGridLines: Bool = true, yAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), yAxisGridLineColor: Color = Color.secondary.opacity(0.5), yAxisFontSize: CGFloat = 8, yAxisMinMaxOverride: (min:Double?, max:Double?)? = nil, yAxisIntervalOverride: Double? = nil) {
+    public init(showYAxis: Bool = true, yAxisPosition: Edge.Set = .leading, yAxisViewWidth: CGFloat = 35, showYAxisGridLines: Bool = true, yAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), yAxisGridLineColor: Color = Color.secondary.opacity(0.5), yAxisZeroGridLineStrokeStyle: StrokeStyle? = nil, yAxisZeroGridLineColor: Color? = nil, yAxisFontSize: CGFloat = 8, yAxisMinMaxOverride: (min:Double?, max:Double?)? = nil, yAxisIntervalOverride: Double? = nil) {
         
         self.showYAxis = showYAxis
         self.yAxisPosition = yAxisPosition
@@ -124,6 +133,8 @@ public struct YAxisSettingsNew {
         self.showYAxisGridLines = showYAxisGridLines
         self.yAxisGridLinesStrokeStyle = yAxisGridLineStrokeStyle
         self.yAxisGridLineColor = yAxisGridLineColor
+        self.yAxisZeroGridLineStrokeStyle = yAxisZeroGridLineStrokeStyle
+        self.yAxisZeroGridLineColor = yAxisZeroGridLineColor
         self.yAxisFontSize = yAxisFontSize
         self.yAxisMinMaxOverride = yAxisMinMaxOverride
         self.yAxisIntervalOverride = yAxisIntervalOverride

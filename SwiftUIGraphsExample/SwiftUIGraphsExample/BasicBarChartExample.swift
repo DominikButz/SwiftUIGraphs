@@ -22,16 +22,10 @@ struct BasicBarChartExample: View {
 //                    return  yValue.toDecimalString(maxFractionDigits: 1) + " KG"
 //                })
                 
-                DYStackedBarChartView(barDataSets: barDataSets, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.trailing, yAxisFontSize: self.fontSize, yAxisMinMaxOverride: (min: 0, max:nil))), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65) { yValue in
+                DYStackedBarChartView(barDataSets: barDataSets, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.trailing, yAxisFontSize: self.fontSize, yAxisMinMaxOverride: (min: 0, max:nil)), barDropShadow: self.dropShadow), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65) { yValue in
                     return yValue.toDecimalString(maxFractionDigits: 0)
                 }
-                
-//                DYBarChartView(dataPoints: exampleData, selectedIndex: $selectedDataIndex, labelView: {dataPoint in self.labelView(dataPoint: dataPoint)}, xValueConverter: { (xValue) -> String in
-//                    return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
-//                }, yValueConverter: { (yValue) -> String inx
-//                    return  yValue.toDecimalString(maxFractionDigits: 0)
-//                }, chartFrameHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, settings: DYBarChartSettings(selectedBarGradient: LinearGradient(colors: [.green, .green.opacity(0.8)], startPoint: .top, endPoint: .bottom), lateralPadding: (0, 0), barDropShadow: self.dropShadow, showSelectionIndicator: false, selectionIndicatorColor: .green, yAxisSettings: YAxisSettings(yAxisPosition: .trailing, yAxisFontSize: fontSize, yAxisMinMaxOverride: (min:0, max:nil)), xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: fontSize)))
-                
+
                 Spacer()
             }.padding()
             .navigationTitle("Weight Lifting Volume")
@@ -86,7 +80,9 @@ struct BasicBarChartExample: View {
             let yValue = Double.random(in: 1500 ..< 1940)
             let xValueLabel = Date(timeIntervalSinceReferenceDate: endDate.timeIntervalSinceReferenceDate).toString(format:"dd-MM")
             
-            let dataSet = DYBarDataSet(fractions: [DYBarDataFraction(value: yValue, gradient: LinearGradient(colors: [Color.orange, Color.orange.opacity(0.7)], startPoint: .top, endPoint: .bottom))], xAxisLabel: xValueLabel)
+            let dataSet = DYBarDataSet(fractions: [DYBarDataFraction(value: yValue, gradient: LinearGradient(colors: [Color.orange, Color.orange.opacity(0.7)], startPoint: .top, endPoint: .bottom))], xAxisLabel: xValueLabel, labelView: { value in
+                return Text(value.toDecimalString(maxFractionDigits: 0)).font(.footnote).eraseToAnyView()
+            })
             barDataSets.append(dataSet)
             let randomDayDifference = Int.random(in: 1 ..< 8)
             endDate = endDate.add(units: -randomDayDifference, component: .day)

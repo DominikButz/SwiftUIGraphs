@@ -23,7 +23,7 @@ struct ContentView: View {
                 }) {
                    // NavigationLink("Weight Lifting Volume per Workout", destination: BasicLineChartExample())
                     NavigationLink("Stock Prices (asyn data fetch)", destination: LineChartWithAsyncDataFetch())
-                    NavigationLink("Workout Time per Week", destination: CustomYAxisIntervalExampleLineChart())
+                    NavigationLink("Area Chart Example", destination: CustomYAxisIntervalExampleLineChart())
                     NavigationLink("Multi-Line Example", destination: MultiLineChartExample())
                 }
                 

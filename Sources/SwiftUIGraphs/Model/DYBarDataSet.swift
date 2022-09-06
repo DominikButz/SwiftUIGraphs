@@ -14,8 +14,7 @@ public struct DYBarDataSet: Identifiable  {
     var fractions: [DYBarDataFraction]
     let xAxisLabel: String
     var labelView: ((_ value: Double)-> AnyView)?
-    
-    
+
     var positiveFractions: [DYBarDataFraction] {
         return fractions.filter({$0.value >= 0})
     }
@@ -48,11 +47,12 @@ public struct DYBarDataSet: Identifiable  {
 //        fractions.map({$0.value}).reduce(0, +)
 //    }
     
-    public init(id: UUID = UUID(), fractions: [DYBarDataFraction], xAxisLabel: String, labelView: ((Double) -> AnyView)? = nil) {
+    public init(id: UUID = UUID(), fractions: [DYBarDataFraction], xAxisLabel: String, labelView: ((_ value: Double)-> AnyView)? = nil) {
         self.id = id
         self.fractions = fractions
         self.xAxisLabel = xAxisLabel
         self.labelView = labelView
+
     }
 }
 
@@ -61,9 +61,9 @@ public struct DYBarDataFraction: Identifiable  {
     public let id:UUID
     let value: Double
     let gradient: LinearGradient
-    var labelView: ((_ value: Double)-> AnyView)?
+    var labelView: (()-> AnyView)?
     
-    public init(id: UUID = UUID(), value: Double, gradient: LinearGradient, labelView: ((Double) -> AnyView)? = nil) {
+    public init(id: UUID = UUID(), value: Double, gradient: LinearGradient, labelView: (() -> AnyView)? = nil) {
         self.id = id
         self.value = value
         self.gradient = gradient

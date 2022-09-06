@@ -16,13 +16,19 @@ struct MultiBarChartExample: View {
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                DYStackedBarChartView(barDataSets: barDataSets, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.trailing, yAxisFontSize: self.fontSize)), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65) { yValue in
+                DYStackedBarChartView(barDataSets: barDataSets, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.trailing, yAxisZeroGridLineColor: .red, yAxisFontSize: self.fontSize),  barDropShadow: self.dropShadow),  plotAreaHeight: chartHeight(proxy: proxy), yValueAsString: { yValue in
                     return yValue.toDecimalString(maxFractionDigits: 0)
-                }
+                }).frame(height:chartHeight(proxy: proxy)  + 30)
+                
+
+                VStack(alignment: .leading, spacing: 5) {
+                    MultiSeriesLegendView(legendItems: [LegendItem(colorSymbol: Rectangle().fill(.blue).frame(width: 20, height: 20), title: "Energy"), LegendItem(colorSymbol: Rectangle().fill(.orange).frame(width: 20, height: 20), title: "Pharmaceutical"), LegendItem(colorSymbol: Rectangle().fill(.green).frame(width: 20, height: 20), title: "Agriculture")])
+                  
+                }.padding()
                 Spacer()
             }
 
-        }.navigationTitle("Some Random Data Sets")
+        }.navigationTitle("Profits & Losses Mio. USD per Division per Year")
             .onAppear {
                 self.generateExampleData()
             }
@@ -45,20 +51,36 @@ struct MultiBarChartExample: View {
     
     func generateExampleData() {
         var barDataSets: [DYBarDataSet] = []
-        var endDate = Date().add(units: -3, component: .hour)
+       var currentYear = 2012
+        let colors = [Color.blue, Color.orange, Color.green]
+        
         for _ in 0..<10 {
-            let yValue = Double.random(in: -100 ..< 100)
-            print("var yValue: \(yValue)")
-            let xValueLabel = Date(timeIntervalSinceReferenceDate: endDate.timeIntervalSinceReferenceDate).toString(format:"dd-MM")
+            let firstValue = Double.random(in: -30 ..< 30)
+            let secondValue = Double.random(in: -30 ..< 30)
+            let thirdValue = Double.random(in: -30 ..< 30)
+            let values = [firstValue, secondValue, thirdValue]
+            let xValueLabel = "\(currentYear)"
+            var fractions: [DYBarDataFraction] = []
+            for i in 0..<values.count {
+                let fraction = DYBarDataFraction(value: values[i], gradient: LinearGradient(colors: [colors[i], colors[i].opacity(0.7)], startPoint: .top, endPoint: .bottom)) {
+                    Text(values[i].toDecimalString(maxFractionDigits: 1)).font(.footnote).foregroundColor(.white).eraseToAnyView()
+                }
+                fractions.append(fraction)
+            }
             
-            let dataSet = DYBarDataSet(fractions: [DYBarDataFraction(value: yValue, gradient: LinearGradient(colors: [Color.orange, Color.orange.opacity(0.7)], startPoint: .top, endPoint: .bottom))], xAxisLabel: xValueLabel)
+            let dataSet = DYBarDataSet(fractions: fractions, xAxisLabel: xValueLabel, labelView: { value in
+                let text = value != 0 ? value.toDecimalString(maxFractionDigits: 1) : ""
+                return Text(text).font(.footnote).eraseToAnyView()
+            })
             barDataSets.append(dataSet)
-            let randomDayDifference = Int.random(in: 1 ..< 8)
-            endDate = endDate.add(units: -randomDayDifference, component: .day)
+
+            currentYear += 1
         }
         self.barDataSets = barDataSets
     }
 }
+
+
 
 struct MultiBarChartExample_Previews: PreviewProvider {
     static var previews: some View {
