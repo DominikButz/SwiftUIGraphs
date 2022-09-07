@@ -56,17 +56,19 @@ extension PlotAreaChart {
                 let max = self.yAxisMinMax(settings: settings.yAxisSettings).max
                 let convertedYAxisInterval  = height * CGFloat(yAxisInterval / (max - min))
                 let zeroYPosition = height - self.convertToCoordinate(value: 0, min: min, max: max, length: height)
-
+           
             
                 ZStack {
                     ForEach(0..<count, id: \.self)   { _ in
-                        let strokeStyle = yPosition == zeroYPosition ?  settings.yAxisSettings.yAxisZeroGridLineStrokeStyle ??  settings.yAxisSettings.yAxisGridLinesStrokeStyle  : settings.yAxisSettings.yAxisGridLinesStrokeStyle
-                        let color = yPosition == zeroYPosition ? settings.yAxisSettings.yAxisZeroGridLineColor ?? settings.yAxisSettings.yAxisGridLineColor : settings.yAxisSettings.yAxisGridLineColor
+                        let isZeroPosition =  yPosition.rounded() == zeroYPosition.rounded()
+                        let strokeStyle = isZeroPosition ?  settings.yAxisSettings.yAxisZeroGridLineStrokeStyle ??  settings.yAxisSettings.yAxisGridLinesStrokeStyle  : settings.yAxisSettings.yAxisGridLinesStrokeStyle
+                        let color = isZeroPosition ? settings.yAxisSettings.yAxisZeroGridLineColor ?? settings.yAxisSettings.yAxisGridLineColor : settings.yAxisSettings.yAxisGridLineColor
                         Path { p in
                                 p.move(to: CGPoint(x: 0, y: yPosition))
                                 p.addLine(to: CGPoint(x: width, y: yPosition))
                                 p.closeSubpath()
                                 yPosition += convertedYAxisInterval
+                                
      
                         }.stroke(style: strokeStyle)
                             .foregroundColor(color)

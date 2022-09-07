@@ -1,5 +1,5 @@
 //
-//  DYBarChartDataSet.swift
+//  DYBarDataSet.swift
 //  
 //
 //  Created by Dominik Butz on 2/9/2022.
@@ -11,41 +11,42 @@ import SwiftUI
 public struct DYBarDataSet: Identifiable  {
 
     public let id:UUID
-    var fractions: [DYBarDataFraction]
-    let xAxisLabel: String
-    var labelView: ((_ value: Double)-> AnyView)?
+    public var fractions: [DYBarDataFraction]
+    public let xAxisLabel: String
+    public var labelView: ((_ value: Double)-> AnyView)?
 
-    var positiveFractions: [DYBarDataFraction] {
+    public var positiveFractions: [DYBarDataFraction] {
         return fractions.filter({$0.value >= 0})
     }
     
-    var negativeFractions: [DYBarDataFraction] {
+    public var negativeFractions: [DYBarDataFraction] {
         return fractions.filter({$0.value < 0})
     }
     
-    var positiveYValue: Double {
+    public var positiveYValue: Double {
         positiveFractions.map({$0.value}).reduce(0, +)
     }
     
-    var negativeYValue: Double {
+    public var negativeYValue: Double {
         negativeFractions.map({$0.value}).reduce(0, +)
+    }
+    
+    public var netValue: Double {
+        positiveYValue + negativeYValue
     }
     
     var yInterval: Double {
         return positiveYValue + abs(negativeYValue)
     }
     
-    var minValue: Double? {
+    public var minValue: Double? {
         return fractions.map({$0.value}).min()
     }
     
-    var maxValue: Double? {
+    public var maxValue: Double? {
         return fractions.map({$0.value}).max()
     }
-    
-//    var yValue: Double {
-//        fractions.map({$0.value}).reduce(0, +)
-//    }
+
     
     public init(id: UUID = UUID(), fractions: [DYBarDataFraction], xAxisLabel: String, labelView: ((_ value: Double)-> AnyView)? = nil) {
         self.id = id
@@ -59,13 +60,16 @@ public struct DYBarDataSet: Identifiable  {
 public struct DYBarDataFraction: Identifiable  {
 
     public let id:UUID
-    let value: Double
+    public let value: Double
+    public let title: String
     let gradient: LinearGradient
-    var labelView: (()-> AnyView)?
+    var labelView: (()->
+    AnyView)?
     
-    public init(id: UUID = UUID(), value: Double, gradient: LinearGradient, labelView: (() -> AnyView)? = nil) {
+    public init(id: UUID = UUID(), value: Double, title:String = "", gradient: LinearGradient, labelView: (() -> AnyView)? = nil) {
         self.id = id
         self.value = value
+        self.title = title
         self.gradient = gradient
         self.labelView = labelView
     }
