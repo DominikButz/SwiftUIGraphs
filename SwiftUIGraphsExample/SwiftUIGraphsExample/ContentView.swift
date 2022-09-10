@@ -31,8 +31,8 @@ struct ContentView: View {
                     Image(systemName: "chart.bar.fill")
                     Text("Bar Charts")
                 }) {
-                    NavigationLink("Weight Lifting Volume", destination: BasicBarChartExample())
-                    NavigationLink("Multi-Bar Example", destination: MultiBarChartExample(), isActive: $linkActive)
+                    NavigationLink("Basic Example", destination: BasicBarChartExample(),  isActive: $linkActive)
+                    NavigationLink("Multi-Bar Example", destination: MultiBarChartExample())
                 }
                 
                 Section(header: HStack{

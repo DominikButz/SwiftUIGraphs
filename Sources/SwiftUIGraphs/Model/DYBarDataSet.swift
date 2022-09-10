@@ -13,6 +13,7 @@ public struct DYBarDataSet: Identifiable  {
     public let id:UUID
     public var fractions: [DYBarDataFraction]
     public let xAxisLabel: String
+    public let xValue: Double?
     public var labelView: ((_ value: Double)-> AnyView)?
 
     public var positiveFractions: [DYBarDataFraction] {
@@ -48,10 +49,11 @@ public struct DYBarDataSet: Identifiable  {
     }
 
     
-    public init(id: UUID = UUID(), fractions: [DYBarDataFraction], xAxisLabel: String, labelView: ((_ value: Double)-> AnyView)? = nil) {
+    public init(id: UUID = UUID(), fractions: [DYBarDataFraction], xValue: Double? = nil,  xAxisLabel: String, labelView: ((_ value: Double)-> AnyView)? = nil) {
         self.id = id
         self.fractions = fractions
         self.xAxisLabel = xAxisLabel
+        self.xValue = xValue
         self.labelView = labelView
 
     }
