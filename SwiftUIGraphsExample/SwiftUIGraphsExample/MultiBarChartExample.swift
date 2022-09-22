@@ -13,18 +13,20 @@ struct MultiBarChartExample: View {
     let colors: [Color] = [.blue, .orange, .green]
     let titles = ["Energy", "Pharmaceutical", "Agriculture"]
     @State var barDataSets: [DYBarDataSet] = []
-    @State var selectedIndex: Int? 
+    @State var selectedIndex: Int? = 0
     
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                DYStackedBarChartView(barDataSets: barDataSets, selectedIndex: $selectedIndex, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.leading, yAxisZeroGridLineColor: .red, yAxisFontSize: self.fontSize),  barDropShadow: self.dropShadow), plotAreaHeight: chartHeight(proxy: proxy), yValueAsString: { yValue in
+                DYStackedBarChartView(barDataSets: barDataSets, selectedIndex: $selectedIndex, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.leading, yAxisZeroGridLineColor: .red, yAxisFontSize: self.fontSize),  barDropShadow: self.dropShadow), chartViewHeight: chartHeight(proxy: proxy), yValueAsString: { yValue in
                     return yValue.toDecimalString(maxFractionDigits: 0)
-                }).frame(height:chartHeight(proxy: proxy)  + 30)
+                }).frame(height:chartHeight(proxy: proxy))
                 
-                HStack {
-                    self.selectedDataSetDetailView()
-                    Spacer()
+                if self.barDataSets.isEmpty == false {
+                    HStack {
+                        self.selectedDataSetDetailView()
+                        Spacer()
+                    }
                 }
                 
                 Spacer()

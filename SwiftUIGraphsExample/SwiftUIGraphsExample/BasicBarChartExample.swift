@@ -18,9 +18,9 @@ struct BasicBarChartExample: View {
         GeometryReader { proxy in
             VStack(alignment: .leading) {
                 
-                DYStackedBarChartView(barDataSets: barDataSets, selectedIndex: $selectedIndex, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.trailing, yAxisFontSize: self.fontSize, yAxisMinMaxOverride: (min: 0, max:nil)), selectedBarBorderColor: .blue, barDropShadow: self.dropShadow), plotAreaHeight: self.chartHeight(proxy: proxy)) { yValue in
+                DYStackedBarChartView(barDataSets: barDataSets, selectedIndex: $selectedIndex, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.trailing, yAxisFontSize: self.fontSize, yAxisMinMaxOverride: (min: 0, max:nil)), selectedBarBorderColor: .blue, barDropShadow: self.dropShadow), chartViewHeight: self.chartHeight(proxy: proxy)) { yValue in
                     return yValue.toDecimalString(maxFractionDigits: 0)
-                }.frame(height: self.chartHeight(proxy: proxy) + 30)
+                }.frame(height: self.chartHeight(proxy: proxy))
                 
                 self.selectedDataSetView().padding()
 
@@ -65,7 +65,7 @@ struct BasicBarChartExample: View {
     func generateExampleData() {
         var barDataSets: [DYBarDataSet] = []
         var endDate = Date().add(units: -105, component: .day)
-        for _ in 0..<14 {
+        for _ in 0..<4 {
             let yValue = Double.random(in: 1500 ..< 1940)
            let xValue = endDate.timeIntervalSinceReferenceDate
             let xValueLabel = Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")

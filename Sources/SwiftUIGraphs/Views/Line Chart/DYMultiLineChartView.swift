@@ -21,7 +21,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     @State private var touchingXPosition: CGFloat? // User X touch location
     @State private var selectorLineOffset: CGFloat = 0
     
-    public init?(lineDataSets: [DYLineDataSet],  selectedIndices: [Binding<Int>], settings: DYLineChartSettingsNew = DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew()), plotAreaHeight: CGFloat? = nil, xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
+    public init?(lineDataSets: [DYLineDataSet],  selectedIndices: Binding<Int>..., settings: DYLineChartSettingsNew = DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew()), plotAreaHeight: CGFloat? = nil, xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
 
         self.lineDataSets = lineDataSets
         self.settings = settings

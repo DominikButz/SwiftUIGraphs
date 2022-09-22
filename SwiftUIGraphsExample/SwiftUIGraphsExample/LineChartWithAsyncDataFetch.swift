@@ -37,7 +37,7 @@ struct LineChartWithAsyncDataFetch: View {
                         
                     })
                         
-                        DYMultiLineChartView(lineDataSets: [self.dataSet], selectedIndices: [self.$selectedIndex], settings: DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew(xAxisInterval: 172800, xAxisFontSize: fontSize), yAxisSettings: YAxisSettingsNew(yAxisFontSize: fontSize)), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65) { xValue in
+                        DYMultiLineChartView(lineDataSets: [self.dataSet], selectedIndices: self.$selectedIndex, settings: DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew(xAxisInterval: 172800, xAxisFontSize: fontSize), yAxisSettings: YAxisSettingsNew(yAxisFontSize: fontSize)), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65) { xValue in
                             return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
                         } yValueAsString: { yValue in
                             let formatter = NumberFormatter()
@@ -62,7 +62,7 @@ struct LineChartWithAsyncDataFetch: View {
             DYLineDataSet.defaultPointView(color: .orange)
         }, labelView: { dataPoint in
             self.labelView(dataPoint: dataPoint)
-        }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red), settings: DYLineSettings(xValueSelectedDataPointLineColor: .orange,  yValueSelectedDataPointLineColor: .orange))
+        }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red), settings: DYLineSettings(xValueSelectedDataPointLineColor: .red,  yValueSelectedDataPointLineColor: .red))
     }
     
     func labelView(dataPoint: DYDataPoint)-> AnyView {

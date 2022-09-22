@@ -26,7 +26,7 @@ struct ContentView: View {
                     NavigationLink("Area Chart Example", destination: CustomYAxisIntervalExampleLineChart())
                     NavigationLink("Multi-Line Example", destination: MultiLineChartExample())
                 }
-                
+         
                 Section(header: HStack{
                     Image(systemName: "chart.bar.fill")
                     Text("Bar Charts")

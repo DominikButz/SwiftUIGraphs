@@ -12,20 +12,22 @@ struct CustomYAxisIntervalExampleLineChart: View {
     
     @State private var selectedDataIndex: Int = 0
     
-    @State var exampleData = DYDataPoint.exampleData0
+    @State var exampleDataSets: [DYLineDataSet] = []
     
     var body: some View {
         
        return  GeometryReader { proxy in
-         VStack {
-            DYGridChartHeaderView(title: "Workout Time per Week", dataPoints: exampleData, selectedIndex: self.$selectedDataIndex, isLandscape: proxy.size.height < proxy.size.width,  xValueConverter: { (xValue) -> String in
-                return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy HH:mm")
-            }, yValueConverter: { (yValue) -> String in
+           VStack {
+               if exampleDataSets.isEmpty == false {
+                   DYGridChartHeaderView(title: "Workout Time per Week", dataPoints: exampleDataSets.first!.dataPoints, selectedIndex: self.$selectedDataIndex, isLandscape: proxy.size.height < proxy.size.width,  xValueConverter: { (xValue) -> String in
+                        return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy HH:mm")
+                    }, yValueConverter: { (yValue) -> String in
+                        
+                        return TimeInterval(yValue).toString() ?? ""
+                    })
+               }
            
-               return TimeInterval(yValue).toString() ?? ""
-            })
-             
-             DYMultiLineChartView(lineDataSets: [exampleLineDataSet], selectedIndices: [$selectedDataIndex], settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings, yAxisSettings: yAxisSettings), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, xValueAsString: {xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")}, yValueAsString: { yValue in  TimeInterval(yValue).toString() ?? ""})
+             DYMultiLineChartView(lineDataSets: exampleDataSets, selectedIndices: $selectedDataIndex, settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings, yAxisSettings: yAxisSettings), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65, xValueAsString: {xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")}, yValueAsString: { yValue in  TimeInterval(yValue).toString() ?? ""})
         
 
 //             Button {
@@ -45,7 +47,12 @@ struct CustomYAxisIntervalExampleLineChart: View {
             Spacer()
          }.padding()
          .navigationTitle("Workout Time Per Week")
+         .onAppear {
+             self.exampleDataSets = [exampleLineDataSet]
+         }
+        
        }
+
     }
     
 //    var lineChartSettings: DYLineChartSettings {
@@ -62,7 +69,7 @@ struct CustomYAxisIntervalExampleLineChart: View {
 //    var xAxisInterval: Double
     
     var yAxisSettings: YAxisSettingsNew {
-        YAxisSettingsNew(showYAxis: true, yAxisPosition: .trailing, yAxisViewWidth: self.yAxisWidth,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min: 0, max: Double(Int(exampleData.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), yAxisIntervalOverride: 1800)
+        YAxisSettingsNew(showYAxis: true, yAxisPosition: .trailing, yAxisViewWidth: self.yAxisWidth,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min: 0, max: Double(Int(exampleDataSets.first?.dataPoints.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), yAxisIntervalOverride: 1800)
     }
     
     var fontSize: CGFloat {
@@ -79,7 +86,7 @@ struct CustomYAxisIntervalExampleLineChart: View {
     
     func dataPointSegmentColor(dataPoint: DYDataPoint)->Color {
         
-        if let index = exampleData.firstIndex(where: { (cDataPoint) in
+        if let index = exampleDataSets.first?.dataPoints.firstIndex(where: { (cDataPoint) in
             cDataPoint.id == dataPoint.id
         }) {
            
@@ -114,7 +121,7 @@ struct CustomYAxisIntervalExampleLineChart: View {
 
         return DYLineDataSet(dataPoints: dataPoints, pointView: { _ in
             DYLineDataSet.defaultPointView(color: .blue)
-        }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red), settings: DYLineSettings(lineColor: .blue,   lineAreaGradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), lineAreaGradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), xValueSelectedDataPointLineColor: .red, yValueSelectedDataPointLineColor: .red))
+        }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red),  settings: DYLineSettings(lineColor: .blue,   showAppearAnimation: true, lineAreaGradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), lineAreaGradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), xValueSelectedDataPointLineColor: .red, yValueSelectedDataPointLineColor: .red))
     }
     
 //    var lineChartSettings: DYLineChartSettings {

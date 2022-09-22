@@ -28,7 +28,7 @@ internal struct DYLineView: View, DataPointConversion {
         GeometryReader { geo in
             ZStack {
                 
-                if let _ = self.lineDataSet.settings.lineAreaGradient, showSupplementaryViews {
+                if (self.lineDataSet.settings.lineAreaGradient != nil && showSupplementaryViews) || self.lineDataSet.settings.showAppearAnimation == false {
                     self.gradient()
                 }
                 
@@ -38,7 +38,7 @@ internal struct DYLineView: View, DataPointConversion {
                     self.line()
                 }
              
-                if self.showSupplementaryViews {
+                if self.showSupplementaryViews || self.lineDataSet.settings.showAppearAnimation == false {
                     
                     self.selectedDataPointAxisLines()
                     
