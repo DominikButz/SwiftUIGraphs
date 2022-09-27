@@ -14,7 +14,7 @@ public extension Shape {
             .stroke(style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0))
             .foregroundColor(color)
             .frame(width: edgeLength, height: edgeLength, alignment: .center)
-            .background(Color(.systemBackground))
+        
           
     }
 }

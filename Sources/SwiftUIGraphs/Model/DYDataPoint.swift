@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct DYDataPoint: Identifiable {
+public struct DYDataPoint: Identifiable, Equatable {
     
-    public let id:UUID = UUID()
+    public let id:UUID = UUID() 
     
     /// DYDataPoint initializer
     /// - Parameters:
@@ -22,6 +22,11 @@ public struct DYDataPoint: Identifiable {
     
     public var xValue: Double
     public var yValue: Double
+    
+    public static func == (lhs: DYDataPoint, rhs: DYDataPoint) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     
     /// example data: e.g. y-values are seconds.
     public static var exampleData0: [DYDataPoint] {

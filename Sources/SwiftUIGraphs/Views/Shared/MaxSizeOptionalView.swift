@@ -7,19 +7,24 @@
 
 import SwiftUI
 
-internal struct MaxHeightOptionalView<V: View>: View {
-    @State var height: CGFloat = 0
+internal struct MaxSizeOptionalView<V: View>: View {
+    @State var size: CGSize = CGSize.zero
     @State var opacity: CGFloat = 1
-    let maxHeight: CGFloat
+    let maxSize: CGSize
     
     var view: V?
     
     var body: some View {
         view?.measureSize(perform: { size in
-            self.height = size.height
+            self.size = size
         }).opacity(opacity)
-        .onChange(of: height, perform: { newValue in
-            self.opacity =  newValue > maxHeight ? 0 : 1
+        .onChange(of: size, perform: { newValue in
+            if newValue.height > maxSize.height || newValue.width > maxSize.width {
+                self.opacity = 0
+            } else {
+                self.opacity = 1
+            }
+           
         })
     }
 }

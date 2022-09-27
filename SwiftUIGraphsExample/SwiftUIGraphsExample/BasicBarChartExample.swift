@@ -9,18 +9,19 @@ import SwiftUI
 import SwiftUIGraphs
 
 struct BasicBarChartExample: View {
-    @State var selectedDataIndex: Int = 0
+    @State private var selectedBarDataSet: DYBarDataSet?
     @State private var barDataSets: [DYBarDataSet] = []
-    @State var selectedIndex: Int?
+  //  @StateObject private var orientationObserver =  OrientationObserver()
     
     var body: some View {
        
         GeometryReader { proxy in
             VStack(alignment: .leading) {
                 
-                DYStackedBarChartView(barDataSets: barDataSets, selectedIndex: $selectedIndex, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.trailing, yAxisFontSize: self.fontSize, yAxisMinMaxOverride: (min: 0, max:nil)), selectedBarBorderColor: .blue, barDropShadow: self.dropShadow), chartViewHeight: self.chartHeight(proxy: proxy)) { yValue in
+                DYStackedBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.trailing, yAxisFontSize: self.fontSize, yAxisMinMaxOverride: (min: 0, max:nil)), selectedBarBorderColor: .blue, barDropShadow: self.dropShadow)) { yValue in
                     return yValue.toDecimalString(maxFractionDigits: 0)
-                }.frame(height: self.chartHeight(proxy: proxy))
+                }
+                .frame(height: self.chartHeight(proxy: proxy))
                 
                 self.selectedDataSetView().padding()
 
@@ -28,7 +29,7 @@ struct BasicBarChartExample: View {
             }.padding()
             .navigationTitle("Weight Lifting Volume per Week (kg)")
             .onAppear{
-                self.generateExampleData()
+                self.createBarDataSets()
             }
         }
     }
@@ -42,14 +43,14 @@ struct BasicBarChartExample: View {
     }
     
     func chartHeight(proxy: GeometryProxy)->CGFloat {
-        return proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65
+        return proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.75
     }
     
     func selectedDataSetView()->some View {
         
         Group {
-            if let selectedIndex = selectedIndex {
-                let barDataSet = self.barDataSets[selectedIndex]
+            if let barDataSet = selectedBarDataSet {
+      
                 let startDate = barDataSet.xValue!
                 let endDate = startDate.advanced(by: 604800)
                 VStack(alignment: .leading) {
@@ -62,10 +63,10 @@ struct BasicBarChartExample: View {
     }
     
     
-    func generateExampleData() {
+    func createBarDataSets() {
         var barDataSets: [DYBarDataSet] = []
         var endDate = Date().add(units: -105, component: .day)
-        for _ in 0..<4 {
+        for _ in 0..<14 {
             let yValue = Double.random(in: 1500 ..< 1940)
            let xValue = endDate.timeIntervalSinceReferenceDate
             let xValueLabel = Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")

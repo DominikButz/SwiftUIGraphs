@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public struct DYBarDataSet: Identifiable  {
+public struct DYBarDataSet: Identifiable, Equatable  {
 
     public let id:UUID
     public var fractions: [DYBarDataFraction]
@@ -56,6 +56,10 @@ public struct DYBarDataSet: Identifiable  {
         self.xValue = xValue
         self.labelView = labelView
 
+    }
+    
+    public static func == (lhs: DYBarDataSet, rhs: DYBarDataSet) -> Bool {
+        lhs.id == rhs.id
     }
 }
 

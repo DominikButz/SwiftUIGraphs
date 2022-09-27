@@ -70,8 +70,9 @@ public struct DYStackedBarChartSettings: DYPlotAreaSettings {
 
 
 public struct DYLineChartXAxisSettingsNew: XAxisSettings {
-    
+
     public var showXAxis: Bool
+    public var xAxisViewHeight: CGFloat
     var showXAxisGridLines: Bool
     var xAxisGridLineStrokeStyle: StrokeStyle
     var xAxisGridLineColor: Color
@@ -81,14 +82,16 @@ public struct DYLineChartXAxisSettingsNew: XAxisSettings {
     /// DYLineChartXAxisSettings initializer.
     /// - Parameters:
     ///   - showXAxis: determines if the x axis should be shown.
+    ///   - xAxisViewHeight: height of the xAxis view.
     ///   - showXAxisGridLines: determines if the x axis grid lines should be shown (vertical lines).
     ///   - xAxisGridLineStrokeStyle: stroke style of the vertical x axis grid lines.
     ///   - xAxisGridLineColor: color of the xAxis grid lines.
     ///   - xAxisInterval: interval of the x-axis markers. It is recommended to override the default if required.
     ///   - xAxisFontSize: font size of the x axis marker labels.
-    public init(showXAxis: Bool = true, showXAxisGridLines: Bool = true, xAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisGridLineColor: Color = Color.secondary.opacity(0.5),  xAxisInterval:Double = 100, xAxisFontSize: CGFloat = 8) {
+    public init(showXAxis: Bool = true, xAxisViewHeight: CGFloat = 20, showXAxisGridLines: Bool = true, xAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisGridLineColor: Color = Color.secondary.opacity(0.5),  xAxisInterval:Double = 100, xAxisFontSize: CGFloat = 8) {
         
         self.showXAxis = showXAxis
+        self.xAxisViewHeight = xAxisViewHeight
         self.showXAxisGridLines = showXAxisGridLines
         self.xAxisGridLineStrokeStyle = xAxisGridLineStrokeStyle
         self.xAxisGridLineColor = xAxisGridLineColor

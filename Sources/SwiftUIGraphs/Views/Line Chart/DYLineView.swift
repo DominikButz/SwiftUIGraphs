@@ -15,10 +15,10 @@ internal struct DYLineView: View, DataPointConversion {
     var yAxisSettings: YAxisSettingsNew
     var yAxisScaler: YAxisScaler
     var xValuesMinMax: (min: Double, max: Double) // can be different from this data set's x values min max because other line data sets included.
-    @Binding var selectedIndex: Int
+    
     @Binding var touchingXPosition: CGFloat? // User X touch location - nil = not touching
     @Binding var selectorLineOffset: CGFloat
-    
+    @State var selectorCurrentXPosition: CGFloat = 0 // can be different form selector line offset in multi-line chart!
     @State private var lineEnd: CGFloat = 0 // for line animation
     @State private var showLineSegments: Bool = false  // for segmented line animation
     @State private var showSupplementaryViews: Bool = false  // for supplementary views appear animation
@@ -40,7 +40,9 @@ internal struct DYLineView: View, DataPointConversion {
              
                 if self.showSupplementaryViews || self.lineDataSet.settings.showAppearAnimation == false {
                     
-                    self.selectedDataPointAxisLines()
+                    if self.lineDataSet.selectedDataPoint != nil {
+                        self.selectedDataPointAxisLines()
+                    }
                     
                     if let _ = self.lineDataSet.pointView {
                         self.points()
@@ -59,15 +61,25 @@ internal struct DYLineView: View, DataPointConversion {
                 
             }.onAppear {
                // self.selectedIndex = self.lineDataSet.selectedIndex
+                if let selectedDataPoint = self.lineDataSet.selectedDataPoint {
+                    if let index = self.lineDataSet.dataPoints.firstIndex(where: {$0.id == selectedDataPoint.id}) {
+                        self.lineDataSet.setSelected(index: index)
+                    }
+                }
                 self.showLine()
             }.onChange(of: self.touchingXPosition) { newValue in
-               //print("touching x pos \(newValue)")
-                if newValue == nil {
+               // print("touching x pos \(newValue)")
+           
+               // if newValue == nil {
                     //print("line offset \(self.selectorLineOffset)")
+                    self.updateSelectorCurrentXPosition(geo: geo)
                     let index = self.fractionIndexFor(xPosition: self.selectorLineOffset, width: geo.size.width)
+                    //print("released touching position. setting index to \(index)")
                     self.setSelected(index: index)
+                
                     //print("setting selected to index \(index)")
-                }
+              //  }
+                
             }
         }
     }
@@ -176,19 +188,24 @@ internal struct DYLineView: View, DataPointConversion {
     private func selectorView()->some View {
         
         GeometryReader { geo in
+
+            let xValue = self.lineDataSet.selectedDataPoint?.xValue ?? self.lineDataSet.dataPoints.first!.xValue
             
-            let minXPosition = self.convertToCoordinate(value: self.lineDataSet.dataPoints.first!.xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: geo.size.width)
-            let maxXPosition = self.convertToCoordinate(value: self.lineDataSet.dataPoints.last!.xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: geo.size.width)
-            let currentXPosition = max(minXPosition, min(self.selectorLineOffset, maxXPosition))
-            
-            let xPosition = self.touchingXPosition == nil ? self.convertToCoordinate(value: self.lineDataSet.dataPoints[self.selectedIndex].xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: geo.size.width) :  currentXPosition
+            let xPosition = self.touchingXPosition == nil ? self.convertToCoordinate(value: xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: geo.size.width) :  self.selectorCurrentXPosition
             let path = self.pathFor(width: geo.size.width, height: geo.size.height, closeShape: false)
             let yPosition = path.point(to: xPosition).y
             self.lineDataSet.selectorView
                 .position(x: xPosition, y: yPosition)
-                .animation(Animation.spring().speed(4), value: self.selectorLineOffset)
-                
+                .animation(Animation.spring().speed(4), value: self.selectorCurrentXPosition)
+                .opacity(self.lineDataSet.selectedDataPoint == nil ? 0 : 1)
+         
         }
+    }
+    
+    private func updateSelectorCurrentXPosition(geo: GeometryProxy) {
+        let minXPosition = self.convertToCoordinate(value: self.lineDataSet.dataPoints.first!.xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: geo.size.width)
+        let maxXPosition = self.convertToCoordinate(value: self.lineDataSet.dataPoints.last!.xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: geo.size.width)
+        self.selectorCurrentXPosition =  max(minXPosition, min(self.selectorLineOffset, maxXPosition))
     }
     
     private func gradient()->some View {
@@ -212,7 +229,7 @@ internal struct DYLineView: View, DataPointConversion {
         GeometryReader { geo in
             let height = geo.size.height
             let width = geo.size.width
-            let selectedDataPoint = self.lineDataSet.dataPoints[self.selectedIndex]
+            let selectedDataPoint = self.lineDataSet.selectedDataPoint!
             let xValue =  self.convertToCoordinate(value:  selectedDataPoint.xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: width)
             let yValue = height - self.convertToCoordinate(value: selectedDataPoint.yValue, min: self.yAxisMinMax(settings: self.yAxisSettings).min, max:  self.yAxisMinMax(settings: self.yAxisSettings).max, length: height)
             
@@ -261,12 +278,12 @@ internal struct DYLineView: View, DataPointConversion {
 
     
     private func setSelected(index: CGFloat) {
-        
+        var selectedIndex:Int = Int(index)
         if index.truncatingRemainder(dividingBy: 1) >= 0.5 && index < CGFloat(self.lineDataSet.dataPoints.count - 1) {
-            self.selectedIndex = Int(index) + 1
-        } else {
-            self.selectedIndex = Int(index)
+            selectedIndex = Int(index) + 1
         }
+        //print("selected index now \(selectedIndex)")
+        self.lineDataSet.setSelected(index: selectedIndex)
     }
     
    

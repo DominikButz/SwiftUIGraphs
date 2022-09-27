@@ -68,7 +68,7 @@ extension PlotAreaChart {
                                 p.addLine(to: CGPoint(x: width, y: yPosition))
                                 p.closeSubpath()
                                 yPosition += convertedYAxisInterval
-                                
+                                print("y position \(yPosition)")
      
                         }.stroke(style: strokeStyle)
                             .foregroundColor(color)
@@ -117,8 +117,9 @@ extension PlotAreaChart {
 
         let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
         // let x be the padding
+        let padding: CGFloat = 5
         var count = 1
-        var totalWidthAllLabels: CGFloat = allLabels.map({$0.width(ctFont: ctFont)}).reduce(0, +)
+        var totalWidthAllLabels: CGFloat = allLabels.map({$0.width(ctFont: ctFont) + padding}).reduce(0, +)
         if totalWidthAllLabels < totalWidth {
             return count
         }
@@ -130,7 +131,7 @@ extension PlotAreaChart {
                 if $0 % count != 0 { return labels[$0] }
                    else { return nil }
             })
-            totalWidthAllLabels = labels.map({$0.width(ctFont: ctFont)}).reduce(0, +)
+            totalWidthAllLabels = labels.map({$0.width(ctFont: ctFont) + padding}).reduce(0, +)
             
 
         }

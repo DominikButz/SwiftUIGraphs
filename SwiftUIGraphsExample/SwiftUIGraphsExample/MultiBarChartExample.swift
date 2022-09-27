@@ -13,14 +13,15 @@ struct MultiBarChartExample: View {
     let colors: [Color] = [.blue, .orange, .green]
     let titles = ["Energy", "Pharmaceutical", "Agriculture"]
     @State var barDataSets: [DYBarDataSet] = []
-    @State var selectedIndex: Int? = 0
+    @State var selectedBarDataSet: DYBarDataSet?
     
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                DYStackedBarChartView(barDataSets: barDataSets, selectedIndex: $selectedIndex, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.leading, yAxisZeroGridLineColor: .red, yAxisFontSize: self.fontSize),  barDropShadow: self.dropShadow), chartViewHeight: chartHeight(proxy: proxy), yValueAsString: { yValue in
+                DYStackedBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.leading, yAxisZeroGridLineColor: .red, yAxisFontSize: self.fontSize),  barDropShadow: self.dropShadow), yValueAsString: { yValue in
                     return yValue.toDecimalString(maxFractionDigits: 0)
-                }).frame(height:chartHeight(proxy: proxy))
+                })
+                .frame(height:chartHeight(proxy: proxy))
                 
                 if self.barDataSets.isEmpty == false {
                     HStack {
@@ -58,10 +59,8 @@ struct MultiBarChartExample: View {
     
     func selectedDataSetDetailView()->some View {
         Group {
-            if let selectedIndex = selectedIndex {
+            if let barDataSet = selectedBarDataSet {
                 VStack(alignment: .leading) {
-                    
-                    let barDataSet = self.barDataSets[selectedIndex]
                     
                     Text(barDataSet.xAxisLabel).font(.callout).bold()
                     HStack {
@@ -113,7 +112,7 @@ struct MultiBarChartExample: View {
             var fractions: [DYBarDataFraction] = []
             for i in 0..<values.count {
                 let fraction = DYBarDataFraction(value: values[i], title:titles[i], gradient: LinearGradient(colors: [colors[i]], startPoint: .top, endPoint: .bottom)) {
-                    Text(values[i].toDecimalString(maxFractionDigits: 1)).font(.footnote).foregroundColor(.white).eraseToAnyView()
+                    Text(values[i].toDecimalString(maxFractionDigits: 1)).font(.footnote).lineLimit(1).foregroundColor(.white).eraseToAnyView()
                 }
                 fractions.append(fraction)
             }

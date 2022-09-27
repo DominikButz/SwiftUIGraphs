@@ -11,7 +11,6 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
    
     var settings: DYPlotAreaSettings
     var lineDataSets: [DYLineDataSet]
-    var selectedIndices: [Binding<Int>]
     var plotAreaHeight: CGFloat?
     var yAxisScaler: YAxisScaler
     var xValueAsString: (Double)->String
@@ -21,11 +20,11 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     @State private var touchingXPosition: CGFloat? // User X touch location
     @State private var selectorLineOffset: CGFloat = 0
     
-    public init?(lineDataSets: [DYLineDataSet],  selectedIndices: Binding<Int>..., settings: DYLineChartSettingsNew = DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew()), plotAreaHeight: CGFloat? = nil, xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
+    public init?(lineDataSets: [DYLineDataSet], settings: DYLineChartSettingsNew = DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew()), plotAreaHeight: CGFloat? = nil, xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
 
         self.lineDataSets = lineDataSets
         self.settings = settings
-        self.selectedIndices = selectedIndices
+  
         self.plotAreaHeight = plotAreaHeight
         
         self.xValueAsString = xValueAsString
@@ -65,7 +64,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     
     public var body: some View  {
         GeometryReader { geo in
-            Group {
+            //Group {
                 if self.allDataPoints.count >= 2 {
                     VStack(spacing: 0) {
                         HStack(spacing: 0) {
@@ -85,9 +84,8 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                                 
 
                                 ForEach(self.lineDataSets) { dataSet in
-                                    let index = self.lineDataSets.firstIndex(where: {$0.id == dataSet.id})!
-                                    
-                                    DYLineView(lineDataSet: dataSet, yAxisSettings: self.settings.yAxisSettings, yAxisScaler: self.yAxisScaler, xValuesMinMax: xValuesMinMax, selectedIndex: self.selectedIndices[index], touchingXPosition: self.$touchingXPosition, selectorLineOffset: self.$selectorLineOffset)
+   
+                                    DYLineView(lineDataSet: dataSet, yAxisSettings: self.settings.yAxisSettings, yAxisScaler: self.yAxisScaler, xValuesMinMax: xValuesMinMax, touchingXPosition: self.$touchingXPosition, selectorLineOffset: self.$selectorLineOffset)
                                     
                                 }
                                 
@@ -99,6 +97,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                                 }
                                 
                             }.frame(width: geo.size.width - self.settings.yAxisSettings.yAxisViewWidth).background(settings.plotAreaBackgroundGradient)
+                             
 
                             if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing {
                          
@@ -106,10 +105,10 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                                 
                             }
                             
-                        }.frame(height: self.plotAreaHeight)
+                        }.frame(height: self.plotAreaHeight != nil ? self.plotAreaHeight! - settings.xAxisSettings.xAxisViewHeight : nil)
                         
                         if self.settings.xAxisSettings.showXAxis {
-                            self.xAxisView()
+                            self.xAxisView().frame(height:settings.xAxisSettings.xAxisViewHeight  )
                         }
                     }
                 }
@@ -119,7 +118,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                     self.placeholderGrid(xAxisLineCount: 12, yAxisLineCount: 10).frame(height: self.plotAreaHeight).opacity(0.5).padding().transition(AnyTransition.opacity)
 
                 }
-            }
+           // }
             
         }
     }
@@ -180,8 +179,6 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                         }
                     }
                 }
-   
-            .frame(height: 30)
         }
         .padding(.leading, settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .leading ?  settings.yAxisSettings.yAxisViewWidth : 0)
         .padding(.trailing, settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing ? settings.yAxisSettings.yAxisViewWidth : 0)

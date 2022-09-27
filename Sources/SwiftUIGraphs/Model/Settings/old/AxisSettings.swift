@@ -13,7 +13,7 @@ public struct DYLineChartXAxisSettings: XAxisSettings {
     
    public var showXAxis: Bool
    public var labelFontSize: CGFloat
-    
+   public var xAxisViewHeight: CGFloat
     var showXAxisGridLines: Bool
     var xAxisLineStrokeStyle: StrokeStyle
     var xAxisInterval: Double
@@ -40,9 +40,10 @@ public struct DYLineChartXAxisSettings: XAxisSettings {
     ///  - xAxisSelectedDataPointLineColor: if showXAxisSelectedDataPointLine set to true, this value sets the line color.
     ///   - xAxisInterval: interval of the x-axis markers. It is recommended to override the default if required.
     ///   - xAxisFontSize: font size of the x axis marker labels.
-    public init(showXAxis: Bool = true, showXAxisGridLines: Bool = true, xAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), showXAxisDataPointLines: Bool = false, xAxisDataPointLinesStrokeStyle: StrokeStyle =  StrokeStyle(lineWidth: 1, dash: [3]),  xAxisDataPointLinesColor: Color = .green, showXAxisSelectedDataPointLine: Bool = false, xAxisSelectedDataPointLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, dash: [3]),  xAxisSelectedDataPointLineColor: Color = Color.orange,  xAxisInterval:Double = 100, xAxisFontSize: CGFloat = 8) {
+    public init(showXAxis: Bool = true, xAxisViewHeight: CGFloat = 20, showXAxisGridLines: Bool = true, xAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), showXAxisDataPointLines: Bool = false, xAxisDataPointLinesStrokeStyle: StrokeStyle =  StrokeStyle(lineWidth: 1, dash: [3]),  xAxisDataPointLinesColor: Color = .green, showXAxisSelectedDataPointLine: Bool = false, xAxisSelectedDataPointLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, dash: [3]),  xAxisSelectedDataPointLineColor: Color = Color.orange,  xAxisInterval:Double = 100, xAxisFontSize: CGFloat = 8) {
         
         self.showXAxis = showXAxis
+        self.xAxisViewHeight = xAxisViewHeight
         self.showXAxisGridLines = showXAxisGridLines
         self.xAxisLineStrokeStyle = xAxisGridLineStrokeStyle
         self.showXAxisDataPointLines = showXAxisDataPointLines
@@ -63,15 +64,18 @@ public struct DYLineChartXAxisSettings: XAxisSettings {
 public struct DYBarChartXAxisSettings: XAxisSettings {
     
    public var showXAxis: Bool
+   public var xAxisViewHeight: CGFloat
    public var labelFontSize: CGFloat
     
     /// DYBarChartXAxisSettings
     /// - Parameters:
     ///   - showXAxis: determines if the x-axis should be shown.
+    ///   - xAxisViewHeight: height of the xAxis view.
     ///   - xAxisFontSize: font size of the x-axis marker labels.
-    public init(showXAxis: Bool = true, xAxisFontSize: CGFloat = 8) {
+    public init(showXAxis: Bool = true, xAxisViewHeight:CGFloat = 20,  xAxisFontSize: CGFloat = 8) {
         
         self.showXAxis = showXAxis
+        self.xAxisViewHeight = xAxisViewHeight
         self.labelFontSize = xAxisFontSize
     }
 }
@@ -79,7 +83,7 @@ public struct DYBarChartXAxisSettings: XAxisSettings {
 public protocol XAxisSettings {
     var showXAxis: Bool {get set}
     var labelFontSize: CGFloat {get set}
-
+    var xAxisViewHeight: CGFloat {get set}
 }
 
 

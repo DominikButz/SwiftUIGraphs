@@ -11,19 +11,18 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
 
     var barDataSets: [DYBarDataSet]
     var settings: DYPlotAreaSettings
-    var chartViewHeight: CGFloat?
     var yAxisScaler: YAxisScaler
     var yValueAsString: (Double)->String
     let generator = UISelectionFeedbackGenerator()
     
-    @Binding var selectedIndex: Int?
+    //@State private var selectedIndex: Int?
+    @Binding private var selectedBarDataSet: DYBarDataSet?
     @State var showBars: Bool = false
   
-    public init(barDataSets: [DYBarDataSet], selectedIndex:Binding<Int?> = .constant(nil), settings: DYStackedBarChartSettings = DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings()), chartViewHeight: CGFloat? = nil, yValueAsString: @escaping (Double) -> String) {
+    public init(barDataSets: [DYBarDataSet], selectedBarDataSet: Binding<DYBarDataSet?>, settings: DYStackedBarChartSettings = DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings()), yValueAsString: @escaping (Double) -> String) {
         self.settings = settings
         self.barDataSets = barDataSets
-        self._selectedIndex = selectedIndex
-        self.chartViewHeight = chartViewHeight
+        self._selectedBarDataSet = selectedBarDataSet
         self.yValueAsString = yValueAsString
         var min =  barDataSets.map({$0.negativeYValue}).min() ?? 0
         if let overrideMin = settings.yAxisSettings.yAxisMinMaxOverride?.min, overrideMin < min {
@@ -63,21 +62,25 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
                             self.yAxisView(yValueAsString: self.yValueAsString, yAxisPosition: .trailing)
 
                         }
-                    }.frame(height: chartViewHeight != nil ? chartViewHeight! - 20 : nil)
+                    }
 
                     if self.settings.xAxisSettings.showXAxis {
-                        self.xAxisView(totalWidth: geo.size.width - settings.yAxisSettings.yAxisViewWidth)
+                        self.xAxisView().frame(height: settings.xAxisSettings.xAxisViewHeight)
                     }
-                }.frame(height: chartViewHeight)
+                }
                 .onAppear {
                     self.showBars = true
                 }
             } else {
                 // placeholder grid in case not enough data is available
-                self.placeholderGrid(xAxisLineCount: 12, yAxisLineCount: 10).frame(height: self.chartViewHeight).opacity(0.5).padding().transition(AnyTransition.opacity)
+                self.placeholderGrid(xAxisLineCount: 12, yAxisLineCount: 10).opacity(0.5).padding().transition(AnyTransition.opacity)
             }
         }.onAppear {
+            
             self.generator.prepare()
+//            if let barDataSet = self.selectedBarDataSet {
+//
+//            }
         }
         
     }
@@ -101,7 +104,7 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
      
                 let i = self.indexFor(dataSet: dataSet) ?? 0
                 
-                BarViewPair(dataSet: dataSet, index: i, selectedIndex: $selectedIndex, dataSetCount: self.barDataSets.count, totalHeight: totalHeight, barWidth: barWidth, positiveBarYPosition: positiveBarYPosition, negativeBarYPosition: negativeBarYPosition, settings: settings as! DYStackedBarChartSettings, yAxisScaler: yAxisScaler)
+                BarViewPair(dataSet: dataSet, index: i, selectedBarDataSet: self.$selectedBarDataSet, dataSetCount: self.barDataSets.count, totalHeight: totalHeight, barWidth: barWidth, positiveBarYPosition: positiveBarYPosition, negativeBarYPosition: negativeBarYPosition, settings: settings as! DYStackedBarChartSettings, yAxisScaler: yAxisScaler)
                 .position(x: self.convertToXCoordinate(index: i, totalWidth: totalWidth), y: barsYPosition)
                 
                 .onTapGesture {
@@ -110,15 +113,15 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
                     
                     self.generator.selectionChanged()
                     
-                    guard self.selectedIndex != i else {
+                    guard self.selectedBarDataSet != dataSet else {
                         withAnimation {
-                            self.selectedIndex = nil
+                            self.selectedBarDataSet = nil
                         }
                         return
                     }
                     withAnimation {
            
-                        self.selectedIndex = i
+                        self.selectedBarDataSet = dataSet
                     }
                     
                 }
@@ -136,18 +139,22 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
    
     }
     
-    private func xAxisView(totalWidth: CGFloat)-> some View {
-
-        ZStack(alignment: .center) {
-
-            let labels = self.xAxisLabelStrings()
-            let labelSteps = self.xAxisLabelSteps(totalWidth: totalWidth)
-            ForEach(labels, id:\.self) { label in
-                let i = self.indexFor(labelString: label)
-                if  i % labelSteps == 0 {
-                    self.xAxisIntervalLabelViewFor(label: label, index: i, totalWidth: totalWidth)
-                }
+    private func xAxisView()-> some View {
+        GeometryReader { proxy in
+            let totalWidth = proxy.size.width
             
+            ZStack(alignment: .center) {
+                
+                let labels = self.xAxisLabelStrings()
+                let labelSteps = self.xAxisLabelSteps(totalWidth: totalWidth)
+                
+                ForEach(labels, id:\.self) { label in
+                    let i = self.indexFor(labelString: label)
+                    if  i % labelSteps == 0 {
+                        self.xAxisIntervalLabelViewFor(label: label, index: i, totalWidth: totalWidth)
+                    }
+                    
+                }
             }
         }
         .padding(.leading, settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .leading ?  settings.yAxisSettings.yAxisViewWidth : 0)
@@ -196,7 +203,7 @@ internal struct BarViewPair: View, DataPointConversion {
 
     let dataSet: DYBarDataSet
     let index: Int
-    @Binding var selectedIndex: Int?
+    @Binding var selectedBarDataSet: DYBarDataSet?
     var dataSetCount: Int
     let totalHeight: CGFloat
     let barWidth: CGFloat
@@ -216,7 +223,7 @@ internal struct BarViewPair: View, DataPointConversion {
         let shouldShowNegativeLabel = negativeBarYPosition + negativeBarHeight / 2 - settings.labelViewOffset.height < totalHeight - settings.minimumBottomEdgeBarLabelMargin
         let totalBarHeight = positiveBarHeight + negativeBarHeight
 //        let barsYPosition = (positiveBarHeight / totalBarHeight) * positiveBarYPosition + (negativeBarHeight / totalBarHeight) * negativeBarYPosition
-        let shadow = index == selectedIndex ? settings.selectedBarDropShadow ?? settings.barDropShadow : settings.barDropShadow
+        let shadow = dataSet == selectedBarDataSet ? settings.selectedBarDropShadow ?? settings.barDropShadow : settings.barDropShadow
 
         VStack(spacing: 0) {
             // positive bar
@@ -241,8 +248,8 @@ internal struct BarViewPair: View, DataPointConversion {
         )
         .scaleEffect(self.selectionScale, anchor: scaleEffectAnchor)
         .shadow(color: shadow?.color ?? .clear, radius:  shadow?.radius ?? 0, x:  shadow?.x ?? 0, y: shadow?.y ?? 0)
-        .onChange(of: self.selectedIndex, perform: { newValue in
-            if let i = newValue, i == self.index {
+        .onChange(of: self.selectedBarDataSet, perform: { newValue in
+            if let selectedBarSet = newValue, selectedBarSet == dataSet {
                 withAnimation(Animation.spring()) {
                     self.selectionScale = 1.08
                 }
@@ -267,8 +274,8 @@ internal struct BarViewPair: View, DataPointConversion {
         Group {
             if self.showSelectionBorder {
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(index == selectedIndex ? settings.selectedBarBorderColor : .clear, lineWidth: max(1, min(self.barWidth * 0.1, 3)))
-                    .animation(.easeInOut, value: selectedIndex)
+                    .stroke(dataSet == selectedBarDataSet ? settings.selectedBarBorderColor : .clear, lineWidth: max(1, min(self.barWidth * 0.1, 3)))
+                    .animation(.easeInOut, value: selectedBarDataSet)
             }
         }
     }
@@ -309,7 +316,7 @@ internal struct StackedBarView: View, DataPointConversion {
                 ForEach(fractions) { fraction in
                     let fractionHeight = abs(fraction.value) /  abs(valueSum) * height
                     Rectangle().fill(fraction.gradient).frame(height: fractionHeight)
-                        .overlay(MaxHeightOptionalView(maxHeight: fractionHeight - 3, view: fraction.labelView?()))
+                        .overlay(MaxSizeOptionalView(maxSize: CGSize(width: self.width - 2, height: fractionHeight - 3), view: fraction.labelView?()))
                 }
             }
             .frame(width: width, height: height)
