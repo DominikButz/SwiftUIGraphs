@@ -26,17 +26,10 @@ struct CustomYAxisIntervalExampleLineChart: View {
                    }, selectedXValueAsString: { xValue in
                        Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy")
                    }, minValueLabels: self.minValueLabels, maxValueLabels: self.maxValueLabels)
-                   .selectedDataPointLabel(yColor: .blue)
+                   .selectedDataPointLabelSettings(yColor: .blue)
+
                    
-                   //                   DYGridChartHeaderView(title: "Workout Time per Week", dataPoints: exampleDataSets.first!.dataPoints, selectedIndex: self.$selectedDataIndex, isLandscape: proxy.size.height < proxy.size.width,  xValueConverter: { (xValue) -> String in
-                   //                        return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy HH:mm")
-                   //                    }, yValueConverter: { (yValue) -> String in
-                   //
-                   //                        return TimeInterval(yValue).toString() ?? ""
-                   //                    })
-                   
-                   
-                   DYMultiLineChartView(lineDataSets: [self.dataSet], settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings, yAxisSettings: yAxisSettings), plotAreaHeight: nil, xValueAsString: {xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")}, yValueAsString: { yValue in  TimeInterval(yValue).toString() ?? ""})
+                   DYMultiLineChartView(lineDataSets: [self.dataSet], settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings, yAxisSettings: yAxisSettings), xValueAsString: {xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")}, yValueAsString: { yValue in  TimeInterval(yValue).toString() ?? ""})
                    .frame(height: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.75)
                
 //proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65

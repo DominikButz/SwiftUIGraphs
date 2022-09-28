@@ -20,7 +20,7 @@ struct MultiLineChartExample: View {
   
         GeometryReader { proxy in
             VStack {
-                DYMultiLineChartView(lineDataSets: [blueDataSet, orangeDataSet, greenDataSet], settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings), plotAreaHeight: nil) { xValue in
+                DYMultiLineChartView(lineDataSets: [blueDataSet, orangeDataSet, greenDataSet], settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings)) { xValue in
                     self.stringified(value: xValue, allowFloat: false)
                 } yValueAsString: { yValue in
                     self.stringified(value:yValue, allowFloat: true)

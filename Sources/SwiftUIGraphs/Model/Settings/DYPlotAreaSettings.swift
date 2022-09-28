@@ -26,7 +26,7 @@ public struct DYLineChartSettingsNew: DYPlotAreaSettings {
     var selectorLineColor: Color
     
     
-    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), xAxisSettings: XAxisSettings, yAxisSettings: YAxisSettingsNew = YAxisSettingsNew(), selectorLineWidth: CGFloat = 2, selectorLineColor: Color = .red, allowUserInteraction: Bool = true) {
+    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), xAxisSettings: XAxisSettings = DYBarChartXAxisSettings(), yAxisSettings: YAxisSettingsNew = YAxisSettingsNew(), selectorLineWidth: CGFloat = 2, selectorLineColor: Color = .red, allowUserInteraction: Bool = true) {
         self.plotAreaBackgroundGradient = plotAreaBackgroundGradient
         self.xAxisSettings = xAxisSettings
         self.yAxisSettings = yAxisSettings

@@ -37,13 +37,14 @@ struct LineChartWithAsyncDataFetch: View {
                         
                     })
                         
-                        DYMultiLineChartView(lineDataSets: [self.dataSet], settings: DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew(xAxisInterval: 172800, xAxisFontSize: fontSize), yAxisSettings: YAxisSettingsNew(yAxisFontSize: fontSize)), plotAreaHeight: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65) { xValue in
+                        DYMultiLineChartView(lineDataSets: [self.dataSet], settings: DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew(xAxisInterval: 172800, xAxisFontSize: fontSize), yAxisSettings: YAxisSettingsNew(yAxisFontSize: fontSize)), xValueAsString: { xValue in
                             return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
-                        } yValueAsString: { yValue in
+                        }, yValueAsString: { yValue in
                             let formatter = NumberFormatter()
                             formatter.maximumFractionDigits = 2
                             return formatter.string(for: yValue)!
-                        }
+                        })
+                        .frame(height:proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65)
 
                 }.padding()
             }.onAppear {

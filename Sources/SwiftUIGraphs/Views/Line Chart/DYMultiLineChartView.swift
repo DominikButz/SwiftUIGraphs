@@ -11,7 +11,6 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
    
     var settings: DYPlotAreaSettings
     var lineDataSets: [DYLineDataSet]
-    var plotAreaHeight: CGFloat?
     var yAxisScaler: YAxisScaler
     var xValueAsString: (Double)->String
     var yValueAsString: (Double)->String
@@ -20,13 +19,11 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     @State private var touchingXPosition: CGFloat? // User X touch location
     @State private var selectorLineOffset: CGFloat = 0
     
-    public init?(lineDataSets: [DYLineDataSet], settings: DYLineChartSettingsNew = DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew()), plotAreaHeight: CGFloat? = nil, xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
+    public init?(lineDataSets: [DYLineDataSet], settings: DYLineChartSettingsNew = DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew()), xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
 
         self.lineDataSets = lineDataSets
         self.settings = settings
-  
-        self.plotAreaHeight = plotAreaHeight
-        
+
         self.xValueAsString = xValueAsString
         self.yValueAsString = yValueAsString
         
@@ -105,7 +102,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                                 
                             }
                             
-                        }.frame(height: self.plotAreaHeight != nil ? self.plotAreaHeight! - settings.xAxisSettings.xAxisViewHeight : nil)
+                        }
                         
                         if self.settings.xAxisSettings.showXAxis {
                             self.xAxisView().frame(height:settings.xAxisSettings.xAxisViewHeight  )
@@ -115,7 +112,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                 
                 else {
 
-                    self.placeholderGrid(xAxisLineCount: 12, yAxisLineCount: 10).frame(height: self.plotAreaHeight).opacity(0.5).padding().transition(AnyTransition.opacity)
+                    self.placeholderGrid(xAxisLineCount: 12, yAxisLineCount: 10).opacity(0.5).padding().transition(AnyTransition.opacity)
 
                 }
            // }

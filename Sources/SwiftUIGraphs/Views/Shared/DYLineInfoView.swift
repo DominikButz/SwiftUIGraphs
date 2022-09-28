@@ -108,7 +108,7 @@ public protocol DYLineInfoViewModifiableProperties {
 
 public extension View where Self: DYLineInfoViewModifiableProperties {
     
-    func selectedDataPointLabel(yFont: Font = .headline, yColor: Color = .orange, xFont: Font = .callout, xColor: Color = .secondary)-> some View {
+    func selectedDataPointLabelSettings(yFont: Font = .headline, yColor: Color = .orange, xFont: Font = .callout, xColor: Color = .secondary)-> some View {
         var newView = self
         newView.selectedYLabelFont = yFont
         newView.selectedYLabelTextColor = yColor
