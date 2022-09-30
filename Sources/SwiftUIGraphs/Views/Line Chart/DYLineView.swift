@@ -161,7 +161,7 @@ internal struct DYLineView: View, DataPointConversion {
  
           ForEach(lineDataSet.dataPoints) { dataPoint in
               self.lineDataSet.pointView?(dataPoint)
-                  .position(x: self.convertToCoordinate(value: dataPoint.xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: width), y: height - self.convertToCoordinate(value: dataPoint.yValue, min: self.yAxisMinMax(settings: self.yAxisSettings).min, max: self.yAxisMinMax(settings: self.yAxisSettings).max, length: height))
+                  .position(x: self.convertToCoordinate(value: dataPoint.xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: width), y: height - self.convertToCoordinate(value: dataPoint.yValue, min: self.yAxisScaler.axisMinMax.min, max: self.yAxisScaler.axisMinMax.max, length: height))
               
             }
        }
@@ -176,7 +176,7 @@ internal struct DYLineView: View, DataPointConversion {
             ForEach(lineDataSet.dataPoints) { dataPoint in
                 
                 self.lineDataSet.labelView?(dataPoint)
-                    .position(x: self.convertToCoordinate(value: dataPoint.xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: width), y: (height - self.convertToCoordinate(value: dataPoint.yValue, min: yAxisMinMax(settings: yAxisSettings).min, max: yAxisMinMax(settings: yAxisSettings).max, length: height)))
+                    .position(x: self.convertToCoordinate(value: dataPoint.xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: width), y: (height - self.convertToCoordinate(value: dataPoint.yValue, min: self.yAxisScaler.axisMinMax.min, max: self.yAxisScaler.axisMinMax.max, length: height)))
                     .offset(x: self.lineDataSet.settings.labelViewOffset.width, y:  self.lineDataSet.settings.labelViewOffset.height)
            
                 
@@ -231,7 +231,7 @@ internal struct DYLineView: View, DataPointConversion {
             let width = geo.size.width
             let selectedDataPoint = self.lineDataSet.selectedDataPoint!
             let xValue =  self.convertToCoordinate(value:  selectedDataPoint.xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: width)
-            let yValue = height - self.convertToCoordinate(value: selectedDataPoint.yValue, min: self.yAxisMinMax(settings: self.yAxisSettings).min, max:  self.yAxisMinMax(settings: self.yAxisSettings).max, length: height)
+            let yValue = height - self.convertToCoordinate(value: selectedDataPoint.yValue, min: self.yAxisScaler.axisMinMax.min, max:  self.yAxisScaler.axisMinMax.max, length: height)
             
             if let xLineColor = lineDataSet.settings.xValueSelectedDataPointLineColor {
                 Path { p in  // vertical from selected point to x-axis
@@ -296,7 +296,7 @@ internal struct DYLineView: View, DataPointConversion {
            
             // Finally close the subpath off by looping around to the beginning point.
             if closeShape {
-                let yAxisMinMax = yAxisMinMax(settings: self.yAxisSettings)
+                let yAxisMinMax = yAxisScaler.axisMinMax
                 var y = height
                 if yAxisMinMax.min <= 0 {
                     y = height - self.convertToCoordinate(value: 0, min: yAxisMinMax.min, max: yAxisMinMax.max, length: height)
@@ -312,7 +312,7 @@ internal struct DYLineView: View, DataPointConversion {
     
     func drawPathWith(path: inout Path, index: Int, height: CGFloat, width: CGFloat) -> Path {
         
-        let mappedYValue0 = convertToCoordinate(value: lineDataSet.dataPoints[index].yValue, min: yAxisMinMax(settings: yAxisSettings).min, max: yAxisMinMax(settings: yAxisSettings).max, length: height)
+        let mappedYValue0 = convertToCoordinate(value: lineDataSet.dataPoints[index].yValue, min: yAxisScaler.axisMinMax.min, max: yAxisScaler.axisMinMax.max, length: height)
         let mappedXValue0 = convertToCoordinate(value: lineDataSet.dataPoints[index].xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: width)
             let point0 = CGPoint(x: mappedXValue0, y: height - mappedYValue0)
             path.move(to: point0)
@@ -333,7 +333,7 @@ internal struct DYLineView: View, DataPointConversion {
       
         let firstXValue =  lineDataSet.dataPoints.first!.xValue
         
-        var point0 = CGPoint(x: convertToCoordinate(value: firstXValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: width), y: height - self.convertToCoordinate(value: firstYValue, min: self.yAxisMinMax(settings: self.yAxisSettings).min, max: self.yAxisMinMax(settings: self.yAxisSettings).max, length: height))
+        var point0 = CGPoint(x: convertToCoordinate(value: firstXValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: width), y: height - self.convertToCoordinate(value: firstYValue, min: self.yAxisScaler.axisMinMax.min, max: self.yAxisScaler.axisMinMax.max, length: height))
         path.move(to: point0)
         var index:Int = 0
         
@@ -353,7 +353,7 @@ internal struct DYLineView: View, DataPointConversion {
     
     private func connectPointsWith(path: inout Path, index: Int, point0: CGPoint, height: CGFloat, width: CGFloat)->CGPoint {
 
-        let mappedYValue = self.convertToCoordinate(value: lineDataSet.dataPoints[index].yValue, min: self.yAxisMinMax(settings: self.yAxisSettings).min, max: self.yAxisMinMax(settings: self.yAxisSettings).max, length: height)
+        let mappedYValue = self.convertToCoordinate(value: lineDataSet.dataPoints[index].yValue, min: self.yAxisScaler.axisMinMax.min, max: self.yAxisScaler.axisMinMax.max, length: height)
         let mappedXValue = self.convertToCoordinate(value: lineDataSet.dataPoints[index].xValue, min: xValuesMinMax.min, max: xValuesMinMax.max, length: width)
         let point1 = CGPoint(x: mappedXValue, y: height - mappedYValue)
         if self.lineDataSet.settings.interpolationType == .quadCurve {

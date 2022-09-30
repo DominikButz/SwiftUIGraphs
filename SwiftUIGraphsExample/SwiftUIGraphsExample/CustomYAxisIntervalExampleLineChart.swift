@@ -125,24 +125,24 @@ struct CustomYAxisIntervalExampleLineChart: View {
         return Color.green
     }
     
-    func createExampleLineDataSet()->DYLineDataSet {
-        var dataPoints:[DYDataPoint] = []
-        
-        var endDate = Date().add(units: -3, component: .hour)
-        
-        for _ in 0..<50 {
-            let yValue = Int.random(in: 6000 ..< 12000)
-            let xValue =  endDate.timeIntervalSinceReferenceDate
-            let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
-            dataPoints.append(dataPoint)
-            let randomDayDifference = Int.random(in: 1 ..< 8)
-            endDate = endDate.add(units: -randomDayDifference, component: .day)
-        }
-
-        return DYLineDataSet(dataPoints: dataPoints, selectedDataPoint: nil, pointView: { _ in
-            DYLineDataSet.defaultPointView(color: .blue)
-        }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red),  settings: DYLineSettings(lineColor: .blue,   showAppearAnimation: true, lineAreaGradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), lineAreaGradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), xValueSelectedDataPointLineColor: .red, yValueSelectedDataPointLineColor: .red))
-    }
+//    func createExampleLineDataSet()->DYLineDataSet {
+//        var dataPoints:[DYDataPoint] = []
+//        
+//        var endDate = Date().add(units: -3, component: .hour)
+//        
+//        for _ in 0..<50 {
+//            let yValue = Int.random(in: 6000 ..< 12000)
+//            let xValue =  endDate.timeIntervalSinceReferenceDate
+//            let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
+//            dataPoints.append(dataPoint)
+//            let randomDayDifference = Int.random(in: 1 ..< 8)
+//            endDate = endDate.add(units: -randomDayDifference, component: .day)
+//        }
+//
+//        return DYLineDataSet(dataPoints: dataPoints, selectedDataPoint: nil, pointView: { _ in
+//            DYLineDataSet.defaultPointView(color: .blue)
+//        }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red),  settings: DYLineSettings(lineColor: .blue,   showAppearAnimation: true, lineAreaGradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), lineAreaGradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), xValueSelectedDataPointLineColor: .red, yValueSelectedDataPointLineColor: .red))
+//    }
     
 //    var lineChartSettings: DYLineChartSettings {
 //        DYLineChartSettings(lineStrokeStyle: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: .blue, showAppearAnimation: true, showGradient: true, gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), gradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), lateralPadding: (0, 0), pointColor: .blue, selectorLineColor: .blue, selectorLinePointColor: .blue, allowUserInteraction: true, yAxisSettings:  yAxisSettings, xAxisSettings: xAxisSettings)

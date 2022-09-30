@@ -11,16 +11,15 @@ import SwiftUIGraphs
 struct BasicBarChartExample: View {
     @State private var selectedBarDataSet: DYBarDataSet?
     @State private var barDataSets: [DYBarDataSet] = []
-  //  @StateObject private var orientationObserver =  OrientationObserver()
-    
+
     var body: some View {
        
         GeometryReader { proxy in
             VStack(alignment: .leading) {
                 
-                DYStackedBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.trailing, yAxisFontSize: self.fontSize, yAxisMinMaxOverride: (min: 0, max:nil)), selectedBarBorderColor: .blue, barDropShadow: self.dropShadow)) { yValue in
+                DYStackedBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.trailing, yAxisFontSize: self.fontSize), selectedBarBorderColor: .blue, barDropShadow: self.dropShadow)) { yValue in
                     return yValue.toDecimalString(maxFractionDigits: 0)
-                }
+                }  //yAxisMinMaxOverride: (min: 200, max:1800)
                 .frame(height: self.chartHeight(proxy: proxy))
                 
                 self.selectedDataSetView().padding()

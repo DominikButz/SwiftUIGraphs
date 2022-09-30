@@ -18,6 +18,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
    // @State private var userTouchingChart: Bool = false
     @State private var touchingXPosition: CGFloat? // User X touch location
     @State private var selectorLineOffset: CGFloat = 0
+
     
     public init?(lineDataSets: [DYLineDataSet], settings: DYLineChartSettingsNew = DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew()), xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
 
@@ -29,15 +30,19 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
         
         self.yAxisScaler = YAxisScaler(min:0, max: 0, maxTicks: 10) // initialize here otherwise error will be thrown
         let dataPoints = self.allDataPoints
+        var didOverrideMin = false
+        var didOverrideMax = false
         var min =  dataPoints.map({$0.yValue}).min() ?? 0
         if let overrideMin = settings.yAxisSettings.yAxisMinMaxOverride?.min, overrideMin < min {
             min = overrideMin
+            didOverrideMin = true
         }
          var max = dataPoints.map({$0.yValue}).max() ?? 0
         if let overrideMax = settings.yAxisSettings.yAxisMinMaxOverride?.max, overrideMax > max {
             max = overrideMax
+            didOverrideMax = true
         }
-         self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10)
+        self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10, minOverride: didOverrideMin, maxOverride: didOverrideMax)
 
         print("x axis min max: \(self.xAxisMinMax().min), \(self.xAxisMinMax().max)")
         
@@ -72,9 +77,11 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                             }
                             
                             ZStack {
-                                if self.settings.yAxisSettings.showYAxisGridLines {
+                                if self.settings.yAxisSettings.showYAxisGridLines  {
                                     self.yAxisGridLines()
+                                    self.yAxisZeroGridLine() 
                                 }
+                                
                                 if (settings.xAxisSettings as! DYLineChartXAxisSettingsNew).showXAxisGridLines {
                                     self.xAxisGridLines()
                                 }
@@ -153,10 +160,8 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     }
     
     private func dragOnEnded(value: DragGesture.Value, geo: GeometryProxy) {
-        //let xPos = value.location.x
+
         self.touchingXPosition = nil
-     //   self.userTouchingChart = false
-      //  let index = (xPos - leadingMargin) / (((geo.size.width - marginSum) / CGFloat(self.dataPoints.count - 1)))
 
     }
     
@@ -204,6 +209,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
 
         }
     }
+    
 
     private func xAxisIntervalLabelViewFor(value:Double, totalWidth: CGFloat)-> some View {
         let xValues = allDataPoints.map({$0.xValue})

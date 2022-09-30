@@ -25,14 +25,19 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
         self._selectedBarDataSet = selectedBarDataSet
         self.yValueAsString = yValueAsString
         var min =  barDataSets.map({$0.negativeYValue}).min() ?? 0
+        var didOverrideMin = false
+        var didOverrideMax = false
         if let overrideMin = settings.yAxisSettings.yAxisMinMaxOverride?.min, overrideMin < min {
             min = overrideMin
+            didOverrideMin = true
         }
         var max = self.barDataSets.map({$0.positiveYValue}).max() ?? 0
         if let overrideMax = settings.yAxisSettings.yAxisMinMaxOverride?.max, overrideMax > max {
             max = overrideMax
+            didOverrideMax = true
         }
-        self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10) // initialize here otherwise error will be thrown
+
+        self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10, minOverride: didOverrideMin, maxOverride: didOverrideMax)
     }
     
     public var body: some View {
@@ -49,6 +54,7 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
 
                             if self.settings.yAxisSettings.showYAxisGridLines {
                                 self.yAxisGridLines()
+                                self.yAxisZeroGridLine()
                             }
                             
                             if self.showBars {
@@ -90,15 +96,16 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
             let totalHeight = geo.size.height
             let totalWidth = geo.size.width
             let barWidth:CGFloat = self.barWidth(totalWidth: totalWidth)
-            let yMinMax = self.yAxisMinMax(settings: settings.yAxisSettings)
-            let zeroYcoord = totalHeight - self.convertToCoordinate(value: 0, min: yMinMax.min, max: yMinMax.max, length: totalHeight)
+            let yMinMax = self.yAxisScaler.axisMinMax
+            let positiveBarYOrigin =  totalHeight - self.convertToCoordinate(value: max(0, yMinMax.min), min: yMinMax.min, max: yMinMax.max, length: totalHeight)
+            let negativeBarYOrigin = totalHeight - self.convertToCoordinate(value: min(0, yMinMax.max), min: yMinMax.min, max: yMinMax.max, length: totalHeight)
  
             ForEach(barDataSets) { dataSet in
                 
                 let positiveBarHeight =  dataSet.positiveYValue / (yMinMax.max - yMinMax.min) * totalHeight
                 let negativeBarHeight = abs(dataSet.negativeYValue) / (yMinMax.max - yMinMax.min) * totalHeight
-                let positiveBarYPosition = self.barYPosition(barHeight: positiveBarHeight, totalHeight: totalHeight, zeroYCoord: zeroYcoord, valueNegative: false)
-                let negativeBarYPosition = self.barYPosition(barHeight: negativeBarHeight, totalHeight: totalHeight, zeroYCoord: zeroYcoord, valueNegative: true)
+                let positiveBarYPosition = self.barYPosition(barHeight: positiveBarHeight, totalHeight: totalHeight, originY: positiveBarYOrigin, valueNegative: false)
+                let negativeBarYPosition = self.barYPosition(barHeight: negativeBarHeight, totalHeight: totalHeight, originY: negativeBarYOrigin, valueNegative: true)
                 let totalBarHeight = positiveBarHeight + negativeBarHeight
                 let barsYPosition = (positiveBarHeight / totalBarHeight) * positiveBarYPosition + (negativeBarHeight / totalBarHeight) * negativeBarYPosition
      
@@ -133,9 +140,9 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
         
     }
     
-    private func barYPosition(barHeight: CGFloat, totalHeight: CGFloat, zeroYCoord: CGFloat, valueNegative: Bool)->CGFloat {
+    private func barYPosition(barHeight: CGFloat, totalHeight: CGFloat, originY: CGFloat, valueNegative: Bool)->CGFloat {
         let halfBarHeight = valueNegative ? -barHeight / 2 : +barHeight / 2
-        return zeroYCoord - halfBarHeight
+        return originY - halfBarHeight
    
     }
     
@@ -215,7 +222,7 @@ internal struct BarViewPair: View, DataPointConversion {
     @State var showSelectionBorder: Bool = false
     
     var body: some View {
-        let yMinMax = self.yAxisMinMax(settings: settings.yAxisSettings)
+        let yMinMax = self.yAxisScaler.axisMinMax
         let positiveBarHeight =  dataSet.positiveYValue / (yMinMax.max - yMinMax.min) * totalHeight
         let negativeBarHeight = abs(dataSet.negativeYValue) / (yMinMax.max - yMinMax.min) * totalHeight
 
@@ -230,13 +237,13 @@ internal struct BarViewPair: View, DataPointConversion {
            
             if positiveBarHeight > 0 {
                 //Spacer(minLength: 0)
-                StackedBarView(fractions: dataSet.positiveFractions, width: barWidth, height: positiveBarHeight, index: index, yAxisScaler: yAxisScaler, labelView: shouldShowPositiveLabel ?  dataSet.labelView?(dataSet.positiveYValue) : nil, settings: settings)
+                StackedBarView(fractions: dataSet.positiveFractions, width: barWidth, height: positiveBarHeight, index: index, yAxisScaler: yAxisScaler, labelView: shouldShowPositiveLabel ?  dataSet.labelView?(dataSet.positiveYValue) : nil, labelViewOffset: settings.labelViewOffset)
                 
             }
             
             // negative bar
             if negativeBarHeight > 0 {
-                StackedBarView(fractions: dataSet.negativeFractions, width: barWidth, height: negativeBarHeight, index: index, yAxisScaler: yAxisScaler, labelView: shouldShowNegativeLabel ?  dataSet.labelView?(dataSet.negativeYValue) : nil, settings: settings)
+                StackedBarView(fractions: dataSet.negativeFractions, width: barWidth, height: negativeBarHeight, index: index, yAxisScaler: yAxisScaler, labelView: shouldShowNegativeLabel ?  dataSet.labelView?(dataSet.negativeYValue) : nil, labelViewOffset: settings.labelViewOffset)
                // Spacer(minLength: 0)
             }
             
@@ -303,7 +310,8 @@ internal struct StackedBarView: View, DataPointConversion {
     //@Binding var selectedIndex: Int?
     var yAxisScaler: YAxisScaler
     var labelView: AnyView?
-    let settings: DYStackedBarChartSettings
+    let labelViewOffset: CGSize
+  //  let settings: DYStackedBarChartSettings
 
     @State private var barHeightFactor: CGFloat = 0
     @State private var showLabelView: Bool = false
@@ -355,8 +363,8 @@ internal struct StackedBarView: View, DataPointConversion {
     
     var barLabelTotalOffset: CGSize {
         
-        let widthOffset: CGFloat = valueSum > 0 ? settings.labelViewOffset.width :  -settings.labelViewOffset.width
-        let heightOffset: CGFloat = valueSum > 0 ?  -height / 2 + settings.labelViewOffset.height : height / 2 - settings.labelViewOffset.height
+        let widthOffset: CGFloat = valueSum > 0 ? labelViewOffset.width :  -labelViewOffset.width
+        let heightOffset: CGFloat = valueSum > 0 ?  -height / 2 + labelViewOffset.height : height / 2 - labelViewOffset.height
        
         return CGSize(width: widthOffset, height: heightOffset)
 

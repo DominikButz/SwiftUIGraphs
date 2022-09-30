@@ -24,8 +24,8 @@ struct ContentView: View {
                 }) {
                    // NavigationLink("Weight Lifting Volume per Workout", destination: BasicLineChartExample())
                     NavigationLink("Stock Prices (asyn data fetch)", destination: LineChartWithAsyncDataFetch())
-                    NavigationLink("Area Chart Example", destination: CustomYAxisIntervalExampleLineChart(dataSet: self.singleLineDataSet()), isActive: $linkActive)
-                    NavigationLink("Multi-Line Example", destination: MultiLineChartExample(blueDataSet: multiLineDataSets[0], orangeDataSet: multiLineDataSets[1], greenDataSet: multiLineDataSets[2]))
+                    NavigationLink("Area Chart Example", destination: CustomYAxisIntervalExampleLineChart(dataSet: self.areaLineChartDataSet()))
+                    NavigationLink("Multi-Line Example", destination: MultiLineChartExample(blueDataSet: multiLineDataSets[0], orangeDataSet: multiLineDataSets[1], greenDataSet: multiLineDataSets[2]), isActive: $linkActive)
                 }
          
                 Section(header: HStack{
@@ -55,7 +55,7 @@ struct ContentView: View {
 
     }
     
-    func singleLineDataSet()->DYLineDataSet {
+    func areaLineChartDataSet()->DYLineDataSet {
         var dataPoints:[DYDataPoint] = []
         
         var endDate = Date().add(units: -3, component: .hour)
@@ -74,7 +74,7 @@ struct ContentView: View {
         }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red),  settings: DYLineSettings(lineColor: .blue,   showAppearAnimation: true, lineAreaGradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), lineAreaGradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), xValueSelectedDataPointLineColor: .red, yValueSelectedDataPointLineColor: .red))
     }
     
-    
+    //LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom)
     
     // Multi Line example
     func multiLineDataSets()->[DYLineDataSet] {
