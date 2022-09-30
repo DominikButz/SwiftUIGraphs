@@ -11,10 +11,27 @@ import SwiftUI
 protocol PlotAreaChart: DataPointConversion {
     var settings: DYPlotAreaSettings {get set}
     func xAxisLabelStrings()->[String]
+    mutating func configureYAxisScaler(min: Double, max: Double)
 }
 
 extension PlotAreaChart {
     
+    mutating func configureYAxisScaler(min: Double, max: Double) {
+        var didOverrideMin = false
+        var didOverrideMax = false
+        var min = min
+        var max = max
+        if let overrideMin = settings.yAxisSettings.yAxisMinMaxOverride?.min, overrideMin < min {
+            min = overrideMin
+            didOverrideMin = true
+        }
+
+        if let overrideMax = settings.yAxisSettings.yAxisMinMaxOverride?.max, overrideMax > max {
+            max = overrideMax
+            didOverrideMax = true
+        }
+        self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10, minOverride: didOverrideMin, maxOverride: didOverrideMax)
+    }
     
     func yAxisView(yValueAsString: @escaping (Double)->String, yAxisPosition: Edge.Set = .leading)-> some View {
         GeometryReader { geo in

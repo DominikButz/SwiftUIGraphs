@@ -7,20 +7,24 @@
 
 import SwiftUI
 
-public struct DYMultiLineChartView: View, PlotAreaChart {
+public protocol SettingsTest {
+    var someValue: Int {get set}
+}
+
+public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
    
     var settings: DYPlotAreaSettings
     var lineDataSets: [DYLineDataSet]
     var yAxisScaler: YAxisScaler
     var xValueAsString: (Double)->String
     var yValueAsString: (Double)->String
-    
+    public var someValue = 0
    // @State private var userTouchingChart: Bool = false
     @State private var touchingXPosition: CGFloat? // User X touch location
     @State private var selectorLineOffset: CGFloat = 0
 
     
-    public init?(lineDataSets: [DYLineDataSet], settings: DYLineChartSettingsNew = DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew()), xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
+    public init(lineDataSets: [DYLineDataSet], settings: DYLineChartSettingsNew = DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew()), xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
 
         self.lineDataSets = lineDataSets
         self.settings = settings
@@ -30,23 +34,14 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
         
         self.yAxisScaler = YAxisScaler(min:0, max: 0, maxTicks: 10) // initialize here otherwise error will be thrown
         let dataPoints = self.allDataPoints
-        var didOverrideMin = false
-        var didOverrideMax = false
-        var min =  dataPoints.map({$0.yValue}).min() ?? 0
-        if let overrideMin = settings.yAxisSettings.yAxisMinMaxOverride?.min, overrideMin < min {
-            min = overrideMin
-            didOverrideMin = true
-        }
-         var max = dataPoints.map({$0.yValue}).max() ?? 0
-        if let overrideMax = settings.yAxisSettings.yAxisMinMaxOverride?.max, overrideMax > max {
-            max = overrideMax
-            didOverrideMax = true
-        }
-        self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10, minOverride: didOverrideMin, maxOverride: didOverrideMax)
+        self.configureYAxisScaler(min: dataPoints.map({$0.yValue}).min() ?? 0, max:  dataPoints.map({$0.yValue}).max() ?? 0)
 
-        print("x axis min max: \(self.xAxisMinMax().min), \(self.xAxisMinMax().max)")
+        //print("x axis min max: \(self.xAxisMinMax().min), \(self.xAxisMinMax().max)")
+        //print("some value: \(someValue)")
         
     }
+    
+
     
     private var allDataPoints: [DYDataPoint] {
         var allDataPoints:[DYDataPoint] = []
@@ -114,6 +109,9 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
                         if self.settings.xAxisSettings.showXAxis {
                             self.xAxisView().frame(height:settings.xAxisSettings.xAxisViewHeight  )
                         }
+                    }
+                    .onAppear {
+                        print("on appear some value \(someValue)")
                     }
                 }
                 
@@ -257,6 +255,14 @@ public struct DYMultiLineChartView: View, PlotAreaChart {
     
     
     
+}
+
+public extension View where Self: SettingsTest {
+    func changeSomeValue(_ value: Int)-> some View  {
+        var newView = self
+        newView.someValue = value
+        return newView
+    }
 }
 
 //struct DYMultiLineChartView_Previews: PreviewProvider {

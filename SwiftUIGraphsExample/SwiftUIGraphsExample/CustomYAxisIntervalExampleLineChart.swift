@@ -30,8 +30,9 @@ struct CustomYAxisIntervalExampleLineChart: View {
 
                    
                    DYMultiLineChartView(lineDataSets: [self.dataSet], settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings, yAxisSettings: yAxisSettings), xValueAsString: {xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")}, yValueAsString: { yValue in  TimeInterval(yValue).toString() ?? ""})
+                   .changeSomeValue(3)
                    .frame(height: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.75)
-               
+                  
 //proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65
             Spacer()
          }.padding()

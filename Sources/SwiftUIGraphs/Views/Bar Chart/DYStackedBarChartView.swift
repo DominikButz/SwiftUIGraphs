@@ -24,20 +24,9 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
         self.barDataSets = barDataSets
         self._selectedBarDataSet = selectedBarDataSet
         self.yValueAsString = yValueAsString
-        var min =  barDataSets.map({$0.negativeYValue}).min() ?? 0
-        var didOverrideMin = false
-        var didOverrideMax = false
-        if let overrideMin = settings.yAxisSettings.yAxisMinMaxOverride?.min, overrideMin < min {
-            min = overrideMin
-            didOverrideMin = true
-        }
-        var max = self.barDataSets.map({$0.positiveYValue}).max() ?? 0
-        if let overrideMax = settings.yAxisSettings.yAxisMinMaxOverride?.max, overrideMax > max {
-            max = overrideMax
-            didOverrideMax = true
-        }
+        self.yAxisScaler = YAxisScaler(min:0, max: 0, maxTicks: 10) // initialize here otherwise error will be thrown
+        self.configureYAxisScaler(min: barDataSets.map({$0.negativeYValue}).min() ?? 0, max: barDataSets.map({$0.positiveYValue}).max() ?? 0)
 
-        self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10, minOverride: didOverrideMin, maxOverride: didOverrideMax)
     }
     
     public var body: some View {
