@@ -7,35 +7,35 @@
 
 import SwiftUI
 
-public protocol SettingsTest {
-    var someValue: Int {get set}
-}
 
-public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
-   
-    var settings: DYPlotAreaSettings
-    var lineDataSets: [DYLineDataSet]
+
+public struct DYMultiLineChartView<L: View>: View, PlotAreaChart, DYMultiLineChartModifiableProperties {
+
+    public var settings: DYLineChartSettingsNew
+    public var yAxisSettings: YAxisSettingsNew
+    public var xAxisSettings: XAxisSettings
+    var allDataPoints: [DYDataPoint]
     var yAxisScaler: YAxisScaler
     var xValueAsString: (Double)->String
     var yValueAsString: (Double)->String
-    public var someValue = 0
+    var lineViews: (DYLineParentViewProperties)->L
    // @State private var userTouchingChart: Bool = false
     @State private var touchingXPosition: CGFloat? // User X touch location
     @State private var selectorLineOffset: CGFloat = 0
 
     
-    public init(lineDataSets: [DYLineDataSet], settings: DYLineChartSettingsNew = DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew()), xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
+    public init(allDataPoints: [DYDataPoint], @ViewBuilder lineViews: @escaping (DYLineParentViewProperties)->L,  xValueAsString: @escaping (Double)->String , yValueAsString:  @escaping (Double)->String) {
 
-        self.lineDataSets = lineDataSets
-        self.settings = settings
-
+        self.allDataPoints = allDataPoints.sorted(by: {$0.xValue < $1.xValue})
+        self.settings = DYLineChartSettingsNew()
+        self.xAxisSettings = DYLineChartXAxisSettingsNew()
+        self.yAxisSettings = YAxisSettingsNew()
         self.xValueAsString = xValueAsString
         self.yValueAsString = yValueAsString
         
-        self.yAxisScaler = YAxisScaler(min:0, max: 0, maxTicks: 10) // initialize here otherwise error will be thrown
-        let dataPoints = self.allDataPoints
-        self.configureYAxisScaler(min: dataPoints.map({$0.yValue}).min() ?? 0, max:  dataPoints.map({$0.yValue}).max() ?? 0)
-
+        self.yAxisScaler = YAxisScaler(min:allDataPoints.map({$0.yValue}).min() ?? 0, max: allDataPoints.map({$0.yValue}).max() ?? 0, maxTicks: 10, minOverride: false, maxOverride: false)
+       // self.configureYAxisScaler(min: allDataPoints.map({$0.yValue}).min() ?? 0, max:  allDataPoints.map({$0.yValue}).max() ?? 0)
+        self.lineViews = lineViews
         //print("x axis min max: \(self.xAxisMinMax().min), \(self.xAxisMinMax().max)")
         //print("some value: \(someValue)")
         
@@ -43,21 +43,12 @@ public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
     
 
     
-    private var allDataPoints: [DYDataPoint] {
-        var allDataPoints:[DYDataPoint] = []
-        for dataSet in self.lineDataSets {
-            allDataPoints = allDataPoints + dataSet.dataPoints
-        }
-        return allDataPoints.sorted(by: {$0.xValue < $1.xValue})
-        
-    }
-    
-    private var xValuesMinMax: (min: Double, max: Double) {
+    private var globalxValuesMinMax: (min: Double, max: Double) {
         let xValues = allDataPoints.map({$0.xValue})
         let maxX = xValues.max() ?? 0
         let minX = xValues.min() ?? 0
         return (minX, maxX)
-}
+    }
     
     public var body: some View  {
         GeometryReader { geo in
@@ -65,40 +56,41 @@ public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
                 if self.allDataPoints.count >= 2 {
                     VStack(spacing: 0) {
                         HStack(spacing: 0) {
-                            if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .leading {
+                            if self.yAxisSettings.showYAxis && yAxisSettings.yAxisPosition == .leading {
                          
                                 self.yAxisView(yValueAsString: self.yValueAsString)
                                 
                             }
                             
                             ZStack {
-                                if self.settings.yAxisSettings.showYAxisGridLines  {
+                                if self.yAxisSettings.showYAxisGridLines  {
                                     self.yAxisGridLines()
                                     self.yAxisZeroGridLine() 
                                 }
                                 
-                                if (settings.xAxisSettings as! DYLineChartXAxisSettingsNew).showXAxisGridLines {
+                                if (xAxisSettings as! DYLineChartXAxisSettingsNew).showXAxisGridLines {
                                     self.xAxisGridLines()
                                 }
                                 
 
-                                ForEach(self.lineDataSets) { dataSet in
-   
-                                    DYLineView(lineDataSet: dataSet, yAxisSettings: self.settings.yAxisSettings, yAxisScaler: self.yAxisScaler, xValuesMinMax: xValuesMinMax, touchingXPosition: self.$touchingXPosition, selectorLineOffset: self.$selectorLineOffset)
-                                    
-                                }
+                                lineViews((yAxisSettings, yAxisScaler, globalxValuesMinMax, $touchingXPosition, $selectorLineOffset))
+//                                ForEach(self.lineDataSets) { dataSet in
+//
+//                                    DYLineView(lineDataSet: dataSet, yAxisSettings: self.yAxisSettings, yAxisScaler: self.yAxisScaler, xValuesMinMax: xValuesMinMax, touchingXPosition: self.$touchingXPosition, selectorLineOffset: self.$selectorLineOffset)
+//
+//                                }
                                 
-                                self.selectorLine()
+                                self.selectorLine().clipped()
                                 
 
                                 if self.settings.allowUserInteraction {
                                     self.userInteraction()
                                 }
                                 
-                            }.frame(width: geo.size.width - self.settings.yAxisSettings.yAxisViewWidth).background(settings.plotAreaBackgroundGradient)
+                            }.frame(width: geo.size.width - self.yAxisSettings.yAxisViewWidth).background(settings.plotAreaBackgroundGradient)
                              
 
-                            if self.settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing {
+                            if self.yAxisSettings.showYAxis && yAxisSettings.yAxisPosition == .trailing {
                          
                                 self.yAxisView(yValueAsString: self.yValueAsString, yAxisPosition: .trailing)
                                 
@@ -106,13 +98,11 @@ public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
                             
                         }
                         
-                        if self.settings.xAxisSettings.showXAxis {
-                            self.xAxisView().frame(height:settings.xAxisSettings.xAxisViewHeight  )
+                        if xAxisSettings.showXAxis {
+                            self.xAxisView().frame(height:xAxisSettings.xAxisViewHeight  )
                         }
                     }
-                    .onAppear {
-                        print("on appear some value \(someValue)")
-                    }
+
                 }
                 
                 else {
@@ -128,8 +118,8 @@ public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
     
     private func selectorLine() -> some View {
         GeometryReader { geo in
-            (self.settings as! DYLineChartSettingsNew).selectorLineColor
-                .frame(width: (self.settings as! DYLineChartSettingsNew).selectorLineWidth)
+           settings.selectorLineColor
+                .frame(width: settings.selectorLineWidth)
                  .opacity(touchingXPosition != nil ? 1 : 0) // hide the vertical indicator line if user not touching the chart
                 .position(x: self.selectorLineOffset, y: geo.size.height / 2)
                 .animation(Animation.spring().speed(4))
@@ -180,8 +170,8 @@ public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
                     }
                 }
         }
-        .padding(.leading, settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .leading ?  settings.yAxisSettings.yAxisViewWidth : 0)
-        .padding(.trailing, settings.yAxisSettings.showYAxis && settings.yAxisSettings.yAxisPosition == .trailing ? settings.yAxisSettings.yAxisViewWidth : 0)
+        .padding(.leading, yAxisSettings.showYAxis && yAxisSettings.yAxisPosition == .leading ?  yAxisSettings.yAxisViewWidth : 0)
+        .padding(.trailing, yAxisSettings.showYAxis && yAxisSettings.yAxisPosition == .trailing ? yAxisSettings.yAxisViewWidth : 0)
 
     }
     
@@ -193,7 +183,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
                     let totalHeight = geo.size.height
                     var xPosition: CGFloat = 0
                     let count = self.xAxisLineCount()
-                    let interval:Double =  (settings.xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisInterval
+                    let interval:Double =  (xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisInterval
                     let xAxisMinMax = self.xAxisMinMax()
                     let convertedXAxisInterval = totalWidth * CGFloat(interval / (xAxisMinMax.max - xAxisMinMax.min))
                     for _ in 0..<count + 1 {
@@ -201,8 +191,8 @@ public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
                         p.addLine(to: CGPoint(x:xPosition, y: totalHeight))
                         xPosition += convertedXAxisInterval
                     }
-                }.stroke(style: (settings.xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisGridLineStrokeStyle)
-                    .foregroundColor((settings.xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisGridLineColor)
+                }.stroke(style: (xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisGridLineStrokeStyle)
+                    .foregroundColor((xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisGridLineColor)
             }
 
         }
@@ -215,7 +205,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
         let minX = xValues.min() ?? 0
         let mappedXValue = self.convertToCoordinate(value:value, min: minX, max: maxX, length: totalWidth)
         
-        return Text(self.xValueAsString(value)).font(.system(size:settings.xAxisSettings.labelFontSize)).position(x: mappedXValue, y: 10)
+        return Text(self.xValueAsString(value)).font(.system(size:xAxisSettings.labelFontSize)).position(x: mappedXValue, y: 10)
     }
     
     func xAxisLabelStrings()->[String] {
@@ -228,7 +218,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
 
         let xAxisMinMax = self.xAxisMinMax()
    
-        let count = (xAxisMinMax.max - xAxisMinMax.min) / (settings.xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisInterval
+        let count = (xAxisMinMax.max - xAxisMinMax.min) / (xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisInterval
         
         return Int(count)
     
@@ -242,7 +232,7 @@ public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
         var currentValue = self.xAxisMinMax().min
         for _ in 0..<(count + 1) {
             values.append(currentValue)
-            currentValue += (settings.xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisInterval
+            currentValue += (xAxisSettings as! DYLineChartXAxisSettingsNew).xAxisInterval
             
         }
         return values
@@ -257,13 +247,119 @@ public struct DYMultiLineChartView: View, PlotAreaChart, SettingsTest {
     
 }
 
-public extension View where Self: SettingsTest {
-    func changeSomeValue(_ value: Int)-> some View  {
-        var newView = self
-        newView.someValue = value
-        return newView
-    }
+
+public protocol DYMultiLineChartModifiableProperties {
+    var settings: DYLineChartSettingsNew {get set}
+    var xAxisSettings: XAxisSettings {get set}
+    var yAxisSettings: YAxisSettingsNew {get set}
 }
+
+public extension View where Self: DYMultiLineChartModifiableProperties {
+    
+    func background(gradient: LinearGradient)->DYMultiLineChartView<DYLineView> {
+        var modView = self
+        modView.settings.plotAreaBackgroundGradient = gradient
+        return modView as! DYMultiLineChartView<DYLineView>
+  
+    }
+    
+    func userInteraction(enabled: Bool = true)->DYMultiLineChartView<DYLineView> {
+        var modView = self
+        modView.settings.allowUserInteraction = enabled
+        return modView as! DYMultiLineChartView<DYLineView>
+    }
+     
+    func selectorLine(color: Color = .red, width: CGFloat = 2)->DYMultiLineChartView<DYLineView>  {
+        var modView = self
+        modView.settings.selectorLineColor = color
+        modView.settings.selectorLineWidth = width
+        return modView as! DYMultiLineChartView<DYLineView>
+        
+    }
+    
+    /// XAxisSettings
+    func showXaxis(_ show: Bool = true)->DYMultiLineChartView<DYLineView> {
+        var modView = self
+        modView.xAxisSettings.showXAxis = show
+        return modView as! DYMultiLineChartView<DYLineView>
+    }
+    
+    func xAxisInterval(_ interval: Double = 100)->DYMultiLineChartView<DYLineView> {
+        var modView = self
+        var xAxisSettings = modView.xAxisSettings as! DYLineChartXAxisSettingsNew
+        xAxisSettings.xAxisInterval = interval
+        modView.xAxisSettings = xAxisSettings
+        return modView as! DYMultiLineChartView<DYLineView>
+    }
+    
+    func xAxisViewHeight(_ height: CGFloat = 20)->DYMultiLineChartView<DYLineView> {
+        var modView = self
+        modView.xAxisSettings.xAxisViewHeight = height
+        return modView as! DYMultiLineChartView<DYLineView>
+    }
+    
+    func xAxisStyle(fontSize: CGFloat = 8, showGridLines: Bool = true, gridLineColor: Color = Color.secondary.opacity(0.5), gridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]))->DYMultiLineChartView<DYLineView> {
+        var modView = self
+        var xAxisSettings = modView.xAxisSettings as! DYLineChartXAxisSettingsNew
+        xAxisSettings.labelFontSize = fontSize
+        xAxisSettings.showXAxisGridLines = showGridLines
+        xAxisSettings.xAxisGridLineColor = gridLineColor
+        xAxisSettings.xAxisGridLineStrokeStyle = gridLineStrokeStyle
+        modView.xAxisSettings = xAxisSettings
+        return modView as! DYMultiLineChartView<DYLineView>
+        
+    }
+    
+    /// YAxisSettings
+    func showYaxis(_ show: Bool = true)->DYMultiLineChartView<DYLineView> {
+        var modView = self
+        modView.yAxisSettings.showYAxis = show
+        return modView as! DYMultiLineChartView<DYLineView>
+    }
+    
+    func yAxisPosition(_ position: Edge.Set = .leading)->DYMultiLineChartView<DYLineView> {
+        var modView = self
+        modView.yAxisSettings.yAxisPosition = position
+        return modView as! DYMultiLineChartView<DYLineView>
+    }
+    
+    func yAxisViewWidth(_ height: CGFloat = 35)->DYMultiLineChartView<DYLineView> {
+        var modView = self
+        modView.yAxisSettings.yAxisViewWidth = height
+        return modView as! DYMultiLineChartView<DYLineView>
+    }
+    
+    func yAxisStyle(fontSize: CGFloat = 8, showGridLines: Bool = true, gridLineColor: Color = Color.secondary.opacity(0.5), gridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), zeroGridLineColor: Color? = nil, zeroGridLineStrokeStyle: StrokeStyle? = nil)->DYMultiLineChartView<DYLineView> {
+        var modView = self
+        var yAxisSettings = modView.yAxisSettings
+        yAxisSettings.yAxisFontSize = fontSize
+        yAxisSettings.showYAxisGridLines = showGridLines
+        yAxisSettings.yAxisGridLineColor = gridLineColor
+        yAxisSettings.yAxisGridLinesStrokeStyle = gridLineStrokeStyle
+        yAxisSettings.yAxisZeroGridLineColor = zeroGridLineColor
+        yAxisSettings.yAxisZeroGridLineStrokeStyle = zeroGridLineStrokeStyle
+        modView.yAxisSettings = yAxisSettings
+        return modView as! DYMultiLineChartView<DYLineView>
+        
+    }
+    
+    func yAxisScalerOverride(minMax: (min:Double?, max:Double?)? = nil, interval: Double? = nil) ->DYMultiLineChartView<DYLineView> {
+        var modView  = self as! DYMultiLineChartView<DYLineView>
+        modView.yAxisSettings.yAxisMinMaxOverride = minMax
+        modView.yAxisSettings.yAxisIntervalOverride = interval
+        modView.configureYAxisScaler(min: modView.allDataPoints.map({$0.yValue}).min() ?? 0, max: modView.allDataPoints.map({$0.yValue}).max() ?? 0)
+        return modView
+        
+    }
+    
+}
+
+
+
+//var yAxisMinMaxOverride: (min:Double?, max:Double?)?
+//var yAxisIntervalOverride: Double?
+
+
 
 //struct DYMultiLineChartView_Previews: PreviewProvider {
 //    static var previews: some View {

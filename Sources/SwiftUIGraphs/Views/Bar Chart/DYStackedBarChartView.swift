@@ -9,8 +9,11 @@ import SwiftUI
 
 public struct DYStackedBarChartView: View, PlotAreaChart {
 
+
     var barDataSets: [DYBarDataSet]
-    var settings: DYPlotAreaSettings
+    var settings: DYStackedBarChartSettings 
+    var yAxisSettings: YAxisSettingsNew
+    var xAxisSettings: XAxisSettings
     var yAxisScaler: YAxisScaler
     var yValueAsString: (Double)->String
     let generator = UISelectionFeedbackGenerator()
@@ -21,6 +24,8 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
   
     public init(barDataSets: [DYBarDataSet], selectedBarDataSet: Binding<DYBarDataSet?>, settings: DYStackedBarChartSettings = DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings()), yValueAsString: @escaping (Double) -> String) {
         self.settings = settings
+        self.xAxisSettings = DYBarChartXAxisSettings()
+        self.yAxisSettings = YAxisSettingsNew()
         self.barDataSets = barDataSets
         self._selectedBarDataSet = selectedBarDataSet
         self.yValueAsString = yValueAsString

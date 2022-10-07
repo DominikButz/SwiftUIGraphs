@@ -9,7 +9,9 @@ import Foundation
 import SwiftUI
 
 protocol PlotAreaChart: DataPointConversion {
-    var settings: DYPlotAreaSettings {get set}
+ 
+    var yAxisSettings: YAxisSettingsNew {get set}
+    var xAxisSettings: XAxisSettings {get set}
     func xAxisLabelStrings()->[String]
     mutating func configureYAxisScaler(min: Double, max: Double)
 }
@@ -21,12 +23,12 @@ extension PlotAreaChart {
         var didOverrideMax = false
         var min = min
         var max = max
-        if let overrideMin = settings.yAxisSettings.yAxisMinMaxOverride?.min, overrideMin < min {
+        if let overrideMin = yAxisSettings.yAxisMinMaxOverride?.min, overrideMin < min {
             min = overrideMin
             didOverrideMin = true
         }
 
-        if let overrideMax = settings.yAxisSettings.yAxisMinMaxOverride?.max, overrideMax > max {
+        if let overrideMax = yAxisSettings.yAxisMinMaxOverride?.max, overrideMax > max {
             max = overrideMax
             didOverrideMax = true
         }
@@ -36,19 +38,19 @@ extension PlotAreaChart {
     func yAxisView(yValueAsString: @escaping (Double)->String, yAxisPosition: Edge.Set = .leading)-> some View {
         GeometryReader { geo in
             ZStack(alignment: .trailing) {
-               // let interval = self.yAxisScaler.tickSpacing ?? self.settings.yAxisSettings.yAxisIntervalOverride ?? 0
+               // let interval = self.yAxisScaler.tickSpacing ?? self.yAxisSettings.yAxisIntervalOverride ?? 0
 //                if let maxValue = self.yAxisValues().first, maxValue >=  interval {
 //                    self.yAxisIntervalLabelViewFor(value: maxValue, yValueAsString: yValueAsString, totalHeight: geo.size.height)
 //                }
                 ForEach(self.yAxisValues(), id: \.self) {value in
-                   // if value != self.yAxisMinMax(settings: settings.yAxisSettings).max {
+                   // if value != self.yAxisMinMax(settings: yAxisSettings).max {
                        // Spacer(minLength: 0)
                         self.yAxisIntervalLabelViewFor(value: value, yValueAsString: yValueAsString, totalHeight: geo.size.height)
                  //   }
                     
                 }
 
-            }.frame(width: self.settings.yAxisSettings.yAxisViewWidth)
+            }.frame(width: self.yAxisSettings.yAxisViewWidth)
          
          
      
@@ -56,7 +58,7 @@ extension PlotAreaChart {
     }
     
     private func yAxisIntervalLabelViewFor(value:Double, yValueAsString: (Double)->String, totalHeight: CGFloat)-> some View {
-        Text(yValueAsString(value)).font(.system(size:settings.yAxisSettings.yAxisFontSize)).position(x: self.settings.yAxisSettings.yAxisViewWidth / 2, y: totalHeight - self.convertToCoordinate(value: value, min: self.yAxisScaler.axisMinMax.min, max: self.yAxisScaler.axisMinMax.max, length: totalHeight))
+        Text(yValueAsString(value)).font(.system(size:yAxisSettings.yAxisFontSize)).position(x: self.yAxisSettings.yAxisViewWidth / 2, y: totalHeight - self.convertToCoordinate(value: value, min: self.yAxisScaler.axisMinMax.min, max: self.yAxisScaler.axisMinMax.max, length: totalHeight))
     }
     
     func yAxisGridLines()-> some View {
@@ -67,7 +69,7 @@ extension PlotAreaChart {
                     let height = geo.size.height
                     var yPosition: CGFloat = 0
                     let count = self.yAxisValueCount()
-                    let interval:Double =  self.settings.yAxisSettings.yAxisIntervalOverride ?? self.yAxisScaler.tickSpacing ?? 1
+                    let interval:Double =  self.yAxisSettings.yAxisIntervalOverride ?? self.yAxisScaler.tickSpacing ?? 1
                     let min = self.yAxisScaler.axisMinMax.min
                     let max = self.yAxisScaler.axisMinMax.max
                     let convertedYAxisInterval  = height * CGFloat(interval / (max - min))
@@ -77,8 +79,8 @@ extension PlotAreaChart {
                         p.addLine(to: CGPoint(x:width, y: yPosition))
                         yPosition += convertedYAxisInterval
                     }
-                }.stroke(style: settings.yAxisSettings.yAxisGridLinesStrokeStyle)
-                    .foregroundColor(settings.yAxisSettings.yAxisGridLineColor)
+                }.stroke(style: yAxisSettings.yAxisGridLinesStrokeStyle)
+                    .foregroundColor(yAxisSettings.yAxisGridLineColor)
 
         }
     }
@@ -91,13 +93,13 @@ extension PlotAreaChart {
             let min = self.yAxisScaler.axisMinMax.min
             let max = self.yAxisScaler.axisMinMax.max
             let zeroYPosition = height - self.convertToCoordinate(value: 0, min: min, max: max, length: height)
-            if 0 > min && 0 <= max  && (settings.yAxisSettings.yAxisZeroGridLineStrokeStyle  != nil || settings.yAxisSettings.yAxisZeroGridLineColor != nil ){
+            if 0 > min && 0 <= max  && (yAxisSettings.yAxisZeroGridLineStrokeStyle  != nil || yAxisSettings.yAxisZeroGridLineColor != nil ){
                 Path {p in
                     p.move(to: CGPoint(x: 0, y: zeroYPosition))
                     p.addLine(to: CGPoint(x: width, y: zeroYPosition))
                     p.closeSubpath()
-                }.stroke(style: settings.yAxisSettings.yAxisZeroGridLineStrokeStyle ?? settings.yAxisSettings.yAxisGridLinesStrokeStyle)
-                    .foregroundColor(settings.yAxisSettings.yAxisZeroGridLineColor ?? settings.yAxisSettings.yAxisGridLineColor)
+                }.stroke(style: yAxisSettings.yAxisZeroGridLineStrokeStyle ?? yAxisSettings.yAxisGridLinesStrokeStyle)
+                    .foregroundColor(yAxisSettings.yAxisZeroGridLineColor ?? yAxisSettings.yAxisGridLineColor)
             }
         }
 
@@ -108,7 +110,7 @@ extension PlotAreaChart {
             VStack {
                 ForEach(0..<yAxisLineCount, id:\.self) { i in
                     Line()
-                        .stroke(style: self.settings.yAxisSettings.yAxisGridLinesStrokeStyle)
+                        .stroke(style: self.yAxisSettings.yAxisGridLinesStrokeStyle)
                         .foregroundColor(.secondary)
                         .frame(height:1)
                     
@@ -120,7 +122,7 @@ extension PlotAreaChart {
             HStack {
                 ForEach(0..<xAxisLineCount, id: \.self) { i in
                     Line(horizontal: false)
-                        .stroke(style: self.settings.yAxisSettings.yAxisGridLinesStrokeStyle)
+                        .stroke(style: self.yAxisSettings.yAxisGridLinesStrokeStyle)
                         .foregroundColor(.secondary)
                         .frame(width:1)
                         if i < xAxisLineCount - 1 {
@@ -137,7 +139,7 @@ extension PlotAreaChart {
     func xAxisLabelSteps(totalWidth: CGFloat)->Int {
         let allLabels = xAxisLabelStrings()
 
-        let fontSize =  settings.xAxisSettings.labelFontSize
+        let fontSize =  xAxisSettings.labelFontSize
 
         let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
         // let x be the padding
@@ -166,7 +168,7 @@ extension PlotAreaChart {
     
     func yAxisValues()->[Double] {
         
-        let intervalOverride = settings.yAxisSettings.yAxisIntervalOverride
+        let intervalOverride = yAxisSettings.yAxisIntervalOverride
         let minMaxOverriden: Bool = self.yAxisScaler.minOverride || self.yAxisScaler.maxOverride
         guard intervalOverride != nil || minMaxOverriden else {
             return self.yAxisScaler.scaledValues().reversed()
@@ -189,7 +191,7 @@ extension PlotAreaChart {
     
     func yAxisValueCount()->Int {
     //   print("y axis lines \(self.yAxisScaler.scaledValues().count)")
-        let intervalOverride = settings.yAxisSettings.yAxisIntervalOverride
+        let intervalOverride = yAxisSettings.yAxisIntervalOverride
         let minMaxOverriden: Bool = self.yAxisScaler.minOverride || self.yAxisScaler.maxOverride
         guard intervalOverride != nil || minMaxOverriden else {
             return self.yAxisScaler.scaledValues().count
@@ -203,3 +205,6 @@ extension PlotAreaChart {
    }
     
 }
+
+
+

@@ -27,7 +27,7 @@
 
 import Foundation
 
-struct YAxisScaler {
+public struct YAxisScaler {
     var minPoint: Double
     var maxPoint: Double
     var minOverride: Bool

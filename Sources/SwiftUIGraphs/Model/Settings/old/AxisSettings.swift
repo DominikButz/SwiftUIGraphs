@@ -9,56 +9,56 @@ import Foundation
 import SwiftUI
 
 /// Line chart x-axis settings.
-public struct DYLineChartXAxisSettings: XAxisSettings {
-    
-   public var showXAxis: Bool
-   public var labelFontSize: CGFloat
-   public var xAxisViewHeight: CGFloat
-    var showXAxisGridLines: Bool
-    var xAxisLineStrokeStyle: StrokeStyle
-    var xAxisInterval: Double
-    
-    var showXAxisDataPointLines: Bool
-    var xAxisDataPointLinesStrokeStyle: StrokeStyle
-    var xAxisDataPointLinesColor: Color
-    
-    var showXAxisSelectedDataPointLine: Bool
-    var xAxisSelectedDataPointLineStrokeStyle: StrokeStyle
-    var xAxisSelectedDataPointLineColor: Color
- 
-    
-    /// DYLineChartXAxisSettings initializer.
-    /// - Parameters:
-    ///   - showXAxis: determines if the x axis should be shown.
-    ///   - showXAxisGridLines: determines if the x axis grid lines should be shown (vertical lines).
-    ///   - xAxisGridLineStrokeStyle: stroke style of the vertical x axis grid lines.
-    ///   - showXAxisDataPointLines: determines if the there should be vertical marker lines from each data point down to the x-axis. Default: false.
-    ///   - xAxisDataPointLinesStrokeStyle: if showXAxisDataPointLines is set to true, set the lines stroke style here.
-    ///   - xAxisDataPointLinesColor. if showXAxisDataPointLines is set to true, this value sets the data points lines' color.
-    ///   - showXAxisSelectedDataPointLine: if set to true, there will be a line drawn from the selected point vertically to the x-axis. Default is false.
-    ///   - xAxisSelectedDataPointLineStrokeStyle: if showXAxisSelectedDataPointLine set to true, this value sets the line stroke style.
-    ///  - xAxisSelectedDataPointLineColor: if showXAxisSelectedDataPointLine set to true, this value sets the line color.
-    ///   - xAxisInterval: interval of the x-axis markers. It is recommended to override the default if required.
-    ///   - xAxisFontSize: font size of the x axis marker labels.
-    public init(showXAxis: Bool = true, xAxisViewHeight: CGFloat = 20, showXAxisGridLines: Bool = true, xAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), showXAxisDataPointLines: Bool = false, xAxisDataPointLinesStrokeStyle: StrokeStyle =  StrokeStyle(lineWidth: 1, dash: [3]),  xAxisDataPointLinesColor: Color = .green, showXAxisSelectedDataPointLine: Bool = false, xAxisSelectedDataPointLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, dash: [3]),  xAxisSelectedDataPointLineColor: Color = Color.orange,  xAxisInterval:Double = 100, xAxisFontSize: CGFloat = 8) {
-        
-        self.showXAxis = showXAxis
-        self.xAxisViewHeight = xAxisViewHeight
-        self.showXAxisGridLines = showXAxisGridLines
-        self.xAxisLineStrokeStyle = xAxisGridLineStrokeStyle
-        self.showXAxisDataPointLines = showXAxisDataPointLines
-        self.xAxisDataPointLinesStrokeStyle = xAxisDataPointLinesStrokeStyle
-        self.xAxisDataPointLinesColor = xAxisDataPointLinesColor
-        
-        self.showXAxisSelectedDataPointLine = showXAxisSelectedDataPointLine
-        self.xAxisSelectedDataPointLineStrokeStyle = xAxisSelectedDataPointLineStrokeStyle
-        self.xAxisSelectedDataPointLineColor = xAxisSelectedDataPointLineColor
-        
-        self.xAxisInterval = xAxisInterval
-        self.labelFontSize = xAxisFontSize
-        
-    }
-}
+//public struct DYLineChartXAxisSettings: XAxisSettings {
+//
+//   public var showXAxis: Bool
+//   public var labelFontSize: CGFloat
+//   public var xAxisViewHeight: CGFloat
+//    var showXAxisGridLines: Bool
+//    var xAxisLineStrokeStyle: StrokeStyle
+//    var xAxisInterval: Double
+//
+//    var showXAxisDataPointLines: Bool
+//    var xAxisDataPointLinesStrokeStyle: StrokeStyle
+//    var xAxisDataPointLinesColor: Color
+//
+//    var showXAxisSelectedDataPointLine: Bool
+//    var xAxisSelectedDataPointLineStrokeStyle: StrokeStyle
+//    var xAxisSelectedDataPointLineColor: Color
+//
+//
+//    /// DYLineChartXAxisSettings initializer.
+//    /// - Parameters:
+//    ///   - showXAxis: determines if the x axis should be shown.
+//    ///   - showXAxisGridLines: determines if the x axis grid lines should be shown (vertical lines).
+//    ///   - xAxisGridLineStrokeStyle: stroke style of the vertical x axis grid lines.
+//    ///   - showXAxisDataPointLines: determines if the there should be vertical marker lines from each data point down to the x-axis. Default: false.
+//    ///   - xAxisDataPointLinesStrokeStyle: if showXAxisDataPointLines is set to true, set the lines stroke style here.
+//    ///   - xAxisDataPointLinesColor. if showXAxisDataPointLines is set to true, this value sets the data points lines' color.
+//    ///   - showXAxisSelectedDataPointLine: if set to true, there will be a line drawn from the selected point vertically to the x-axis. Default is false.
+//    ///   - xAxisSelectedDataPointLineStrokeStyle: if showXAxisSelectedDataPointLine set to true, this value sets the line stroke style.
+//    ///  - xAxisSelectedDataPointLineColor: if showXAxisSelectedDataPointLine set to true, this value sets the line color.
+//    ///   - xAxisInterval: interval of the x-axis markers. It is recommended to override the default if required.
+//    ///   - xAxisFontSize: font size of the x axis marker labels.
+//    public init(showXAxis: Bool = true, xAxisViewHeight: CGFloat = 20, showXAxisGridLines: Bool = true, xAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), showXAxisDataPointLines: Bool = false, xAxisDataPointLinesStrokeStyle: StrokeStyle =  StrokeStyle(lineWidth: 1, dash: [3]),  xAxisDataPointLinesColor: Color = .green, showXAxisSelectedDataPointLine: Bool = false, xAxisSelectedDataPointLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, dash: [3]),  xAxisSelectedDataPointLineColor: Color = Color.orange,  xAxisInterval:Double = 100, xAxisFontSize: CGFloat = 8) {
+//
+//        self.showXAxis = showXAxis
+//        self.xAxisViewHeight = xAxisViewHeight
+//        self.showXAxisGridLines = showXAxisGridLines
+//        self.xAxisLineStrokeStyle = xAxisGridLineStrokeStyle
+//        self.showXAxisDataPointLines = showXAxisDataPointLines
+//        self.xAxisDataPointLinesStrokeStyle = xAxisDataPointLinesStrokeStyle
+//        self.xAxisDataPointLinesColor = xAxisDataPointLinesColor
+//
+//        self.showXAxisSelectedDataPointLine = showXAxisSelectedDataPointLine
+//        self.xAxisSelectedDataPointLineStrokeStyle = xAxisSelectedDataPointLineStrokeStyle
+//        self.xAxisSelectedDataPointLineColor = xAxisSelectedDataPointLineColor
+//
+//        self.xAxisInterval = xAxisInterval
+//        self.labelFontSize = xAxisFontSize
+//
+//    }
+//}
 
 /// Bar chart x-axis settings
 public struct DYBarChartXAxisSettings: XAxisSettings {

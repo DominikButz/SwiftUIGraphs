@@ -11,21 +11,48 @@ import SwiftUIGraphs
 struct MultiLineChartExample: View {
     
     let colors: [Color] = [.blue, .orange, .green]
+    @State private var dataPointArrays: Array<[DYDataPoint]> = []
     
-    @ObservedObject var blueDataSet: DYLineDataSet
-    @ObservedObject var orangeDataSet: DYLineDataSet
-    @ObservedObject var greenDataSet: DYLineDataSet
+    @State private var blueSelectedDataPoint: DYDataPoint?
+    @State private var orangeSelectedDataPoint: DYDataPoint?
+    @State private var greenSelectedDataPoint: DYDataPoint?
+    
+//    @ObservedObject var blueDataSet: DYLineDataSet
+//    @ObservedObject var orangeDataSet: DYLineDataSet
+//    @ObservedObject var greenDataSet: DYLineDataSet
     
     var body: some View {
   
         GeometryReader { proxy in
             VStack {
-                DYMultiLineChartView(lineDataSets: [blueDataSet, orangeDataSet, greenDataSet], settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings, yAxisSettings: YAxisSettingsNew(yAxisZeroGridLineColor: .red)), xValueAsString: { xValue in
+//                DYMultiLineChartView(lineDataSets: [blueDataSet, orangeDataSet, greenDataSet], settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings, yAxisSettings: YAxisSettingsNew(yAxisZeroGridLineColor: .red)), xValueAsString: { xValue in
+//                    self.stringified(value: xValue, allowFloat: false)
+//                }, yValueAsString: { yValue in
+//                    self.stringified(value:yValue, allowFloat: true)
+//                }).frame(height: self.chartHeight(proxy: proxy))
+//                .padding()
+                
+                DYMultiLineChartView(allDataPoints: Array(self.dataPointArrays.joined())) { parentProps in
+                    let selectedPoints = [$blueSelectedDataPoint, $orangeSelectedDataPoint, $greenSelectedDataPoint]
+                    ForEach(0..<dataPointArrays.count, id:\.self) { i in
+                        DYLineView(dataPoints: dataPointArrays[i], selectedDataPoint: selectedPoints[i], pointView: { _ in
+                            self.pointViewFor(index: i).eraseToAnyView()
+                        }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red), parentViewProperties: parentProps)
+                        .lineStyle(color: colors[i])
+                        .selectedPointIndicatorLineStyle(xLineColor: colors[i], yLineColor: colors[i])
+                    }
+                } xValueAsString: { xValue in
                     self.stringified(value: xValue, allowFloat: false)
-                }, yValueAsString: { yValue in
+                } yValueAsString: { yValue in
                     self.stringified(value:yValue, allowFloat: true)
-                }).frame(height: self.chartHeight(proxy: proxy))
+                }
+                .xAxisInterval(1)
+                .yAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10, zeroGridLineColor: .red)
+                .xAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .frame(height: self.chartHeight(proxy: proxy))
                 .padding()
+                
+
                  
 
                 self.legendView.padding()
@@ -45,9 +72,9 @@ struct MultiLineChartExample: View {
     var legendView: some View {
 
         return HStack(spacing:15) {
-            let dataSets = [blueDataSet, orangeDataSet, greenDataSet]
-            ForEach(0..<dataSets.count, id:\.self) { i in
-                if let dataPoint =  dataSets[i].selectedDataPoint {
+            let selectedPoints = [blueSelectedDataPoint, orangeSelectedDataPoint, greenSelectedDataPoint]
+            ForEach(0..<selectedPoints.count, id:\.self) { i in
+                if let dataPoint =  selectedPoints[i] {
                     HStack {
                         self.pointViewFor(index: i)
                         Text("X: \(self.stringified(value: dataPoint.xValue, allowFloat: true))")
@@ -79,6 +106,24 @@ struct MultiLineChartExample: View {
 //        UIDevice.current.userInterfaceIdiom == .phone ? 40 : 45
 //    }
     
+    
+    func generateDataPoints() {
+        var dataPointArrays: Array<[DYDataPoint]> = []
+        for _ in 0..<3 {
+            
+            var dataPoints: [DYDataPoint] = []
+            var xValue = Double.random(in: 1...1.5)
+            for _ in 0..<12 {
+                
+                let yValue = Double.random(in: -10...40)
+                let dataPoint = DYDataPoint(xValue: xValue, yValue: yValue)
+                dataPoints.append(dataPoint)
+                xValue += Double.random(in: 0.5...1)
+            }
+            dataPointArrays.append(dataPoints)
+        }
+        self.dataPointArrays = dataPointArrays
+    }
     
     // e.g. daily average degrees centigrade on the specified date
     func generateExampleData()->[DYLineDataSet] {

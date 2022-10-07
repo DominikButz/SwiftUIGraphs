@@ -8,28 +8,26 @@
 import Foundation
 import SwiftUI
 
-public protocol DYPlotAreaSettings {
-    
-    var plotAreaBackgroundGradient: LinearGradient {get set}
-    var xAxisSettings: XAxisSettings {get set}
-    var yAxisSettings: YAxisSettingsNew {get set}
-    var allowUserInteraction: Bool {get set }
-}
+//public protocol DYPlotAreaSettings {
+//
+//    var plotAreaBackgroundGradient: LinearGradient {get set}
+//    var xAxisSettings: XAxisSettings {get set}
+//    var yAxisSettings: YAxisSettingsNew {get set}
+//    var allowUserInteraction: Bool {get set }
+//}
 
-public struct DYLineChartSettingsNew: DYPlotAreaSettings {
+public struct DYLineChartSettingsNew {
 
     public var plotAreaBackgroundGradient: LinearGradient
-    public var xAxisSettings: XAxisSettings
-    public var yAxisSettings: YAxisSettingsNew
+//    public var xAxisSettings: XAxisSettings
+//    public var yAxisSettings: YAxisSettingsNew
     public var allowUserInteraction: Bool
     var selectorLineWidth: CGFloat
     var selectorLineColor: Color
     
     
-    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), xAxisSettings: XAxisSettings = DYBarChartXAxisSettings(), yAxisSettings: YAxisSettingsNew = YAxisSettingsNew(), selectorLineWidth: CGFloat = 2, selectorLineColor: Color = .red, allowUserInteraction: Bool = true) {
+    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), selectorLineWidth: CGFloat = 2, selectorLineColor: Color = .red, allowUserInteraction: Bool = true) {
         self.plotAreaBackgroundGradient = plotAreaBackgroundGradient
-        self.xAxisSettings = xAxisSettings
-        self.yAxisSettings = yAxisSettings
         self.selectorLineWidth = selectorLineWidth
         self.selectorLineColor = selectorLineColor
         self.allowUserInteraction = allowUserInteraction
@@ -39,7 +37,7 @@ public struct DYLineChartSettingsNew: DYPlotAreaSettings {
     
 }
 
-public struct DYStackedBarChartSettings: DYPlotAreaSettings {
+public struct DYStackedBarChartSettings {
 
     public var plotAreaBackgroundGradient: LinearGradient
     public var xAxisSettings: XAxisSettings
@@ -77,7 +75,7 @@ public struct DYLineChartXAxisSettingsNew: XAxisSettings {
     var xAxisGridLineStrokeStyle: StrokeStyle
     var xAxisGridLineColor: Color
     public var labelFontSize: CGFloat
-    var xAxisInterval: Double
+    var xAxisInterval: Double 
 
     /// DYLineChartXAxisSettings initializer.
     /// - Parameters:
@@ -111,8 +109,8 @@ public struct YAxisSettingsNew {
     var yAxisGridLineColor: Color
     var yAxisZeroGridLineStrokeStyle: StrokeStyle?
     var yAxisZeroGridLineColor: Color?
-
     var yAxisFontSize: CGFloat
+    
     var yAxisMinMaxOverride: (min:Double?, max:Double?)?
     var yAxisIntervalOverride: Double?
     
