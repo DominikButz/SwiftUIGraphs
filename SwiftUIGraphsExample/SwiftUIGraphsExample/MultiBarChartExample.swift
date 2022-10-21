@@ -18,9 +18,13 @@ struct MultiBarChartExample: View {
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                DYStackedBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet, settings: DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.leading, yAxisZeroGridLineColor: .red, yAxisFontSize: self.fontSize),  barDropShadow: self.dropShadow), yValueAsString: { yValue in
+                DYStackedBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet, yValueAsString: { yValue in
                     return yValue.toDecimalString(maxFractionDigits: 0)
                 })
+                .barDropShadow(Shadow(color: .gray, radius:8, x:-4, y:-3))
+                .selectedBar(borderColor: .purple, dropShadow: Shadow(color: .black.opacity(0.7), radius:10, x:-7, y:-5))
+                .yAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10, zeroGridLineColor: .red)
+                .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
                 .frame(height:chartHeight(proxy: proxy))
                 
                 if self.barDataSets.isEmpty == false {
@@ -38,20 +42,7 @@ struct MultiBarChartExample: View {
                 self.generateExampleData()
             }
     }
-    
 
-    
-    var fontSize: CGFloat {
-        UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
-    }
-    
-    var dropShadow: Shadow {
-       return Shadow(color: .gray, radius:8, x:-4, y:-3)
-    }
-    
-    var selectedDropShadow: Shadow {
-        return Shadow(color: .black.opacity(0.7), radius:10, x:-7, y:-5)
-    }
     
     func chartHeight(proxy: GeometryProxy)->CGFloat {
         return proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65

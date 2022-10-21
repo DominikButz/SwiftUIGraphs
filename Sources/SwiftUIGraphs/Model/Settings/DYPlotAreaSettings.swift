@@ -40,8 +40,6 @@ public struct DYLineChartSettingsNew {
 public struct DYStackedBarChartSettings {
 
     public var plotAreaBackgroundGradient: LinearGradient
-    public var xAxisSettings: XAxisSettings
-    public var yAxisSettings: YAxisSettingsNew
     public var allowUserInteraction: Bool
     var selectedBarBorderColor: Color
     var barDropShadow: Shadow?
@@ -51,10 +49,8 @@ public struct DYStackedBarChartSettings {
     var minimumBottomEdgeBarLabelMargin: CGFloat
     
     
-    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), xAxisSettings: XAxisSettings = DYBarChartXAxisSettings(), yAxisSettings: YAxisSettingsNew = YAxisSettingsNew(), allowUserInteraction: Bool = true, selectedBarBorderColor: Color = .yellow,  barDropShadow: Shadow? = nil, selectedBarDropShadow: Shadow? = nil, labelViewOffset: CGSize = CGSize(width: 0, height: -10), minimumTopEdgeBarLabelMargin: CGFloat = 0, minimumBottomEdgeBarLabelMargin: CGFloat = 10) {
+    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), allowUserInteraction: Bool = true, selectedBarBorderColor: Color = .yellow,  barDropShadow: Shadow? = nil, selectedBarDropShadow: Shadow? = nil, labelViewOffset: CGSize = CGSize(width: 0, height: -10), minimumTopEdgeBarLabelMargin: CGFloat = 0, minimumBottomEdgeBarLabelMargin: CGFloat = 10) {
        self.plotAreaBackgroundGradient = plotAreaBackgroundGradient
-       self.xAxisSettings = xAxisSettings
-       self.yAxisSettings = yAxisSettings
        self.allowUserInteraction = allowUserInteraction
        self.selectedBarBorderColor = selectedBarBorderColor
        self.barDropShadow = barDropShadow

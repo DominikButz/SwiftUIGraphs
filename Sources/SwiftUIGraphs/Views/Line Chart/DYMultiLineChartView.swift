@@ -210,7 +210,7 @@ public struct DYMultiLineChartView<L>: View, PlotAreaChart, DYMultiLineChartModi
                    let interval =  (self.xAxisSettings as! DYLineChartXAxisSettingsNew).intervalOverride ?? self.xAxisScaler.tickSpacing ?? 1
                     let xAxisMinMax = self.xAxisMinMax()
                     let convertedXAxisInterval = totalWidth * CGFloat(interval / (xAxisMinMax.max - xAxisMinMax.min))
-                    for _ in 0..<count + 1 {
+                    for _ in 0..<count  {
                         p.move(to: CGPoint(x: xPosition, y: 0))
                         p.addLine(to: CGPoint(x:xPosition, y: totalHeight))
                         xPosition += convertedXAxisInterval
