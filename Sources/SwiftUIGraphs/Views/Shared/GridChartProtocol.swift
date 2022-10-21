@@ -11,7 +11,7 @@ import SwiftUI
 protocol DYGridChart: View {
     
     var dataPoints: [DYDataPoint] {get set}
-    var yAxisScaler: YAxisScaler {get set}
+    var yAxisScaler: AxisScaler {get set}
     var selectedIndex: Int {get set}
     var settings: DYGridChartSettings {get set}
     var marginSum: CGFloat {get}

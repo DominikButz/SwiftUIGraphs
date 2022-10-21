@@ -10,7 +10,7 @@ import SwiftUI
 
 protocol DataPointConversion {
     
-    var yAxisScaler: YAxisScaler {get set}
+    var yAxisScaler: AxisScaler {get set}
     
     func convertToCoordinate(value:Double, min: Double, max: Double, length: CGFloat)->CGFloat
    // func yAxisMinMax(settings: YAxisSettingsNew)->(min: Double, max: Double)

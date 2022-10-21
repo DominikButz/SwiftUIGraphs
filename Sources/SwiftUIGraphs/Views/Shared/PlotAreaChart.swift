@@ -13,12 +13,12 @@ protocol PlotAreaChart: DataPointConversion {
     var yAxisSettings: YAxisSettingsNew {get set}
     var xAxisSettings: XAxisSettings {get set}
     func xAxisLabelStrings()->[String]
-    mutating func configureYAxisScaler(min: Double, max: Double)
+    mutating func configureYAxisScaler(min: Double, max: Double, maxTicks: Int)
 }
 
 extension PlotAreaChart {
     
-    mutating func configureYAxisScaler(min: Double, max: Double) {
+    mutating func configureYAxisScaler(min: Double, max: Double, maxTicks: Int = 10) {
         var didOverrideMin = false
         var didOverrideMax = false
         var min = min
@@ -32,7 +32,7 @@ extension PlotAreaChart {
             max = overrideMax
             didOverrideMax = true
         }
-        self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10, minOverride: didOverrideMin, maxOverride: didOverrideMax)
+        self.yAxisScaler = AxisScaler(min:min, max: max, maxTicks: maxTicks, minOverride: didOverrideMin, maxOverride: didOverrideMax)
     }
     
     func yAxisView(yValueAsString: @escaping (Double)->String, yAxisPosition: Edge.Set = .leading)-> some View {

@@ -75,7 +75,9 @@ public struct DYLineChartXAxisSettingsNew: XAxisSettings {
     var xAxisGridLineStrokeStyle: StrokeStyle
     var xAxisGridLineColor: Color
     public var labelFontSize: CGFloat
-    var xAxisInterval: Double 
+    //var xAxisInterval: Double
+    var minMaxOverride: (min:Double?, max:Double?)?
+    var intervalOverride: Double?
 
     /// DYLineChartXAxisSettings initializer.
     /// - Parameters:
@@ -84,18 +86,19 @@ public struct DYLineChartXAxisSettingsNew: XAxisSettings {
     ///   - showXAxisGridLines: determines if the x axis grid lines should be shown (vertical lines).
     ///   - xAxisGridLineStrokeStyle: stroke style of the vertical x axis grid lines.
     ///   - xAxisGridLineColor: color of the xAxis grid lines.
-    ///   - xAxisInterval: interval of the x-axis markers. It is recommended to override the default if required.
     ///   - xAxisFontSize: font size of the x axis marker labels.
-    public init(showXAxis: Bool = true, xAxisViewHeight: CGFloat = 20, showXAxisGridLines: Bool = true, xAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisGridLineColor: Color = Color.secondary.opacity(0.5),  xAxisInterval:Double = 100, xAxisFontSize: CGFloat = 8) {
+    ///   - minMaxOverride: override the max and min values of the x-axis. if not set, the min and max value will be calculated automatically.
+    ///   - intervalOverride: override the interval of the x-axis values. If not set, the interval will be calculated automatically.
+    public init(showXAxis: Bool = true, xAxisViewHeight: CGFloat = 20, showXAxisGridLines: Bool = true, xAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisGridLineColor: Color = Color.secondary.opacity(0.5), xAxisFontSize: CGFloat = 8, minMaxOverride: (min:Double?, max:Double?)? = nil, intervalOverride: Double? = nil ) {
         
         self.showXAxis = showXAxis
         self.xAxisViewHeight = xAxisViewHeight
         self.showXAxisGridLines = showXAxisGridLines
         self.xAxisGridLineStrokeStyle = xAxisGridLineStrokeStyle
         self.xAxisGridLineColor = xAxisGridLineColor
-        self.xAxisInterval = xAxisInterval
         self.labelFontSize = xAxisFontSize
-        
+        self.minMaxOverride = minMaxOverride
+        self.intervalOverride = intervalOverride
     }
 }
 

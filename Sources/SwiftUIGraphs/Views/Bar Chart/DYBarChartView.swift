@@ -10,7 +10,7 @@ import SwiftUI
 public struct DYBarChartView: View, DYGridChart {
     
     var dataPoints: [DYDataPoint]
-    var yAxisScaler: YAxisScaler
+    var yAxisScaler: AxisScaler
     var settings: DYGridChartSettings 
     var marginSum: CGFloat {
         return settings.lateralPadding.leading + settings.lateralPadding.trailing
@@ -60,7 +60,7 @@ public struct DYBarChartView: View, DYGridChart {
         if let overrideMax = settings.yAxisSettings.yAxisMinMaxOverride?.max, overrideMax > max {
             max = overrideMax
         }
-         self.yAxisScaler = YAxisScaler(min:min, max: max, maxTicks: 10)
+         self.yAxisScaler = AxisScaler(min:min, max: max, maxTicks: 10)
     }
     
     public var body: some View {

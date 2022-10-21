@@ -11,7 +11,7 @@ import SwiftUIGraphs
 struct LineChartWithAsyncDataFetch: View {
     //TODO: sign up with https://iexcloud.io to get a free auth token and insert it here
     @StateObject var viewModel = StockPriceDataViewModel(token: "sk_de2fe196544e455ab4d48aea5040b740")
-    @State var selectedDataPoint:DYDataPoint?
+
     
     var body: some View {
         GeometryReader { proxy in
@@ -29,7 +29,7 @@ struct LineChartWithAsyncDataFetch: View {
                             }.padding()
                         }
                         
-                        DYLineInfoView(titleLabel: Text("\(self.viewModel.stockSymbol) Share Price, last 30 days"), selectedDataPoint: $selectedDataPoint, selectedYValueAsString: { yValue in
+                        DYLineInfoView(titleLabel: Text("\(self.viewModel.stockSymbol) Share Price, last 30 days"), selectedDataPoint: $viewModel.selectedDataPoint, selectedYValueAsString: { yValue in
                             yValue.toCurrencyString(maxDigits: 2)
                         }, selectedXValueAsString: { xValue in
                             Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy")
@@ -39,11 +39,13 @@ struct LineChartWithAsyncDataFetch: View {
                         
                         DYMultiLineChartView(allDataPoints: viewModel.dataPoints, lineViews: { parentProps in
                             
-                            DYLineView(dataPoints: viewModel.dataPoints, selectedDataPoint: $selectedDataPoint, pointView: { _ in
+                            DYLineView(dataPoints: viewModel.dataPoints, selectedDataPoint: $viewModel.selectedDataPoint, pointView: { _ in
                                 DYLineDataSet.defaultPointView(color: .orange)
                             }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red),  parentViewProperties: parentProps)
                                 .selectedPointIndicatorLineStyle(xLineColor: .red, yLineColor: .red)
                                 .area(gradient: LinearGradient(colors: [.orange, .orange.opacity(0.1)], startPoint: .top, endPoint: .bottom), shadow: nil)
+                                .eraseToAnyView()
+                              //
                             
                         },  xValueAsString: { xValue in
                             return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
@@ -52,8 +54,9 @@ struct LineChartWithAsyncDataFetch: View {
                            formatter.maximumFractionDigits = 2
                            return formatter.string(for: yValue)!
                         })
-                        .xAxisInterval(172800)
-                        .xAxisStyle(fontSize:   UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+            
+                        .xAxisScalerOverride(minMax: (self.viewModel.dataPoints.first?.xValue, nil), interval: 172800)
+                        .xAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
                         .yAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
                         .frame(height:proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65)
 
@@ -68,11 +71,13 @@ struct LineChartWithAsyncDataFetch: View {
 //                        .frame(height:proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65)
 
                 }.padding()
-            }.onAppear {
-                if viewModel.stockSymbol == "" {
-                    viewModel.stockSymbol = "AAPL"
-                    viewModel.loadDataPoints()
-                }
+                    .onAppear {
+                        
+                        if viewModel.stockSymbol == "" {
+                            viewModel.stockSymbol = "AAPL"
+                            viewModel.loadDataPoints()
+                        }
+                    }
             }
         }.navigationTitle("Stock price")
             
@@ -131,6 +136,7 @@ final class StockPriceDataViewModel: ObservableObject {
     @Published var stockSymbol: String = ""
     
     @Published var dataPoints:[DYDataPoint] = []
+    @Published var selectedDataPoint:DYDataPoint?
     
     
     init(token: String) {
@@ -139,7 +145,7 @@ final class StockPriceDataViewModel: ObservableObject {
     }
     
     func loadDataPoints() {
-        self.objectWillChange.send()
+        //self.objectWillChange.send()
         withAnimation {
             self.dataPoints.removeAll()
         }
@@ -166,9 +172,9 @@ final class StockPriceDataViewModel: ObservableObject {
                                     let timeInterval = date.timeIntervalSinceReferenceDate
                                     // let's make sure the data points array is updated on the main thread!
                                     DispatchQueue.main.async {
-                                        withAnimation {
+                                      //  withAnimation {
                                             self.dataPoints.append(DYDataPoint(xValue: timeInterval, yValue: closePrice))
-                                        }
+                                     //   }
                                     }
              
                                 }

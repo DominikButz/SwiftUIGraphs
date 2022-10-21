@@ -14,7 +14,7 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
     var settings: DYStackedBarChartSettings 
     var yAxisSettings: YAxisSettingsNew
     var xAxisSettings: XAxisSettings
-    var yAxisScaler: YAxisScaler
+    var yAxisScaler: AxisScaler
     var yValueAsString: (Double)->String
     let generator = UISelectionFeedbackGenerator()
     
@@ -29,7 +29,7 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
         self.barDataSets = barDataSets
         self._selectedBarDataSet = selectedBarDataSet
         self.yValueAsString = yValueAsString
-        self.yAxisScaler = YAxisScaler(min:0, max: 0, maxTicks: 10) // initialize here otherwise error will be thrown
+        self.yAxisScaler = AxisScaler(min:0, max: 0, maxTicks: 10) // initialize here otherwise error will be thrown
         self.configureYAxisScaler(min: barDataSets.map({$0.negativeYValue}).min() ?? 0, max: barDataSets.map({$0.positiveYValue}).max() ?? 0)
 
     }
@@ -211,7 +211,7 @@ internal struct BarViewPair: View, DataPointConversion {
     let positiveBarYPosition: CGFloat
     let negativeBarYPosition: CGFloat
     let settings: DYStackedBarChartSettings
-    var yAxisScaler: YAxisScaler
+    var yAxisScaler: AxisScaler
     @State var selectionScale: CGFloat = 1
     @State var showSelectionBorder: Bool = false
     
@@ -302,7 +302,7 @@ internal struct StackedBarView: View, DataPointConversion {
     let height: CGFloat
     let index: Int
     //@Binding var selectedIndex: Int?
-    var yAxisScaler: YAxisScaler
+    var yAxisScaler: AxisScaler
     var labelView: AnyView?
     let labelViewOffset: CGSize
   //  let settings: DYStackedBarChartSettings

@@ -1,6 +1,6 @@
 
 //
-//  YAxisScaler.swift
+//  AxisScaler.swift
 
 //
 //  Copyright (c) 2020 Roman Baitaliuk
@@ -27,7 +27,7 @@
 
 import Foundation
 
-public struct YAxisScaler {
+public struct AxisScaler {
     var minPoint: Double
     var maxPoint: Double
     var minOverride: Bool

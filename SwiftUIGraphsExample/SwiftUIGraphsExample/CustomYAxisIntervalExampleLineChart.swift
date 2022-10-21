@@ -31,19 +31,21 @@ struct CustomYAxisIntervalExampleLineChart: View {
                    
                DYMultiLineChartView(allDataPoints: self.dataPoints, lineViews: { parentViewProperties in
                    
-                   DYLineView(dataPoints: self.dataPoints, selectedDataPoint: $selectedDataPoint, pointView: { _ in
-                       DYLineDataSet.defaultPointView(color: .blue)
-                   }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red),  parentViewProperties: parentViewProperties)
-                   .lineStyle(color: .blue)
-                   .area(gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), shadow: Shadow(color: .gray, radius: 7, x: -7, y: -7))
-                   .selectedPointIndicatorLineStyle(xLineColor: .red, yLineColor: .red)
+        
+                       DYLineView(dataPoints: self.dataPoints, selectedDataPoint: $selectedDataPoint, pointView: { _ in
+                           DYLineDataSet.defaultPointView(color: .blue)
+                       }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red),  parentViewProperties: parentViewProperties)
+                       .lineStyle(color: .blue)
+                       .area(gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), shadow: Shadow(color: .gray, radius: 7, x: -7, y: -7))
+                       .selectedPointIndicatorLineStyle(xLineColor: .red, yLineColor: .red)
+                   
                    
                }, xValueAsString: {xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")}, yValueAsString: { yValue in  TimeInterval(yValue).toString() ?? ""})
-               .xAxisInterval(604800)
+               .yAxisScalerOverride(minMax:  (min: 0, max: Double(Int(dataPoints.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), interval: 1800)  // 1800 seconds = 30 min
                .yAxisPosition(.trailing)
                .yAxisViewWidth(UIDevice.current.userInterfaceIdiom == .phone ? 40 : 45)
                .yAxisStyle(fontSize:  UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
-               .yAxisScalerOverride(minMax:  (min: 0, max: Double(Int(dataPoints.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), interval: 1800)  // 1800 seconds = 30 min
+               .xAxisScalerOverride(minMax: (min: self.dataPoints.map({$0.xValue}).min(), max: self.dataPoints.map({$0.xValue}).max()), interval: 604800)  // 604800 seconds per week
                 .frame(height: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.75)
                
                   
@@ -76,8 +78,9 @@ struct CustomYAxisIntervalExampleLineChart: View {
             let xValue =  endDate.timeIntervalSinceReferenceDate
             let dataPoint = DYDataPoint(xValue: xValue, yValue: Double(yValue))
             dataPoints.append(dataPoint)
-            let randomDayDifference = Int.random(in: 1 ..< 8)
-            endDate = endDate.add(units: -randomDayDifference, component: .day)
+//            let randomDayDifference = Int.random(in: 1 ..< 8)
+            let dayDifference = 7
+            endDate = endDate.add(units: -dayDifference, component: .day)
         }
         
         return dataPoints

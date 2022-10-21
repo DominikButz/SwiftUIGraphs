@@ -41,12 +41,13 @@ struct MultiLineChartExample: View {
                         .lineStyle(color: colors[i])
                         .selectedPointIndicatorLineStyle(xLineColor: colors[i], yLineColor: colors[i])
                     }
+              
+                    
                 } xValueAsString: { xValue in
                     self.stringified(value: xValue, allowFloat: false)
                 } yValueAsString: { yValue in
                     self.stringified(value:yValue, allowFloat: true)
                 }
-                .xAxisInterval(1)
                 .yAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10, zeroGridLineColor: .red)
                 .xAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
                 .frame(height: self.chartHeight(proxy: proxy))
@@ -62,6 +63,9 @@ struct MultiLineChartExample: View {
             }
 
         }.navigationTitle("Some Random Data Sets")
+            .onAppear {
+                generateDataPoints()
+            }
 
     }
     
@@ -94,10 +98,10 @@ struct MultiLineChartExample: View {
         return formatter.string(for: value)!
     }
     
-    var xAxisSettings: DYLineChartXAxisSettingsNew {
-        DYLineChartXAxisSettingsNew(showXAxis: true, xAxisInterval: 1, xAxisFontSize: fontSize)  // seconds per 31 days
-        
-    }
+//    var xAxisSettings: DYLineChartXAxisSettingsNew {
+//        DYLineChartXAxisSettingsNew(showXAxis: true, xAxisInterval: 1, xAxisFontSize: fontSize)  // seconds per 31 days
+//        
+//    }
     
     var fontSize: CGFloat {
         UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
@@ -126,32 +130,32 @@ struct MultiLineChartExample: View {
     }
     
     // e.g. daily average degrees centigrade on the specified date
-    func generateExampleData()->[DYLineDataSet] {
-        var dataSets: [DYLineDataSet] = []
-        
-        for i in 0..<3 {
- 
-            var dataPoints: [DYDataPoint] = []
-            var xValue = Double.random(in: 1...1.5)
-            for _ in 0..<12 {
-            
-                let yValue = Double.random(in: -10...40)
-                let dataPoint = DYDataPoint(xValue: xValue, yValue: yValue)
-                dataPoints.append(dataPoint)
-                xValue += Double.random(in: 0.5...1)
-            }
-            
-            let dataSet = DYLineDataSet(dataPoints: dataPoints, selectedDataPoint: nil, pointView: { _ in
-                return self.pointView(index: i)
-            },  selectorView: DYLineDataSet.defaultSelectorPointView(color:.red),  settings: DYLineSettings(lineColor: colors[i], lineDropShadow: Shadow(color: .gray, radius: 5, x: -5, y: -5), interpolationType: .quadCurve,  xValueSelectedDataPointLineColor: colors[i], yValueSelectedDataPointLineColor: colors[i]))
-            //lineAreaGradient: LinearGradient(colors: [colors[i].opacity(0.7), .clear], startPoint: .top, endPoint: .bottom),
-            //lineAreaGradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7),
-            dataSets.append(dataSet)
-        }
-        print("example data blue line x values \(dataSets[0].dataPoints.map({$0.xValue}))")
-     //LinearGradient(colors: [colors[i], .white], startPoint: .top, endPoint: .bottom)
-        return dataSets
-    }
+//    func generateExampleData()->[DYLineDataSet] {
+//        var dataSets: [DYLineDataSet] = []
+//
+//        for i in 0..<3 {
+//
+//            var dataPoints: [DYDataPoint] = []
+//            var xValue = Double.random(in: 1...1.5)
+//            for _ in 0..<12 {
+//
+//                let yValue = Double.random(in: -10...40)
+//                let dataPoint = DYDataPoint(xValue: xValue, yValue: yValue)
+//                dataPoints.append(dataPoint)
+//                xValue += Double.random(in: 0.5...1)
+//            }
+//
+//            let dataSet = DYLineDataSet(dataPoints: dataPoints, selectedDataPoint: nil, pointView: { _ in
+//                return self.pointView(index: i)
+//            },  selectorView: DYLineDataSet.defaultSelectorPointView(color:.red),  settings: DYLineSettings(lineColor: colors[i], lineDropShadow: Shadow(color: .gray, radius: 5, x: -5, y: -5), interpolationType: .quadCurve,  xValueSelectedDataPointLineColor: colors[i], yValueSelectedDataPointLineColor: colors[i]))
+//            //lineAreaGradient: LinearGradient(colors: [colors[i].opacity(0.7), .clear], startPoint: .top, endPoint: .bottom),
+//            //lineAreaGradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7),
+//            dataSets.append(dataSet)
+//        }
+//        print("example data blue line x values \(dataSets[0].dataPoints.map({$0.xValue}))")
+//     //LinearGradient(colors: [colors[i], .white], startPoint: .top, endPoint: .bottom)
+//        return dataSets
+//    }
     
     func pointView(index: Int)->AnyView {
 
