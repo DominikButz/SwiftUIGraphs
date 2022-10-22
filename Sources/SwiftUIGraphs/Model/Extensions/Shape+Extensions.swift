@@ -10,8 +10,8 @@ import SwiftUI
 
 public extension Shape {
     func pointStyle(color: Color, edgeLength: CGFloat)-> some View {
-            self
-            .stroke(style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0))
+            self      //, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0
+            .stroke(style: StrokeStyle(lineWidth: 2))
             .foregroundColor(color)
             .frame(width: edgeLength, height: edgeLength, alignment: .center)
         

@@ -9,16 +9,16 @@ import Foundation
 import SwiftUI
 
 
-public struct DYLineView: View, DataPointConversion, DYLineViewModifiableProperties {
+public struct DYLineView<PointV: View, LabelV: View, SelectorV: View>: View, DataPointConversion, DYLineViewModifiableProperties {
     
     var dataPoints: [DYDataPoint]
     var yAxisSettings: YAxisSettingsNew
     var yAxisScaler: AxisScaler
     var xAxisScaler: AxisScaler
-   // var xAxisScaler.axisMinMax: (min: Double, max: Double) // can be different from this data set's x values min max because other line data sets included.
-    var pointView: ((DYDataPoint)-> AnyView)?
-    var labelView: ((DYDataPoint)->AnyView?)?
-    var selectorView: AnyView?
+    // var xAxisScaler.axisMinMax: (min: Double, max: Double) // can be different from this data set's x values min max because other line data sets included.
+    var pointView: (DYDataPoint)-> PointV
+    var labelView: (DYDataPoint)->LabelV
+    var selectorView: SelectorV
     @Binding var selectedDataPoint: DYDataPoint?
     @Binding var touchingXPosition: CGFloat? // User X touch location - nil = not touching
     @Binding var selectorLineOffset: CGFloat
@@ -33,9 +33,9 @@ public struct DYLineView: View, DataPointConversion, DYLineViewModifiablePropert
     @State private var showLineSegments: Bool = false  // for segmented line animation
     @State private var showSupplementaryViews: Bool = false  // for supplementary views appear animation
     
-
-
-    public init(dataPoints: [DYDataPoint], selectedDataPoint: Binding<DYDataPoint?>, pointView:((DYDataPoint)-> AnyView)? = nil, labelView: ((DYDataPoint)->AnyView?)? = nil, selectorView: AnyView? = nil, parentViewProperties: DYLineParentViewProperties) {
+    
+    
+    public init(dataPoints: [DYDataPoint], selectedDataPoint: Binding<DYDataPoint?>, @ViewBuilder pointView: @escaping (DYDataPoint)-> PointV = {_ in EmptyView()}, labelView:  @escaping (DYDataPoint)->LabelV = {_ in EmptyView()}, selectorView: SelectorV = EmptyView(), parentViewProperties: DYLineParentViewProperties) {
     
         self.dataPoints =  dataPoints.sorted(by: {$0.xValue < $1.xValue})
         self._selectedDataPoint = selectedDataPoint
@@ -189,7 +189,7 @@ public struct DYLineView: View, DataPointConversion, DYLineViewModifiablePropert
             let width = geo.size.width
  
           ForEach(dataPoints) { dataPoint in
-              self.pointView?(dataPoint)
+              self.pointView(dataPoint)
                   .position(x: self.convertToCoordinate(value: dataPoint.xValue, min: xAxisScaler.axisMinMax.min, max: xAxisScaler.axisMinMax.max, length: width), y: height - self.convertToCoordinate(value: dataPoint.yValue, min: self.yAxisScaler.axisMinMax.min, max: self.yAxisScaler.axisMinMax.max, length: height))
               
             }
@@ -204,7 +204,7 @@ public struct DYLineView: View, DataPointConversion, DYLineViewModifiablePropert
             let width = geo.size.width
             ForEach(dataPoints) { dataPoint in
                 
-                self.labelView?(dataPoint)
+                self.labelView(dataPoint)
                     .position(x: self.convertToCoordinate(value: dataPoint.xValue, min: xAxisScaler.axisMinMax.min, max: xAxisScaler.axisMinMax.max, length: width), y: (height - self.convertToCoordinate(value: dataPoint.yValue, min: self.yAxisScaler.axisMinMax.min, max: self.yAxisScaler.axisMinMax.max, length: height)))
                     
            
@@ -223,7 +223,7 @@ public struct DYLineView: View, DataPointConversion, DYLineViewModifiablePropert
             let xPosition = self.touchingXPosition == nil ? self.convertToCoordinate(value: xValue, min: xAxisScaler.axisMinMax.min, max: xAxisScaler.axisMinMax.max, length: geo.size.width) :  self.selectorCurrentXPosition
             let path = self.pathFor(width: geo.size.width, height: geo.size.height, closeShape: false)
             let yPosition = path.point(to: xPosition).y
-            self.selectorView?
+            self.selectorView
                 .position(x: xPosition, y: yPosition)
                 .animation(Animation.spring().speed(4), value: self.selectorCurrentXPosition)
                 .opacity(self.selectedDataPoint == nil ? 0 : 1)
@@ -428,73 +428,59 @@ public typealias  DYLineParentViewProperties = (yAxisSettings: YAxisSettingsNew,
 
 
 public protocol DYLineViewModifiableProperties {
-    
+    associatedtype LabelV: View
+    associatedtype PointV: View
+    associatedtype SelectorV: View
     var settings: DYLineSettings {get set}
     var colorPerLineSegment: ((DYDataPoint)->Color)? {get set}
 }
 
 public extension View where Self: DYLineViewModifiableProperties {
     
-    func lineStyle(color: Color, strokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), shadow: Shadow? = nil, interpolationType: InterpolationType = .quadCurve)->DYLineView {
+    func lineStyle(color: Color, strokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), shadow: Shadow? = nil, interpolationType: InterpolationType = .quadCurve)->DYLineView<PointV, LabelV, SelectorV>  {
         var modView = self
         modView.settings.lineColor = color
         modView.settings.lineStrokeStyle = strokeStyle
         modView.settings.lineDropShadow = shadow
         modView.settings.interpolationType = interpolationType
-        return modView as! DYLineView
+        return modView as! DYLineView<PointV, LabelV, SelectorV>
     }
     
-    func animation(showAppearAnimation: Bool = true, duration:TimeInterval = 1.4)->DYLineView {
+    func animation(showAppearAnimation: Bool = true, duration:TimeInterval = 1.4)->DYLineView<PointV, LabelV, SelectorV> {
         var modView = self
         modView.settings.showAppearAnimation = showAppearAnimation
         modView.settings.lineAnimationDuration = duration
-        return modView as! DYLineView
+        return modView as! DYLineView<PointV, LabelV, SelectorV>
     }
     
-    func userInteraction(enabled: Bool = true )->DYLineView {
+    func userInteraction(enabled: Bool = true )->DYLineView<PointV, LabelV, SelectorV>  {
         var modView = self
         modView.settings.allowUserInteraction = enabled
-        return modView as! DYLineView
+        return modView as! DYLineView<PointV, LabelV, SelectorV>
     }
     
-    func area(gradient: LinearGradient?, shadow: Shadow?)-> DYLineView {
+    func area(gradient: LinearGradient?, shadow: Shadow?)-> DYLineView<PointV, LabelV, SelectorV>  {
         var modView = self
         modView.settings.lineAreaGradient = gradient
         modView.settings.lineAreaGradientDropShadow = shadow
-        return modView as! DYLineView
+        return modView as! DYLineView<PointV, LabelV, SelectorV>
     }
     
-    func selectedPointIndicatorLineStyle(xLineColor: Color? = nil, xLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, dash: [3]), yLineColor: Color? = nil, yLineStrokeStyle: StrokeStyle =  StrokeStyle(lineWidth: 2, dash: [3]))->DYLineView {
+    func selectedPointIndicatorLineStyle(xLineColor: Color? = nil, xLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, dash: [3]), yLineColor: Color? = nil, yLineStrokeStyle: StrokeStyle =  StrokeStyle(lineWidth: 2, dash: [3]))->DYLineView<PointV, LabelV, SelectorV>  {
         var modView = self
         modView.settings.xValueSelectedDataPointLineColor = xLineColor
         modView.settings.xValueSelectedDataPointLineStrokeStyle = xLineStrokeStyle
         modView.settings.yValueSelectedDataPointLineColor = yLineColor
         modView.settings.yValueSelectedDataPointLineStrokeStyle = yLineStrokeStyle
-        return modView as! DYLineView
+        return modView as! DYLineView<PointV, LabelV, SelectorV>
     }
     
-    func colorPerLineSegment(_ closure: ((DYDataPoint)->Color)? = nil)->DYLineView {
+    func colorPerLineSegment(_ closure: ((DYDataPoint)->Color)? = nil)->DYLineView<PointV, LabelV, SelectorV>  {
         var modView = self
         modView.colorPerLineSegment = closure
-        return modView as! DYLineView
+        return modView as! DYLineView<PointV, LabelV, SelectorV> 
     }
   
 }
 
-//{
-//
-//    var yAxisSettings: YAxisSettingsNew
-//    var yAxisScaler: YAxisScaler
-//    var xValuesMinMax: (min: Double, max: Double)
-//    var touchingXPosition: Binding<CGFloat?>
-//    var selectorLineOffset: Binding<CGFloat>
-//
-//    public init(yAxisSettings: YAxisSettingsNew, yAxisScaler: YAxisScaler, xValuesMinMax: (min: Double, max: Double), touchingXPosition: Binding<CGFloat?>, selectorLineOffset: Binding<CGFloat>) {
-//        self.yAxisSettings = yAxisSettings
-//        self.yAxisScaler = yAxisScaler
-//        self.xValuesMinMax = xValuesMinMax
-//        self.touchingXPosition = touchingXPosition
-//        self.selectorLineOffset = selectorLineOffset
-//    }
-//
-//}
+

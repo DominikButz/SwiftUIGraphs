@@ -16,30 +16,22 @@ struct MultiLineChartExample: View {
     @State private var blueSelectedDataPoint: DYDataPoint?
     @State private var orangeSelectedDataPoint: DYDataPoint?
     @State private var greenSelectedDataPoint: DYDataPoint?
-    
-//    @ObservedObject var blueDataSet: DYLineDataSet
-//    @ObservedObject var orangeDataSet: DYLineDataSet
-//    @ObservedObject var greenDataSet: DYLineDataSet
-    
+
     var body: some View {
   
         GeometryReader { proxy in
             VStack {
-//                DYMultiLineChartView(lineDataSets: [blueDataSet, orangeDataSet, greenDataSet], settings: DYLineChartSettingsNew(xAxisSettings: xAxisSettings, yAxisSettings: YAxisSettingsNew(yAxisZeroGridLineColor: .red)), xValueAsString: { xValue in
-//                    self.stringified(value: xValue, allowFloat: false)
-//                }, yValueAsString: { yValue in
-//                    self.stringified(value:yValue, allowFloat: true)
-//                }).frame(height: self.chartHeight(proxy: proxy))
-//                .padding()
                 
                 DYMultiLineChartView(allDataPoints: Array(self.dataPointArrays.joined())) { parentProps in
                     let selectedPoints = [$blueSelectedDataPoint, $orangeSelectedDataPoint, $greenSelectedDataPoint]
                     ForEach(0..<dataPointArrays.count, id:\.self) { i in
+                        
                         DYLineView(dataPoints: dataPointArrays[i], selectedDataPoint: selectedPoints[i], pointView: { _ in
-                            self.pointViewFor(index: i).eraseToAnyView()
-                        }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red), parentViewProperties: parentProps)
+                            self.pointViewFor(index: i)
+                        }, selectorView: self.selectorPointViewFor(index: i), parentViewProperties: parentProps)
                         .lineStyle(color: colors[i])
                         .selectedPointIndicatorLineStyle(xLineColor: colors[i], yLineColor: colors[i])
+                        
                     }
               
                     
@@ -157,26 +149,56 @@ struct MultiLineChartExample: View {
 //        return dataSets
 //    }
     
-    func pointView(index: Int)->AnyView {
-
-        Group {
-            self.pointViewFor(index: index)
-        }.eraseToAnyView()
-    }
+//    func pointView(index: Int)->some View {
+//
+//        Group {
+//            self.pointViewFor(index: index)
+//        }
+//    }
     
     func pointViewFor(index: Int)-> some View {
         Group {
             switch index {
                 case 0:
-                Circle().pointStyle(color: colors[index], edgeLength: 12).cornerRadius(6).background(Color(.systemBackground))
+                DYLinePointView(borderColor: colors[index])
+           
                 case 1:
-                Rectangle().pointStyle(color: colors[index], edgeLength: 10).background(Color(.systemBackground))
+                DYLinePointView(shape: Rectangle(), borderColor: colors[index])
+          
                 default:
-                Triangle().pointStyle(color: colors[index], edgeLength: 12)
+                DYLinePointView(shape: Triangle(), borderColor: colors[index])
                 
             }
         }
     }
+    
+    func selectorPointViewFor(index: Int)-> some View {
+        Group {
+            switch index {
+                case 0:
+                DYSelectorPointView()
+                case 1:
+                DYSelectorPointView(shape: Rectangle())
+                default:
+                    DYSelectorPointView(shape: Triangle())
+                
+            }
+        }
+    }
+    
+//    func pointViewFor(index: Int)-> some View {
+//        Group {
+//            switch index {
+//                case 0:
+//                Circle().pointStyle(color: colors[index], edgeLength: 12).cornerRadius(6).background(Color(.systemBackground))
+//                case 1:
+//                Rectangle().pointStyle(color: colors[index], edgeLength: 10).background(Color(.systemBackground))
+//                default:
+//                Triangle().pointStyle(color: colors[index], edgeLength: 12)
+//
+//            }
+//        }
+//    }
    
 //    func labelView(dataPoint: DYDataPoint)-> AnyView {
 //

@@ -40,12 +40,11 @@ struct LineChartWithAsyncDataFetch: View {
                         DYMultiLineChartView(allDataPoints: viewModel.dataPoints, lineViews: { parentProps in
                             
                             DYLineView(dataPoints: viewModel.dataPoints, selectedDataPoint: $viewModel.selectedDataPoint, pointView: { _ in
-                                DYLineDataSet.defaultPointView(color: .orange)
-                            }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red),  parentViewProperties: parentProps)
+                                DYLinePointView()
+                            }, selectorView: DYSelectorPointView(),  parentViewProperties: parentProps)
                                 .selectedPointIndicatorLineStyle(xLineColor: .red, yLineColor: .red)
                                 .area(gradient: LinearGradient(colors: [.orange, .orange.opacity(0.1)], startPoint: .top, endPoint: .bottom), shadow: nil)
-                                .eraseToAnyView()
-                              //
+           
                             
                         },  xValueAsString: { xValue in
                             return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
