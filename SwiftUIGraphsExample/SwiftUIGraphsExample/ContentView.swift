@@ -131,21 +131,7 @@ struct ContentView: View {
     
 }
 
-struct Triangle: Shape {
-    
-    func path(in rect: CGRect) -> Path {
-        Path { path in
-            path.move(to: CGPoint(x: rect.width / 2, y: 0))
-            path.addLine(to: CGPoint(x: rect.width, y: rect.height))
-            path.addLine(to: CGPoint(x: 0, y: rect.height))
-            path.closeSubpath()
-            
-        }
-    }
-    
-    
-    
-}
+
 
 
 struct ContentView_Previews: PreviewProvider {

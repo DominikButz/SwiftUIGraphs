@@ -90,18 +90,6 @@ struct MultiLineChartExample: View {
         return formatter.string(for: value)!
     }
     
-//    var xAxisSettings: DYLineChartXAxisSettingsNew {
-//        DYLineChartXAxisSettingsNew(showXAxis: true, xAxisInterval: 1, xAxisFontSize: fontSize)  // seconds per 31 days
-//        
-//    }
-    
-    var fontSize: CGFloat {
-        UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
-    }
-//    var yAxisWidth: CGFloat {
-//        UIDevice.current.userInterfaceIdiom == .phone ? 40 : 45
-//    }
-    
     
     func generateDataPoints() {
         var dataPointArrays: Array<[DYDataPoint]> = []
@@ -121,40 +109,7 @@ struct MultiLineChartExample: View {
         self.dataPointArrays = dataPointArrays
     }
     
-    // e.g. daily average degrees centigrade on the specified date
-//    func generateExampleData()->[DYLineDataSet] {
-//        var dataSets: [DYLineDataSet] = []
-//
-//        for i in 0..<3 {
-//
-//            var dataPoints: [DYDataPoint] = []
-//            var xValue = Double.random(in: 1...1.5)
-//            for _ in 0..<12 {
-//
-//                let yValue = Double.random(in: -10...40)
-//                let dataPoint = DYDataPoint(xValue: xValue, yValue: yValue)
-//                dataPoints.append(dataPoint)
-//                xValue += Double.random(in: 0.5...1)
-//            }
-//
-//            let dataSet = DYLineDataSet(dataPoints: dataPoints, selectedDataPoint: nil, pointView: { _ in
-//                return self.pointView(index: i)
-//            },  selectorView: DYLineDataSet.defaultSelectorPointView(color:.red),  settings: DYLineSettings(lineColor: colors[i], lineDropShadow: Shadow(color: .gray, radius: 5, x: -5, y: -5), interpolationType: .quadCurve,  xValueSelectedDataPointLineColor: colors[i], yValueSelectedDataPointLineColor: colors[i]))
-//            //lineAreaGradient: LinearGradient(colors: [colors[i].opacity(0.7), .clear], startPoint: .top, endPoint: .bottom),
-//            //lineAreaGradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7),
-//            dataSets.append(dataSet)
-//        }
-//        print("example data blue line x values \(dataSets[0].dataPoints.map({$0.xValue}))")
-//     //LinearGradient(colors: [colors[i], .white], startPoint: .top, endPoint: .bottom)
-//        return dataSets
-//    }
-    
-//    func pointView(index: Int)->some View {
-//
-//        Group {
-//            self.pointViewFor(index: index)
-//        }
-//    }
+
     
     func pointViewFor(index: Int)-> some View {
         Group {
@@ -163,7 +118,7 @@ struct MultiLineChartExample: View {
                 DYLinePointView(borderColor: colors[index])
            
                 case 1:
-                DYLinePointView(shape: Rectangle(), borderColor: colors[index])
+                DYLinePointView(shape: Rectangle(), borderColor: colors[index], edgeLength: 10)
           
                 default:
                 DYLinePointView(shape: Triangle(), borderColor: colors[index])
@@ -178,62 +133,13 @@ struct MultiLineChartExample: View {
                 case 0:
                 DYSelectorPointView()
                 case 1:
-                DYSelectorPointView(shape: Rectangle())
+                DYSelectorPointView(shape: Rectangle(), shapeSize: 12, shapeHaloSize: 24)
                 default:
-                    DYSelectorPointView(shape: Triangle())
+                DYSelectorPointView(shape: Triangle(), haloOffset: CGSize(width: 0, height: -14 / 6))
                 
             }
         }
     }
-    
-//    func pointViewFor(index: Int)-> some View {
-//        Group {
-//            switch index {
-//                case 0:
-//                Circle().pointStyle(color: colors[index], edgeLength: 12).cornerRadius(6).background(Color(.systemBackground))
-//                case 1:
-//                Rectangle().pointStyle(color: colors[index], edgeLength: 10).background(Color(.systemBackground))
-//                default:
-//                Triangle().pointStyle(color: colors[index], edgeLength: 12)
-//
-//            }
-//        }
-//    }
-   
-//    func labelView(dataPoint: DYDataPoint)-> AnyView {
-//
-//        return Text("Text").font(.caption).foregroundColor(.blue).eraseToAnyView()
-//    }
-//
-//
-//    func selectorPointView(index: Int)->AnyView {
-//
-//        Circle()
-//            .frame(width: 26, height: 26, alignment: .center)
-//            .foregroundColor(.red)
-//            .opacity(0.2)
-//            .overlay(
-//                Circle()
-//                    .fill()
-//                    .frame(width: 14, height: 14, alignment: .center)
-//                    .foregroundColor(.red)
-//            ).eraseToAnyView()
-//    }
-//
-
-//
-//    func dataPointSegmentColor(index: Int)->Color {
-//            let nIndex = index + 1
-//
-//            if nIndex == 1 || nIndex % 3 == 0 {
-//                return Color.purple
-//            } else if nIndex % 2 == 0 {
-//                return Color.red
-//            } else {
-//                return Color.green
-//            }
-//
-//    }
     
 
 }

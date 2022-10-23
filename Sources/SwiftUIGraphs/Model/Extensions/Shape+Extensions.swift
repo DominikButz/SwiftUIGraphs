@@ -8,13 +8,22 @@
 import Foundation
 import SwiftUI
 
-public extension Shape {
-    func pointStyle(color: Color, edgeLength: CGFloat)-> some View {
-            self      //, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0
-            .stroke(style: StrokeStyle(lineWidth: 2))
-            .foregroundColor(color)
-            .frame(width: edgeLength, height: edgeLength, alignment: .center)
+public struct Triangle: Shape {
+    
+    public init() {
         
-          
     }
+    
+   public func path(in rect: CGRect) -> Path {
+        Path { path in
+            path.move(to: CGPoint(x: rect.width / 2, y: 0))
+            path.addLine(to: CGPoint(x: rect.width, y: rect.height))
+            path.addLine(to: CGPoint(x: 0, y: rect.height))
+            path.closeSubpath()
+            
+        }
+    }
+    
+    
+    
 }

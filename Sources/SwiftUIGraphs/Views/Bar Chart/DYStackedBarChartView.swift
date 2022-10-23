@@ -472,7 +472,7 @@ public extension View where Self == DYStackedBarChartView {
             var modView  = self
             modView.yAxisSettings.yAxisMinMaxOverride = minMax
             modView.yAxisSettings.yAxisIntervalOverride = interval
-            modView.configureYAxisScaler(min: modView.barDataSets.map({$0.negativeYValue}).min() ?? 0, max: modView.barDataSets.map({$0.negativeYValue}).max() ?? 1, maxTicks: maxTicks)
+            modView.configureYAxisScaler(min: modView.barDataSets.map({$0.negativeYValue}).min() ?? 0, max: modView.barDataSets.map({$0.positiveYValue}).max() ?? 0, maxTicks: maxTicks)
             return modView
     
     }

@@ -10,6 +10,13 @@ import SwiftUI
 public struct DYLinePointView<S: Shape>: View {
     
     
+    /// DYLinePointView initializer
+    /// - Parameters:
+    ///   - shape: a Shape
+    ///   - borderColor: border Color
+    ///   - borderLineWidth: border line with
+    ///   - fillColor: fill color
+    ///   - edgeLength: size of the point
     public init(shape: S = Circle(), borderColor: Color = .orange, borderLineWidth: CGFloat = 2, fillColor: Color = Color(.systemBackground), edgeLength: CGFloat = 12) {
         self.shape = shape
         self.borderColor = borderColor
