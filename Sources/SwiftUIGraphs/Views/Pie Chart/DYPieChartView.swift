@@ -8,20 +8,20 @@
 import SwiftUI
 
 /// DYPieChartView
-public struct DYPieChartView<L: View>: View {
+public struct DYPieChartView<L: View>: View, DYPieChartModifiableProperties {
     
-    @Binding private var selectedId:String?
+    @Binding private var selectedSlice: DYPieFraction?
     
-    var data: [DYChartFraction] = []
+    var data: [DYPieFraction] = []
 
-    var sliceLabelView: (DYChartFraction)->L
+    var sliceLabelView: (DYPieFraction)->L
     var totalValue: Double {
 
         return data.reduce(0) { $0 + $1.value}
     }
-    var shouldHideMultiFractionSliceOnSelection: Bool
+
     var animationNamespace: Namespace.ID
-    var settings: DYPieChartSettings
+    public var settings: DYPieChartSettings
     
     /// DYPieChartView initializer
     /// - Parameters:
@@ -31,13 +31,12 @@ public struct DYPieChartView<L: View>: View {
     ///   - shouldHideMultiFractionSliceOnSelection: This Bool determines whether or not a slice should be hidden on selection in case the DYChartFraction struct of the slice has at least two elements in the detailFractions array. Setting this value to true only makes sense if another DYPieChartView or other view (visualizing the detailFractions) is shown once the slice disappears. Default is false.
     ///   - animationNamespace: set the @Namespace property in the parent view of your main DYPieChartView and pass it into this initializer. This only has an effect in conjunction with a matchedGeometryEffect property set on a second DYPieChartView - see the property shouldHideMultiFractionSliceOnSelection.
     ///  - settings: settings struct. if you don't set this parameter, all values set will be the default values - see DYPieChartSettings for details.
-    public init(data: [DYChartFraction], selectedId: Binding<String?>, sliceLabelView: @escaping (DYChartFraction)->L, shouldHideMultiFractionSliceOnSelection: Bool = false, animationNamespace: Namespace.ID, settings: DYPieChartSettings = DYPieChartSettings()) {
+    public init(data: [DYPieFraction], selectedSlice: Binding<DYPieFraction?>, sliceLabelView: @escaping (DYPieFraction)->L,  animationNamespace: Namespace.ID) {
         self.data  = data
-        self._selectedId = selectedId
+        self._selectedSlice = selectedSlice
         self.sliceLabelView = sliceLabelView
-        self.shouldHideMultiFractionSliceOnSelection = shouldHideMultiFractionSliceOnSelection
         self.animationNamespace = animationNamespace
-        self.settings = settings
+        self.settings = DYPieChartSettings()
     }
     
     public var body: some View {
@@ -49,16 +48,16 @@ public struct DYPieChartView<L: View>: View {
                     if self.showSliceCondition(fraction: fraction) {
                         PieChartSlice(startAngle: self.startAngleFor(fraction: fraction) , endAngle: self.endAngleFor(fraction: fraction))
                             .fill(fraction.color, opacity: 1, strokeWidth: settings.sliceOutlineWidth, strokeColor: settings.sliceOutlineColor)
-                            .scaleEffect(self.selectedId == fraction.id && self.settings.allowUserInteraction ? settings.selectedSliceScaleEffect : 1, anchor: .center)
-                            .shadow(color: self.selectedSliceShadow(fractionId: fraction.id).color, radius: self.selectedSliceShadow(fractionId: fraction.id).radius, x: self.selectedSliceShadow(fractionId: fraction.id).x, y: self.selectedSliceShadow(fractionId: fraction.id).y)
+                            .scaleEffect(selectedSlice == fraction && self.settings.allowUserInteraction ? settings.selectedSliceScaleEffect : 1, anchor: .center)
+                            .shadow(color: self.selectedSliceShadow(fraction: fraction).color, radius: self.selectedSliceShadow(fraction: fraction).radius, x: self.selectedSliceShadow(fraction: fraction).x, y: self.selectedSliceShadow(fraction: fraction).y)
                             .matchedGeometryEffect(id: fraction.id, in: animationNamespace)
                             .onTapGesture {
                                 if self.settings.allowUserInteraction {
                                     withAnimation(.default) {
-                                        if self.selectedId != fraction.id {
-                                            self.selectedId = fraction.id
+                                        if self.selectedSlice != fraction {
+                                            self.selectedSlice = fraction
                                         } else {
-                                            self.selectedId = nil
+                                            self.selectedSlice = nil
                                         }
                                     }
                                 }
@@ -70,7 +69,7 @@ public struct DYPieChartView<L: View>: View {
                     if self.showSliceCondition(fraction: fraction) {
                         self.sliceLabelView(fraction)
                             .offset(self.labelOffsetFor(fraction: fraction, diameter: min(proxy.size.width, proxy.size.height)))
-                            .scaleEffect(self.selectedId == fraction.id ? settings.selectedSliceScaleEffect: 1, anchor: .center)
+                            .scaleEffect(self.selectedSlice == fraction ? settings.selectedSliceScaleEffect: 1, anchor: .center)
                             .allowsHitTesting(false)
 
                     }
@@ -80,9 +79,10 @@ public struct DYPieChartView<L: View>: View {
           
     }
     
-    private func selectedSliceShadow(fractionId: String)->Shadow {
+    private func selectedSliceShadow(fraction: DYPieFraction)->Shadow {
         
-        if self.selectedId != fractionId || self.settings.allowUserInteraction == false  {
+        if self.selectedSlice != fraction
+            || self.settings.allowUserInteraction == false  {
             return Shadow(color: .clear, radius: 0, x: 0, y: 0)
         } else {
             return self.settings.selectedSliceDropShadow
@@ -90,18 +90,18 @@ public struct DYPieChartView<L: View>: View {
         
     }
     
-    private func showSliceCondition(fraction: DYChartFraction)->Bool {
+    private func showSliceCondition(fraction: DYPieFraction)->Bool {
         
-        if fraction.detailFractions.count < 2 || shouldHideMultiFractionSliceOnSelection == false  {
+        if fraction.detailFractions.count < 2 || settings.shouldHideMultiFractionSliceOnSelection == false  {
             return true
         } else {
-            return fraction.id != self.selectedId
+            return fraction != self.selectedSlice
         }
       
     }
 
     
-    private func cumulativeFractionValueUpUntil(fraction: DYChartFraction)->Double {
+    private func cumulativeFractionValueUpUntil(fraction: DYPieFraction)->Double {
         
         var currentValue:Double = 0
         var index = 0
@@ -119,7 +119,7 @@ public struct DYPieChartView<L: View>: View {
     }
         
 
-    private func startAngleFor(fraction: DYChartFraction)->Angle {
+    private func startAngleFor(fraction: DYPieFraction)->Angle {
         var value = self.cumulativeFractionValueUpUntil(fraction: fraction)
         value += fraction.value
        // print("value start: \(value)")
@@ -130,7 +130,7 @@ public struct DYPieChartView<L: View>: View {
         return angle
     }
     
-    private func endAngleFor(fraction: DYChartFraction)->Angle {
+    private func endAngleFor(fraction: DYPieFraction)->Angle {
         let value:Double = self.cumulativeFractionValueUpUntil(fraction: fraction)
        // print("value start: \(value)")
         let startAngleValue = (value / self.totalValue) * 360 - 90
@@ -140,7 +140,7 @@ public struct DYPieChartView<L: View>: View {
 
     }
     
-    private func midAngleFor(fraction: DYChartFraction)->Angle {
+    private func midAngleFor(fraction: DYPieFraction)->Angle {
         
         var value:Double = self.cumulativeFractionValueUpUntil(fraction: fraction)
         value += fraction.value / 2
@@ -151,7 +151,7 @@ public struct DYPieChartView<L: View>: View {
         return angle
     }
     
-    private func labelOffsetFor(fraction: DYChartFraction, diameter: CGFloat)->CGSize {
+    private func labelOffsetFor(fraction: DYPieFraction, diameter: CGFloat)->CGSize {
         let midAngle = self.midAngleFor(fraction: fraction)
         let fractionPercentage = fraction.value / self.totalValue
         let offsetFactor = fractionPercentage >= self.settings.minimumFractionForSliceLabelOffset ? 0.6 : 1.3
@@ -199,17 +199,71 @@ struct PieChartSlice: Shape {
 struct DYPieChartView_Previews: PreviewProvider {
     @Namespace static var placeholder
     static var previews: some View {
-        let data = DYChartFraction.exampleData()
-        DYPieChartView(data: data, selectedId: .constant(data.first!.id), sliceLabelView: { fraction in
+        let data = DYPieFraction.exampleData()
+        DYPieChartView(data: data, selectedSlice: .constant(data.first!), sliceLabelView: { fraction in
             VStack {
                 Text(fraction.title).font(.body)
                 Text(fraction.value.toCurrencyString()).font(.callout).bold()
                 Text(fraction.value.percentageString(totalValue: data.reduce(0) { $0 + $1.value})).font(.callout)
                 
             }
-        }, animationNamespace: Self.placeholder, settings: DYPieChartSettings(innerCircleRadiusFraction: 0.3)).padding()
+        }, animationNamespace: Self.placeholder).padding()
     }
 
 }
+
+public protocol DYPieChartModifiableProperties where Self: View {
+    
+    associatedtype L: View  // slice label view
+    var settings: DYPieChartSettings {get set }
+    
+}
+
+
+public extension View where Self: DYPieChartModifiableProperties {
+    
+    func innerCircleRadiusFraction(_ fraction: CGFloat = 0)->DYPieChartView<L> {
+        var modView = self
+        modView.settings.innerCircleRadiusFraction = fraction
+        return modView as! DYPieChartView<L>
+    }
+    
+    func allowUserInteraction(enable: Bool = true)->DYPieChartView<L> {
+        var modView = self
+        modView.settings.allowUserInteraction = enable
+        return modView as! DYPieChartView<L>
+    }
+    
+    func selectedSlice(scaleEffect: CGFloat = 1.05, dropShadow: Shadow = Shadow(color: .gray.opacity(0.7), radius: 10, x: 0, y: 0))->DYPieChartView<L> {
+        var modView = self
+        modView.settings.selectedSliceScaleEffect = scaleEffect
+        modView.settings.selectedSliceDropShadow = dropShadow
+        return modView as! DYPieChartView<L>
+    }
+    
+    func sliceBorderLine(width: CGFloat = 1, color: Color = .primary)->DYPieChartView<L> {
+        var modView = self
+        modView.settings.sliceOutlineWidth = width
+        modView.settings.sliceOutlineColor = color
+        return modView as! DYPieChartView<L>
+    }
+    
+    func minimumFractionForSliceLabelOffset(_ fraction: CGFloat = 0.1)->DYPieChartView<L> {
+        var modView = self
+        modView.settings.minimumFractionForSliceLabelOffset = fraction
+        return modView as! DYPieChartView<L>
+    }
+    
+  
+    func hideMultiFractionSliceOnSelection(_ hide: Bool = false)->DYPieChartView<L> {
+        var modView = self
+        modView.settings.shouldHideMultiFractionSliceOnSelection = hide
+        return modView as! DYPieChartView<L>
+    }
+    
+    
+}
+
+
 
 

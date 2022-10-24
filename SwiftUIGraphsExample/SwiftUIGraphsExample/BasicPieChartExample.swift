@@ -31,8 +31,8 @@ struct BasicPieChartExample: View {
                             self.content()
                         }
                     }
-                    if self.viewModel.selectedId != nil {
-                        DYFractionChartInfoView(title: "", data: viewModel.data, selectedId: $viewModel.selectedId) { (value) -> String in
+                    if self.viewModel.selectedSlice != nil {
+                        DYFractionChartInfoView(title: "", data: viewModel.data, selectedSlice: $viewModel.selectedSlice) { (value) -> String in
                             value.toCurrencyString()
                         }.padding(5).infoBoxBackground().padding(UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10)
                     }
@@ -46,9 +46,9 @@ struct BasicPieChartExample: View {
             
             Spacer(minLength: 50)
             
-            DYPieChartView(data: viewModel.data, selectedId: $viewModel.selectedId, sliceLabelView: {fraction in
+            DYPieChartView(data: viewModel.data, selectedSlice: $viewModel.selectedSlice, sliceLabelView: {fraction in
                 self.sliceLabelView(fraction: fraction, data: viewModel.data)
-            }, animationNamespace: animationNamespace, settings: DYPieChartSettings(minimumFractionForSliceLabelOffset: 0.11, allowUserInteraction: true))
+            }, animationNamespace: animationNamespace)
             .background(Circle().fill(Color(.systemBackground))
             .shadow(radius: 8))
             .scaleEffect(self.pieScale)
@@ -64,7 +64,7 @@ struct BasicPieChartExample: View {
         }
     }
     
-    func sliceLabelView(fraction: DYChartFraction, data: [DYChartFraction])->some View {
+    func sliceLabelView(fraction: DYPieFraction, data: [DYPieFraction])->some View {
         Group {
             if fraction.value / data.reduce(0, { $0 + $1.value}) >= 0.11  {
                 VStack {
@@ -85,11 +85,11 @@ struct BasicPieChartExample: View {
 
 final class BasicPieChartViewModel: ObservableObject {
     
-    @Published var data: [DYChartFraction]
-    @Published var selectedId: String?
+    @Published var data: [DYPieFraction]
+    @Published var selectedSlice: DYPieFraction?
     
     init() {
-        self.data = DYChartFraction.exampleData()
+        self.data = DYPieFraction.exampleData()
         
     }
     

@@ -61,3 +61,7 @@ public struct DYLineSettings {
     
     
 }
+
+public enum InterpolationType {
+    case linear, quadCurve
+}

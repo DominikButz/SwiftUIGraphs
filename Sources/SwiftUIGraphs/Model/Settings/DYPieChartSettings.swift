@@ -14,6 +14,7 @@ public struct DYPieChartSettings {
     var innerCircleRadiusFraction: CGFloat
     var minimumFractionForSliceLabelOffset: Double
     var allowUserInteraction: Bool
+    var shouldHideMultiFractionSliceOnSelection: Bool
     var selectedSliceScaleEffect: CGFloat
     var selectedSliceDropShadow: Shadow
     var sliceOutlineWidth: CGFloat
@@ -28,11 +29,12 @@ public struct DYPieChartSettings {
     ///   - selectedSliceDropShadow: A shadow to appear underneath the selected slice.
     ///   - sliceOutlineWidth: The width of the edge line of each pie chart slice. Default is 1. Set to 0 if there should be no outline
     ///   - sliceOutlineColor: The color of the edge line of each pie chart slice. Default is primary.
-    public init(innerCircleRadiusFraction: CGFloat = 0, minimumFractionForSliceLabelOffset: Double = 0.10, allowUserInteraction: Bool = true, selectedSliceScaleEffect: CGFloat = 1.05, selectedSliceDropShadow: Shadow = Shadow(color: .gray.opacity(0.7), radius: 10, x: 0, y: 0), sliceOutlineWidth: CGFloat = 1, sliceOutlineColor: Color = Color.primary) {
+    public init(innerCircleRadiusFraction: CGFloat = 0, minimumFractionForSliceLabelOffset: Double = 0.10, allowUserInteraction: Bool = true, shouldHideMultiFractionSliceOnSelection: Bool = false, selectedSliceScaleEffect: CGFloat = 1.05, selectedSliceDropShadow: Shadow = Shadow(color: .gray.opacity(0.7), radius: 10, x: 0, y: 0), sliceOutlineWidth: CGFloat = 1, sliceOutlineColor: Color = Color.primary) {
         self.innerCircleRadiusFraction = innerCircleRadiusFraction
         self.minimumFractionForSliceLabelOffset = minimumFractionForSliceLabelOffset
         self.allowUserInteraction = allowUserInteraction
         self.selectedSliceScaleEffect = selectedSliceScaleEffect
+        self.shouldHideMultiFractionSliceOnSelection = shouldHideMultiFractionSliceOnSelection
         self.selectedSliceDropShadow = selectedSliceDropShadow
         self.sliceOutlineWidth = sliceOutlineWidth
         self.sliceOutlineColor = sliceOutlineColor

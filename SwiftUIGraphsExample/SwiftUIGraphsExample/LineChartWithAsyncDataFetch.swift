@@ -10,7 +10,7 @@ import SwiftUIGraphs
 
 struct LineChartWithAsyncDataFetch: View {
     //TODO: sign up with https://iexcloud.io to get a free auth token and insert it here
-    @StateObject var viewModel = StockPriceDataViewModel(token: "sk_de2fe196544e455ab4d48aea5040b740")
+    @StateObject var viewModel = StockPriceDataViewModel(token: "")
 
     
     var body: some View {
