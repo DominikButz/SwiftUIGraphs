@@ -17,14 +17,12 @@ struct BasicBarChartExample: View {
         GeometryReader { proxy in
             VStack(alignment: .leading) {
                 
-                DYStackedBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet) { yValue in
-                    return yValue.toDecimalString(maxFractionDigits: 0)
-                }  //yAxisMinMaxOverride: (min: 200, max:1800)
+                DYBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet)
                 .barDropShadow(Shadow(color: .gray, radius:8, x:-4, y:-3))
                 .selectedBar(borderColor: .blue)
                 .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
                 .yAxisPosition(.trailing)
-                .yAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
                 .frame(height: self.chartHeight(proxy: proxy))
                 
                 self.selectedDataSetView().padding()
@@ -38,9 +36,6 @@ struct BasicBarChartExample: View {
         }
     }
     
-//    DYStackedBarChartSettings(xAxisSettings: DYBarChartXAxisSettings(showXAxis: true, xAxisFontSize: self.fontSize), yAxisSettings: YAxisSettingsNew(yAxisPosition:.trailing, yAxisFontSize: self.fontSize), selectedBarBorderColor: .blue, barDropShadow: self.dropShadow)
-    
-
     
     func chartHeight(proxy: GeometryProxy)->CGFloat {
         return proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.75

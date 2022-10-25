@@ -166,34 +166,10 @@ public struct DYPieChartView<L: View>: View, DYPieChartModifiableProperties {
 }
 
 // combine fill color
-extension Shape {
-    func fill<S:ShapeStyle>(_ fillContent: S, opacity: Double, strokeWidth: CGFloat, strokeColor: S) -> some View {
-            ZStack {
-                self.fill(fillContent).opacity(opacity)
-                self.stroke(strokeColor, lineWidth: strokeWidth)
-            }
-    }
-}
 
 
-struct PieChartSlice: Shape {
-    let startAngle: Angle
-    let endAngle: Angle
-   func path(in rect: CGRect) -> Path {
-        let center = CGPoint.init(x: (rect.origin.x + rect.width)/2, y: (rect.origin.y + rect.height)/2)
-        let radius = min(center.x, center.y)
-            let path = Path { p in
-                p.addArc(center: center,
-                         radius: radius,
-                         startAngle: startAngle,
-                         endAngle: endAngle,
-                         clockwise: true)
-                p.addLine(to: center)
-            
-            }
-            return path
-   }
-}
+
+
 
 
 struct DYPieChartView_Previews: PreviewProvider {
@@ -222,18 +198,32 @@ public protocol DYPieChartModifiableProperties where Self: View {
 
 public extension View where Self: DYPieChartModifiableProperties {
     
+    /// inner circle radius fraction: value > 0 turns a pie chart into a doughnut chart.
+    /// - Parameter fraction: value between 0 and 1. E.g. 0.5 means the inner circle radius is half as long as the pie chart radius. Default is 0.
+    /// - Returns: modified DYPieChartView
     func innerCircleRadiusFraction(_ fraction: CGFloat = 0)->DYPieChartView<L> {
         var modView = self
+        if fraction < 0 || fraction > 1 {
+            assertionFailure("inner circle radius fraction must be between 0 and 1 ")
+        }
         modView.settings.innerCircleRadiusFraction = fraction
         return modView as! DYPieChartView<L>
     }
     
-    func allowUserInteraction(enable: Bool = true)->DYPieChartView<L> {
+    /// userInteraction
+    /// - Parameter enabled: if set to true, users can select pie chart slices by tapping. Default is true.
+    /// - Returns: modified DYPieChartView
+    func userInteraction(enabled: Bool = true)->DYPieChartView<L> {
         var modView = self
-        modView.settings.allowUserInteraction = enable
+        modView.settings.allowUserInteraction = enabled
         return modView as! DYPieChartView<L>
     }
     
+    /// selectedSlice visual effects
+    /// - Parameters:
+    ///   - scaleEffect: determines by which percentage the selected slice should enlarge when selected. default value is 1.05 (= 5%)
+    ///   - dropShadow: shadow under the selected slice.
+    /// - Returns: modified DYPieChartView
     func selectedSlice(scaleEffect: CGFloat = 1.05, dropShadow: Shadow = Shadow(color: .gray.opacity(0.7), radius: 10, x: 0, y: 0))->DYPieChartView<L> {
         var modView = self
         modView.settings.selectedSliceScaleEffect = scaleEffect
@@ -241,6 +231,11 @@ public extension View where Self: DYPieChartModifiableProperties {
         return modView as! DYPieChartView<L>
     }
     
+    /// sliceBorderLine
+    /// - Parameters:
+    ///   - width: width of the slice border line.
+    ///   - color: color of the slice border line.
+    /// - Returns: modified DYPieChartView
     func sliceBorderLine(width: CGFloat = 1, color: Color = .primary)->DYPieChartView<L> {
         var modView = self
         modView.settings.sliceOutlineWidth = width
@@ -254,7 +249,10 @@ public extension View where Self: DYPieChartModifiableProperties {
         return modView as! DYPieChartView<L>
     }
     
-  
+    
+    /// hideMultiFractionSliceOnSelection
+    /// - Parameter hide:  if set to true, the selected slice will be hidden. This only makes sense in conjuction with a second pie chart that shows the detail slices of the hidden slice in the first pie chart. Default is false.
+    /// - Returns: modified DYPieChartView
     func hideMultiFractionSliceOnSelection(_ hide: Bool = false)->DYPieChartView<L> {
         var modView = self
         modView.settings.shouldHideMultiFractionSliceOnSelection = hide

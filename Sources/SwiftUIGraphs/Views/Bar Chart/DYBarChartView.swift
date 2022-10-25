@@ -7,28 +7,33 @@
 
 import SwiftUI
 
-public struct DYStackedBarChartView: View, PlotAreaChart {
+public struct DYBarChartView: View, PlotAreaChart {
 
 
     var barDataSets: [DYBarDataSet]
-    var settings: DYStackedBarChartSettings 
-    var yAxisSettings: YAxisSettingsNew
+    var settings: DYBarChartSettings 
+    var yAxisSettings: YAxisSettings
     var xAxisSettings: XAxisSettings
     var yAxisScaler: AxisScaler
-    var yValueAsString: (Double)->String
+    var yAxisValueAsString: (Double)->String
     let generator = UISelectionFeedbackGenerator()
     
     //@State private var selectedIndex: Int?
     @Binding private var selectedBarDataSet: DYBarDataSet?
     @State var showBars: Bool = false
-  
-    public init(barDataSets: [DYBarDataSet], selectedBarDataSet: Binding<DYBarDataSet?>, yValueAsString: @escaping (Double) -> String) {
-        self.settings = DYStackedBarChartSettings()
+    
+    /// DYBarChartView Initializer
+    /// - Parameters:
+    ///   - barDataSets: an array of bar data sets, each of which holds the data for one bar.
+    ///   - selectedBarDataSet: the bar data set that corresponds to the user's selection (by tapping).
+    public init(barDataSets: [DYBarDataSet], selectedBarDataSet: Binding<DYBarDataSet?>) {
+        
+        self.settings = DYBarChartSettings()
         self.xAxisSettings = DYBarChartXAxisSettings()
-        self.yAxisSettings = YAxisSettingsNew()
+        self.yAxisSettings = YAxisSettings()
         self.barDataSets = barDataSets
         self._selectedBarDataSet = selectedBarDataSet
-        self.yValueAsString = yValueAsString
+        self.yAxisValueAsString = {yValue in yValue.toDecimalString(maxFractionDigits: 0)}
         self.yAxisScaler = AxisScaler(min:0, max: 0, maxTicks: 10) // initialize here otherwise error will be thrown
         self.configureYAxisScaler(min: barDataSets.map({$0.negativeYValue}).min() ?? 0, max: barDataSets.map({$0.positiveYValue}).max() ?? 1)
 
@@ -41,25 +46,24 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
                 VStack(spacing: 0) {
                     HStack(spacing:0) {
                         if self.yAxisSettings.showYAxis && yAxisSettings.yAxisPosition == .leading {
-                            self.yAxisView(yValueAsString: self.yValueAsString)
+                            self.yAxisView(yValueAsString: self.yAxisValueAsString)
 
                         }
                         ZStack {
 
                             if self.yAxisSettings.showYAxisGridLines {
-                                self.yAxisGridLines()
-                                self.yAxisZeroGridLine()
+                                self.yAxisGridLinesView()
+                                self.yAxisZeroGridLineView()
                             }
                             
                             if self.showBars {
                                 self.bars()
                             }
 
-                        }.frame(width: geo.size.width - self.yAxisSettings.yAxisViewWidth).background(settings.plotAreaBackgroundGradient)
+                        }.frame(width: self.plotAreaFrameWidth(proxy: geo)).background(settings.plotAreaBackgroundGradient)
                         
-
                         if self.yAxisSettings.showYAxis && yAxisSettings.yAxisPosition == .trailing {
-                            self.yAxisView(yValueAsString: self.yValueAsString, yAxisPosition: .trailing)
+                            self.yAxisView(yValueAsString: self.yAxisValueAsString, yAxisPosition: .trailing)
 
                         }
                     }
@@ -85,14 +89,15 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
         
     }
     
+    
     private func bars()->some View {
         GeometryReader {geo in
             let totalHeight = geo.size.height
             let totalWidth = geo.size.width
             let barWidth:CGFloat = self.barWidth(totalWidth: totalWidth)
             let yMinMax = self.yAxisScaler.axisMinMax
-            let positiveBarYOrigin =  totalHeight - self.convertToCoordinate(value: max(0, yMinMax.min), min: yMinMax.min, max: yMinMax.max, length: totalHeight)
-            let negativeBarYOrigin = totalHeight - self.convertToCoordinate(value: min(0, yMinMax.max), min: yMinMax.min, max: yMinMax.max, length: totalHeight)
+            let positiveBarYOrigin =  totalHeight - max(0, yMinMax.min).convertToCoordinate(min: yMinMax.min, max: yMinMax.max, length: totalHeight)
+            let negativeBarYOrigin = totalHeight - min(0, yMinMax.max).convertToCoordinate(min: yMinMax.min, max: yMinMax.max, length: totalHeight)
  
             ForEach(barDataSets) { dataSet in
                 
@@ -105,7 +110,7 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
      
                 let i = self.indexFor(dataSet: dataSet) ?? 0
                 
-                BarViewPair(dataSet: dataSet, index: i, selectedBarDataSet: self.$selectedBarDataSet, dataSetCount: self.barDataSets.count, totalHeight: totalHeight, barWidth: barWidth, positiveBarYPosition: positiveBarYPosition, negativeBarYPosition: negativeBarYPosition, settings: settings as! DYStackedBarChartSettings, yAxisScaler: yAxisScaler)
+                BarViewPair(dataSet: dataSet, index: i, selectedBarDataSet: self.$selectedBarDataSet, dataSetCount: self.barDataSets.count, totalHeight: totalHeight, barWidth: barWidth, positiveBarYPosition: positiveBarYPosition, negativeBarYPosition: negativeBarYPosition, settings: settings, yAxisScaler: yAxisScaler)
                 .position(x: self.convertToXCoordinate(index: i, totalWidth: totalWidth), y: barsYPosition)
                 
                 .onTapGesture {
@@ -200,7 +205,7 @@ public struct DYStackedBarChartView: View, PlotAreaChart {
     }
 }
 
-internal struct BarViewPair: View, DataPointConversion {
+internal struct BarViewPair: View {
 
     let dataSet: DYBarDataSet
     let index: Int
@@ -210,7 +215,7 @@ internal struct BarViewPair: View, DataPointConversion {
     let barWidth: CGFloat
     let positiveBarYPosition: CGFloat
     let negativeBarYPosition: CGFloat
-    let settings: DYStackedBarChartSettings
+    let settings: DYBarChartSettings
     var yAxisScaler: AxisScaler
     @State var selectionScale: CGFloat = 1
     @State var showSelectionBorder: Bool = false
@@ -295,7 +300,7 @@ internal struct BarViewPair: View, DataPointConversion {
     
 }
 
-internal struct StackedBarView: View, DataPointConversion {
+internal struct StackedBarView: View {
     
     let fractions: [DYBarDataFraction]
     let width: CGFloat
@@ -305,7 +310,6 @@ internal struct StackedBarView: View, DataPointConversion {
     var yAxisScaler: AxisScaler
     var labelView: AnyView?
     let labelViewOffset: CGSize
-  //  let settings: DYStackedBarChartSettings
 
     @State private var barHeightFactor: CGFloat = 0
     @State private var showLabelView: Bool = false
@@ -356,45 +360,63 @@ internal struct StackedBarView: View, DataPointConversion {
     }
     
     var barLabelTotalOffset: CGSize {
-        
-        let widthOffset: CGFloat = valueSum > 0 ? labelViewOffset.width :  -labelViewOffset.width
+
         let heightOffset: CGFloat = valueSum > 0 ?  -height / 2 + labelViewOffset.height : height / 2 - labelViewOffset.height
        
-        return CGSize(width: widthOffset, height: heightOffset)
+        return CGSize(width: labelViewOffset.width, height: heightOffset)
 
     }
 
 }
 
-public extension View where Self == DYStackedBarChartView {
+public extension View where Self == DYBarChartView {
     
-    func background(gradient: LinearGradient)->DYStackedBarChartView {
+    /// background of the plot area
+    /// - Parameter gradient: a linear gradient. Default is system background color.
+    /// - Returns: modified DYBarChartView
+    func background(gradient: LinearGradient)->DYBarChartView {
        var modView = self
         modView.settings.plotAreaBackgroundGradient = gradient
         return modView
         
     }
     
-    func userInteraction(enabled: Bool = true)->DYStackedBarChartView  {
+    /// userInteraction
+    /// - Parameter enabled: if set to true, the user can interact with the chart by tapping each bar
+    /// - Returns: modified DYBarChartView
+    func userInteraction(enabled: Bool = true)->DYBarChartView  {
         var modView = self
         modView.settings.allowUserInteraction = enabled
         return modView
     }
     
-    func barDropShadow(_ shadow: Shadow? = nil)->DYStackedBarChartView  {
+    
+    /// barDropShadow
+    /// - Parameter shadow: add a shadow under each bar
+    /// - Returns: modified DYBarChartView
+    func barDropShadow(_ shadow: Shadow)->DYBarChartView  {
         var modView = self
         modView.settings.barDropShadow = shadow
         return modView
     }
     
-    func labelViewOffset( _ offset: CGSize = CGSize(width: 0, height: -10))->DYStackedBarChartView  {
+    
+    /// labelViewOffset of the stacked bar top and bottom label
+    /// - Parameter offset: offset relative to the top and bottom edge of the stacked bar. default is width 0 and height -10. The height offset is multiplied by -1 in case there the sum of the negative fraction values is < 0.
+    /// - Returns: modified DYBarChartView
+    func labelViewOffset( _ offset: CGSize)->DYBarChartView  {
         var modView = self
         modView.settings.labelViewOffset = offset
         return modView
         
     }
     
-    func selectedBar(borderColor: Color = Color.yellow, dropShadow: Shadow? = nil)->DYStackedBarChartView {
+    /// selectedBar: settings for the selected bar.
+    /// - Parameters:
+    ///   - borderColor: border color of the selected bar. Default is yellow.
+    ///   - dropShadow: drop shadow of the selected bar. default is nil (= no different drop shadow under the selected bar )
+    /// - Returns: modified DYBarChartView
+    func selectedBar(borderColor: Color = Color.yellow, dropShadow: Shadow? = nil)->DYBarChartView {
         var modView = self
         modView.settings.selectedBarBorderColor = borderColor
         modView.settings.selectedBarDropShadow = dropShadow
@@ -406,58 +428,106 @@ public extension View where Self == DYStackedBarChartView {
     /// - Parameters:
     ///   - top: top minimum edge margin
     ///   - bottom: bottom minimum edge margin
-    /// - Returns: modified DYStackedBarChartView
-    func barLabelMinimumEdgeMargin(top: CGFloat = 0, bottom: CGFloat = 10)->DYStackedBarChartView {
+    /// - Returns: modified DYBarChartView
+    func barLabelMinimumEdgeMargin(top: CGFloat = 0, bottom: CGFloat = 10)->DYBarChartView {
         var modView = self
         modView.settings.minimumTopEdgeBarLabelMargin = top
         modView.settings.minimumBottomEdgeBarLabelMargin = bottom
         return modView
     }
     
-    ///x-Axis settings
-    ///
-    func showXaxis(_ show: Bool = true)->DYStackedBarChartView {
+//MARK: x-Axis Settings
+    
+    /// showXaxis
+    /// - Parameter show: determines if the x-axis view should be visible. Default is true.
+    /// - Returns: modified DYBarChartView
+    func showXaxis(_ show: Bool)->DYBarChartView {
         var modView = self
         modView.xAxisSettings.showXAxis = show
         return modView
     }
     
-    func xAxisViewHeight(_ height: CGFloat = 20)->DYStackedBarChartView {
+    /// xAxisViewHeight
+    /// - Parameter height: the height of the x-axis view. default is 20.
+    /// - Returns: modified  DYBarChartView
+    func xAxisViewHeight(_ height: CGFloat)->DYBarChartView {
         var modView = self
         modView.xAxisSettings.xAxisViewHeight = height
         return modView
     }
     
-    func xAxisLabelFontSize(_ fontSize: CGFloat = 8)->DYStackedBarChartView {
+    /// xAxisLabelFontSize
+    /// - Parameter fontSize: font size of the x-axis tick labels. default is 8.
+    /// - Returns: modified  DYBarChartView
+    func xAxisLabelFontSize(_ fontSize: CGFloat)->DYBarChartView {
         var modView = self
         modView.xAxisSettings.labelFontSize = fontSize
         return modView
     }
     
-    /// y-Axis settings
-    ///
-    func showYaxis(_ show: Bool = true)->DYStackedBarChartView {
+//MARK: y-Axis Settings
+    
+    /// showYaxis
+    /// - Parameter show:  determines if the y-axis view should be visible. Default is true.
+    /// - Returns: modified DYBarChartView
+    func showYaxis(_ show: Bool)->DYBarChartView {
         var modView = self
         modView.yAxisSettings.showYAxis = show
         return modView
     }
-//
-    func yAxisPosition(_ position: Edge.Set = .leading)->DYStackedBarChartView  {
+
+    
+    /// yAxisPosition
+    /// - Parameter position: .leading or .trailing. Default is .leading.
+    /// - Returns: modified DYBarChartView
+    func yAxisPosition(_ position: Edge.Set)->DYBarChartView  {
         var modView = self
         modView.yAxisSettings.yAxisPosition = position
         return modView
     }
-//
-    func yAxisViewWidth(_ height: CGFloat = 35)->DYStackedBarChartView  {
+
+    /// yAxisViewWidth
+    /// - Parameter width: the width of the y-axis view. default is 35.
+    /// - Returns:  modified DYBarChartView
+    func yAxisViewWidth(_ height: CGFloat)->DYBarChartView  {
         var modView = self
         modView.yAxisSettings.yAxisViewWidth = height
         return modView
     }
-//
-    func yAxisStyle(fontSize: CGFloat = 8, showGridLines: Bool = true, gridLineColor: Color = Color.secondary.opacity(0.5), gridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), zeroGridLineColor: Color? = nil, zeroGridLineStrokeStyle: StrokeStyle? = nil)->DYStackedBarChartView  {
+    
+    
+    /// yAxisStringValue
+    /// - Parameter stringValue: a closure to format y-Axis label strings depending on the number value. Default is a format as integer string (no fraction digits)
+    /// - Returns: modified DYBarChartView
+    func yAxisStringValue(_ stringValue: @escaping (Double)->String)->DYBarChartView {
+        var modView = self
+        modView.yAxisValueAsString = stringValue
+        return modView
+    }
+    
+    /// yAxisLabelFontSize
+    /// - Parameter fontSize: font size of the y-axis labels. default size is 8
+    /// - Returns: modified  DYBarChartView
+    func yAxisLabelFontSize(_ fontSize: CGFloat)->DYBarChartView {
         var modView = self
         var yAxisSettings = modView.yAxisSettings
         yAxisSettings.yAxisFontSize = fontSize
+        modView.yAxisSettings = yAxisSettings
+        return modView
+    }
+
+    
+    /// yAxisGridLines: horizontal grid lines
+    /// - Parameters:
+    ///   - showGridLines: show the horizontal grid lines
+    ///   - gridLineColor: horizontal grid line color
+    ///   - gridLineStrokeStyle: vertical grid line stroke style
+    ///   - zeroGridLineColor: color of the 0-grid line. default nil: no separate zero grid line
+    ///   - zeroGridLineStrokeStyle: stroke style of the 0-grid line. default nil.
+    /// - Returns: modified DYBarChartView
+    func yAxisGridLines(showGridLines: Bool = true, gridLineColor: Color = Color.secondary.opacity(0.5), gridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), zeroGridLineColor: Color? = nil, zeroGridLineStrokeStyle: StrokeStyle? = nil)->DYBarChartView  {
+        var modView = self
+        var yAxisSettings = modView.yAxisSettings
         yAxisSettings.showYAxisGridLines = showGridLines
         yAxisSettings.yAxisGridLineColor = gridLineColor
         yAxisSettings.yAxisGridLinesStrokeStyle = gridLineStrokeStyle
@@ -468,7 +538,8 @@ public extension View where Self == DYStackedBarChartView {
         
     }
     
-    func yAxisScalerOverride(minMax: (min:Double?, max:Double?)? = nil, interval: Double? = nil, maxTicks: Int = 10) ->DYStackedBarChartView   {
+    
+    func yAxisScalerOverride(minMax: (min:Double?, max:Double?)? = nil, interval: Double? = nil, maxTicks: Int = 10) ->DYBarChartView   {
             var modView  = self
             modView.yAxisSettings.yAxisMinMaxOverride = minMax
             modView.yAxisSettings.yAxisIntervalOverride = interval

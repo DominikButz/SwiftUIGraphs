@@ -18,14 +18,15 @@ struct MultiBarChartExample: View {
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                DYStackedBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet, yValueAsString: { yValue in
-                    return yValue.toDecimalString(maxFractionDigits: 0)
-                })
+                DYBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet)
                 .barDropShadow(Shadow(color: .gray, radius:8, x:-4, y:-3))
                 .selectedBar(borderColor: .purple, dropShadow: Shadow(color: .black.opacity(0.7), radius:10, x:-7, y:-5))
-                .yAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10, zeroGridLineColor: .red)
+                .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .yAxisGridLines(zeroGridLineColor: .red)
                 .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                
                 .frame(height:chartHeight(proxy: proxy))
+            
                 
                 if self.barDataSets.isEmpty == false {
                     HStack {

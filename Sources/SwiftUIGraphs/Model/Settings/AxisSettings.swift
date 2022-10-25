@@ -8,10 +8,7 @@
 import Foundation
 import SwiftUI
 
-
-
-
-public struct YAxisSettingsNew {
+public struct YAxisSettings {
     
     var showYAxis: Bool
     var yAxisPosition: Edge.Set
@@ -62,7 +59,7 @@ public protocol XAxisSettings {
     var xAxisViewHeight: CGFloat {get set}
 }
  
-public struct DYLineChartXAxisSettingsNew: XAxisSettings {
+public struct DYLineChartXAxisSettings: XAxisSettings {
 
     public var showXAxis: Bool
     public var xAxisViewHeight: CGFloat

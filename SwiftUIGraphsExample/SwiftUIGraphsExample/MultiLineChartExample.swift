@@ -22,7 +22,7 @@ struct MultiLineChartExample: View {
         GeometryReader { proxy in
             VStack {
                 
-                DYMultiLineChartView(allDataPoints: Array(self.dataPointArrays.joined())) { parentProps in
+                DYLineChartView(allDataPoints: Array(self.dataPointArrays.joined()), lineViews: { parentProps in
                     let selectedPoints = [$blueSelectedDataPoint, $orangeSelectedDataPoint, $greenSelectedDataPoint]
                     ForEach(0..<dataPointArrays.count, id:\.self) { i in
                         
@@ -35,18 +35,18 @@ struct MultiLineChartExample: View {
                     }
               
                     
-                } xValueAsString: { xValue in
-                    self.stringified(value: xValue, allowFloat: false)
-                } yValueAsString: { yValue in
-                    self.stringified(value:yValue, allowFloat: true)
-                }
-                .yAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10, zeroGridLineColor: .red)
-                .xAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                })
+                .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .yAxisGridLines(zeroGridLineColor:.red)
+                .yAxisStringValue({ yValue in
+                    self.stringified(value:yValue)
+                })
+                .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .xAxisStringValue({ xValue in
+                    self.stringified(value: xValue)
+                })
                 .frame(height: self.chartHeight(proxy: proxy))
                 .padding()
-                
-
-                 
 
                 self.legendView.padding()
                 
@@ -73,8 +73,8 @@ struct MultiLineChartExample: View {
                 if let dataPoint =  selectedPoints[i] {
                     HStack {
                         self.pointViewFor(index: i)
-                        Text("X: \(self.stringified(value: dataPoint.xValue, allowFloat: true))")
-                        Text("Y: \(self.stringified(value: dataPoint.yValue, allowFloat: true))")
+                        Text("X: \(self.stringified(value: dataPoint.xValue))")
+                        Text("Y: \(self.stringified(value: dataPoint.yValue))")
                         
                     }.font(UIDevice.current.userInterfaceIdiom == .pad ? .body : .caption)
                 }
@@ -83,9 +83,8 @@ struct MultiLineChartExample: View {
         }
     }
     
-    func stringified(value: Double, allowFloat: Bool)->String {
+    func stringified(value: Double)->String {
         let formatter = NumberFormatter()
-        formatter.allowsFloats = allowFloat
         formatter.maximumFractionDigits = 1
         return formatter.string(for: value)!
     }
@@ -140,7 +139,6 @@ struct MultiLineChartExample: View {
             }
         }
     }
-    
 
 }
 

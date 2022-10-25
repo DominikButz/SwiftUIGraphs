@@ -9,8 +9,6 @@ import SwiftUI
 import SwiftUIGraphs
 
 struct CustomYAxisIntervalExampleLineChart: View {
-    
-   //  @State private var selectedDataIndex: Int = 0
 
     @State var selectedDataPoint: DYDataPoint?
     @State var dataPoints: [DYDataPoint] = []
@@ -29,32 +27,25 @@ struct CustomYAxisIntervalExampleLineChart: View {
                    .selectedDataPointLabelSettings(yColor: .blue)
 
                    
-               DYMultiLineChartView(allDataPoints: self.dataPoints, lineViews: { parentViewProperties in
-                   
-        
+               DYLineChartView(allDataPoints: self.dataPoints, lineViews: { parentViewProperties in
+
                        DYLineView(dataPoints: self.dataPoints, selectedDataPoint: $selectedDataPoint, pointView: { _ in
                            DYLinePointView(borderColor: .blue)
                        }, selectorView: DYSelectorPointView(),  parentViewProperties: parentViewProperties)
                        .lineStyle(color: .blue)
                        .area(gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), shadow: Shadow(color: .gray, radius: 7, x: -7, y: -7))
                        .selectedPointIndicatorLineStyle(xLineColor: .red, yLineColor: .red)
-                   
-                   
-               }, xValueAsString: {xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")}, yValueAsString: { yValue in  TimeInterval(yValue).toString() ?? ""})
+
+               })
                .yAxisScalerOverride(minMax:  (min: 0, max: Double(Int(dataPoints.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), interval: 1800)  // 1800 seconds = 30 min
                .yAxisPosition(.trailing)
                .yAxisViewWidth(UIDevice.current.userInterfaceIdiom == .phone ? 40 : 45)
-               .yAxisStyle(fontSize:  UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+               .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+               .yAxisStringValue({yValue in  TimeInterval(yValue).toString() ?? ""})
+               .xAxisStringValue({xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")})
                .xAxisScalerOverride(minMax: (min: self.dataPoints.map({$0.xValue}).min(), max: self.dataPoints.map({$0.xValue}).max()), interval: 604800)  // 604800 seconds per week
                 .frame(height: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.75)
                
-                  
-//               var yAxisSettings: YAxisSettingsNew {
-//                   YAxisSettingsNew(showYAxis: true, yAxisPosition: .trailing, yAxisViewWidth: self.yAxisWidth,  yAxisFontSize: fontSize, yAxisMinMaxOverride: (min: 0, max: Double(Int(dataPoints.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), yAxisIntervalOverride: 1800)
-//               }
-               
-               
-//proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65
             Spacer()
          }.padding()
          .navigationTitle("Workout Time Per Week")
@@ -112,16 +103,7 @@ struct CustomYAxisIntervalExampleLineChart: View {
         return (y:Text(yString).font(.caption).bold(), x:Text(xString).font(.caption).foregroundColor(.gray))
     }
     
-//    var lineChartSettings: DYLineChartSettings {
-//        DYLineChartSettings(lineStrokeStyle: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), lineColor: .blue, showAppearAnimation: true, showGradient: true, gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), gradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), lateralPadding: (0, 0), pointColor: .blue, selectorLineColor: .blue, selectorLinePointColor: .blue, allowUserInteraction: true, yAxisSettings:  yAxisSettings, xAxisSettings: xAxisSettings)
-//    }
-    
-//    var xAxisSettings: DYLineChartXAxisSettingsNew {
-//        DYLineChartXAxisSettingsNew(showXAxis: true, xAxisInterval: 604800, xAxisFontSize: fontSize)
-//    }
-    
 
-    
     func labelView(dataPoint: DYDataPoint)-> AnyView {
         
         return Text("Text").font(.caption).foregroundColor(.blue).eraseToAnyView()

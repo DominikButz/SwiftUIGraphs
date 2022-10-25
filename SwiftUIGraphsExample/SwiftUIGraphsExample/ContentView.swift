@@ -24,7 +24,7 @@ struct ContentView: View {
                 }) {
                    // NavigationLink("Weight Lifting Volume per Workout", destination: BasicLineChartExample())
                     NavigationLink("Stock Prices (asyn data fetch)", destination: LineChartWithAsyncDataFetch())
-                    NavigationLink("Area Chart Example", destination: CustomYAxisIntervalExampleLineChart(), isActive: $linkActive)
+                    NavigationLink("Area Chart Example", destination: CustomYAxisIntervalExampleLineChart())
                     NavigationLink("Multi-Line Example", destination: MultiLineChartExample())
                 }
          
@@ -32,7 +32,7 @@ struct ContentView: View {
                     Image(systemName: "chart.bar.fill")
                     Text("Bar Charts")
                 }) {
-                    NavigationLink("Basic Example", destination: BasicBarChartExample())
+                    NavigationLink("Basic Example", destination: BasicBarChartExample(), isActive: $linkActive)
                     NavigationLink("Multi-Bar Example", destination: MultiBarChartExample())
                 }
                 

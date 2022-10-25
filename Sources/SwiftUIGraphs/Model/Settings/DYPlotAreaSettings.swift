@@ -8,19 +8,10 @@
 import Foundation
 import SwiftUI
 
-//public protocol DYPlotAreaSettings {
-//
-//    var plotAreaBackgroundGradient: LinearGradient {get set}
-//    var xAxisSettings: XAxisSettings {get set}
-//    var yAxisSettings: YAxisSettingsNew {get set}
-//    var allowUserInteraction: Bool {get set }
-//}
 
-public struct DYLineChartSettingsNew {
+public struct DYLineChartSettings {
 
     public var plotAreaBackgroundGradient: LinearGradient
-//    public var xAxisSettings: XAxisSettings
-//    public var yAxisSettings: YAxisSettingsNew
     public var allowUserInteraction: Bool
     var selectorLineWidth: CGFloat
     var selectorLineColor: Color
@@ -37,7 +28,7 @@ public struct DYLineChartSettingsNew {
     
 }
 
-public struct DYStackedBarChartSettings {
+public struct DYBarChartSettings {
 
     public var plotAreaBackgroundGradient: LinearGradient
     public var allowUserInteraction: Bool

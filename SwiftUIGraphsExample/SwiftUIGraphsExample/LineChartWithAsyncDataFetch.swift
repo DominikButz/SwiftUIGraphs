@@ -37,7 +37,7 @@ struct LineChartWithAsyncDataFetch: View {
                         .padding()
                         
                         
-                        DYMultiLineChartView(allDataPoints: viewModel.dataPoints, lineViews: { parentProps in
+                        DYLineChartView(allDataPoints: viewModel.dataPoints, lineViews: { parentProps in
                             
                             DYLineView(dataPoints: viewModel.dataPoints, selectedDataPoint: $viewModel.selectedDataPoint, pointView: { _ in
                                 DYLinePointView()
@@ -46,28 +46,19 @@ struct LineChartWithAsyncDataFetch: View {
                                 .area(gradient: LinearGradient(colors: [.orange, .orange.opacity(0.1)], startPoint: .top, endPoint: .bottom), shadow: nil)
            
                             
-                        },  xValueAsString: { xValue in
-                            return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
-                        }, yValueAsString: { yValue in
+                        })
+                        .xAxisScalerOverride(minMax: (self.viewModel.dataPoints.first?.xValue, nil), interval: 172800)
+                        .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                        .xAxisStringValue({ xValue in Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
+                        })
+                        .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                        .yAxisStringValue({ yValue in
                             let formatter = NumberFormatter()
                            formatter.maximumFractionDigits = 2
                            return formatter.string(for: yValue)!
                         })
-            
-                        .xAxisScalerOverride(minMax: (self.viewModel.dataPoints.first?.xValue, nil), interval: 172800)
-                        .xAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
-                        .yAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
                         .frame(height:proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65)
 
-//                        
-//                        DYMultiLineChartView(lineDataSets: [self.dataSet], settings: DYLineChartSettingsNew(xAxisSettings: DYLineChartXAxisSettingsNew(xAxisInterval: 172800, xAxisFontSize: fontSize), yAxisSettings: YAxisSettingsNew(yAxisFontSize: fontSize)), xValueAsString: { xValue in
-//                            return Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
-//                        }, yValueAsString: { yValue in
-//                            let formatter = NumberFormatter()
-//                            formatter.maximumFractionDigits = 2
-//                            return formatter.string(for: yValue)!
-//                        })
-//                        .frame(height:proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.65)
 
                 }.padding()
                     .onAppear {
