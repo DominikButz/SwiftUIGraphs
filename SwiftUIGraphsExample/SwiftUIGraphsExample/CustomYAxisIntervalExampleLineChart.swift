@@ -19,12 +19,14 @@ struct CustomYAxisIntervalExampleLineChart: View {
            VStack {
    
                    
-                   DYLineInfoView(selectedDataPoint: $selectedDataPoint, selectedYValueAsString:  { yValue in
+                   DYLineInfoView(selectedDataPoint: $selectedDataPoint, minValueLabels: self.minValueLabels, maxValueLabels: self.maxValueLabels)
+                   .selectedYStringValue({ yValue in
                        TimeInterval(yValue).toString() ?? ""
-                   }, selectedXValueAsString: { xValue in
+                   })
+                   .selectedXStringValue( { xValue in
                        Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy")
-                   }, minValueLabels: self.minValueLabels, maxValueLabels: self.maxValueLabels)
-                   .selectedDataPointLabelSettings(yColor: .blue)
+                   })
+                   .selectedDataPointLabel(yColor: .blue)
 
                    
                DYLineChartView(allDataPoints: self.dataPoints, lineViews: { parentViewProperties in
@@ -41,8 +43,8 @@ struct CustomYAxisIntervalExampleLineChart: View {
                .yAxisPosition(.trailing)
                .yAxisViewWidth(UIDevice.current.userInterfaceIdiom == .phone ? 40 : 45)
                .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
-               .yAxisStringValue({yValue in  TimeInterval(yValue).toString() ?? ""})
-               .xAxisStringValue({xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")})
+               .yAxisLabelStringValue({yValue in  TimeInterval(yValue).toString() ?? ""})
+               .xAxisLabelStringValue({xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")})
                .xAxisScalerOverride(minMax: (min: self.dataPoints.map({$0.xValue}).min(), max: self.dataPoints.map({$0.xValue}).max()), interval: 604800)  // 604800 seconds per week
                 .frame(height: proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.75)
                

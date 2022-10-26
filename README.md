@@ -14,8 +14,9 @@ SwiftUIGraphs is a simple Swift package for iOS and iPadOS 14.0 and later. It fe
 * Create a pie chart or doughnut chart with customizable colors and a cool pop out effect to present a detail pie chart.
 * The chart views feature separate header / info / legend views that can be replaced by custom solutions easily. 
 * Add drop shadows to the line chart, gradient, bars and selected pie slice.
+* Many more features - check out details below. 
 
-Check out the examples below for details. The folder SwiftUIGraphsExample contains an example project, make sure to check it out for more implementation details. All public structs / classes include in-code-documentation.
+The folder SwiftUIGraphsExample contains an example project, make sure to check it out for more implementation details. All public structs / classes include in-code-documentation.
     
     
 ## Installation
@@ -41,10 +42,40 @@ Make sure to import SwiftUIGraphs in every file where you use SwiftUIGraphs.
 Check out the following examples. This repo also contains an example project to illustrate how to implement all three chart types. Check the in-code documentation for more details.
 
 
-### Code example: Multi-Line Chart
+### Line Charts
 
+DYLineChartView supports the following modifiers:
 
+* background(gradient...)
+* selectorLine
+* markerGridLine
+* userInteraction
+* showXAxis
+* xAxisViewHeight
+* xAxisGridLines
+* xAxisLabelStringValue
+* xAxisLabelFontSize
+* xAxisScalerOverride
+* showYaxis
+* yAxisPosition
+* yAxisViewWidth
+* yAxisGridLines
+* yAxisLabelStringValue
+* yAxisLabelFontSize
+* yAxisScalerOverride
 
+Pass in one or several DYLineViews into DYLineChartView's lineViews closure. You can attach the following modifiers to DYLineView:
+
+* lineStyle
+* animation
+* userInteraction
+* area
+* selectedPointIndicatorLineStyle
+* colorPerLineSegment
+
+#### Code Example: Multi-line chart
+
+![SwiftUIGraphs example](gitResources/MultiLineChartExample0.gif) 
 
 ```Swift
 
@@ -62,7 +93,7 @@ struct MultiLineChartExample: View {
         GeometryReader { proxy in
             VStack {
                 
-                DYLineChartView(allDataPoints: Array(self.dataPointArrays.joined())) { parentProps in
+                DYLineChartView(allDataPoints: Array(self.dataPointArrays.joined()), lineViews: { parentProps in
                     let selectedPoints = [$blueSelectedDataPoint, $orangeSelectedDataPoint, $greenSelectedDataPoint]
                     ForEach(0..<dataPointArrays.count, id:\.self) { i in
                         
@@ -71,17 +102,20 @@ struct MultiLineChartExample: View {
                         }, selectorView: self.selectorPointViewFor(index: i), parentViewProperties: parentProps)
                         .lineStyle(color: colors[i])
                         .selectedPointIndicatorLineStyle(xLineColor: colors[i], yLineColor: colors[i])
-                        
+                         
                     }
               
                     
-                } xValueAsString: { xValue in
-                    self.stringified(value: xValue, allowFloat: false)
-                } yValueAsString: { yValue in
-                    self.stringified(value:yValue, allowFloat: true)
-                }
-                .yAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10, zeroGridLineColor: .red)
-                .xAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                })
+                .markerGridLine(coordinate: 0, color: .red)
+                .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .yAxisLabelStringValue({ yValue in
+                    self.stringified(value:yValue)
+                })
+                .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .xAxisLabelStringValue({ xValue in
+                    self.stringified(value: xValue)
+                })
                 .frame(height: self.chartHeight(proxy: proxy))
                 .padding()
 
@@ -110,8 +144,8 @@ struct MultiLineChartExample: View {
                 if let dataPoint =  selectedPoints[i] {
                     HStack {
                         self.pointViewFor(index: i)
-                        Text("X: \(self.stringified(value: dataPoint.xValue, allowFloat: true))")
-                        Text("Y: \(self.stringified(value: dataPoint.yValue, allowFloat: true))")
+                        Text("X: \(self.stringified(value: dataPoint.xValue))")
+                        Text("Y: \(self.stringified(value: dataPoint.yValue))")
                         
                     }.font(UIDevice.current.userInterfaceIdiom == .pad ? .body : .caption)
                 }
@@ -120,9 +154,8 @@ struct MultiLineChartExample: View {
         }
     }
     
-    func stringified(value: Double, allowFloat: Bool)->String {
+    func stringified(value: Double)->String {
         let formatter = NumberFormatter()
-        formatter.allowsFloats = allowFloat
         formatter.maximumFractionDigits = 1
         return formatter.string(for: value)!
     }
@@ -181,7 +214,7 @@ struct MultiLineChartExample: View {
 }
 ```
 
-### Other examples
+#### Other examples
 
 Check out the example project for details (included in the package).
 
@@ -202,8 +235,35 @@ Additionally, you can add a drop shadow underneath the gradient (and / or the li
 
 
 
-### Code example: Stacked Bar Chart
+### Bar Charts
 
+DYBarChartView supports multiple data series from version 1.0. Each bar is represented by a DYBarDataSet - check out the example below for details.
+
+DYBarChartView supports the following modifiers:
+
+* background(gradient: LinearGradient)
+* userInteraction(enabled: Bool = true)
+* barDropShadow(_ shadow: Shadow)
+* labelViewOffset( _ offset: CGSize)
+* selectedBar(borderColor: Color, dropShadow: Shadow? = nil)
+* barLabelMinimumEdgeMargin(top: CGFloat = 0, bottom: CGFloat = 10)
+* showXaxis(_ show: Bool)
+* xAxisViewHeight(_ height: CGFloat)
+* xAxisLabelFontSize(_ fontSize: CGFloat)
+* showYaxis(_ show: Bool)
+* yAxisPosition(_ position: Edge.Set)
+* yAxisViewWidth(_ height: CGFloat)
+* yAxisLabelStringValue(_ stringValue: @escaping (Double)->String)
+* yAxisLabelFontSize(_ fontSize: CGFloat)
+* yAxisGridLines(showGridLines: Bool = true, gridLineColor: Color = Color.secondary.opacity(0.5), gridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]))
+* markerGridLine(yCoordinate: Double, color: Color, strokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]))
+* yAxisScalerOverride(minMax: (min:Double?, max:Double?)? = nil, interval: Double? = nil, maxTicks: Int = 10)
+
+
+
+#### Code Example: Stacked Bar Chart
+
+![SwiftUIGraphs example](gitResources/StackedBarChartExample0.gif) 
 
 
 ``` Swift 
@@ -217,15 +277,15 @@ struct MultiBarChartExample: View {
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                DYBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet, yValueAsString: { yValue in
-                    return yValue.toDecimalString(maxFractionDigits: 0)
-                })
+                DYBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet)
                 .barDropShadow(Shadow(color: .gray, radius:8, x:-4, y:-3))
                 .selectedBar(borderColor: .purple, dropShadow: Shadow(color: .black.opacity(0.7), radius:10, x:-7, y:-5))
-                .yAxisStyle(fontSize: UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10, zeroGridLineColor: .red)
+                .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .markerGridLine(yCoordinate: 0, color: .red)
                 .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
                 .frame(height:chartHeight(proxy: proxy))
                 
+            
                 if self.barDataSets.isEmpty == false {
                     HStack {
                         self.selectedDataSetDetailView()
@@ -234,7 +294,7 @@ struct MultiBarChartExample: View {
                 }
                 
                 Spacer()
-            }
+            }.padding()
 
         }.navigationTitle("Profits & Losses Mio. USD per Division per Year")
             .onAppear {
@@ -318,15 +378,29 @@ struct MultiBarChartExample: View {
         self.barDataSets = barDataSets
     }
 }
+
 ```
 
 ***Simple bar chart example:***
 
 ![SwiftUIGraphs example](gitResources/BarChartExample0.gif) 
 
+### Pie Charts
+
+DYPieChartView supports the following modifiers:
+
+*  innerCircleRadiusFraction(_ fraction: CGFloat)
+*  userInteraction(enabled: Bool)
+*  sliceBorderLine(width: CGFloat = 1, color: Color = .primary)
+*  selectedSlice(scaleEffect: CGFloat = 1.05, dropShadow: Shadow = Shadow(color: .gray.opacity(0.7), radius: 10, x: 0, y: 0))
+*  minimumFractionForSliceLabelOffset(_ fraction: CGFloat = 0.1)
+*  hideMultiFractionSliceOnSelection(_ hide: Bool = false)
 
 
-### Code example: Ring Chart with detail pie chart (pop-out effect)
+
+#### Code example: Ring Chart with detail pie chart (pop-out effect)
+
+Set the innerCircleRadiusFraction(_ fraction: CGFloat = 0) modifier to a value larger than 0 and smaller than 1 to turn a pie chart into a ring chart. Details below. 
 
 ![SwiftUIGraphs example](gitResources/PieChartExample0.gif) 
 
@@ -440,10 +514,12 @@ struct RingChartAndDetailPieChartExample: View {
 
 #### [Version 1.0](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.0)
 BREAKING changes:
+
 * DYLineChartView and DYBarChartView now support multiple data series by default.
 * no more bulky settings objects to pass into the initialisers: simply attach modifiers. 
 * no more chart height parameter in the initialisers: simply attach a .frame modifier like with any other SwiftUI view.
 * DYLineChartView x-axis ticks are now calculated in the same way as the y-axis. In order to override the min and max x-axis values as well as the tick interval, simply attach the xAxisScalerOverride modifier (for the y-axis, attach the yAxisScalerOverride modifier).
+* use the markerGridLine-modifier to add one or several marker lines (e.g. as target line) to the plot area.
 
 #### [Version 0.9.3](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.9.3)
 Bug fix: in the line chart, user interaction (provided it is switched on) works again if showAppearAnimation set to false
@@ -453,6 +529,7 @@ Added showAppearAnimation parameter to settings of DYLineChartView and DYBarChar
 
 #### [Version 0.9.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/0.9.1)
 Bug fixes: 
+
 * DYBarChart yAxis labels are now positioned more precisely
 * lateral padding works correctly in DYBarChartView
 * bars won't surpass the bounds of the chart area any more when device orientation is changed.
@@ -462,6 +539,7 @@ Bug fixes:
 "Shady update": You can now set drop shadows to show underneath the line and line gradient and underneath each bar and pie chart slice.
 Moreover, in the DYGridChartHeaderView you can now set the selected y-value text label to a different text color. 
 Bug fixes:
+
 * lateral padding should work properly now and should not shift subviews any more.
 * the y-axis labels are now positioned more precisely.
 

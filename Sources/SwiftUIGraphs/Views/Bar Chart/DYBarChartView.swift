@@ -9,7 +9,6 @@ import SwiftUI
 
 public struct DYBarChartView: View, PlotAreaChart {
 
-
     var barDataSets: [DYBarDataSet]
     var settings: DYBarChartSettings 
     var yAxisSettings: YAxisSettings
@@ -17,7 +16,7 @@ public struct DYBarChartView: View, PlotAreaChart {
     var yAxisScaler: AxisScaler
     var yAxisValueAsString: (Double)->String
     let generator = UISelectionFeedbackGenerator()
-    
+    var markerLines: [MarkerLine] = []
     //@State private var selectedIndex: Int?
     @Binding private var selectedBarDataSet: DYBarDataSet?
     @State var showBars: Bool = false
@@ -53,7 +52,10 @@ public struct DYBarChartView: View, PlotAreaChart {
 
                             if self.yAxisSettings.showYAxisGridLines {
                                 self.yAxisGridLinesView()
-                                self.yAxisZeroGridLineView()
+                            }
+                            
+                            ForEach(markerLines) { markerLine in
+                                self.markerLineView(markerLine: markerLine).clipped()
                             }
                             
                             if self.showBars {
@@ -171,6 +173,34 @@ public struct DYBarChartView: View, PlotAreaChart {
     
     private func xAxisIntervalLabelViewFor(label: String, index: Int, totalWidth: CGFloat)-> some View {
         Text(label).font(.system(size: xAxisSettings.labelFontSize)).position(x: self.convertToXCoordinate(index: index, totalWidth: totalWidth), y: 10)
+    }
+    
+    
+    //MARK: Marker line
+
+    func markerLineView(markerLine: MarkerLine)-> some View {
+        
+        GeometryReader { geo in
+            let height = geo.size.height
+            let width = geo.size.width
+            let minY = self.yAxisScaler.axisMinMax.min
+            let maxY = self.yAxisScaler.axisMinMax.max
+            
+            Path { p in
+          
+                let startPointY = height - markerLine.coordinate.convertToCoordinate(min: minY, max: maxY, length: height)
+                let endPointY = height - markerLine.coordinate.convertToCoordinate(min: minY, max: maxY, length: height)
+                
+                p.move(to: CGPoint(x: 0, y: startPointY))
+                p.addLine(to: CGPoint(x: width, y: endPointY))
+                p.closeSubpath()
+                
+            }.stroke(style: markerLine.strokeStyle)
+            .foregroundColor(markerLine.color)
+            
+        }
+        
+        
     }
     
     // MARK: Helper Funcs
@@ -416,7 +446,7 @@ public extension View where Self == DYBarChartView {
     ///   - borderColor: border color of the selected bar. Default is yellow.
     ///   - dropShadow: drop shadow of the selected bar. default is nil (= no different drop shadow under the selected bar )
     /// - Returns: modified DYBarChartView
-    func selectedBar(borderColor: Color = Color.yellow, dropShadow: Shadow? = nil)->DYBarChartView {
+    func selectedBar(borderColor: Color, dropShadow: Shadow? = nil)->DYBarChartView {
         var modView = self
         modView.settings.selectedBarBorderColor = borderColor
         modView.settings.selectedBarDropShadow = dropShadow
@@ -499,7 +529,7 @@ public extension View where Self == DYBarChartView {
     /// yAxisStringValue
     /// - Parameter stringValue: a closure to format y-Axis label strings depending on the number value. Default is a format as integer string (no fraction digits)
     /// - Returns: modified DYBarChartView
-    func yAxisStringValue(_ stringValue: @escaping (Double)->String)->DYBarChartView {
+    func yAxisLabelStringValue(_ stringValue: @escaping (Double)->String)->DYBarChartView {
         var modView = self
         modView.yAxisValueAsString = stringValue
         return modView
@@ -525,15 +555,27 @@ public extension View where Self == DYBarChartView {
     ///   - zeroGridLineColor: color of the 0-grid line. default nil: no separate zero grid line
     ///   - zeroGridLineStrokeStyle: stroke style of the 0-grid line. default nil.
     /// - Returns: modified DYBarChartView
-    func yAxisGridLines(showGridLines: Bool = true, gridLineColor: Color = Color.secondary.opacity(0.5), gridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), zeroGridLineColor: Color? = nil, zeroGridLineStrokeStyle: StrokeStyle? = nil)->DYBarChartView  {
+    func yAxisGridLines(showGridLines: Bool = true, gridLineColor: Color = Color.secondary.opacity(0.5), gridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]))->DYBarChartView  {
         var modView = self
         var yAxisSettings = modView.yAxisSettings
         yAxisSettings.showYAxisGridLines = showGridLines
         yAxisSettings.yAxisGridLineColor = gridLineColor
         yAxisSettings.yAxisGridLinesStrokeStyle = gridLineStrokeStyle
-        yAxisSettings.yAxisZeroGridLineColor = zeroGridLineColor
-        yAxisSettings.yAxisZeroGridLineStrokeStyle = zeroGridLineStrokeStyle
         modView.yAxisSettings = yAxisSettings
+        return modView 
+        
+    }
+    
+    /// markerGridLine: Additional grid line e.g. to mark a y-target-value.
+    /// - Parameters:
+    ///   - yCoordinate: y-coordinate of the grid line
+    ///   - color: color of the marker grid line
+    ///   - strokeStyle: stroke style of the marker grid line
+    /// - Returns: modified DYLineChartView
+    func markerGridLine(yCoordinate: Double, color: Color, strokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]))->DYBarChartView {
+        let markerLine = MarkerLine(coordinate: yCoordinate, color: color, strokeStyle: strokeStyle, orientation: .horizontal)
+        var modView = self
+        modView.markerLines.append(markerLine)
         return modView
         
     }

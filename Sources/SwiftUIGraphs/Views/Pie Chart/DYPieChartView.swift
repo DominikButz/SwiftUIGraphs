@@ -201,7 +201,7 @@ public extension View where Self: DYPieChartModifiableProperties {
     /// inner circle radius fraction: value > 0 turns a pie chart into a doughnut chart.
     /// - Parameter fraction: value between 0 and 1. E.g. 0.5 means the inner circle radius is half as long as the pie chart radius. Default is 0.
     /// - Returns: modified DYPieChartView
-    func innerCircleRadiusFraction(_ fraction: CGFloat = 0)->DYPieChartView<L> {
+    func innerCircleRadiusFraction(_ fraction: CGFloat)->DYPieChartView<L> {
         var modView = self
         if fraction < 0 || fraction > 1 {
             assertionFailure("inner circle radius fraction must be between 0 and 1 ")
@@ -213,7 +213,7 @@ public extension View where Self: DYPieChartModifiableProperties {
     /// userInteraction
     /// - Parameter enabled: if set to true, users can select pie chart slices by tapping. Default is true.
     /// - Returns: modified DYPieChartView
-    func userInteraction(enabled: Bool = true)->DYPieChartView<L> {
+    func userInteraction(enabled: Bool)->DYPieChartView<L> {
         var modView = self
         modView.settings.allowUserInteraction = enabled
         return modView as! DYPieChartView<L>
@@ -243,6 +243,9 @@ public extension View where Self: DYPieChartModifiableProperties {
         return modView as! DYPieChartView<L>
     }
     
+    /// minimumFractionForSliceLabelOffset
+    /// - Parameter fraction: slice fraction. If the fraction of a slice is lower than this value, the slice label will be show outside the pie chart instead of inside the slice.
+    /// - Returns: modified DYPieChartView
     func minimumFractionForSliceLabelOffset(_ fraction: CGFloat = 0.1)->DYPieChartView<L> {
         var modView = self
         modView.settings.minimumFractionForSliceLabelOffset = fraction

@@ -16,8 +16,6 @@ public struct YAxisSettings {
     var showYAxisGridLines: Bool
     var yAxisGridLinesStrokeStyle: StrokeStyle
     var yAxisGridLineColor: Color
-    var yAxisZeroGridLineStrokeStyle: StrokeStyle?
-    var yAxisZeroGridLineColor: Color?
     var yAxisFontSize: CGFloat
     
     var yAxisMinMaxOverride: (min:Double?, max:Double?)?
@@ -31,12 +29,10 @@ public struct YAxisSettings {
     ///   - showYAxisGridLines: determines if the (horizontal) y-axis grid lines should be shown.
     ///   - yAxisGridLineStrokeStyle: stroke style of the y-axis grid lines.
     ///   - yAxisGridLineColor: color of the y-axis grid lines.
-    ///   - yAxisZeroGridLineStrokeStyle: overrides the yAxisGridLineStrokeStyle only for the 0-line. Default is nil (no override).
-    ///   - yAxisZeroGridLineColor: overrides the yAxisGridLineColor only for the 0-line. Default is nil (no override).
     ///  - yAxisFontSize: font size of the y-axis marker labels.
     ///  - yAxisMinMaxOverride: override the max and min values of the y-axis. if not set, the min and max value will be calculated automatically.
     ///  - yAxisIntervalOverride: override the interval of the y-axis values. If not set, the interval will be calculated automatically.
-    public init(showYAxis: Bool = true, yAxisPosition: Edge.Set = .leading, yAxisViewWidth: CGFloat = 35, showYAxisGridLines: Bool = true, yAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), yAxisGridLineColor: Color = Color.secondary.opacity(0.5), yAxisZeroGridLineStrokeStyle: StrokeStyle? = nil, yAxisZeroGridLineColor: Color? = nil, yAxisFontSize: CGFloat = 8, yAxisMinMaxOverride: (min:Double?, max:Double?)? = nil, yAxisIntervalOverride: Double? = nil) {
+    public init(showYAxis: Bool = true, yAxisPosition: Edge.Set = .leading, yAxisViewWidth: CGFloat = 35, showYAxisGridLines: Bool = true, yAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), yAxisGridLineColor: Color = Color.secondary.opacity(0.5), yAxisFontSize: CGFloat = 8, yAxisMinMaxOverride: (min:Double?, max:Double?)? = nil, yAxisIntervalOverride: Double? = nil) {
         
         self.showYAxis = showYAxis
         self.yAxisPosition = yAxisPosition
@@ -44,8 +40,6 @@ public struct YAxisSettings {
         self.showYAxisGridLines = showYAxisGridLines
         self.yAxisGridLinesStrokeStyle = yAxisGridLineStrokeStyle
         self.yAxisGridLineColor = yAxisGridLineColor
-        self.yAxisZeroGridLineStrokeStyle = yAxisZeroGridLineStrokeStyle
-        self.yAxisZeroGridLineColor = yAxisZeroGridLineColor
         self.yAxisFontSize = yAxisFontSize
         self.yAxisMinMaxOverride = yAxisMinMaxOverride
         self.yAxisIntervalOverride = yAxisIntervalOverride

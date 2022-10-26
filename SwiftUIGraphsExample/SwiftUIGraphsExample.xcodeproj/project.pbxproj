@@ -22,7 +22,6 @@
 		B451709C28B34CFB00739334 /* MultiLineChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B451709B28B34CFB00739334 /* MultiLineChartExample.swift */; };
 		B47F4F2C28C1F86F002C94A4 /* MultiBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */; };
 		B480715B25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480715A25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift */; };
-		B480716325D7E2B1002D3A1C /* BasicLineChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480716225D7E2B1002D3A1C /* BasicLineChartExample.swift */; };
 		B480716825DD1BA6002D3A1C /* BasicBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480716725DD1BA6002D3A1C /* BasicBarChartExample.swift */; };
 		B4ECDC3728AA38D6001B6D35 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ECDC3628AA38D6001B6D35 /* View+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -66,7 +65,6 @@
 		B451709B28B34CFB00739334 /* MultiLineChartExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLineChartExample.swift; sourceTree = "<group>"; };
 		B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiBarChartExample.swift; sourceTree = "<group>"; };
 		B480715A25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomYAxisIntervalExampleLineChart.swift; sourceTree = "<group>"; };
-		B480716225D7E2B1002D3A1C /* BasicLineChartExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLineChartExample.swift; sourceTree = "<group>"; };
 		B480716725DD1BA6002D3A1C /* BasicBarChartExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBarChartExample.swift; sourceTree = "<group>"; };
 		B4ECDC3628AA38D6001B6D35 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,7 +123,6 @@
 				B437B5C025C8F9A80068CB91 /* SwiftUIGraphsExampleApp.swift */,
 				B437B5C225C8F9A80068CB91 /* ContentView.swift */,
 				B480715A25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift */,
-				B480716225D7E2B1002D3A1C /* BasicLineChartExample.swift */,
 				B40A8457261091FB00BB4EE3 /* LineChartWithAsyncDataFetch.swift */,
 				B480716725DD1BA6002D3A1C /* BasicBarChartExample.swift */,
 				B40A84412609C37000BB4EE3 /* BasicPieChartExample.swift */,
@@ -317,7 +314,6 @@
 				B4ECDC3728AA38D6001B6D35 /* View+Extensions.swift in Sources */,
 				B437B5C125C8F9A80068CB91 /* SwiftUIGraphsExampleApp.swift in Sources */,
 				B40A84422609C37000BB4EE3 /* BasicPieChartExample.swift in Sources */,
-				B480716325D7E2B1002D3A1C /* BasicLineChartExample.swift in Sources */,
 				B480715B25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift in Sources */,
 				B40A8447260D80F900BB4EE3 /* RingChartAndDetailPieChartExample.swift in Sources */,
 				B40A8458261091FB00BB4EE3 /* LineChartWithAsyncDataFetch.swift in Sources */,

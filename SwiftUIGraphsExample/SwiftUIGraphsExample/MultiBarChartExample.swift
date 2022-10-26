@@ -22,10 +22,10 @@ struct MultiBarChartExample: View {
                 .barDropShadow(Shadow(color: .gray, radius:8, x:-4, y:-3))
                 .selectedBar(borderColor: .purple, dropShadow: Shadow(color: .black.opacity(0.7), radius:10, x:-7, y:-5))
                 .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
-                .yAxisGridLines(zeroGridLineColor: .red)
+                .markerGridLine(yCoordinate: 0, color: .red)
                 .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
-                
                 .frame(height:chartHeight(proxy: proxy))
+                
             
                 
                 if self.barDataSets.isEmpty == false {
@@ -36,7 +36,7 @@ struct MultiBarChartExample: View {
                 }
                 
                 Spacer()
-            }
+            }.padding()
 
         }.navigationTitle("Profits & Losses Mio. USD per Division per Year")
             .onAppear {

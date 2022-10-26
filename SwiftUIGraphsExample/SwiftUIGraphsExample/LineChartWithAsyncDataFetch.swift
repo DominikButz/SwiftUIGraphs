@@ -29,11 +29,13 @@ struct LineChartWithAsyncDataFetch: View {
                             }.padding()
                         }
                         
-                        DYLineInfoView(titleLabel: Text("\(self.viewModel.stockSymbol) Share Price, last 30 days"), selectedDataPoint: $viewModel.selectedDataPoint, selectedYValueAsString: { yValue in
-                            yValue.toCurrencyString(maxDigits: 2)
-                        }, selectedXValueAsString: { xValue in
+                        DYLineInfoView(titleLabel: Text("\(self.viewModel.stockSymbol) Share Price, last 30 days"), selectedDataPoint: $viewModel.selectedDataPoint, minValueLabels: minValueLabels, maxValueLabels: maxValueLabels)
+                        .selectedXStringValue( { xValue in
                             Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM-yyyy")
-                        }, minValueLabels: minValueLabels, maxValueLabels: maxValueLabels)
+                        })
+                        .selectedYStringValue({ yValue in
+                            yValue.toCurrencyString(maxDigits: 2)
+                        })
                         .padding()
                         
                         
@@ -49,10 +51,10 @@ struct LineChartWithAsyncDataFetch: View {
                         })
                         .xAxisScalerOverride(minMax: (self.viewModel.dataPoints.first?.xValue, nil), interval: 172800)
                         .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
-                        .xAxisStringValue({ xValue in Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
+                        .xAxisLabelStringValue({ xValue in Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
                         })
                         .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
-                        .yAxisStringValue({ yValue in
+                        .yAxisLabelStringValue({ yValue in
                             let formatter = NumberFormatter()
                            formatter.maximumFractionDigits = 2
                            return formatter.string(for: yValue)!

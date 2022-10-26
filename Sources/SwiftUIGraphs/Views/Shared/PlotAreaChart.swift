@@ -8,11 +8,14 @@
 import Foundation
 import SwiftUI
 
-protocol PlotAreaChart  {
+protocol PlotAreaChart where Self: View  {
+
     var yAxisScaler: AxisScaler {get set}
     var yAxisSettings: YAxisSettings {get set}
     var xAxisSettings: XAxisSettings {get set}
+
     func xAxisLabelStrings()->[String]
+
     mutating func configureYAxisScaler(min: Double, max: Double, maxTicks: Int)
 }
 
@@ -87,25 +90,26 @@ extension PlotAreaChart {
         }
     }
     
-    
-    func yAxisZeroGridLineView()-> some View {
-        GeometryReader { geo in
-            let height = geo.size.height
-            let width = geo.size.width
-            let min = self.yAxisScaler.axisMinMax.min
-            let max = self.yAxisScaler.axisMinMax.max
-            let zeroYPosition = height - 0.convertToCoordinate(min: min, max: max, length: height)
-            if 0 > min && 0 <= max  && (yAxisSettings.yAxisZeroGridLineStrokeStyle  != nil || yAxisSettings.yAxisZeroGridLineColor != nil ){
-                Path {p in
-                    p.move(to: CGPoint(x: 0, y: zeroYPosition))
-                    p.addLine(to: CGPoint(x: width, y: zeroYPosition))
-                    p.closeSubpath()
-                }.stroke(style: yAxisSettings.yAxisZeroGridLineStrokeStyle ?? yAxisSettings.yAxisGridLinesStrokeStyle)
-                    .foregroundColor(yAxisSettings.yAxisZeroGridLineColor ?? yAxisSettings.yAxisGridLineColor)
-            }
-        }
 
-    }
+    
+//    func yAxisZeroGridLineView()-> some View {
+//        GeometryReader { geo in
+//            let height = geo.size.height
+//            let width = geo.size.width
+//            let min = self.yAxisScaler.axisMinMax.min
+//            let max = self.yAxisScaler.axisMinMax.max
+//            let zeroYPosition = height - 0.convertToCoordinate(min: min, max: max, length: height)
+//            if 0 > min && 0 <= max  && (yAxisSettings.yAxisZeroGridLineStrokeStyle  != nil || yAxisSettings.yAxisZeroGridLineColor != nil ){
+//                Path {p in
+//                    p.move(to: CGPoint(x: 0, y: zeroYPosition))
+//                    p.addLine(to: CGPoint(x: width, y: zeroYPosition))
+//                    p.closeSubpath()
+//                }.stroke(style: yAxisSettings.yAxisZeroGridLineStrokeStyle ?? yAxisSettings.yAxisGridLinesStrokeStyle)
+//                    .foregroundColor(yAxisSettings.yAxisZeroGridLineColor ?? yAxisSettings.yAxisGridLineColor)
+//            }
+//        }
+//
+//    }
     
     func placeholderGrid(xAxisLineCount: Int, yAxisLineCount: Int)->some View {
         ZStack {
@@ -113,7 +117,7 @@ extension PlotAreaChart {
                 ForEach(0..<yAxisLineCount, id:\.self) { i in
                     Line()
                         .stroke(style: self.yAxisSettings.yAxisGridLinesStrokeStyle)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(self.yAxisSettings.yAxisGridLineColor)
                         .frame(height:1)
                     
                     if i < yAxisLineCount - 1 {
@@ -121,17 +125,19 @@ extension PlotAreaChart {
                     }
                 }
             }
-            HStack {
-                ForEach(0..<xAxisLineCount, id: \.self) { i in
-                    Line(horizontal: false)
-                        .stroke(style: self.yAxisSettings.yAxisGridLinesStrokeStyle)
-                        .foregroundColor(.secondary)
-                        .frame(width:1)
+/// using yAxissettings here because xAxissettings for LineChart need to cast into DYLineChartXAxisSettings  - this fails because of associated type L... 
+                HStack {
+                    ForEach(0..<xAxisLineCount, id: \.self) { i in
+                        Line(horizontal: false)
+                            .stroke(style: self.yAxisSettings.yAxisGridLinesStrokeStyle)
+                            .foregroundColor(yAxisSettings.yAxisGridLineColor)
+                            .frame(width:1)
                         if i < xAxisLineCount - 1 {
                             Spacer()
                         }
+                    }
                 }
-            }
+            
             
         }
     }

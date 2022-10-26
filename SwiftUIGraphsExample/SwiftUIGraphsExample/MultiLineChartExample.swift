@@ -32,17 +32,19 @@ struct MultiLineChartExample: View {
                         .lineStyle(color: colors[i])
                         .selectedPointIndicatorLineStyle(xLineColor: colors[i], yLineColor: colors[i])
                         
+                        
                     }
               
                     
                 })
                 .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
-                .yAxisGridLines(zeroGridLineColor:.red)
-                .yAxisStringValue({ yValue in
+                .markerGridLine(coordinate: 0, color: .red)
+
+                .yAxisLabelStringValue({ yValue in
                     self.stringified(value:yValue)
                 })
                 .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
-                .xAxisStringValue({ xValue in
+                .xAxisLabelStringValue({ xValue in
                     self.stringified(value: xValue)
                 })
                 .frame(height: self.chartHeight(proxy: proxy))

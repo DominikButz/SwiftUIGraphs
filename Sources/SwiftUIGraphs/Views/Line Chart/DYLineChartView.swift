@@ -9,8 +9,8 @@ import SwiftUI
 
 
 
-public struct DYLineChartView<L>: View, PlotAreaChart, DYMultiLineChartModifiableProperties  where L: View {
-   
+public struct DYLineChartView<L: View>: View, PlotAreaChart, DYMultiLineChartModifiableProperties  {
+    
     public var settings: DYLineChartSettings
     public var yAxisSettings: YAxisSettings
     public var xAxisSettings: XAxisSettings
@@ -23,6 +23,7 @@ public struct DYLineChartView<L>: View, PlotAreaChart, DYMultiLineChartModifiabl
     @State private var touchingXPosition: CGFloat? // User X touch location
     @State private var selectorLineOffset: CGFloat = 0
 
+    var markerLines: [MarkerLine] = []
     
     public init(allDataPoints: [DYDataPoint], @ViewBuilder lineViews: @escaping (DYLineParentViewProperties)->L) {
 
@@ -68,11 +69,16 @@ public struct DYLineChartView<L>: View, PlotAreaChart, DYMultiLineChartModifiabl
                             ZStack {
                                 if self.yAxisSettings.showYAxisGridLines  {
                                     self.yAxisGridLinesView()
-                                    self.yAxisZeroGridLineView()
+                                    
+                                    //self.yAxisZeroGridLineView()
                                 }
                                 
                                 if (xAxisSettings as! DYLineChartXAxisSettings).showXAxisGridLines {
                                     self.xAxisGridLines().clipped()
+                                }
+                                
+                                ForEach(markerLines) { markerLine in
+                                    self.markerLineView(markerLine: markerLine).clipped()
                                 }
                                 
 
@@ -288,6 +294,40 @@ public struct DYLineChartView<L>: View, PlotAreaChart, DYMultiLineChartModifiabl
     private func xAxisMinMax()->(min: Double, max: Double){
         return self.xAxisScaler.axisMinMax
     }
+    
+    //MARK: marker lines
+    
+    
+    func markerLineView(markerLine: MarkerLine)-> some View {
+        
+        GeometryReader { geo in
+            let height = geo.size.height
+            let width = geo.size.width
+            let minY = self.yAxisScaler.axisMinMax.min
+            let maxY = self.yAxisScaler.axisMinMax.max
+            let minX = self.xAxisScaler.axisMinMax.min
+            let maxX = self.xAxisScaler.axisMinMax.max
+            
+            Path { p in
+                let startPointX = markerLine.orientation == .horizontal ? 0 :  markerLine.coordinate.convertToCoordinate(min: minX, max: maxX, length: width)
+                
+                let startPointY = markerLine.orientation == .horizontal ? height - markerLine.coordinate.convertToCoordinate(min: minY, max: maxY, length: height) : 0
+                
+                let endPointX = markerLine.orientation == .horizontal ? width : markerLine.coordinate.convertToCoordinate(min: minX, max: maxX, length: width)
+                
+                let endPointY = markerLine.orientation == .horizontal ?  height - markerLine.coordinate.convertToCoordinate(min: minY, max: maxY, length: height) : height
+                
+                p.move(to: CGPoint(x: startPointX, y: startPointY))
+                p.addLine(to: CGPoint(x: endPointX, y: endPointY))
+                p.closeSubpath()
+                
+            }.stroke(style: markerLine.strokeStyle)
+            .foregroundColor(markerLine.color)
+            
+        }
+        
+        
+    }
    
 }
 
@@ -318,6 +358,21 @@ public extension View where Self:  DYMultiLineChartModifiableProperties {
         var modView = self  as! DYLineChartView<L>
         modView.settings.selectorLineColor = color
         modView.settings.selectorLineWidth = width
+        return modView
+        
+    }
+    
+    /// markerGridLine: Additional grid line e.g. to mark a target value. It is possible to add several marker grid line modifiers to the DYLineChartView. 
+    /// - Parameters:
+    ///   - coordinate: coordinate of the grid line. If the orientation is horizontal, the coordinate represents the the y-coorindate, otherwise, it represents the x-coordinate.
+    ///   - color: color of the marker grid line
+    ///   - strokeStyle: stroke style of the marker grid line
+    ///   - orientation: horizontal or vertical
+    /// - Returns: modified DYLineChartView
+    func markerGridLine(coordinate: Double, color: Color, strokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), orientation: Orientation = .horizontal)->DYLineChartView<L> {
+        let markerLine = MarkerLine(coordinate: coordinate, color: color, strokeStyle: strokeStyle, orientation: orientation)
+        var modView = self  as! DYLineChartView<L>
+        modView.markerLines.append(markerLine)
         return modView
         
     }
@@ -371,10 +426,10 @@ public extension View where Self:  DYMultiLineChartModifiableProperties {
         
     }
     
-    /// xAxisStringValue
+    /// xAxisLabelStringValue
     /// - Parameter stringValue: a closure to format x-Axis label strings depending on the number value. Default is a format as integer string (no fraction digits)
     /// - Returns: modified DYLineChartView
-    func xAxisStringValue(_ stringValue: @escaping (Double)->String)->DYLineChartView<L> {
+    func xAxisLabelStringValue(_ stringValue: @escaping (Double)->String)->DYLineChartView<L> {
         var modView = self as! DYLineChartView<L>
         modView.xAxisValueAsString = stringValue
         return modView
@@ -444,17 +499,13 @@ public extension View where Self:  DYMultiLineChartModifiableProperties {
     ///   - showGridLines: show the horizontal grid lines
     ///   - gridLineColor: horizontal grid line color
     ///   - gridLineStrokeStyle: vertical grid line stroke style
-    ///   - zeroGridLineColor: color of the 0-grid line. default nil: no separate zero grid line
-    ///   - zeroGridLineStrokeStyle: stroke style of the 0-grid line. default nil.
     /// - Returns: modified DYLineChartView
-    func yAxisGridLines(showGridLines: Bool = true, gridLineColor: Color = Color.secondary.opacity(0.5), gridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), zeroGridLineColor: Color? = nil, zeroGridLineStrokeStyle: StrokeStyle? = nil)->DYLineChartView<L> {
+    func yAxisGridLines(showGridLines: Bool = true, gridLineColor: Color = Color.secondary.opacity(0.5), gridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]))->DYLineChartView<L> {
         var modView = self as! DYLineChartView<L>
         var yAxisSettings = modView.yAxisSettings
         yAxisSettings.showYAxisGridLines = showGridLines
         yAxisSettings.yAxisGridLineColor = gridLineColor
         yAxisSettings.yAxisGridLinesStrokeStyle = gridLineStrokeStyle
-        yAxisSettings.yAxisZeroGridLineColor = zeroGridLineColor
-        yAxisSettings.yAxisZeroGridLineStrokeStyle = zeroGridLineStrokeStyle
         modView.yAxisSettings = yAxisSettings
         return modView
         
@@ -463,7 +514,7 @@ public extension View where Self:  DYMultiLineChartModifiableProperties {
     /// yAxisStringValue
     /// - Parameter stringValue: a closure to format y-Axis label strings depending on the number value. Default is a format as integer string (no fraction digits)
     /// - Returns: modified DYLineChartView
-    func yAxisStringValue(_ stringValue: @escaping (Double)->String)->DYLineChartView<L> {
+    func yAxisLabelStringValue(_ stringValue: @escaping (Double)->String)->DYLineChartView<L> {
         var modView = self as! DYLineChartView<L>
         modView.yAxisValueAsString = stringValue
         return modView
@@ -495,6 +546,8 @@ public extension View where Self:  DYMultiLineChartModifiableProperties {
             return modView
     
     }
+    
+    
 
     
 }

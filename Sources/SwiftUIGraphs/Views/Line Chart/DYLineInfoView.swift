@@ -11,12 +11,12 @@ public struct DYLineInfoView: View, DYLineInfoViewModifiableProperties {
 
     var titleLabel: Text?
     @Binding var selectedDataPoint: DYDataPoint?
-    var selectedYValueAsString: (Double)->String
-    var selectedXValueAsString: (Double)->String
+
     var minValueLabels: (y: Text, x:Text)?
     var maxValueLabels: (y: Text, x:Text)?
     
-    //access only through selectedLabel modifier
+    public var selectedYValueAsString: (Double)->String
+    public var selectedXValueAsString: (Double)->String
     public var selectedYLabelFont: Font = .headline
     public var selectedXLabelFont: Font = .callout
     public var selectedYLabelTextColor: Color = .orange
@@ -24,11 +24,11 @@ public struct DYLineInfoView: View, DYLineInfoViewModifiableProperties {
    
     @StateObject var orientationObserver = OrientationObserver()
     
-    public init(titleLabel: Text? = nil, selectedDataPoint: Binding<DYDataPoint?>, selectedYValueAsString: @escaping (Double)->String, selectedXValueAsString: @escaping (Double)->String,  minValueLabels: (y: Text, x: Text)? = nil, maxValueLabels: (y: Text, x: Text)? = nil) {
+    public init(titleLabel: Text? = nil, selectedDataPoint: Binding<DYDataPoint?>, minValueLabels: (y: Text, x: Text)? = nil, maxValueLabels: (y: Text, x: Text)? = nil) {
         self.titleLabel = titleLabel
         self._selectedDataPoint = selectedDataPoint
-        self.selectedYValueAsString = selectedYValueAsString
-        self.selectedXValueAsString = selectedXValueAsString
+        self.selectedYValueAsString = {yValue in yValue.toDecimalString(maxFractionDigits: 0)}
+        self.selectedXValueAsString = {xValue in xValue.toDecimalString(maxFractionDigits: 0)}
         self.minValueLabels = minValueLabels
         self.maxValueLabels = maxValueLabels
 
@@ -102,20 +102,38 @@ public protocol DYLineInfoViewModifiableProperties {
     var selectedYLabelTextColor: Color  {get set }
     var selectedXLabelTextColor: Color {get set }
     
+    var selectedYValueAsString: (Double)->String {get set}
+    var selectedXValueAsString: (Double)->String {get set }
 }
 
 
 
 public extension View where Self: DYLineInfoViewModifiableProperties {
     
-    func selectedDataPointLabelSettings(yFont: Font = .headline, yColor: Color = .orange, xFont: Font = .callout, xColor: Color = .secondary)-> some View {
-        var newView = self
-        newView.selectedYLabelFont = yFont
-        newView.selectedYLabelTextColor = yColor
-        newView.selectedXLabelFont = xFont
-        newView.selectedXLabelTextColor = xColor
-        return newView
+    func selectedDataPointLabel(yFont: Font = .headline, yColor: Color = .orange, xFont: Font = .callout, xColor: Color = .secondary)-> DYLineInfoView{
+        var modView = self
+        modView.selectedYLabelFont = yFont
+        modView.selectedYLabelTextColor = yColor
+        modView.selectedXLabelFont = xFont
+        modView.selectedXLabelTextColor = xColor
+        return modView as! DYLineInfoView
     }
+    
+    func selectedXStringValue(_ stringValue: @escaping (Double)->String)-> DYLineInfoView {
+        var modView = self
+        modView.selectedXValueAsString = stringValue
+        return modView as! DYLineInfoView
+        
+    }
+    
+    func selectedYStringValue(_ stringValue: @escaping (Double)->String)-> DYLineInfoView {
+        var modView = self
+        modView.selectedYValueAsString = stringValue
+        return modView as! DYLineInfoView
+        
+    }
+    
+    
 }
 
 
