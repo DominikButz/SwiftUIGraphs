@@ -40,8 +40,8 @@ struct ContentView: View {
                     Image(systemName: "chart.pie.fill")
                     Text("Pie Charts")
                 }) {
-                    NavigationLink("Av. US Household Spending", destination: BasicPieChartExample())
-                    NavigationLink("Sales per Country", destination: RingChartAndDetailPieChartExample())
+                    NavigationLink("Basic Pie Chart", destination: BasicPieChartExample())
+                    NavigationLink("Ring Chart with Pop-out Effect", destination: RingChartAndDetailPieChartExample())
                 }
 
             }.navigationBarTitle("SwiftUIGraphs Examples", displayMode: .inline).padding()
