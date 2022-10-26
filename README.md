@@ -512,7 +512,7 @@ struct RingChartAndDetailPieChartExample: View {
 
 ## Change log
 
-#### [Version 1.0](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.0)
+#### [Version 1.0.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.0.1)
 BREAKING changes:
 
 * DYLineChartView and DYBarChartView now support multiple data series by default.
