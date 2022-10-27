@@ -15,7 +15,6 @@ public struct DYLineView<PointV: View, LabelV: View, SelectorV: View>: View, DYL
     var yAxisSettings: YAxisSettings
     var yAxisScaler: AxisScaler
     var xAxisScaler: AxisScaler
-    // var xAxisScaler.axisMinMax: (min: Double, max: Double) // can be different from this data set's x values min max because other line data sets included.
     var pointView: (DYDataPoint)-> PointV
     var labelView: (DYDataPoint)->LabelV
     var selectorView: SelectorV
@@ -69,7 +68,7 @@ public struct DYLineView<PointV: View, LabelV: View, SelectorV: View>: View, DYL
              
                 if self.showSupplementaryViews || self.settings.showAppearAnimation == false {
                     
-                    if self.selectedDataPoint != nil {
+                    if self.selectedDataPoint != nil, self.settings.allowUserInteraction {
                         self.selectedDataPointAxisLines().clipped()
                     }
                     
@@ -97,17 +96,13 @@ public struct DYLineView<PointV: View, LabelV: View, SelectorV: View>: View, DYL
                 }
                 self.showLine()
             }.onChange(of: self.touchingXPosition) { newValue in
-               // print("touching x pos \(newValue)")
-           
-               // if newValue == nil {
-                    //print("line offset \(self.selectorLineOffset)")
+                
+                guard self.settings.allowUserInteraction else {return }
+
                     self.updateSelectorCurrentXPosition(geo: geo)
                     let index = self.fractionIndexFor(xPosition: self.selectorLineOffset, width: geo.size.width)
-                    //print("released touching position. setting index to \(index)")
                     self.setSelected(index: index)
-                
-                    //print("setting selected to index \(index)")
-              //  }
+
                 
             }
         }
@@ -437,7 +432,14 @@ public protocol DYLineViewModifiableProperties {
 
 public extension View where Self: DYLineViewModifiableProperties {
     
-    func lineStyle(color: Color, strokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80, dash: [], dashPhase: 0), shadow: Shadow? = nil, interpolationType: InterpolationType = .quadCurve)->DYLineView<PointV, LabelV, SelectorV>  {
+    /// lineStyle
+    /// - Parameters:
+    ///   - color: color of the line. default is primary.
+    ///   - strokeStyle: stroke style of the line
+    ///   - shadow: drop shadow under the line
+    ///   - interpolationType: method to joint two points - quadCurve connects two points in a more rounded way, linear simply renders a straight line
+    /// - Returns: modified DYLineView
+    func lineStyle(color: Color, strokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round, miterLimit: 80), shadow: Shadow? = nil, interpolationType: InterpolationType = .quadCurve)->DYLineView<PointV, LabelV, SelectorV>  {
         var modView = self
         modView.settings.lineColor = color
         modView.settings.lineStrokeStyle = strokeStyle
@@ -446,6 +448,11 @@ public extension View where Self: DYLineViewModifiableProperties {
         return modView as! DYLineView<PointV, LabelV, SelectorV>
     }
     
+    /// line animation settings
+    /// - Parameters:
+    ///   - showAppearAnimation: if set to true, the line will appear with a drawing animation, from left to right.
+    ///   - duration: animation duration.
+    /// - Returns: modified DYLineView
     func animation(showAppearAnimation: Bool = true, duration:TimeInterval = 1.4)->DYLineView<PointV, LabelV, SelectorV> {
         var modView = self
         modView.settings.showAppearAnimation = showAppearAnimation
@@ -453,12 +460,20 @@ public extension View where Self: DYLineViewModifiableProperties {
         return modView as! DYLineView<PointV, LabelV, SelectorV>
     }
     
-    func userInteraction(enabled: Bool = true )->DYLineView<PointV, LabelV, SelectorV>  {
+    /// user interaction
+    /// - Parameter enabled: if enabled, the selected data point will be constantly updated as the user swipes horizontally across the plotting area.  Likewise, the selector marker view (if any) will move along the line. If the DYLineChartView's user interaction property is set to false, this user interaction property won't work. Default is true.
+    /// - Returns: modified DYLineView.
+    func userInteraction(enabled: Bool)->DYLineView<PointV, LabelV, SelectorV>  {
         var modView = self
         modView.settings.allowUserInteraction = enabled
         return modView as! DYLineView<PointV, LabelV, SelectorV>
     }
     
+    /// area  linear gradient under the line
+    /// - Parameters:
+    ///   - gradient: a linear gradient area between the line and the 0-value. Any line section lying below 0 will show the gradient above the line section. default is nil (= no gradient area).
+    ///   - shadow: drop shadow under the gradient area.
+    /// - Returns: modified DYLineView.
     func area(gradient: LinearGradient?, shadow: Shadow?)-> DYLineView<PointV, LabelV, SelectorV>  {
         var modView = self
         modView.settings.lineAreaGradient = gradient
@@ -466,6 +481,13 @@ public extension View where Self: DYLineViewModifiableProperties {
         return modView as! DYLineView<PointV, LabelV, SelectorV>
     }
     
+    /// selectedPointIndicatorLineStyle: marker lines connecting the selected point with the x- and/ or y-axis.
+    /// - Parameters:
+    ///   - xLineColor: the vertical marker line color
+    ///   - xLineStrokeStyle: the vertical marker line stroke style
+    ///   - yLineColor: the horizontal marker line color
+    ///   - yLineStrokeStyle: the horizontal marker line stroke style
+    /// - Returns:  modified DYLineView.
     func selectedPointIndicatorLineStyle(xLineColor: Color? = nil, xLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 2, dash: [3]), yLineColor: Color? = nil, yLineStrokeStyle: StrokeStyle =  StrokeStyle(lineWidth: 2, dash: [3]))->DYLineView<PointV, LabelV, SelectorV>  {
         var modView = self
         modView.settings.xValueSelectedDataPointLineColor = xLineColor
@@ -475,9 +497,12 @@ public extension View where Self: DYLineViewModifiableProperties {
         return modView as! DYLineView<PointV, LabelV, SelectorV>
     }
     
-    func colorPerLineSegment(_ closure: ((DYDataPoint)->Color)? = nil)->DYLineView<PointV, LabelV, SelectorV>  {
+    /// colorPerLineSegment
+    /// - Parameter segmentColor: the color of the line segment that connects the current data point with the next data point. If this property is set, the default line color (or the color set in the lineStyle modifier) will be overridden. 
+    /// - Returns: modified DYLineView.
+    func colorPerLineSegment(_ segmentColor: ((DYDataPoint)->Color)? = nil)->DYLineView<PointV, LabelV, SelectorV>  {
         var modView = self
-        modView.colorPerLineSegment = closure
+        modView.colorPerLineSegment = segmentColor
         return modView as! DYLineView<PointV, LabelV, SelectorV> 
     }
   

@@ -26,9 +26,11 @@ struct MultiLineChartExample: View {
                     let selectedPoints = [$blueSelectedDataPoint, $orangeSelectedDataPoint, $greenSelectedDataPoint]
                     ForEach(0..<dataPointArrays.count, id:\.self) { i in
                         
+                        let userInteractionEnabled = i == 1 ? false : true
                         DYLineView(dataPoints: dataPointArrays[i], selectedDataPoint: selectedPoints[i], pointView: { _ in
                             self.pointViewFor(index: i)
                         }, selectorView: self.selectorPointViewFor(index: i), parentViewProperties: parentProps)
+                        .userInteraction(enabled: userInteractionEnabled)
                         .lineStyle(color: colors[i])
                         .selectedPointIndicatorLineStyle(xLineColor: colors[i], yLineColor: colors[i])
                         
@@ -37,13 +39,13 @@ struct MultiLineChartExample: View {
               
                     
                 })
-                .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .yAxisLabelFont(self.font)
                 .markerGridLine(coordinate: 0, color: .red)
 
                 .yAxisLabelStringValue({ yValue in
                     self.stringified(value:yValue)
                 })
-                .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .xAxisLabelFont(self.font)
                 .xAxisLabelStringValue({ xValue in
                     self.stringified(value: xValue)
                 })
@@ -61,6 +63,11 @@ struct MultiLineChartExample: View {
                 generateDataPoints()
             }
 
+    }
+    
+    var font: UIFont {
+        let size:CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
+        return UIFont.systemFont(ofSize: size)
     }
     
     func chartHeight(proxy: GeometryProxy)->CGFloat {

@@ -63,7 +63,7 @@ extension PlotAreaChart {
     }
     
     private func yAxisIntervalLabelViewFor(value:Double, yValueAsString: (Double)->String, totalHeight: CGFloat)-> some View {
-        Text(yValueAsString(value)).font(.system(size:yAxisSettings.yAxisFontSize)).position(x: self.yAxisSettings.yAxisViewWidth / 2, y: totalHeight - value.convertToCoordinate(min: self.yAxisScaler.axisMinMax.min, max: self.yAxisScaler.axisMinMax.max, length: totalHeight))
+        Text(yValueAsString(value)).font(Font(self.yAxisSettings.labelFont)).position(x: self.yAxisSettings.yAxisViewWidth / 2, y: totalHeight - value.convertToCoordinate(min: self.yAxisScaler.axisMinMax.min, max: self.yAxisScaler.axisMinMax.max, length: totalHeight))
     }
     
     func yAxisGridLinesView()-> some View {
@@ -147,9 +147,11 @@ extension PlotAreaChart {
     func xAxisLabelSteps(totalWidth: CGFloat)->Int {
         let allLabels = xAxisLabelStrings()
 
-        let fontSize =  xAxisSettings.labelFontSize
-
-        let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
+       // let fontSize =  xAxisSettings.labelFontSize
+       // let ctFont = CTFontCreateWithName(("SFProText-Regular" as CFString), fontSize, nil)
+        
+        let ctFont = self.xAxisSettings.labelFont as CTFont
+        
         // let x be the padding
         let padding: CGFloat = 5
         var count = 1

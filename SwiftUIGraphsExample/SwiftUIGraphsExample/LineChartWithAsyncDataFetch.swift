@@ -44,16 +44,17 @@ struct LineChartWithAsyncDataFetch: View {
                             DYLineView(dataPoints: viewModel.dataPoints, selectedDataPoint: $viewModel.selectedDataPoint, pointView: { _ in
                                 DYLinePointView()
                             }, selectorView: DYSelectorPointView(),  parentViewProperties: parentProps)
+                                .lineStyle(color: .orange)
                                 .selectedPointIndicatorLineStyle(xLineColor: .red, yLineColor: .red)
                                 .area(gradient: LinearGradient(colors: [.orange, .orange.opacity(0.1)], startPoint: .top, endPoint: .bottom), shadow: nil)
            
                             
                         })
                         .xAxisScalerOverride(minMax: (self.viewModel.dataPoints.first?.xValue, nil), interval: 172800)
-                        .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                        .xAxisLabelFont(self.font)
                         .xAxisLabelStringValue({ xValue in Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")
                         })
-                        .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                        .yAxisLabelFont(self.font)
                         .yAxisLabelStringValue({ yValue in
                             let formatter = NumberFormatter()
                            formatter.maximumFractionDigits = 2
@@ -87,6 +88,11 @@ struct LineChartWithAsyncDataFetch: View {
         }
       
         return Text("").eraseToAnyView()
+    }
+    
+    var font: UIFont {
+        let size:CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
+        return UIFont.systemFont(ofSize: size)
     }
 
 

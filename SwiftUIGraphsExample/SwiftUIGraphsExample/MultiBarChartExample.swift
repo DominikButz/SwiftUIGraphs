@@ -21,9 +21,9 @@ struct MultiBarChartExample: View {
                 DYBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet)
                 .barDropShadow(Shadow(color: .gray, radius:8, x:-4, y:-3))
                 .selectedBar(borderColor: .purple, dropShadow: Shadow(color: .black.opacity(0.7), radius:10, x:-7, y:-5))
-                .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .yAxisLabelFont(self.font(xAxis: false))
                 .markerGridLine(yCoordinate: 0, color: .red)
-                .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .xAxisLabelFont(self.font())
                 .frame(height:chartHeight(proxy: proxy))
                 
             
@@ -42,6 +42,12 @@ struct MultiBarChartExample: View {
             .onAppear {
                 self.generateExampleData()
             }
+    }
+    
+    func font(xAxis: Bool = true)-> UIFont {
+        let size:CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
+        let weight : UIFont.Weight = xAxis ? .bold : .regular
+        return  UIFont.systemFont(ofSize: size, weight: weight)
     }
 
     

@@ -41,8 +41,9 @@ struct CustomYAxisIntervalExampleLineChart: View {
                })
                .yAxisScalerOverride(minMax:  (min: 0, max: Double(Int(dataPoints.map({$0.yValue}).max() ?? 0).nearest(multipleOf: 1800, up: true))), interval: 1800)  // 1800 seconds = 30 min
                .yAxisPosition(.trailing)
+               .xAxisLabelFont(self.font)
                .yAxisViewWidth(UIDevice.current.userInterfaceIdiom == .phone ? 40 : 45)
-               .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+               .yAxisLabelFont(self.font)
                .yAxisLabelStringValue({yValue in  TimeInterval(yValue).toString() ?? ""})
                .xAxisLabelStringValue({xValue in  Date(timeIntervalSinceReferenceDate: xValue).toString(format:"dd-MM")})
                .xAxisScalerOverride(minMax: (min: self.dataPoints.map({$0.xValue}).min(), max: self.dataPoints.map({$0.xValue}).max()), interval: 604800)  // 604800 seconds per week
@@ -83,7 +84,10 @@ struct CustomYAxisIntervalExampleLineChart: View {
 //        }, selectorView: DYLineDataSet.defaultSelectorPointView(color: .red),  settings: DYLineSettings(lineColor: .blue,   showAppearAnimation: true, lineAreaGradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), lineAreaGradientDropShadow: Shadow(color: .gray, radius: 7, x: -7, y: -7), xValueSelectedDataPointLineColor: .red, yValueSelectedDataPointLineColor: .red))
     }
     
-
+    var font: UIFont {
+        let size:CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
+        return UIFont.systemFont(ofSize: size)
+    }
     
     var minValueLabels: (y: Text, x:Text)? {
     

@@ -104,7 +104,7 @@ public struct DYLineChartView<L: View>: View, PlotAreaChart, DYMultiLineChartMod
                         }
                         
                         if xAxisSettings.showXAxis {
-                            self.xAxisView().frame(height:xAxisSettings.xAxisViewHeight  )
+                            self.xAxisView().frame(maxHeight:xAxisSettings.xAxisViewHeight  )
                         }
                     }
 
@@ -232,7 +232,7 @@ public struct DYLineChartView<L: View>: View, PlotAreaChart, DYMultiLineChartMod
         let minX = xAxisMinMax.min
         let mappedXValue = value.convertToCoordinate(min: minX, max: maxX, length: totalWidth)
         
-        return Text(self.xAxisValueAsString(value)).font(.system(size:xAxisSettings.labelFontSize)).position(x: mappedXValue, y: 10)
+        return Text(self.xAxisValueAsString(value)).font(Font(self.xAxisSettings.labelFont)).position(x: mappedXValue, y: 10)
     }
     
     public func xAxisLabelStrings()->[String] {
@@ -379,9 +379,9 @@ public extension View where Self:  DYMultiLineChartModifiableProperties {
     
     
     /// userInteraction
-    /// - Parameter enabled: if set to true, the user can interact with the chart by swiping horizontally
+    /// - Parameter enabled: if set to true, the user can interact with the chart by swiping horizontally. This flag overrides the userInteraction flag of DYLineView. Default is true.
     /// - Returns: modified DYLineChartView
-    func userInteraction(enabled: Bool = true)->DYLineChartView<L> {
+    func userInteraction(enabled: Bool)->DYLineChartView<L> {
         var modView = self as! DYLineChartView<L>
         modView.settings.allowUserInteraction = enabled
         return modView
@@ -435,15 +435,17 @@ public extension View where Self:  DYMultiLineChartModifiableProperties {
         return modView
     }
     
-    
-    /// xAxisLabelFontSize
-    /// - Parameter fontSize: font size of the x-axis tick labels. default is 8.
-    /// - Returns: modified  DYLineChartView
-    func xAxisLabelFontSize(_ fontSize: CGFloat)->DYLineChartView<L> {
+    /// xAxisLabelFont - font for all x-axis tick labels
+    /// - Parameter font: A UIFont
+    /// - Returns: modified DYLineChartView
+    func xAxisLabelFont(_ font: UIFont)->DYLineChartView<L> {
         var modView = self as! DYLineChartView<L>
-        modView.xAxisSettings.labelFontSize = fontSize
+        modView.xAxisSettings.labelFont = font
         return modView
+        
     }
+    
+
     
     /// xAxisScalerOverride
     /// - Parameters:
@@ -521,16 +523,18 @@ public extension View where Self:  DYMultiLineChartModifiableProperties {
     }
     
     
-    /// yAxisLabelFontSize
-    /// - Parameter fontSize: font size of the y-axis labels. default size is 8
-    /// - Returns: modified  DYLineChartView
-    func yAxisLabelFontSize(_ size: CGFloat)->DYLineChartView<L> {
+    
+    /// yAxisLabelFont - font for all y-axis tick labels
+    /// - Parameter font: A UIFont
+    /// - Returns: modified DYLineChartView
+    func yAxisLabelFont(_ font: UIFont)->DYLineChartView<L> {
         var modView = self as! DYLineChartView<L>
-        modView.yAxisSettings.yAxisFontSize = size
+        modView.yAxisSettings.labelFont = font 
         return modView
         
     }
     
+ 
     
     /// yAxisScalerOverride
     /// - Parameters:

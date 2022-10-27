@@ -71,7 +71,7 @@ public struct DYBarChartView: View, PlotAreaChart {
                     }
 
                     if self.xAxisSettings.showXAxis {
-                        self.xAxisView().frame(height: xAxisSettings.xAxisViewHeight)
+                        self.xAxisView().frame(maxHeight: xAxisSettings.xAxisViewHeight)
                     }
                 }
                 .onAppear {
@@ -172,7 +172,7 @@ public struct DYBarChartView: View, PlotAreaChart {
     }
     
     private func xAxisIntervalLabelViewFor(label: String, index: Int, totalWidth: CGFloat)-> some View {
-        Text(label).font(.system(size: xAxisSettings.labelFontSize)).position(x: self.convertToXCoordinate(index: index, totalWidth: totalWidth), y: 10)
+        Text(label).font(Font(self.xAxisSettings.labelFont)).lineLimit(2).position(x: self.convertToXCoordinate(index: index, totalWidth: totalWidth), y: 10)
     }
     
     
@@ -486,14 +486,16 @@ public extension View where Self == DYBarChartView {
         return modView
     }
     
-    /// xAxisLabelFontSize
-    /// - Parameter fontSize: font size of the x-axis tick labels. default is 8.
-    /// - Returns: modified  DYBarChartView
-    func xAxisLabelFontSize(_ fontSize: CGFloat)->DYBarChartView {
+    /// xAxisLabelFont - font for all x-axis bar labels
+    /// - Parameter font: A UIFont
+    /// - Returns: modified DYBarChartView
+    func xAxisLabelFont(_ font: UIFont)->DYBarChartView {
         var modView = self
-        modView.xAxisSettings.labelFontSize = fontSize
+        modView.xAxisSettings.labelFont = font
         return modView
+        
     }
+
     
 //MARK: y-Axis Settings
     
@@ -535,16 +537,17 @@ public extension View where Self == DYBarChartView {
         return modView
     }
     
-    /// yAxisLabelFontSize
-    /// - Parameter fontSize: font size of the y-axis labels. default size is 8
-    /// - Returns: modified  DYBarChartView
-    func yAxisLabelFontSize(_ fontSize: CGFloat)->DYBarChartView {
+    /// yAxisLabelFont - font for all y-axis tick labels
+    /// - Parameter font: A UIFont
+    /// - Returns: modified DYBarChartView
+    func yAxisLabelFont(_ font: UIFont)->DYBarChartView {
         var modView = self
-        var yAxisSettings = modView.yAxisSettings
-        yAxisSettings.yAxisFontSize = fontSize
-        modView.yAxisSettings = yAxisSettings
+        modView.yAxisSettings.labelFont = font
         return modView
+        
     }
+    
+
 
     
     /// yAxisGridLines: horizontal grid lines

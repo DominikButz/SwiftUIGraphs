@@ -16,7 +16,7 @@ public struct YAxisSettings {
     var showYAxisGridLines: Bool
     var yAxisGridLinesStrokeStyle: StrokeStyle
     var yAxisGridLineColor: Color
-    var yAxisFontSize: CGFloat
+    var labelFont: UIFont
     
     var yAxisMinMaxOverride: (min:Double?, max:Double?)?
     var yAxisIntervalOverride: Double?
@@ -29,10 +29,10 @@ public struct YAxisSettings {
     ///   - showYAxisGridLines: determines if the (horizontal) y-axis grid lines should be shown.
     ///   - yAxisGridLineStrokeStyle: stroke style of the y-axis grid lines.
     ///   - yAxisGridLineColor: color of the y-axis grid lines.
-    ///  - yAxisFontSize: font size of the y-axis marker labels.
+    ///   - labelFont:a UI font for all y-axis tick labels
     ///  - yAxisMinMaxOverride: override the max and min values of the y-axis. if not set, the min and max value will be calculated automatically.
     ///  - yAxisIntervalOverride: override the interval of the y-axis values. If not set, the interval will be calculated automatically.
-    public init(showYAxis: Bool = true, yAxisPosition: Edge.Set = .leading, yAxisViewWidth: CGFloat = 35, showYAxisGridLines: Bool = true, yAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), yAxisGridLineColor: Color = Color.secondary.opacity(0.5), yAxisFontSize: CGFloat = 8, yAxisMinMaxOverride: (min:Double?, max:Double?)? = nil, yAxisIntervalOverride: Double? = nil) {
+    public init(showYAxis: Bool = true, yAxisPosition: Edge.Set = .leading, yAxisViewWidth: CGFloat = 35, showYAxisGridLines: Bool = true, yAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), yAxisGridLineColor: Color = Color.secondary.opacity(0.5), labelFont: UIFont = UIFont.systemFont(ofSize: 8), yAxisMinMaxOverride: (min:Double?, max:Double?)? = nil, yAxisIntervalOverride: Double? = nil) {
         
         self.showYAxis = showYAxis
         self.yAxisPosition = yAxisPosition
@@ -40,7 +40,7 @@ public struct YAxisSettings {
         self.showYAxisGridLines = showYAxisGridLines
         self.yAxisGridLinesStrokeStyle = yAxisGridLineStrokeStyle
         self.yAxisGridLineColor = yAxisGridLineColor
-        self.yAxisFontSize = yAxisFontSize
+        self.labelFont = labelFont
         self.yAxisMinMaxOverride = yAxisMinMaxOverride
         self.yAxisIntervalOverride = yAxisIntervalOverride
         
@@ -49,7 +49,7 @@ public struct YAxisSettings {
 
 public protocol XAxisSettings {
     var showXAxis: Bool {get set}
-    var labelFontSize: CGFloat {get set}
+    var labelFont: UIFont {get set}
     var xAxisViewHeight: CGFloat {get set}
 }
  
@@ -60,8 +60,7 @@ public struct DYLineChartXAxisSettings: XAxisSettings {
     var showXAxisGridLines: Bool
     var xAxisGridLineStrokeStyle: StrokeStyle
     var xAxisGridLineColor: Color
-    public var labelFontSize: CGFloat
-    //var xAxisInterval: Double
+    public var labelFont: UIFont
     var minMaxOverride: (min:Double?, max:Double?)?
     var intervalOverride: Double?
 
@@ -72,17 +71,17 @@ public struct DYLineChartXAxisSettings: XAxisSettings {
     ///   - showXAxisGridLines: determines if the x axis grid lines should be shown (vertical lines).
     ///   - xAxisGridLineStrokeStyle: stroke style of the vertical x axis grid lines.
     ///   - xAxisGridLineColor: color of the xAxis grid lines.
-    ///   - xAxisFontSize: font size of the x axis marker labels.
+    ///   - labelFont: a ui font for all tick labels on the x-axis.
     ///   - minMaxOverride: override the max and min values of the x-axis. if not set, the min and max value will be calculated automatically.
     ///   - intervalOverride: override the interval of the x-axis values. If not set, the interval will be calculated automatically.
-    public init(showXAxis: Bool = true, xAxisViewHeight: CGFloat = 20, showXAxisGridLines: Bool = true, xAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisGridLineColor: Color = Color.secondary.opacity(0.5), xAxisFontSize: CGFloat = 8, minMaxOverride: (min:Double?, max:Double?)? = nil, intervalOverride: Double? = nil ) {
+    public init(showXAxis: Bool = true, xAxisViewHeight: CGFloat = 20, showXAxisGridLines: Bool = true, xAxisGridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]), xAxisGridLineColor: Color = Color.secondary.opacity(0.5), labelFont: UIFont = UIFont.systemFont(ofSize: 8), minMaxOverride: (min:Double?, max:Double?)? = nil, intervalOverride: Double? = nil ) {
         
         self.showXAxis = showXAxis
         self.xAxisViewHeight = xAxisViewHeight
         self.showXAxisGridLines = showXAxisGridLines
         self.xAxisGridLineStrokeStyle = xAxisGridLineStrokeStyle
         self.xAxisGridLineColor = xAxisGridLineColor
-        self.labelFontSize = xAxisFontSize
+        self.labelFont = labelFont
         self.minMaxOverride = minMaxOverride
         self.intervalOverride = intervalOverride
     }
@@ -96,18 +95,18 @@ public struct DYBarChartXAxisSettings: XAxisSettings {
     
    public var showXAxis: Bool
    public var xAxisViewHeight: CGFloat
-   public var labelFontSize: CGFloat
+   public var labelFont: UIFont
     
     /// DYBarChartXAxisSettings
     /// - Parameters:
     ///   - showXAxis: determines if the x-axis should be shown.
     ///   - xAxisViewHeight: height of the xAxis view.
-    ///   - xAxisFontSize: font size of the x-axis marker labels.
-    public init(showXAxis: Bool = true, xAxisViewHeight:CGFloat = 20,  xAxisFontSize: CGFloat = 8) {
+    ///   - labelFont: a ui font for all tick labels on the x-axis.
+    public init(showXAxis: Bool = true, xAxisViewHeight:CGFloat = 20, labelFont: UIFont = UIFont.preferredFont(forTextStyle: .footnote)) {
         
         self.showXAxis = showXAxis
         self.xAxisViewHeight = xAxisViewHeight
-        self.labelFontSize = xAxisFontSize
+        self.labelFont = labelFont
     }
 }
 

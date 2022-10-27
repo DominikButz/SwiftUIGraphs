@@ -20,9 +20,9 @@ struct BasicBarChartExample: View {
                 DYBarChartView(barDataSets: barDataSets, selectedBarDataSet: $selectedBarDataSet)
                 .barDropShadow(Shadow(color: .gray, radius:8, x:-4, y:-3))
                 .selectedBar(borderColor: .blue)
-                .xAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .xAxisLabelFont(self.font)
                 .yAxisPosition(.trailing)
-                .yAxisLabelFontSize(UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10)
+                .yAxisLabelFont(self.font)
                 .frame(height: self.chartHeight(proxy: proxy))
                 
                 self.selectedDataSetView().padding()
@@ -34,6 +34,11 @@ struct BasicBarChartExample: View {
                 self.createBarDataSets()
             }
         }
+    }
+    
+    var font: UIFont {
+        let size:CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
+        return UIFont.systemFont(ofSize: size)
     }
     
     

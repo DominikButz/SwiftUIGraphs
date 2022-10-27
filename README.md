@@ -1,4 +1,4 @@
-# SwiftUIGraphs
+# SwiftUIGraphs (v1.0.2)
 
 
 SwiftUIGraphs is a simple Swift package for iOS and iPadOS 14.0 and later. It features a line chart, bar chart and pie chart for data visualization and has many customization options. 
@@ -7,10 +7,11 @@ SwiftUIGraphs is a simple Swift package for iOS and iPadOS 14.0 and later. It fe
 ## Feature Overview
 
 
-* **NEW**: from v1.0 DYLineChartView and DYBarChartView support muliple data series by default (multi-line and stacked bar charts).
+* **NEW**: from v1.0 DYLineChartView and DYBarChartView support muliple data series by default (multi-line charts and stacked bar charts).
 * Create an interactive line chart with a moving data selector point. The package also allows setting separate data point colors and line section colors.
 * Create an area chart by adding a gradient area below the line chart.
-* Create a bar chart with an appear-animation and various customization options. 
+* Create a stacked bar chart with positive and negative fraction values
+* line and bar charts feature cool appear animations 
 * Create a pie chart or doughnut chart with customizable colors and a cool pop out effect to present a detail pie chart.
 * The chart views feature separate header / info / legend views that can be replaced by custom solutions easily. 
 * Add drop shadows to the line chart, gradient, bars and selected pie slice.
@@ -54,14 +55,14 @@ DYLineChartView supports the following modifiers:
 * xAxisViewHeight
 * xAxisGridLines
 * xAxisLabelStringValue
-* xAxisLabelFontSize
+* xAxisLabelFont(_ font: UIFont)
 * xAxisScalerOverride
 * showYaxis
 * yAxisPosition
 * yAxisViewWidth
 * yAxisGridLines
 * yAxisLabelStringValue
-* yAxisLabelFontSize
+* yAxisLabelFont(_ font: UIFont)
 * yAxisScalerOverride
 
 Pass in one or several DYLineViews into DYLineChartView's lineViews closure. You can attach the following modifiers to DYLineView:
@@ -249,12 +250,12 @@ DYBarChartView supports the following modifiers:
 * barLabelMinimumEdgeMargin(top: CGFloat = 0, bottom: CGFloat = 10)
 * showXaxis(_ show: Bool)
 * xAxisViewHeight(_ height: CGFloat)
-* xAxisLabelFontSize(_ fontSize: CGFloat)
+* xAxisLabelFont(_ font: UIFont)
 * showYaxis(_ show: Bool)
 * yAxisPosition(_ position: Edge.Set)
 * yAxisViewWidth(_ height: CGFloat)
 * yAxisLabelStringValue(_ stringValue: @escaping (Double)->String)
-* yAxisLabelFontSize(_ fontSize: CGFloat)
+* yAxisLabelFont(_ font: UIFont)
 * yAxisGridLines(showGridLines: Bool = true, gridLineColor: Color = Color.secondary.opacity(0.5), gridLineStrokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]))
 * markerGridLine(yCoordinate: Double, color: Color, strokeStyle: StrokeStyle = StrokeStyle(lineWidth: 1, dash: [3]))
 * yAxisScalerOverride(minMax: (min:Double?, max:Double?)? = nil, interval: Double? = nil, maxTicks: Int = 10)
@@ -511,6 +512,11 @@ struct RingChartAndDetailPieChartExample: View {
 - Special thanks to David Malan and his team of Harvard's CS50 Introduction to Computer Science. There is no better course to learn programming basics. 
 
 ## Change log
+
+#### [Version 1.0.2](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.0.2)
+You can now set a label font (UIFont) for the x- and y-axis tick labels (default is UIFont.systemFont(ofSize: 8)). 
+The default color of the line in a line chart is now primary instead of orange. 
+Bug fix: setting userInteraction to false in a DYLineView now works properly when the userInteraction property is set to true in the DYLineChartView modifier. 
 
 #### [Version 1.0.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.0.1)
 BREAKING changes:
