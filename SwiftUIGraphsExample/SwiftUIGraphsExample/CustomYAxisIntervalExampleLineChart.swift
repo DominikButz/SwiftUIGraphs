@@ -33,7 +33,7 @@ struct CustomYAxisIntervalExampleLineChart: View {
 
                        DYLineView(dataPoints: self.dataPoints, selectedDataPoint: $selectedDataPoint, pointView: { _ in
                            DYLinePointView(borderColor: .blue)
-                       }, selectorView: DYSelectorPointView(),  parentViewProperties: parentViewProperties)
+                       }, selectorPointView: DYSelectorPointView(),  parentViewProperties: parentViewProperties)
                        .lineStyle(color: .blue)
                        .area(gradient: LinearGradient(gradient: Gradient(colors: [.blue.opacity(0.7), Color.white.opacity(0.6)]), startPoint: .top, endPoint: .bottom), shadow: Shadow(color: .gray, radius: 7, x: -7, y: -7))
                        .selectedPointIndicatorLineStyle(xLineColor: .red, yLineColor: .red)

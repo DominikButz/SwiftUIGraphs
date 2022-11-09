@@ -29,7 +29,7 @@ struct MultiLineChartExample: View {
                         let userInteractionEnabled = i == 1 ? false : true
                         DYLineView(dataPoints: dataPointArrays[i], selectedDataPoint: selectedPoints[i], pointView: { _ in
                             self.pointViewFor(index: i)
-                        }, selectorView: self.selectorPointViewFor(index: i), parentViewProperties: parentProps)
+                        }, selectorPointView: self.selectorPointViewFor(index: i), parentViewProperties: parentProps)
                         .userInteraction(enabled: userInteractionEnabled)
                         .lineStyle(color: colors[i])
                         .selectedPointIndicatorLineStyle(xLineColor: colors[i], yLineColor: colors[i])

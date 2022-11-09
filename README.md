@@ -513,6 +513,9 @@ struct RingChartAndDetailPieChartExample: View {
 
 ## Change log
 
+#### [Version 1.0.3](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.0.3)
+Minor update: Renaming selectorView parameter in DYLineView to selectorPointView.
+
 #### [Version 1.0.2](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.0.2)
 You can now set a label font (UIFont) for the x- and y-axis tick labels (default is UIFont.systemFont(ofSize: 8)). 
 The default color of the line in a line chart is now primary instead of orange. 

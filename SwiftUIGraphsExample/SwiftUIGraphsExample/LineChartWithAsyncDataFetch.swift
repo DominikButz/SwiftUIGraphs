@@ -43,7 +43,7 @@ struct LineChartWithAsyncDataFetch: View {
                             
                             DYLineView(dataPoints: viewModel.dataPoints, selectedDataPoint: $viewModel.selectedDataPoint, pointView: { _ in
                                 DYLinePointView()
-                            }, selectorView: DYSelectorPointView(),  parentViewProperties: parentProps)
+                            }, selectorPointView: DYSelectorPointView(),  parentViewProperties: parentProps)
                                 .lineStyle(color: .orange)
                                 .selectedPointIndicatorLineStyle(xLineColor: .red, yLineColor: .red)
                                 .area(gradient: LinearGradient(colors: [.orange, .orange.opacity(0.1)], startPoint: .top, endPoint: .bottom), shadow: nil)

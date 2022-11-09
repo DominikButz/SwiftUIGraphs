@@ -127,7 +127,7 @@ public struct DYLineChartView<L: View>: View, PlotAreaChart, DYMultiLineChartMod
                 .frame(width: settings.selectorLineWidth)
                  .opacity(touchingXPosition != nil ? 1 : 0) // hide the vertical indicator line if user not touching the chart
                 .position(x: self.selectorLineOffset, y: geo.size.height / 2)
-                .animation(Animation.spring().speed(4))
+                .animation(Animation.spring().speed(4), value: self.selectorLineOffset)
         }
     }
     

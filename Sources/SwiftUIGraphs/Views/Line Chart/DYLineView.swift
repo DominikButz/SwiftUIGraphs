@@ -17,7 +17,7 @@ public struct DYLineView<PointV: View, LabelV: View, SelectorV: View>: View, DYL
     var xAxisScaler: AxisScaler
     var pointView: (DYDataPoint)-> PointV
     var labelView: (DYDataPoint)->LabelV
-    var selectorView: SelectorV
+    var selectorPointView: SelectorV
     @Binding var selectedDataPoint: DYDataPoint?
     @Binding var touchingXPosition: CGFloat? // User X touch location - nil = not touching
     @Binding var selectorLineOffset: CGFloat
@@ -34,13 +34,13 @@ public struct DYLineView<PointV: View, LabelV: View, SelectorV: View>: View, DYL
     
     
     
-    public init(dataPoints: [DYDataPoint], selectedDataPoint: Binding<DYDataPoint?>, @ViewBuilder pointView: @escaping (DYDataPoint)-> PointV = {_ in EmptyView()}, labelView:  @escaping (DYDataPoint)->LabelV = {_ in EmptyView()}, selectorView: SelectorV = EmptyView(), parentViewProperties: DYLineParentViewProperties) {
+    public init(dataPoints: [DYDataPoint], selectedDataPoint: Binding<DYDataPoint?>, @ViewBuilder pointView: @escaping (DYDataPoint)-> PointV = {_ in EmptyView()}, labelView:  @escaping (DYDataPoint)->LabelV = {_ in EmptyView()}, selectorPointView: SelectorV = EmptyView(), parentViewProperties: DYLineParentViewProperties) {
     
         self.dataPoints =  dataPoints.sorted(by: {$0.xValue < $1.xValue})
         self._selectedDataPoint = selectedDataPoint
         self.pointView = pointView
         self.labelView = labelView
-        self.selectorView = selectorView
+        self.selectorPointView = selectorPointView
         self.settings = DYLineSettings()
         self.yAxisSettings = parentViewProperties.yAxisSettings
         self.yAxisScaler = parentViewProperties.yAxisScaler
@@ -81,7 +81,7 @@ public struct DYLineView<PointV: View, LabelV: View, SelectorV: View>: View, DYL
                     }
 
                     if self.settings.allowUserInteraction {
-                        self.selectorPointView()
+                        self.selectorView()
                     }
                 }
                 
@@ -209,7 +209,7 @@ public struct DYLineView<PointV: View, LabelV: View, SelectorV: View>: View, DYL
         
     }
     
-    private func selectorPointView()->some View {
+    private func selectorView()->some View {
         
         GeometryReader { geo in
 
@@ -218,7 +218,7 @@ public struct DYLineView<PointV: View, LabelV: View, SelectorV: View>: View, DYL
             let xPosition = self.touchingXPosition == nil ? xValue.convertToCoordinate(min: xAxisScaler.axisMinMax.min, max: xAxisScaler.axisMinMax.max, length: geo.size.width) :  self.selectorCurrentXPosition
             let path = self.pathFor(width: geo.size.width, height: geo.size.height, closeShape: false)
             let yPosition = path.point(to: xPosition).y
-            self.selectorView
+            self.selectorPointView
                 .position(x: xPosition, y: yPosition)
                 .animation(Animation.spring().speed(4), value: self.selectorCurrentXPosition)
                 .opacity(self.selectedDataPoint == nil ? 0 : 1)
