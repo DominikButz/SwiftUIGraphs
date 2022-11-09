@@ -1,4 +1,4 @@
-# SwiftUIGraphs (v1.0.2)
+# SwiftUIGraphs (v1.0.3)
 
 
 SwiftUIGraphs is a simple Swift package for iOS and iPadOS 14.0 and later. It features a line chart, bar chart and pie chart for data visualization and has many customization options. 
