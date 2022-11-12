@@ -102,7 +102,7 @@ public struct DYBarChartXAxisSettings: XAxisSettings {
     ///   - showXAxis: determines if the x-axis should be shown.
     ///   - xAxisViewHeight: height of the xAxis view.
     ///   - labelFont: a ui font for all tick labels on the x-axis.
-    public init(showXAxis: Bool = true, xAxisViewHeight:CGFloat = 20, labelFont: UIFont = UIFont.preferredFont(forTextStyle: .footnote)) {
+    public init(showXAxis: Bool = true, xAxisViewHeight:CGFloat = 20, labelFont: UIFont = UIFont.systemFont(ofSize: 8)) {
         
         self.showXAxis = showXAxis
         self.xAxisViewHeight = xAxisViewHeight
