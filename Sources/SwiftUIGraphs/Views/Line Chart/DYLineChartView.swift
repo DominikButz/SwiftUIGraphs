@@ -7,13 +7,11 @@
 
 import SwiftUI
 
-
-
 public struct DYLineChartView<L: View>: View, PlotAreaChart, DYMultiLineChartModifiableProperties  {
     
-    public var settings: DYLineChartSettings
-    public var yAxisSettings: YAxisSettings
-    public var xAxisSettings: XAxisSettings
+    var settings: DYLineChartSettings
+    var yAxisSettings: YAxisSettings
+    var xAxisSettings: XAxisSettings
     var allDataPoints: [DYDataPoint]
     var yAxisScaler: AxisScaler
     var xAxisScaler: AxisScaler
@@ -435,6 +433,17 @@ public extension View where Self:  DYMultiLineChartModifiableProperties {
         return modView
     }
     
+    #if os(macOS)
+    /// xAxisLabelFont - font for all x-axis tick labels
+    /// - Parameter font: An NSFont
+    /// - Returns: modified DYLineChartView
+    func xAxisLabelFont(_ font: NSFont)->DYLineChartView<L> {
+        var modView = self as! DYLineChartView<L>
+        modView.xAxisSettings.labelFont = font
+        return modView
+        
+    }
+    #else
     /// xAxisLabelFont - font for all x-axis tick labels
     /// - Parameter font: A UIFont
     /// - Returns: modified DYLineChartView
@@ -444,7 +453,8 @@ public extension View where Self:  DYMultiLineChartModifiableProperties {
         return modView
         
     }
-    
+
+    #endif
 
     
     /// xAxisScalerOverride
@@ -523,16 +533,28 @@ public extension View where Self:  DYMultiLineChartModifiableProperties {
     }
     
     
-    
+    #if os(macOS)
     /// yAxisLabelFont - font for all y-axis tick labels
-    /// - Parameter font: A UIFont
+    /// - Parameter font: An NSFont
     /// - Returns: modified DYLineChartView
-    func yAxisLabelFont(_ font: UIFont)->DYLineChartView<L> {
+    func yAxisLabelFont(_ font: NSFont)->DYLineChartView<L> {
         var modView = self as! DYLineChartView<L>
         modView.yAxisSettings.labelFont = font 
         return modView
         
     }
+    #else
+    /// yAxisLabelFont - font for all y-axis tick labels
+    /// - Parameter font: A UIFont
+    /// - Returns: modified DYLineChartView
+    func yAxisLabelFont(_ font: UIFont)->DYLineChartView<L> {
+        var modView = self as! DYLineChartView<L>
+        modView.yAxisSettings.labelFont = font
+        return modView
+        
+    }
+    
+    #endif
     
  
     

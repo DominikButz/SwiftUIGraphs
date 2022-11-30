@@ -15,7 +15,6 @@ struct RingChartAndDetailPieChartExample: View {
     @StateObject var chartModel: ChartModel = ChartModel()
     @Namespace var animationNamespace
     
-    
     var body: some View {
         GeometryReader { proxy in
             if proxy.size.height > proxy.size.width {
@@ -47,7 +46,7 @@ struct RingChartAndDetailPieChartExample: View {
             }, animationNamespace: animationNamespace)
             .hideMultiFractionSliceOnSelection(true)
             .innerCircleRadiusFraction(0.3)
-            .background(Circle().fill(Color(.systemBackground)).shadow(color: detailChartVisibleCondition ? .clear : .gray, radius:5))
+            .background(Circle().fill(Color.defaultPlotAreaBackgroundColor).shadow(color: detailChartVisibleCondition ? .clear : .gray, radius:5))
             .rotationEffect(detailChartVisibleCondition ? Angle(degrees: isPortrait ? 45 : -40) : Angle(degrees: 0))
 
         }
@@ -69,9 +68,9 @@ struct RingChartAndDetailPieChartExample: View {
    
             }, animationNamespace: animationNamespace)
             .minimumFractionForSliceLabelOffset(0.11)
-            .background(Circle().fill(Color(.systemBackground)).shadow(radius: 10))
+            .background(Circle().fill(Color.defaultPlotAreaBackgroundColor).shadow(radius: 10))
             .padding(50)
-            .matchedGeometryEffect(id: self.chartModel.data[1].id, in: self.animationNamespace)
+            .matchedGeometryEffect(id: self.chartModel.data[1].id, in: self.animationNamespace, isSource: false)
 
         }
     }
@@ -96,7 +95,13 @@ struct RingChartAndDetailPieChartExample: View {
     }
     
     var sliceLabelViewFont: Font {
-       return UIDevice.current.userInterfaceIdiom == .pad ? .callout : .caption
+        var font: Font?
+        #if os(iOS)
+        font = UIDevice.current.userInterfaceIdiom == .phone ? .caption : .callout
+        #else
+         font = .body
+        #endif
+        return font!
     }
     
     var detailChartVisibleCondition: Bool {

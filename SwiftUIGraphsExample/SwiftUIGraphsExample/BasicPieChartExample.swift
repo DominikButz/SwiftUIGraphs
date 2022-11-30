@@ -34,7 +34,8 @@ struct BasicPieChartExample: View {
                     if self.viewModel.selectedSlice != nil {
                         DYFractionChartInfoView(title: "", data: viewModel.data, selectedSlice: $viewModel.selectedSlice) { (value) -> String in
                             value.toCurrencyString()
-                        }.padding(5).infoBoxBackground().padding(UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10)
+                        }.padding(5).infoBoxBackground()
+                        .padding(infoBoxPadding)
                     }
                 }
             }
@@ -49,12 +50,12 @@ struct BasicPieChartExample: View {
             DYPieChartView(data: viewModel.data, selectedSlice: $viewModel.selectedSlice, sliceLabelView: {fraction in
                 self.sliceLabelView(fraction: fraction, data: viewModel.data)
             }, animationNamespace: animationNamespace)
-            .background(Circle().fill(Color(.systemBackground))
+            .background(Circle().fill(Color.defaultPlotAreaBackgroundColor)
             .shadow(radius: 8))
             .scaleEffect(self.pieScale)
             .padding(10)
             
-            DYFractionChartLegendView(data: viewModel.data, font: UIDevice.current.userInterfaceIdiom == .pad ? .callout : .caption, textColor: .white).frame(width: 250, height: 250).padding(10).infoBoxBackground().padding(10)
+            DYFractionChartLegendView(data: viewModel.data, font: font, textColor: .white).frame(width: 250, height: 250).padding(10).infoBoxBackground().padding(10)
   
             
         }.onAppear {
@@ -68,18 +69,33 @@ struct BasicPieChartExample: View {
         Group {
             if fraction.value / data.reduce(0, { $0 + $1.value}) >= 0.11  {
                 VStack {
-                    Text(fraction.title).font(sliceLabelViewFont).bold().lineLimit(2).frame(maxWidth: 85)
-                    Text(fraction.value.toCurrencyString()).font(sliceLabelViewFont).bold()
-                    Text(fraction.value.percentageString(totalValue: data.reduce(0) { $0 + $1.value})).font(sliceLabelViewFont)
+                    Text(fraction.title).font(font).bold().lineLimit(2).frame(maxWidth: 85)
+                    Text(fraction.value.toCurrencyString()).font(font).bold()
+                    Text(fraction.value.percentageString(totalValue: data.reduce(0) { $0 + $1.value})).font(font)
                     
                 }
             }
         }
     }
     
-    var sliceLabelViewFont: Font {
-       return UIDevice.current.userInterfaceIdiom == .pad ? .callout : .caption
+    var font: Font {
+        var font: Font?
+        #if os(iOS)
+        font = UIDevice.current.userInterfaceIdiom == .phone ? .caption : .callout
+        #else
+         font = .body
+        #endif
+        return font!
     }
+    
+    var infoBoxPadding: CGFloat {
+        #if os(iOS)
+        return UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10
+        #else
+        return 20
+        #endif
+    }
+
     
 }
 
@@ -98,7 +114,7 @@ final class BasicPieChartViewModel: ObservableObject {
 extension View {
     
     func infoBoxBackground()->some View {
-        self.background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(LinearGradient(gradient: Gradient(colors: [Color(.systemGray), Color(.systemGray4)]), startPoint: .topLeading, endPoint: .bottomTrailing)).shadow(radius: 5))
+        self.background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(LinearGradient(gradient: Gradient(colors: [Color.gray, Color.gray.opacity(0.4)]), startPoint: .topLeading, endPoint: .bottomTrailing)).shadow(radius: 5))
     }
 }
 

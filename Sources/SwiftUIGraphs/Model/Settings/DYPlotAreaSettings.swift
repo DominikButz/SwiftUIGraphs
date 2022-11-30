@@ -9,47 +9,26 @@ import Foundation
 import SwiftUI
 
 
-public struct DYLineChartSettings {
+struct DYLineChartSettings {
 
-    public var plotAreaBackgroundGradient: LinearGradient
-    public var allowUserInteraction: Bool
-    var selectorLineWidth: CGFloat
-    var selectorLineColor: Color
-    
-    
-    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), selectorLineWidth: CGFloat = 2, selectorLineColor: Color = .red, allowUserInteraction: Bool = true) {
-        self.plotAreaBackgroundGradient = plotAreaBackgroundGradient
-        self.selectorLineWidth = selectorLineWidth
-        self.selectorLineColor = selectorLineColor
-        self.allowUserInteraction = allowUserInteraction
-        
-    }
-    
-    
+    public var plotAreaBackgroundGradient: LinearGradient = LinearGradient(colors: [Color.defaultPlotAreaBackgroundColor, Color.defaultPlotAreaBackgroundColor], startPoint: .top, endPoint: .bottom)
+    public var allowUserInteraction: Bool = true
+    var selectorLineWidth: CGFloat = 2
+    var selectorLineColor: Color = .red
+  
+
 }
 
-public struct DYBarChartSettings {
+struct DYBarChartSettings {
 
-    public var plotAreaBackgroundGradient: LinearGradient
-    public var allowUserInteraction: Bool
-    var selectedBarBorderColor: Color
-    var barDropShadow: Shadow?
-    var selectedBarDropShadow: Shadow?
-    var labelViewOffset: CGSize
-    var minimumTopEdgeBarLabelMargin: CGFloat
-    var minimumBottomEdgeBarLabelMargin: CGFloat
-    
-    
-    public init(plotAreaBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom), allowUserInteraction: Bool = true, selectedBarBorderColor: Color = .yellow,  barDropShadow: Shadow? = nil, selectedBarDropShadow: Shadow? = nil, labelViewOffset: CGSize = CGSize(width: 0, height: -10), minimumTopEdgeBarLabelMargin: CGFloat = 0, minimumBottomEdgeBarLabelMargin: CGFloat = 10) {
-       self.plotAreaBackgroundGradient = plotAreaBackgroundGradient
-       self.allowUserInteraction = allowUserInteraction
-       self.selectedBarBorderColor = selectedBarBorderColor
-       self.barDropShadow = barDropShadow
-       self.selectedBarDropShadow = selectedBarDropShadow
-       self.labelViewOffset = labelViewOffset
-       self.minimumTopEdgeBarLabelMargin = minimumTopEdgeBarLabelMargin
-       self.minimumBottomEdgeBarLabelMargin = minimumBottomEdgeBarLabelMargin
-   }
-  
+    var plotAreaBackgroundGradient: LinearGradient = LinearGradient(colors: [Color.defaultPlotAreaBackgroundColor, Color.defaultPlotAreaBackgroundColor], startPoint: .top, endPoint: .bottom)
+    var allowUserInteraction: Bool = true
+    var selectedBarBorderColor: Color = Color.yellow
+    var barDropShadow: Shadow? = nil
+    var selectedBarDropShadow: Shadow? = nil
+    var labelViewOffset: CGSize = CGSize(width: 0, height: -10)
+    var minimumTopEdgeBarLabelMargin: CGFloat = 0
+    var minimumBottomEdgeBarLabelMargin: CGFloat = 10
+
 }
 

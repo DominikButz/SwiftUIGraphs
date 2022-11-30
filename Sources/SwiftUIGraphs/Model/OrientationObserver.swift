@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+#if os(iOS) 
 public final class OrientationObserver: ObservableObject {
     enum Orientation {
         case portrait
@@ -19,7 +20,7 @@ public final class OrientationObserver: ObservableObject {
     private var _observer: NSObjectProtocol?
     
     public init() {
-
+   
         if UIDevice.current.orientation.isLandscape {
 
             self.orientation = .landscape
@@ -49,3 +50,4 @@ public final class OrientationObserver: ObservableObject {
         }
     }
 }
+#endif

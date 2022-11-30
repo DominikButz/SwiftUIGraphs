@@ -44,11 +44,19 @@ struct MultiBarChartExample: View {
             }
     }
     
+    #if os(macOS)
+    func font(xAxis: Bool = true)-> NSFont {
+        let weight : NSFont.Weight = xAxis ? .bold : .regular
+        return  NSFont.systemFont(ofSize: 10, weight: weight)
+    }
+    #else
     func font(xAxis: Bool = true)-> UIFont {
-        let size:CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
         let weight : UIFont.Weight = xAxis ? .bold : .regular
+        let size: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
         return  UIFont.systemFont(ofSize: size, weight: weight)
     }
+    
+    #endif
 
     
     func chartHeight(proxy: GeometryProxy)->CGFloat {

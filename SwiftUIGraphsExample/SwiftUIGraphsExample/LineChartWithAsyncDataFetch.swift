@@ -90,15 +90,28 @@ struct LineChartWithAsyncDataFetch: View {
         return Text("").eraseToAnyView()
     }
     
+
+    #if os(macOS)
+    var font: NSFont {
+        return NSFont.systemFont(ofSize: 10)
+    }
+    #else
     var font: UIFont {
         let size:CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
         return UIFont.systemFont(ofSize: size)
     }
+    #endif
+
 
 
     var yAxisWidth: CGFloat {
-        UIDevice.current.userInterfaceIdiom == .phone ? 35 : 45
+        #if os(iOS)
+        return UIDevice.current.userInterfaceIdiom == .phone ? 35 : 45
+        #else
+        return 45
+        #endif
     }
+
     
     var minValueLabels: (y: Text, x:Text)? {
   

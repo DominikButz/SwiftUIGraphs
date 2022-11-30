@@ -23,6 +23,19 @@
 		B47F4F2C28C1F86F002C94A4 /* MultiBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */; };
 		B480715B25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480715A25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift */; };
 		B480716825DD1BA6002D3A1C /* BasicBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480716725DD1BA6002D3A1C /* BasicBarChartExample.swift */; };
+		B4E15662293708790078C868 /* SwiftUIGraphsMacExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E15661293708790078C868 /* SwiftUIGraphsMacExampleApp.swift */; };
+		B4E156662937087A0078C868 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4E156652937087A0078C868 /* Assets.xcassets */; };
+		B4E156692937087A0078C868 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4E156682937087A0078C868 /* Preview Assets.xcassets */; };
+		B4E1567029370BCB0078C868 /* SwiftUIGraphs in Frameworks */ = {isa = PBXBuildFile; productRef = B4E1566F29370BCB0078C868 /* SwiftUIGraphs */; };
+		B4E1567129372E220078C868 /* CustomYAxisIntervalExampleLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480715A25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift */; };
+		B4E1567229372E640078C868 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ECDC3628AA38D6001B6D35 /* View+Extensions.swift */; };
+		B4E1567429372F8D0078C868 /* LineChartWithAsyncDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40A8457261091FB00BB4EE3 /* LineChartWithAsyncDataFetch.swift */; };
+		B4E15676293730CA0078C868 /* BasicBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480716725DD1BA6002D3A1C /* BasicBarChartExample.swift */; };
+		B4E15677293731470078C868 /* MultiBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */; };
+		B4E15678293732270078C868 /* MultiLineChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B451709B28B34CFB00739334 /* MultiLineChartExample.swift */; };
+		B4E15679293732B50078C868 /* BasicPieChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40A84412609C37000BB4EE3 /* BasicPieChartExample.swift */; };
+		B4E1567A293734D50078C868 /* RingChartAndDetailPieChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40A8446260D80F900BB4EE3 /* RingChartAndDetailPieChartExample.swift */; };
+		B4E1567B2937398A0078C868 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437B5C225C8F9A80068CB91 /* ContentView.swift */; };
 		B4ECDC3728AA38D6001B6D35 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ECDC3628AA38D6001B6D35 /* View+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +79,13 @@
 		B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiBarChartExample.swift; sourceTree = "<group>"; };
 		B480715A25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomYAxisIntervalExampleLineChart.swift; sourceTree = "<group>"; };
 		B480716725DD1BA6002D3A1C /* BasicBarChartExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBarChartExample.swift; sourceTree = "<group>"; };
+		B4E15638293706AF0078C868 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B4E1563A293706AF0078C868 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B4E1565F293708790078C868 /* SwiftUIGraphsMacExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIGraphsMacExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4E15661293708790078C868 /* SwiftUIGraphsMacExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIGraphsMacExampleApp.swift; sourceTree = "<group>"; };
+		B4E156652937087A0078C868 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B4E156682937087A0078C868 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B4E1566A2937087A0078C868 /* SwiftUIGraphsMacExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftUIGraphsMacExample.entitlements; sourceTree = "<group>"; };
 		B4ECDC3628AA38D6001B6D35 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +112,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B4E1565C293708790078C868 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4E1567029370BCB0078C868 /* SwiftUIGraphs in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -102,6 +130,7 @@
 				B437B5BF25C8F9A80068CB91 /* SwiftUIGraphsExample */,
 				B437B5D125C8F9A90068CB91 /* SwiftUIGraphsExampleTests */,
 				B437B5DC25C8F9A90068CB91 /* SwiftUIGraphsExampleUITests */,
+				B4E15660293708790078C868 /* SwiftUIGraphsMacExample */,
 				B437B5BE25C8F9A80068CB91 /* Products */,
 				B437B63925CBF4330068CB91 /* Frameworks */,
 			);
@@ -113,6 +142,7 @@
 				B437B5BD25C8F9A80068CB91 /* SwiftUIGraphsExample.app */,
 				B437B5CE25C8F9A90068CB91 /* SwiftUIGraphsExampleTests.xctest */,
 				B437B5D925C8F9A90068CB91 /* SwiftUIGraphsExampleUITests.xctest */,
+				B4E1565F293708790078C868 /* SwiftUIGraphsMacExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,8 +198,29 @@
 		B437B63925CBF4330068CB91 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4E15638293706AF0078C868 /* WidgetKit.framework */,
+				B4E1563A293706AF0078C868 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B4E15660293708790078C868 /* SwiftUIGraphsMacExample */ = {
+			isa = PBXGroup;
+			children = (
+				B4E15661293708790078C868 /* SwiftUIGraphsMacExampleApp.swift */,
+				B4E156652937087A0078C868 /* Assets.xcassets */,
+				B4E1566A2937087A0078C868 /* SwiftUIGraphsMacExample.entitlements */,
+				B4E156672937087A0078C868 /* Preview Content */,
+			);
+			path = SwiftUIGraphsMacExample;
+			sourceTree = "<group>";
+		};
+		B4E156672937087A0078C868 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B4E156682937087A0078C868 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,13 +282,33 @@
 			productReference = B437B5D925C8F9A90068CB91 /* SwiftUIGraphsExampleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		B4E1565E293708790078C868 /* SwiftUIGraphsMacExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B4E1566B2937087A0078C868 /* Build configuration list for PBXNativeTarget "SwiftUIGraphsMacExample" */;
+			buildPhases = (
+				B4E1565B293708790078C868 /* Sources */,
+				B4E1565C293708790078C868 /* Frameworks */,
+				B4E1565D293708790078C868 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftUIGraphsMacExample;
+			packageProductDependencies = (
+				B4E1566F29370BCB0078C868 /* SwiftUIGraphs */,
+			);
+			productName = SwiftUIGraphsMacExample;
+			productReference = B4E1565F293708790078C868 /* SwiftUIGraphsMacExample.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		B437B5B525C8F9A80068CB91 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					B437B5BC25C8F9A80068CB91 = {
@@ -250,6 +321,9 @@
 					B437B5D825C8F9A90068CB91 = {
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = B437B5BC25C8F9A80068CB91;
+					};
+					B4E1565E293708790078C868 = {
+						CreatedOnToolsVersion = 14.0.1;
 					};
 				};
 			};
@@ -271,6 +345,7 @@
 				B437B5BC25C8F9A80068CB91 /* SwiftUIGraphsExample */,
 				B437B5CD25C8F9A90068CB91 /* SwiftUIGraphsExampleTests */,
 				B437B5D825C8F9A90068CB91 /* SwiftUIGraphsExampleUITests */,
+				B4E1565E293708790078C868 /* SwiftUIGraphsMacExample */,
 			);
 		};
 /* End PBXProject section */
@@ -298,6 +373,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4E1565D293708790078C868 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4E156692937087A0078C868 /* Preview Assets.xcassets in Resources */,
+				B4E156662937087A0078C868 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +418,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				B437B5DE25C8F9A90068CB91 /* SwiftUIGraphsExampleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4E1565B293708790078C868 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4E15676293730CA0078C868 /* BasicBarChartExample.swift in Sources */,
+				B4E1567129372E220078C868 /* CustomYAxisIntervalExampleLineChart.swift in Sources */,
+				B4E1567229372E640078C868 /* View+Extensions.swift in Sources */,
+				B4E1567429372F8D0078C868 /* LineChartWithAsyncDataFetch.swift in Sources */,
+				B4E15679293732B50078C868 /* BasicPieChartExample.swift in Sources */,
+				B4E1567A293734D50078C868 /* RingChartAndDetailPieChartExample.swift in Sources */,
+				B4E1567B2937398A0078C868 /* ContentView.swift in Sources */,
+				B4E15662293708790078C868 /* SwiftUIGraphsMacExampleApp.swift in Sources */,
+				B4E15677293731470078C868 /* MultiBarChartExample.swift in Sources */,
+				B4E15678293732270078C868 /* MultiLineChartExample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +698,66 @@
 			};
 			name = Release;
 		};
+		B4E1566C2937087A0078C868 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = SwiftUIGraphsMacExample/SwiftUIGraphsMacExample.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIGraphsMacExample/Preview Content\"";
+				DEVELOPMENT_TEAM = 76FXG652LY;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.duoyun.SwiftUIGraphsMacExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B4E1566D2937087A0078C868 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = SwiftUIGraphsMacExample/SwiftUIGraphsMacExample.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIGraphsMacExample/Preview Content\"";
+				DEVELOPMENT_TEAM = 76FXG652LY;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.duoyun.SwiftUIGraphsMacExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -636,10 +797,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		B4E1566B2937087A0078C868 /* Build configuration list for PBXNativeTarget "SwiftUIGraphsMacExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4E1566C2937087A0078C868 /* Debug */,
+				B4E1566D2937087A0078C868 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		B40A8452260DDD6100BB4EE3 /* SwiftUIGraphs */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftUIGraphs;
+		};
+		B4E1566F29370BCB0078C868 /* SwiftUIGraphs */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftUIGraphs;
 		};

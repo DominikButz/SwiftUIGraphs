@@ -17,7 +17,7 @@ public struct DYLinePointView<S: Shape>: View {
     ///   - borderLineWidth: border line with
     ///   - fillColor: fill color
     ///   - edgeLength: size of the point
-    public init(shape: S = Circle(), borderColor: Color = .orange, borderLineWidth: CGFloat = 2, fillColor: Color = Color(.systemBackground), edgeLength: CGFloat = 12) {
+    public init(shape: S = Circle(), borderColor: Color = .orange, borderLineWidth: CGFloat = 2, fillColor: Color = Color.defaultPlotAreaBackgroundColor, edgeLength: CGFloat = 12) {
         self.shape = shape
         self.borderColor = borderColor
         self.borderLineWidth = borderLineWidth

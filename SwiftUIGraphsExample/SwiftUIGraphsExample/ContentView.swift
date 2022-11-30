@@ -44,12 +44,14 @@ struct ContentView: View {
                     NavigationLink("Ring Chart with Pop-out Effect", destination: RingChartAndDetailPieChartExample())
                 }
 
-            }.navigationBarTitle("SwiftUIGraphs Examples", displayMode: .inline).padding()
+            }.navigationTitle("SwiftUIGraphs Examples").padding()
             
             // add the first destination view in the list one more time as default for iPad in split view mode, otherwise the detail view will be empty
+            #if os(iOS)
             if UIDevice.current.userInterfaceIdiom == .pad {
                 LineChartWithAsyncDataFetch()
             }
+            #endif
         }
 
 

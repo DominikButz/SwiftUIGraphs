@@ -1,12 +1,12 @@
-# SwiftUIGraphs (v1.0.3)
+# SwiftUIGraphs (v1.1)
 
 
-SwiftUIGraphs is a simple Swift package for iOS and iPadOS 14.0 and later. It features a line chart, bar chart and pie chart for data visualization and has many customization options. 
+SwiftUIGraphs is a Swift package for iOS, iPadOS (14.0 and later) as well as MacOS (11.0 and later). It features a line chart, bar chart and pie chart for data visualization and has many customization options. 
  
 
 ## Feature Overview
 
-
+**NEW**: from v1.1 SwiftUIGraphs supports MacOS (from v11) natively - in the included example project , simply select the macOS target and try it out!
 * **NEW**: from v1.0 DYLineChartView and DYBarChartView support muliple data series by default (multi-line charts and stacked bar charts).
 * Create an interactive line chart with a moving data selector point. The package also allows setting separate data point colors and line section colors.
 * Create an area chart by adding a gradient area below the line chart.
@@ -512,6 +512,9 @@ struct RingChartAndDetailPieChartExample: View {
 - Special thanks to David Malan and his team of Harvard's CS50 Introduction to Computer Science. There is no better course to learn programming basics. 
 
 ## Change log
+
+#### [Version 1.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.1)
+Various updates for MacOS native support. 
 
 #### [Version 1.0.3](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.0.3)
 Minor update: Renaming selectorView parameter in DYLineView to selectorPointView.

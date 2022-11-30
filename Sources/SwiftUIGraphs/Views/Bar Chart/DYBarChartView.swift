@@ -15,7 +15,9 @@ public struct DYBarChartView: View, PlotAreaChart {
     var xAxisSettings: XAxisSettings
     var yAxisScaler: AxisScaler
     var yAxisValueAsString: (Double)->String
+    #if os(iOS)
     let generator = UISelectionFeedbackGenerator()
+    #endif
     var markerLines: [MarkerLine] = []
     //@State private var selectedIndex: Int?
     @Binding private var selectedBarDataSet: DYBarDataSet?
@@ -82,8 +84,9 @@ public struct DYBarChartView: View, PlotAreaChart {
                 self.placeholderGrid(xAxisLineCount: 12, yAxisLineCount: 10).opacity(0.5).padding().transition(AnyTransition.opacity)
             }
         }.onAppear {
-            
+            #if os(iOS)
             self.generator.prepare()
+            #endif
 //            if let barDataSet = self.selectedBarDataSet {
 //
 //            }
@@ -118,9 +121,9 @@ public struct DYBarChartView: View, PlotAreaChart {
                 .onTapGesture {
                     
                     guard self.settings.allowUserInteraction  else {return}
-                    
+                    #if os(iOS)
                     self.generator.selectionChanged()
-                    
+                    #endif
                     guard self.selectedBarDataSet != dataSet else {
                         withAnimation {
                             self.selectedBarDataSet = nil
@@ -486,6 +489,18 @@ public extension View where Self == DYBarChartView {
         return modView
     }
     
+    #if os(macOS)
+    /// xAxisLabelFont - font for all x-axis bar labels
+    /// - Parameter font: An NSFont
+    /// - Returns: modified DYBarChartView
+    func xAxisLabelFont(_ font: NSFont)->DYBarChartView {
+        var modView = self
+        modView.xAxisSettings.labelFont = font
+        return modView
+        
+    }
+    
+    #else
     /// xAxisLabelFont - font for all x-axis bar labels
     /// - Parameter font: A UIFont
     /// - Returns: modified DYBarChartView
@@ -495,6 +510,7 @@ public extension View where Self == DYBarChartView {
         return modView
         
     }
+    #endif
 
     
 //MARK: y-Axis Settings
@@ -537,6 +553,17 @@ public extension View where Self == DYBarChartView {
         return modView
     }
     
+    #if os(macOS)
+    /// yAxisLabelFont - font for all y-axis tick labels
+    /// - Parameter font: An NSFont
+    /// - Returns: modified DYBarChartView
+    func yAxisLabelFont(_ font: NSFont)->DYBarChartView {
+        var modView = self
+        modView.yAxisSettings.labelFont = font
+        return modView
+        
+    }
+    #else
     /// yAxisLabelFont - font for all y-axis tick labels
     /// - Parameter font: A UIFont
     /// - Returns: modified DYBarChartView
@@ -546,6 +573,8 @@ public extension View where Self == DYBarChartView {
         return modView
         
     }
+    
+    #endif
     
 
 

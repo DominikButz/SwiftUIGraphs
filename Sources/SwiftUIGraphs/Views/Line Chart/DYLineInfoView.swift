@@ -21,8 +21,10 @@ public struct DYLineInfoView: View, DYLineInfoViewModifiableProperties {
     public var selectedXLabelFont: Font = .callout
     public var selectedYLabelTextColor: Color = .orange
     public var selectedXLabelTextColor: Color = .secondary
-   
+    
+    #if os(iOS)
     @StateObject var orientationObserver = OrientationObserver()
+    #endif
     
     public init(titleLabel: Text? = nil, selectedDataPoint: Binding<DYDataPoint?>, minValueLabels: (y: Text, x: Text)? = nil, maxValueLabels: (y: Text, x: Text)? = nil) {
         self.titleLabel = titleLabel
@@ -42,6 +44,14 @@ public struct DYLineInfoView: View, DYLineInfoViewModifiableProperties {
                 title
      
             }
+            
+            #if os(macOS)
+            VStack {
+                minMaxView
+            }
+            #endif
+            
+            #if os(iOS)
             if self.orientationObserver.orientation == .portrait {
                 VStack {
                     minMaxView
@@ -51,6 +61,7 @@ public struct DYLineInfoView: View, DYLineInfoViewModifiableProperties {
                     minMaxView
                 }
             }
+            #endif
             Divider()
             if let selectedDataPoint =  self.selectedDataPoint {
                 HStack {
@@ -71,11 +82,17 @@ public struct DYLineInfoView: View, DYLineInfoViewModifiableProperties {
                 HStack {
                     maxValue.y
                     maxValue.x
+                    #if os(iOS)
                     if self.orientationObserver.orientation == .portrait {
                         Spacer()
                     } else {
                         Text(" | ")
                     }
+                    #else
+                    Spacer()
+                    #endif
+                    
+                    
                 }
             }
 
@@ -86,9 +103,11 @@ public struct DYLineInfoView: View, DYLineInfoViewModifiableProperties {
                     Spacer()
                 }
             }
+            #if os(iOS)
             if self.orientationObserver.orientation == .landscape {
                 Spacer()
             }
+            #endif
             
         }
     }

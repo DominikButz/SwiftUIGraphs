@@ -26,11 +26,11 @@ struct MultiLineChartExample: View {
                     let selectedPoints = [$blueSelectedDataPoint, $orangeSelectedDataPoint, $greenSelectedDataPoint]
                     ForEach(0..<dataPointArrays.count, id:\.self) { i in
                         
-                        let userInteractionEnabled = i == 1 ? false : true
+//                        let userInteractionEnabled = i == 1 ? false : true
                         DYLineView(dataPoints: dataPointArrays[i], selectedDataPoint: selectedPoints[i], pointView: { _ in
                             self.pointViewFor(index: i)
                         }, selectorPointView: self.selectorPointViewFor(index: i), parentViewProperties: parentProps)
-                        .userInteraction(enabled: userInteractionEnabled)
+                        .userInteraction(enabled: true)
                         .lineStyle(color: colors[i])
                         .selectedPointIndicatorLineStyle(xLineColor: colors[i], yLineColor: colors[i])
                         
@@ -65,10 +65,16 @@ struct MultiLineChartExample: View {
 
     }
     
+    #if os(macOS)
+    var font: NSFont {
+        return NSFont.systemFont(ofSize: 10)
+    }
+    #else
     var font: UIFont {
         let size:CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
         return UIFont.systemFont(ofSize: size)
     }
+    #endif
     
     func chartHeight(proxy: GeometryProxy)->CGFloat {
         return proxy.size.height > proxy.size.width ? proxy.size.height * 0.4 : proxy.size.height * 0.75
@@ -85,7 +91,7 @@ struct MultiLineChartExample: View {
                         Text("X: \(self.stringified(value: dataPoint.xValue))")
                         Text("Y: \(self.stringified(value: dataPoint.yValue))")
                         
-                    }.font(UIDevice.current.userInterfaceIdiom == .pad ? .body : .caption)
+                    }.font(.body)
                 }
             }
             Spacer()

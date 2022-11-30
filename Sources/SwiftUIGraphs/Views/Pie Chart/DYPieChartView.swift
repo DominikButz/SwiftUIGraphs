@@ -31,7 +31,7 @@ public struct DYPieChartView<L: View>: View, DYPieChartModifiableProperties {
     ///   - shouldHideMultiFractionSliceOnSelection: This Bool determines whether or not a slice should be hidden on selection in case the DYChartFraction struct of the slice has at least two elements in the detailFractions array. Setting this value to true only makes sense if another DYPieChartView or other view (visualizing the detailFractions) is shown once the slice disappears. Default is false.
     ///   - animationNamespace: set the @Namespace property in the parent view of your main DYPieChartView and pass it into this initializer. This only has an effect in conjunction with a matchedGeometryEffect property set on a second DYPieChartView - see the property shouldHideMultiFractionSliceOnSelection.
     ///  - settings: settings struct. if you don't set this parameter, all values set will be the default values - see DYPieChartSettings for details.
-    public init(data: [DYPieFraction], selectedSlice: Binding<DYPieFraction?>, sliceLabelView: @escaping (DYPieFraction)->L,  animationNamespace: Namespace.ID) {
+    public init(data: [DYPieFraction], selectedSlice: Binding<DYPieFraction?>, sliceLabelView: @escaping (DYPieFraction)->L,  animationNamespace: Namespace.ID, isMatchedGeoEffectSource: Bool = false) {
         self.data  = data
         self._selectedSlice = selectedSlice
         self.sliceLabelView = sliceLabelView
@@ -50,7 +50,7 @@ public struct DYPieChartView<L: View>: View, DYPieChartModifiableProperties {
                             .fill(fraction.color, opacity: 1, strokeWidth: settings.sliceOutlineWidth, strokeColor: settings.sliceOutlineColor)
                             .scaleEffect(selectedSlice == fraction && self.settings.allowUserInteraction ? settings.selectedSliceScaleEffect : 1, anchor: .center)
                             .shadow(color: self.selectedSliceShadow(fraction: fraction).color, radius: self.selectedSliceShadow(fraction: fraction).radius, x: self.selectedSliceShadow(fraction: fraction).x, y: self.selectedSliceShadow(fraction: fraction).y)
-                            .matchedGeometryEffect(id: fraction.id, in: animationNamespace)
+                            .matchedGeometryEffect(id: fraction.id, in: animationNamespace, isSource: false)
                             .onTapGesture {
                                 if self.settings.allowUserInteraction {
                                     withAnimation(.default) {

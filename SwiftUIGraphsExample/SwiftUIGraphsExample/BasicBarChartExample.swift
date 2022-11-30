@@ -36,10 +36,17 @@ struct BasicBarChartExample: View {
         }
     }
     
+    #if os(macOS)
+    var font: NSFont {
+        return NSFont.systemFont(ofSize: 10)
+    }
+    #else
     var font: UIFont {
         let size:CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
         return UIFont.systemFont(ofSize: size)
     }
+    
+    #endif
     
     
     func chartHeight(proxy: GeometryProxy)->CGFloat {
