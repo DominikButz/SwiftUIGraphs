@@ -6,8 +6,8 @@ SwiftUIGraphs is a Swift package for iOS, iPadOS (14.0 and later) as well as Mac
 
 ## Feature Overview
 
-**NEW**: from v1.1 SwiftUIGraphs supports MacOS (from v11) natively - in the included example project , simply select the macOS target and try it out!
-* **NEW**: from v1.0 DYLineChartView and DYBarChartView support muliple data series by default (multi-line charts and stacked bar charts).
+* **NEW**: from v1.1 SwiftUIGraphs supports MacOS (from v11) natively - in the included example project , simply select the macOS target and try it out!
+* From v1.0 DYLineChartView and DYBarChartView support muliple data series by default (multi-line charts and stacked bar charts).
 * Create an interactive line chart with a moving data selector point. The package also allows setting separate data point colors and line section colors.
 * Create an area chart by adding a gradient area below the line chart.
 * Create a stacked bar chart with positive and negative fraction values
