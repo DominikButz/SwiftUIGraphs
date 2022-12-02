@@ -60,9 +60,8 @@ public struct DYBarChartView: View, PlotAreaChart {
                                 self.markerLineView(markerLine: markerLine).clipped()
                             }
                             
-                            if self.showBars {
-                                self.bars()
-                            }
+                            self.bars()
+                         
 
                         }.frame(width: self.plotAreaFrameWidth(proxy: geo)).background(settings.plotAreaBackgroundGradient)
                         
@@ -76,22 +75,17 @@ public struct DYBarChartView: View, PlotAreaChart {
                         self.xAxisView().frame(maxHeight: xAxisSettings.xAxisViewHeight)
                     }
                 }
-                .onAppear {
-                    self.showBars = true
-                }
+
             } else {
                 // placeholder grid in case not enough data is available
                 self.placeholderGrid(xAxisLineCount: 12, yAxisLineCount: 10).opacity(0.5).padding().transition(AnyTransition.opacity)
             }
-        }.onAppear {
-            #if os(iOS)
-            self.generator.prepare()
-            #endif
-//            if let barDataSet = self.selectedBarDataSet {
-//
-//            }
         }
-        
+        #if os(iOS)
+        .onAppear {
+            self.generator.prepare()
+        }
+        #endif
     }
     
     
@@ -232,8 +226,9 @@ public struct DYBarChartView: View, PlotAreaChart {
         let spacerWidth = (totalWidth - barWidth * CGFloat(barCount)) / CGFloat(barCount + 1)
         
         let startPosition:CGFloat = spacerWidth + barWidth / 2.0
-
-        return startPosition + CGFloat(index) * (spacerWidth + barWidth)
+        let xCoordinate = startPosition + CGFloat(index) * (spacerWidth + barWidth)
+        
+        return xCoordinate
 
     }
 }
@@ -269,13 +264,13 @@ internal struct BarViewPair: View {
            
             if positiveBarHeight > 0 {
                 //Spacer(minLength: 0)
-                StackedBarView(fractions: dataSet.positiveFractions, width: barWidth, height: positiveBarHeight, index: index, yAxisScaler: yAxisScaler, labelView: shouldShowPositiveLabel ?  dataSet.labelView?(dataSet.positiveYValue) : nil, labelViewOffset: settings.labelViewOffset)
+                StackedBarView(fractions: dataSet.positiveFractions, width: barWidth, height: positiveBarHeight, index: index, yAxisScaler: yAxisScaler, labelView: shouldShowPositiveLabel ?  dataSet.labelView?(dataSet.positiveYValue) : nil, labelViewOffset: settings.labelViewOffset, shouldAnimate: settings.showAppearAnimation)
                 
             }
             
             // negative bar
             if negativeBarHeight > 0 {
-                StackedBarView(fractions: dataSet.negativeFractions, width: barWidth, height: negativeBarHeight, index: index, yAxisScaler: yAxisScaler, labelView: shouldShowNegativeLabel ?  dataSet.labelView?(dataSet.negativeYValue) : nil, labelViewOffset: settings.labelViewOffset)
+                StackedBarView(fractions: dataSet.negativeFractions, width: barWidth, height: negativeBarHeight, index: index, yAxisScaler: yAxisScaler, labelView: shouldShowNegativeLabel ?  dataSet.labelView?(dataSet.negativeYValue) : nil, labelViewOffset: settings.labelViewOffset, shouldAnimate: settings.showAppearAnimation)
                // Spacer(minLength: 0)
             }
             
@@ -343,6 +338,7 @@ internal struct StackedBarView: View {
     var yAxisScaler: AxisScaler
     var labelView: AnyView?
     let labelViewOffset: CGSize
+    let shouldAnimate: Bool
 
     @State private var barHeightFactor: CGFloat = 0
     @State private var showLabelView: Bool = false
@@ -354,22 +350,26 @@ internal struct StackedBarView: View {
             VStack(spacing: 0) {
                 ForEach(fractions) { fraction in
                     let fractionHeight = abs(fraction.value) /  abs(valueSum) * height
-                    Rectangle().fill(fraction.gradient).frame(height: fractionHeight)
-                        .overlay(MaxSizeOptionalView(maxSize: CGSize(width: self.width - 2, height: fractionHeight - 3), view: fraction.labelView?()))
+                    Rectangle().fill(fraction.gradient)
+                        .frame(height: fractionHeight)
+                        .overlay(barHeightFactor == 1 || shouldAnimate == false ?  MaxSizeOptionalView(maxSize: CGSize(width: self.width, height: fractionHeight - 3), view: fraction.labelView?()) : nil)
+                        
                 }
             }
             .frame(width: width, height: height)
             .clipShape(RoundedCornerRectangle(tl: 5, tr: 5, bl: 0, br: 0).rotation(Angle(degrees: valueSum > 0 ? 0 : 180)))
-            .scaleEffect(x: 1,  y: self.barHeightFactor, anchor: valueSum >= 0 ? .bottom : .top)
+            .scaleEffect(x: 1,  y: shouldAnimate ?  self.barHeightFactor : 1, anchor: valueSum >= 0 ? .bottom : .top)
             .overlay(self.labelOverlay())
 
         }
         .onAppear {
-            withAnimation(Animation.default.delay(0.1 * Double(index))) {
-                self.barHeightFactor = 1
+            if shouldAnimate {
+                withAnimation(Animation.default.delay(0.1 * Double(index))) {
+                    self.barHeightFactor = 1
+                }
             }
             
-            if let _ = self.labelView {
+            if let _ = self.labelView, shouldAnimate {
                 withAnimation(Animation.default.delay(0.11 * Double(index))) {
                     self.showLabelView = true
                 }
@@ -380,7 +380,7 @@ internal struct StackedBarView: View {
     
     func labelOverlay()-> some View {
         Group {
-            if let labelView = labelView, showLabelView {
+            if let labelView = labelView, (showLabelView || shouldAnimate == false) {
                  labelView
                     .fixedSize()
                     .offset(x: barLabelTotalOffset.width, y: barLabelTotalOffset.height).transition(.opacity)
@@ -420,6 +420,16 @@ public extension View where Self == DYBarChartView {
     func userInteraction(enabled: Bool = true)->DYBarChartView  {
         var modView = self
         modView.settings.allowUserInteraction = enabled
+        return modView
+    }
+    
+    
+    /// animation
+    /// - Parameter showAppearAnimation: determines if bars should "grow" out of the 0 marker one by one. If set to false, all bars will be visible at once when the view appears. Default is true.
+    /// - Returns: modified DYBarChartView
+    func animation(_ showAppearAnimation: Bool)->DYBarChartView {
+        var modView = self
+        modView.settings.showAppearAnimation = showAppearAnimation
         return modView
     }
     
@@ -573,7 +583,6 @@ public extension View where Self == DYBarChartView {
         return modView
         
     }
-    
     #endif
     
 

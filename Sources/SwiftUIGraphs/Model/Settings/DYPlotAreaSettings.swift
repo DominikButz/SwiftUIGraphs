@@ -29,6 +29,7 @@ struct DYBarChartSettings {
     var labelViewOffset: CGSize = CGSize(width: 0, height: -10)
     var minimumTopEdgeBarLabelMargin: CGFloat = 0
     var minimumBottomEdgeBarLabelMargin: CGFloat = 10
+    var showAppearAnimation: Bool = true
 
 }
 

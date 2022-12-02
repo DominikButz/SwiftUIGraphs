@@ -19,7 +19,7 @@ struct SizePreferenceKey: PreferenceKey {
 struct MeasureSizeModifier: ViewModifier {
   func body(content: Content) -> some View {
     content.background(GeometryReader { geometry in
-      Color.clear.preference(key: SizePreferenceKey.self,
+        Color.clear.preference(key: SizePreferenceKey.self,
                              value: geometry.size)
     })
   }

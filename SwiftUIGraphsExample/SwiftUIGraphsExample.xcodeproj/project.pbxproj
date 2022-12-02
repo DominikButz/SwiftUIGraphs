@@ -20,9 +20,10 @@
 		B437B5D325C8F9A90068CB91 /* SwiftUIGraphsExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437B5D225C8F9A90068CB91 /* SwiftUIGraphsExampleTests.swift */; };
 		B437B5DE25C8F9A90068CB91 /* SwiftUIGraphsExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437B5DD25C8F9A90068CB91 /* SwiftUIGraphsExampleUITests.swift */; };
 		B451709C28B34CFB00739334 /* MultiLineChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B451709B28B34CFB00739334 /* MultiLineChartExample.swift */; };
-		B47F4F2C28C1F86F002C94A4 /* MultiBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */; };
 		B480715B25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480715A25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift */; };
 		B480716825DD1BA6002D3A1C /* BasicBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480716725DD1BA6002D3A1C /* BasicBarChartExample.swift */; };
+		B4BF488629389C0500AC34B6 /* MultiBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */; };
+		B4BF488729389C0600AC34B6 /* MultiBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */; };
 		B4E15662293708790078C868 /* SwiftUIGraphsMacExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E15661293708790078C868 /* SwiftUIGraphsMacExampleApp.swift */; };
 		B4E156662937087A0078C868 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4E156652937087A0078C868 /* Assets.xcassets */; };
 		B4E156692937087A0078C868 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4E156682937087A0078C868 /* Preview Assets.xcassets */; };
@@ -31,7 +32,6 @@
 		B4E1567229372E640078C868 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ECDC3628AA38D6001B6D35 /* View+Extensions.swift */; };
 		B4E1567429372F8D0078C868 /* LineChartWithAsyncDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40A8457261091FB00BB4EE3 /* LineChartWithAsyncDataFetch.swift */; };
 		B4E15676293730CA0078C868 /* BasicBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B480716725DD1BA6002D3A1C /* BasicBarChartExample.swift */; };
-		B4E15677293731470078C868 /* MultiBarChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47F4F2B28C1F86F002C94A4 /* MultiBarChartExample.swift */; };
 		B4E15678293732270078C868 /* MultiLineChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B451709B28B34CFB00739334 /* MultiLineChartExample.swift */; };
 		B4E15679293732B50078C868 /* BasicPieChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40A84412609C37000BB4EE3 /* BasicPieChartExample.swift */; };
 		B4E1567A293734D50078C868 /* RingChartAndDetailPieChartExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40A8446260D80F900BB4EE3 /* RingChartAndDetailPieChartExample.swift */; };
@@ -393,11 +393,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B437B5C325C8F9A80068CB91 /* ContentView.swift in Sources */,
-				B47F4F2C28C1F86F002C94A4 /* MultiBarChartExample.swift in Sources */,
 				B451709C28B34CFB00739334 /* MultiLineChartExample.swift in Sources */,
 				B4ECDC3728AA38D6001B6D35 /* View+Extensions.swift in Sources */,
 				B437B5C125C8F9A80068CB91 /* SwiftUIGraphsExampleApp.swift in Sources */,
 				B40A84422609C37000BB4EE3 /* BasicPieChartExample.swift in Sources */,
+				B4BF488629389C0500AC34B6 /* MultiBarChartExample.swift in Sources */,
 				B480715B25D7E1A8002D3A1C /* CustomYAxisIntervalExampleLineChart.swift in Sources */,
 				B40A8447260D80F900BB4EE3 /* RingChartAndDetailPieChartExample.swift in Sources */,
 				B40A8458261091FB00BB4EE3 /* LineChartWithAsyncDataFetch.swift in Sources */,
@@ -430,10 +430,10 @@
 				B4E1567229372E640078C868 /* View+Extensions.swift in Sources */,
 				B4E1567429372F8D0078C868 /* LineChartWithAsyncDataFetch.swift in Sources */,
 				B4E15679293732B50078C868 /* BasicPieChartExample.swift in Sources */,
+				B4BF488729389C0600AC34B6 /* MultiBarChartExample.swift in Sources */,
 				B4E1567A293734D50078C868 /* RingChartAndDetailPieChartExample.swift in Sources */,
 				B4E1567B2937398A0078C868 /* ContentView.swift in Sources */,
 				B4E15662293708790078C868 /* SwiftUIGraphsMacExampleApp.swift in Sources */,
-				B4E15677293731470078C868 /* MultiBarChartExample.swift in Sources */,
 				B4E15678293732270078C868 /* MultiLineChartExample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

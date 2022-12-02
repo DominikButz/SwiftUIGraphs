@@ -1,4 +1,4 @@
-# SwiftUIGraphs (v1.1)
+# SwiftUIGraphs (v1.1.1)
 
 
 SwiftUIGraphs is a Swift package for iOS, iPadOS (14.0 and later) as well as MacOS (11.0 and later). It features a line chart, bar chart and pie chart for data visualization and has many customization options. 
@@ -244,6 +244,7 @@ DYBarChartView supports the following modifiers:
 
 * background(gradient: LinearGradient)
 * userInteraction(enabled: Bool = true)
+* animation(_ showAppearAnimation: Bool)
 * barDropShadow(_ shadow: Shadow)
 * labelViewOffset( _ offset: CGSize)
 * selectedBar(borderColor: Color, dropShadow: Shadow? = nil)
@@ -512,6 +513,14 @@ struct RingChartAndDetailPieChartExample: View {
 - Special thanks to David Malan and his team of Harvard's CS50 Introduction to Computer Science. There is no better course to learn programming basics. 
 
 ## Change log
+
+#### [Version 1.1.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.1.1)
+Various minor updates:
+
+* Fixes a bug that could lead to a crash when displaying a bar chart with bar fraction labels on MacOS. 
+* Adds an animation modifier for DYBarChartView. 
+* Added MacOS icon images to assets
+
 
 #### [Version 1.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.1)
 Various updates for MacOS native support. 

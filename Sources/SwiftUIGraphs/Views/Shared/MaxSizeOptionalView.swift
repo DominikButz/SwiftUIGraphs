@@ -16,13 +16,14 @@ internal struct MaxSizeOptionalView<V: View>: View {
     
     var body: some View {
         view?.measureSize(perform: { size in
+            //print("updating size")
             self.size = size
         }).opacity(opacity)
         .onChange(of: size, perform: { newValue in
             if newValue.height > maxSize.height || newValue.width > maxSize.width {
-                self.opacity = 0
+                self.opacity = 0.0
             } else {
-                self.opacity = 1
+                self.opacity = 1.0
             }
            
         })

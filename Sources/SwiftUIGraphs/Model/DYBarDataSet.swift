@@ -69,8 +69,7 @@ public struct DYBarDataFraction: Identifiable  {
     public let value: Double
     public let title: String
     let gradient: LinearGradient
-    var labelView: (()->
-    AnyView)?
+    var labelView: (()->AnyView)?
     
     public init(id: UUID = UUID(), value: Double, title:String = "", gradient: LinearGradient, labelView: (() -> AnyView)? = nil) {
         self.id = id

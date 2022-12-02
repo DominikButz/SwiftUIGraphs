@@ -15,6 +15,7 @@ struct MultiBarChartExample: View {
     @State var barDataSets: [DYBarDataSet] = []
     @State var selectedBarDataSet: DYBarDataSet?
     
+  
     var body: some View {
         GeometryReader { proxy in
             VStack {
@@ -24,10 +25,9 @@ struct MultiBarChartExample: View {
                 .yAxisLabelFont(self.font(xAxis: false))
                 .markerGridLine(yCoordinate: 0, color: .red)
                 .xAxisLabelFont(self.font())
+                
                 .frame(height:chartHeight(proxy: proxy))
-                
-            
-                
+
                 if self.barDataSets.isEmpty == false {
                     HStack {
                         self.selectedDataSetDetailView()
@@ -37,11 +37,12 @@ struct MultiBarChartExample: View {
                 
                 Spacer()
             }.padding()
-
-        }.navigationTitle("Profits & Losses Mio. USD per Division per Year")
+            .navigationTitle("Profits & Losses Mio. USD per Division per Year")
             .onAppear {
                 self.generateExampleData()
             }
+
+        }
     }
     
     #if os(macOS)
@@ -55,7 +56,6 @@ struct MultiBarChartExample: View {
         let size: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 8 : 10
         return  UIFont.systemFont(ofSize: size, weight: weight)
     }
-    
     #endif
 
     
