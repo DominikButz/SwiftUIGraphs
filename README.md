@@ -1,4 +1,4 @@
-# SwiftUIGraphs (v1.1.1)
+# SwiftUIGraphs (v1.1.2)
 
 
 SwiftUIGraphs is a Swift package for iOS, iPadOS (14.0 and later) as well as MacOS (11.0 and later). It features a line chart, bar chart and pie chart for data visualization and has many customization options. 
@@ -513,6 +513,9 @@ struct RingChartAndDetailPieChartExample: View {
 - Special thanks to David Malan and his team of Harvard's CS50 Introduction to Computer Science. There is no better course to learn programming basics. 
 
 ## Change log
+
+#### [Version 1.1.2](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.1.2)
+Fixes a critical bug in DYLineView. 
 
 #### [Version 1.1.1](https://github.com/DominikButz/SwiftUIGraphs/releases/tag/1.1.1)
 Various minor updates:
